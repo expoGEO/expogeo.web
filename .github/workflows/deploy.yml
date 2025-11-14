@@ -28,14 +28,13 @@ jobs:
       run: flutter build web --release
 
     - name: Sync build/web to HostGator
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.6
-      env:
-        # Força uso de IPv4 apenas (HostGator não suporta IPv6)
-        NODE_OPTIONS: '--dns-result-order=ipv4first'
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.0
       with:
         server: ${{ secrets.FTP_HOST }}
         username: ${{ secrets.FTP_USER }}
         password: ${{ secrets.FTP_PASSWORD }}
+        port: 21
         local-dir: build/web/
-        server-dir: /public_html/
-        dangerous-clean-slate: false
+        server-dir: public_html/
+        protocol: ftp
+        delete-remote: true

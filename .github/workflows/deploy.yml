@@ -37,4 +37,3 @@ jobs:
         local-dir: build/web/
         server-dir: public_html/
         protocol: ftp
-        delete-remote: true

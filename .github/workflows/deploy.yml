@@ -27,13 +27,27 @@ jobs:
     - name: Build Flutter Web app
       run: flutter build web --release
 
-    - name: Sync build/web to HostGator
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.0
-      with:
-        server: ${{ secrets.FTP_HOST }}
-        username: ${{ secrets.FTP_USER }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        port: 21
-        local-dir: build/web/
-        server-dir: public_html/
-        protocol: ftp
+    - name: Install lftp (robust FTP client)
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y lftp
+
+    - name: Deploy Flutter Web to HostGator via FTP
+      env:
+        # IMPORTANTE: Use o IP IPv4 do servidor no secret FTP_HOST
+        # Encontre em: cPanel > Server Information > Shared IP Address
+        # Exemplo: 192.168.1.1 (não use o hostname ftp.seudominio.com.br)
+        FTP_HOST: ${{ secrets.FTP_HOST }}
+        FTP_USER: ${{ secrets.FTP_USER }}
+        FTP_PASS: ${{ secrets.FTP_PASSWORD }}
+      run: |
+        lftp -c "
+        set ftp:ssl-allow no
+        set ftp:passive-mode true
+        set net:timeout 30
+        set net:max-retries 3
+        open -u $FTP_USER,$FTP_PASS $FTP_HOST
+        cd /public_html/
+        mirror -R -v --delete --parallel=3 build/web/ .
+        bye
+        "

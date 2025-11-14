@@ -1,0 +1,71 @@
+name: expogeo
+description: "A new Flutter project."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.9.0
+
+scripts:
+  get: fvm flutter pub get
+
+  clean:
+    $script: fvm flutter clean
+    $after: fvm flutter pub get
+
+  builder:
+    $script: fvm dart run build_runner watch --delete-conflicting-outputs
+
+  build:
+    $script: fvm flutter build web
+
+  run:
+    $script: fvm flutter run -d chrome --web-renderer html
+
+  test:
+    $before: dart pub global run full_coverage
+    $script: fvm flutter test --coverage
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  go_router: ^14.6.2
+  flutter_animate: ^4.5.0
+  carousel_slider: ^5.0.0
+  font_awesome_flutter: ^10.7.0
+  google_fonts: ^6.3.2
+  cached_network_image: ^3.4.1
+  flutter_svg: ^2.2.2
+  flutter_staggered_grid_view: ^0.7.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+
+  fonts:
+    - family: Dosis
+      fonts:
+        - asset: assets/fonts/Dosis-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/Dosis-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Dosis-Medium.ttf
+          weight: 400
+        - asset: assets/fonts/Dosis-Regular.ttf
+          weight: 500
+        - asset: assets/fonts/Dosis-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Dosis-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Dosis-ExtraBold.ttf
+          weight: 800

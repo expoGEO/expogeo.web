@@ -27,23 +27,20 @@ jobs:
     - name: Build Flutter Web app
       run: flutter build web --release
 
-    - name: Deploy Flutter Web to HostGator
+    - name: Sync all files to HostGator (excluding build/web)
       uses: SamKirkland/FTP-Deploy-Action@4.3.0
-      env:
-        # Força uso de IPv4 apenas (HostGator não suporta IPv6)
-        NODE_OPTIONS: '--dns-result-order=ipv4first'
       with:
-        # IMPORTANTE: Use o IP IPv4 do servidor no secret FTP_HOST
-        # Encontre o IP em: cPanel > Server Information > Shared IP Address
-        # Exemplo: 192.168.1.1 (ao invés de ftp.seudominio.com.br)
+        server: ${{ secrets.FTP_HOST }}
+        username: ${{ secrets.FTP_USER }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: ./
+        exclude: |
+          build/web/**
+
+    - name: Sync build/web to HostGator
+      uses: SamKirkland/FTP-Deploy-Action@4.3.0
+      with:
         server: ${{ secrets.FTP_HOST }}
         username: ${{ secrets.FTP_USER }}
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: build/web/
-        server-dir: /public_html/
-        dangerous-clean-slate: false
-        exclude: |
-          **/.git*
-          **/.git*/**
-          **/node_modules/**
-          **/.DS_Store

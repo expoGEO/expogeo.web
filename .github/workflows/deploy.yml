@@ -11,12 +11,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Set up Flutter
-      uses: subosito/flutter-action@v2
-      with:
-        flutter-version: '3.35.5'
+      uses: actions/checkout@v4
 
     - name: Clean Flutter cache
       run: flutter clean
@@ -27,35 +22,14 @@ jobs:
     - name: Build Flutter Web app
       run: flutter build web --release
 
-    - name: Install lftp (robust FTP client)
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y lftp
-
-    - name: Deploy Flutter Web to HostGator via FTP
-      env:
-        # Você pode usar o hostname (ex: ftp.seudominio.com.br) ou o IP IPv4 diretamente
-        FTP_HOST: ${{ secrets.FTP_HOST }}
-        FTP_USER: ${{ secrets.FTP_USER }}
-        FTP_PASS: ${{ secrets.FTP_PASSWORD }}
-      run: |
-        # Resolve o hostname para IPv4 (se for hostname) para evitar problemas com IPv6
-        if [[ $FTP_HOST =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-          # Já é um IP, usa diretamente
-          FTP_IP=$FTP_HOST
-        else
-          # É um hostname, resolve para IPv4
-          FTP_IP=$(getent ahostsv4 $FTP_HOST | head -1 | awk '{print $1}')
-          echo "Resolved $FTP_HOST to IPv4: $FTP_IP"
-        fi
-        
-        lftp -c "
-        set ftp:ssl-allow no
-        set ftp:passive-mode true
-        set net:timeout 30
-        set net:max-retries 3
-        open -u $FTP_USER,$FTP_PASS $FTP_IP
-        cd /public_html/
-        mirror -R -v --delete --parallel=3 build/web/ .
-        bye
-        "
+    - name: Deploy using FTP
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      with:
+        server: ${{ secrets.FTP_HOST }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        port: 21
+        protocol: ftp
+        local-dir: build/web/
+        server-dir: /public_html/
+        dangerous-clean-slate: false

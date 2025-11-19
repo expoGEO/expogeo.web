@@ -1,5 +1,7 @@
 import 'package:expogeo/core/components/button/back_to_button.dart';
+import 'package:expogeo/core/components/card/rounded_card.dart';
 import 'package:expogeo/core/components/image/app_asset_image.dart';
+import 'package:expogeo/core/models/subtheme_model.dart';
 import 'package:expogeo/core/models/theme_model.dart';
 import 'package:expogeo/core/theme/app_theme.dart';
 import 'package:expogeo/core/utils/extensions/num_extension.dart';
@@ -13,27 +15,25 @@ class SubthemeBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return RoundedCard(
+      padding: EdgeInsets.all(AppTheme.dimensions.space.large.scale),
       margin: EdgeInsets.symmetric(
         horizontal: AppTheme.dimensions.space.large.width,
         vertical: AppTheme.dimensions.space.large.height,
       ),
-      padding: EdgeInsets.all(AppTheme.dimensions.space.large.scale),
-      decoration: BoxDecoration(
-        color: AppTheme.colors.white,
-        borderRadius: BorderRadius.circular(AppTheme.dimensions.radius.huge),
-        boxShadow: [
-          BoxShadow(
-            color: AppTheme.colors.black.withValues(alpha: 0.1),
-            blurRadius: 20,
-            offset: Offset(0, 10),
-          ),
-        ],
-      ),
+      borderRadius: BorderRadius.circular(AppTheme.dimensions.radius.huge),
+      borderColor: AppTheme.colors.gray50,
+      boxShadow: [
+        BoxShadow(
+          color: AppTheme.colors.black.withValues(alpha: 0.1),
+          blurRadius: 20,
+          offset: Offset(0, 10),
+        ),
+      ],
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          BackToButton(label: 'Voltar para ${theme.title}', route: theme.route),
+          BackToButton(label: 'Voltar para ${theme.title}', route: theme.type.route),
           SizedBox(height: AppTheme.dimensions.space.large.height),
           Row(
             children: [

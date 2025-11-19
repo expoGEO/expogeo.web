@@ -1,11 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 import 'package:expogeo/core/theme/app_theme.dart';
 import 'package:expogeo/core/utils/extensions/num_extension.dart';
 import 'package:expogeo/features/home/components/carousel/theme_card.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
-import '../../../../core/models/theme_model.dart';
 
 class ThemeCarousel extends StatefulWidget {
   const ThemeCarousel({super.key});
@@ -50,7 +49,7 @@ class _ThemeCarouselState extends State<ThemeCarousel> {
 
               return ThemeCard(
                 theme: theme,
-                onTap: () => context.go(theme.route),
+                onTap: () => context.go(theme.type.route),
                 isCurrent: _currentIndex == index,
               );
             },

@@ -1,4 +1,5 @@
-import 'package:expogeo/core/models/theme_model.dart';
+import 'package:expogeo/core/components/card/rounded_card.dart';
+import 'package:expogeo/core/models/subtheme_model.dart';
 import 'package:expogeo/core/theme/app_theme.dart';
 import 'package:expogeo/core/utils/extensions/num_extension.dart';
 import 'package:flutter/material.dart';
@@ -10,20 +11,18 @@ class SubthemeContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: AppTheme.dimensions.space.large.width),
+    return RoundedCard(
       padding: EdgeInsets.all(AppTheme.dimensions.space.large.scale),
-      decoration: BoxDecoration(
-        color: AppTheme.colors.white,
-        borderRadius: BorderRadius.circular(AppTheme.dimensions.radius.huge),
-        boxShadow: [
-          BoxShadow(
-            color: AppTheme.colors.black.withValues(alpha: 0.1),
-            blurRadius: 20,
-            offset: Offset(0, 10),
-          ),
-        ],
-      ),
+      margin: EdgeInsets.symmetric(horizontal: AppTheme.dimensions.space.large.width),
+      borderRadius: BorderRadius.circular(AppTheme.dimensions.radius.huge),
+      borderColor: AppTheme.colors.gray50,
+      boxShadow: [
+        BoxShadow(
+          color: AppTheme.colors.black.withValues(alpha: 0.1),
+          blurRadius: 20,
+          offset: Offset(0, 10),
+        ),
+      ],
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

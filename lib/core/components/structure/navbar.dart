@@ -1,5 +1,5 @@
 import 'package:expogeo/core/components/image/app_asset_image.dart';
-import 'package:expogeo/core/models/theme_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 import 'package:expogeo/core/navigation/app_router.dart';
 import 'package:expogeo/core/theme/app_theme.dart';
 import 'package:expogeo/core/utils/enums/app_images.dart';
@@ -62,7 +62,7 @@ class Navbar extends StatelessWidget {
     final navigationItems = [
       _NavigationItem(label: 'Home', route: AppRouter.home, icon: Icons.home),
       ...ThemeDataModel.themes.map(
-        (theme) => _NavigationItem(label: theme.title, route: theme.route, icon: theme.icon),
+        (theme) => _NavigationItem(label: theme.title, route: theme.type.route, icon: theme.icon),
       ),
       _NavigationItem(label: 'Contato', route: AppRouter.contact, icon: Icons.contact_mail),
     ];

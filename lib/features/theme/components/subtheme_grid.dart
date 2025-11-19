@@ -1,4 +1,5 @@
 import 'package:expogeo/core/components/image/app_asset_image.dart';
+import 'package:expogeo/core/models/subtheme_model.dart';
 import 'package:expogeo/core/models/theme_model.dart';
 import 'package:expogeo/core/theme/app_theme.dart';
 import 'package:expogeo/core/utils/extensions/num_extension.dart';
@@ -24,7 +25,7 @@ class SubthemeGrid extends StatelessWidget {
         itemCount: theme.subthemes.length,
         itemBuilder: (context, index) {
           final subtheme = theme.subthemes[index];
-          return SubthemeCard(subtheme: subtheme, onTap: () => context.go(subtheme.route));
+          return SubthemeCard(subtheme: subtheme, onTap: () => context.go(subtheme.type.route));
         },
       ),
     );

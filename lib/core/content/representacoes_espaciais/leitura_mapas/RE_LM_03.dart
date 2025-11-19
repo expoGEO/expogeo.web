@@ -1,0 +1,38 @@
+import 'package:expogeo/core/models/content_model.dart';
+
+ContentModel RE_LM_03 = ContentModel(
+  id: 'RE_LM_03',
+  intellectualIndicator: const IntellectualIndicator(
+    creator: 'Instituto Brasileiro de Geografia e Estatística',
+    collaborator: 'Atlas Geográfico Escolar',
+  ),
+  contentInfo: ContentInfo(
+    title: 'Convenções cartográficas',
+    description:
+        'Site com informações sobre a importância das convenções cartográficas para a leitura de mapas',
+    subjects: ['Mapa temático', 'Legenda', 'Convenções cartográficas'],
+    contentNote:
+        'Site com informações sobre a importância das convenções cartográficas para a leitura de mapas',
+  ),
+  originInfo: OriginInfo(
+    insertionDate: DateTime(2024, 10, 11),
+    language: 'Português',
+    type: ContentType.site,
+    format: ContentFormat.texto,
+    requirements: 'Acesso à internet',
+  ),
+  registrationInfo: RegistrationInfo(
+    location:
+        'https://atlasescolar.ibge.gov.br/cartografia/21737-convencoes-cartograficas.html',
+    issueYear: 2024,
+    registrationRules:
+        'Descrição de acordo com o Tema_Geral/Tema_Específico/Número_Referência da curadoria ExpoGEO',
+  ),
+  rightsInfo: const RightsInfo(rights: 'Objeto digital em domínio público'),
+  preservationAction: PreservationAction(
+    operation: 'Atualização do link ao longo do tempo',
+    updateDate: DateTime(2026, 12),
+  ),
+);
+
+

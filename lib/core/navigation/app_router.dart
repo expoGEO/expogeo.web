@@ -1,17 +1,19 @@
+import 'package:expogeo/core/models/theme_data_model.dart';
+import 'package:expogeo/core/pages/not_found_page.dart';
 import 'package:expogeo/features/contact/pages/contact_page.dart';
 import 'package:expogeo/features/home/pages/home_page.dart';
 import 'package:expogeo/features/theme/pages/subtheme_page.dart';
 import 'package:expogeo/features/theme/pages/theme_page.dart';
-import 'package:expogeo/core/pages/not_found_page.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRouter {
   static const String home = '/';
-  static const String representacoes = '/representacoes';
-  static const String meioAmbiente = '/meio-ambiente';
-  static const String espacosUrbanos = '/espacos-urbanos';
-  static const String culturaPolitica = '/cultura-politica';
   static const String contact = '/contato';
+
+  static String representacoesEspaciais = ThemeEnum.representacoesEspaciais.value;
+  static String meioAmbiente = ThemeEnum.naturezaMeioAmbiente.value;
+  static String espacosUrbanosRurais = ThemeEnum.espacosUrbanosRurais.value;
+  static String culturaPolitica = ThemeEnum.culturaPolitica.value;
 
   static final GoRouter router = GoRouter(
     initialLocation: home,
@@ -22,61 +24,61 @@ class AppRouter {
 
       // Rotas dos temas principais
       GoRoute(
-        path: representacoes,
-        name: 'representacoes',
+        path: '/$representacoesEspaciais',
+        name: representacoesEspaciais,
         builder: (context, state) =>
-            const ThemePage(themeId: 'representacoes', themeTitle: 'Representações Espaciais'),
+            ThemePage(themeId: representacoesEspaciais, themeTitle: 'Representações Espaciais'),
       ),
       GoRoute(
-        path: meioAmbiente,
-        name: 'meio-ambiente',
+        path: '/$meioAmbiente',
+        name: meioAmbiente,
         builder: (context, state) =>
-            const ThemePage(themeId: 'meio-ambiente', themeTitle: 'Meio Ambiente e Natureza'),
+            ThemePage(themeId: meioAmbiente, themeTitle: 'Meio Ambiente e Natureza'),
       ),
       GoRoute(
-        path: espacosUrbanos,
-        name: 'espacos-urbanos',
+        path: '/$espacosUrbanosRurais',
+        name: espacosUrbanosRurais,
         builder: (context, state) =>
-            const ThemePage(themeId: 'espacos-urbanos', themeTitle: 'Espaços Urbanos e Rurais'),
+            ThemePage(themeId: espacosUrbanosRurais, themeTitle: 'Espaços Urbanos e Rurais'),
       ),
       GoRoute(
-        path: culturaPolitica,
-        name: 'cultura-politica',
+        path: '/$culturaPolitica',
+        name: culturaPolitica,
         builder: (context, state) =>
-            const ThemePage(themeId: 'cultura-politica', themeTitle: 'Cultura e Política'),
+            ThemePage(themeId: culturaPolitica, themeTitle: 'Cultura e Política'),
       ),
 
       // Rotas dos subtemas
       GoRoute(
-        path: '$representacoes/:subthemeId',
-        name: 'representacoes-subtheme',
+        path: '/$representacoesEspaciais/:subthemeId',
+        name: '$representacoesEspaciais-subtheme',
         builder: (context, state) {
           final subthemeId = state.pathParameters['subthemeId']!;
-          return SubthemePage(themeId: 'representacoes', subthemeId: subthemeId);
+          return SubthemePage(themeId: representacoesEspaciais, subthemeId: subthemeId);
         },
       ),
       GoRoute(
-        path: '$meioAmbiente/:subthemeId',
-        name: 'meio-ambiente-subtheme',
+        path: '/$meioAmbiente/:subthemeId',
+        name: '$meioAmbiente-subtheme',
         builder: (context, state) {
           final subthemeId = state.pathParameters['subthemeId']!;
-          return SubthemePage(themeId: 'meio-ambiente', subthemeId: subthemeId);
+          return SubthemePage(themeId: meioAmbiente, subthemeId: subthemeId);
         },
       ),
       GoRoute(
-        path: '$espacosUrbanos/:subthemeId',
-        name: 'espacos-urbanos-subtheme',
+        path: '/$espacosUrbanosRurais/:subthemeId',
+        name: '$espacosUrbanosRurais-subtheme',
         builder: (context, state) {
           final subthemeId = state.pathParameters['subthemeId']!;
-          return SubthemePage(themeId: 'espacos-urbanos', subthemeId: subthemeId);
+          return SubthemePage(themeId: espacosUrbanosRurais, subthemeId: subthemeId);
         },
       ),
       GoRoute(
-        path: '$culturaPolitica/:subthemeId',
-        name: 'cultura-politica-subtheme',
+        path: '/$culturaPolitica/:subthemeId',
+        name: '$culturaPolitica-subtheme',
         builder: (context, state) {
           final subthemeId = state.pathParameters['subthemeId']!;
-          return SubthemePage(themeId: 'cultura-politica', subthemeId: subthemeId);
+          return SubthemePage(themeId: culturaPolitica, subthemeId: subthemeId);
         },
       ),
 

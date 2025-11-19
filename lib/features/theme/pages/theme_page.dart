@@ -1,6 +1,6 @@
 import 'package:expogeo/core/components/structure/footer.dart';
 import 'package:expogeo/core/components/structure/navbar.dart';
-import 'package:expogeo/core/models/theme_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 import 'package:expogeo/core/theme/app_theme.dart';
 import 'package:expogeo/core/utils/extensions/num_extension.dart';
 import 'package:expogeo/features/theme/components/subtheme_grid.dart';
@@ -17,7 +17,7 @@ class ThemePage extends StatelessWidget {
   Widget build(BuildContext context) {
     // Buscar o tema correspondente
     final theme = ThemeDataModel.themes.firstWhere(
-      (t) => t.id == themeId,
+      (t) => t.type.value == themeId,
       orElse: () => ThemeDataModel.themes.first,
     );
 

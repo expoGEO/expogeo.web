@@ -1,3 +1,7 @@
+import 'package:expogeo/core/content/representacoes_espaciais/compositor_mapas/RE_CM_01.dart';
+import 'package:expogeo/core/content/representacoes_espaciais/compositor_mapas/RE_CM_02.dart';
+import 'package:expogeo/core/content/representacoes_espaciais/compositor_mapas/RE_CM_03.dart';
+import 'package:expogeo/core/content/representacoes_espaciais/compositor_mapas/RE_CM_04.dart';
 import 'package:expogeo/core/content/representacoes_espaciais/coordenadas_geograficas/RE_CG_01.dart';
 import 'package:expogeo/core/content/representacoes_espaciais/coordenadas_geograficas/RE_CG_02.dart';
 import 'package:expogeo/core/content/representacoes_espaciais/coordenadas_geograficas/RE_CG_03.dart';
@@ -106,6 +110,7 @@ ThemeModel representacoesEspaciais = ThemeModel(
       description: 'Compositor de mapas',
       image: AppImages.compositorMapas,
       color: AppTheme.colors.primaryRed,
+      contents: [RE_CM_01, RE_CM_02, RE_CM_03, RE_CM_04],
     ),
   ],
 );

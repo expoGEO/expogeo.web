@@ -17,7 +17,7 @@ scripts:
     $script: fvm dart run build_runner watch --delete-conflicting-outputs
 
   build:
-    $script: fvm flutter build web
+    $script: fvm flutter build web --release
 
   run:
     $script: fvm flutter run -d chrome --web-renderer html

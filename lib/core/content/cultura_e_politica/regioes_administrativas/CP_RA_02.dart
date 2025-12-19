@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel CP_RA_02 = ContentModel(
-  id: 'CP_RA_03',
+  id: 'CP_RA_02',
+  theme: ThemeEnum.culturaPolitica,
+  subtheme: SubthemeEnum.regioesAdministrativas,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Governo do Estado de São Paulo',
     collaborator: 'Núcleo de Ação Educativa',

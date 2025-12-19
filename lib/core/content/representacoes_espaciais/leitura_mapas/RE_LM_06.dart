@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel RE_LM_06 = ContentModel(
   id: 'RE_LM_06',
+  theme: ThemeEnum.representacoesEspaciais,
+  subtheme: SubthemeEnum.leituraMapas,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Universidade de Estado de São Paulo',
     collaborator: 'Biblioteca Brasiliana Guita e José Mindlin',
@@ -33,5 +36,3 @@ ContentModel RE_LM_06 = ContentModel(
     updateDate: DateTime(2026, 12),
   ),
 );
-
-

@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel NMA_EFR_04 = ContentModel(
   id: 'NMA_EFR_04',
+  theme: ThemeEnum.naturezaMeioAmbiente,
+  subtheme: SubthemeEnum.estruturasFormasRelevo,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Novo Tempo',
     collaborator: 'Origens NT',

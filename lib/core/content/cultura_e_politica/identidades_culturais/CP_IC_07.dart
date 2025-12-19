@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel CP_IC_07 = ContentModel(
-  id: 'CP_IC_08',
+  id: 'CP_IC_07',
+  theme: ThemeEnum.culturaPolitica,
+  subtheme: SubthemeEnum.identidadesCulturais,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Local Lingual',
     collaborator: 'Local Lingual',

@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel CP_RA_03 = ContentModel(
-  id: 'CP_RA_04',
+  id: 'CP_RA_03',
+  theme: ThemeEnum.culturaPolitica,
+  subtheme: SubthemeEnum.regioesAdministrativas,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Universidade Federal do Paraná',
     collaborator: 'Museu de Arqueologia e Etnografia',

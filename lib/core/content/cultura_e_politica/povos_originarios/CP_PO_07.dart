@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel CP_PO_07 = ContentModel(
   id: 'CP_PO_07',
+  theme: ThemeEnum.culturaPolitica,
+  subtheme: SubthemeEnum.povosOriginarios,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Museu da Língua Portuguesa',
     collaborator: 'Museu da Língua Portuguesa',

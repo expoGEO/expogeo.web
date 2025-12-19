@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel NMA_SUS_06 = ContentModel(
   id: 'NMA_SUS_06',
+  theme: ThemeEnum.naturezaMeioAmbiente,
+  subtheme: SubthemeEnum.sustentabilidade,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Momento Ambiental',
     collaborator: 'Momento Ambiental',

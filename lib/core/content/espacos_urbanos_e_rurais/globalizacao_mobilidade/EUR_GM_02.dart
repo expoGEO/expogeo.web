@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel EUR_GM_02 = ContentModel(
   id: 'EUR_GM_02',
+  theme: ThemeEnum.espacosUrbanosRurais,
+  subtheme: SubthemeEnum.globalizacaoMobilidade,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Marine Traffic',
     collaborator: 'Marine Traffic',

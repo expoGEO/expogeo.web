@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel NMA_PAG_06 = ContentModel(
   id: 'NMA_PAG_06',
+  theme: ThemeEnum.naturezaMeioAmbiente,
+  subtheme: SubthemeEnum.poluicaoAgua,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Agência Nacional das Águas e Saneamento Básico - ANA',
     collaborator: 'Agência Nacional das Águas e Saneamento Básico - ANA',

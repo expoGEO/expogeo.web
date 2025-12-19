@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel NMA_PAR_04 = ContentModel(
   id: 'NMA_PAR_04',
+  theme: ThemeEnum.naturezaMeioAmbiente,
+  subtheme: SubthemeEnum.poluicaoAr,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Ministério da Saúde',
     collaborator: 'Secretaria de Vigilância em Saúde e Ambiente',

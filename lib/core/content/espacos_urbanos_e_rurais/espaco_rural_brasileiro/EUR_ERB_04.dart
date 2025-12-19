@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel EUR_ERB_04 = ContentModel(
   id: 'EUR_ERB_04',
+  theme: ThemeEnum.espacosUrbanosRurais,
+  subtheme: SubthemeEnum.espacoRuralBrasileiro,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Parque Histórico de Carambeí',
     collaborator: 'Museu Parque Histórico de Carambeí',

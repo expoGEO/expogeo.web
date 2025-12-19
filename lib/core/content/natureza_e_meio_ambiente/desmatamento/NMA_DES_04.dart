@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel NMA_DES_04 = ContentModel(
   id: 'NMA_DES_04',
+  theme: ThemeEnum.naturezaMeioAmbiente,
+  subtheme: SubthemeEnum.desmatamento,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Instituto Brasileiro do Meio Ambiente e dos Recursos Naturais Renováveis - IBAMA',
     collaborator:

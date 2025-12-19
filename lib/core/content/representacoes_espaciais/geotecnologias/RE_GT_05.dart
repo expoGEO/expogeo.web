@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel RE_GT_05 = ContentModel(
   id: 'RE_GT_05',
+  theme: ThemeEnum.representacoesEspaciais,
+  subtheme: SubthemeEnum.geotecnologias,
   intellectualIndicator: const IntellectualIndicator(creator: 'Google', collaborator: 'Google'),
   contentInfo: ContentInfo(
     title: 'Google Earth',

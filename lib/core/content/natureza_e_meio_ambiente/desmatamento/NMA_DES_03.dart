@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel NMA_DES_03 = ContentModel(
   id: 'NMA_DES_03',
+  theme: ThemeEnum.naturezaMeioAmbiente,
+  subtheme: SubthemeEnum.desmatamento,
   intellectualIndicator: const IntellectualIndicator(creator: 'Imazon', collaborator: 'Imazon'),
   contentInfo: ContentInfo(
     title: 'Sistema de Alerta de Desmatamento - SAD',

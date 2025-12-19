@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel RE_LM_03 = ContentModel(
   id: 'RE_LM_03',
+  theme: ThemeEnum.representacoesEspaciais,
+  subtheme: SubthemeEnum.leituraMapas,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Instituto Brasileiro de Geografia e Estatística',
     collaborator: 'Atlas Geográfico Escolar',
@@ -34,5 +37,3 @@ ContentModel RE_LM_03 = ContentModel(
     updateDate: DateTime(2026, 12),
   ),
 );
-
-

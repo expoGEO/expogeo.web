@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel NMA_QUE_01 = ContentModel(
   id: 'NMA_QUE_01',
+  theme: ThemeEnum.naturezaMeioAmbiente,
+  subtheme: SubthemeEnum.queimadas,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Ministério da Ciência, Tecnologias e Informação - MCTI',
     collaborator: 'Instituto Nacional de Pesquisas Espaciais - INPE',

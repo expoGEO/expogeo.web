@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel RE_CG_01 = ContentModel(
   id: 'RE_CG_01',
+  theme: ThemeEnum.representacoesEspaciais,
+  subtheme: SubthemeEnum.coordenadasGeograficas,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Instituto Brasileiro de Geografia e Estatística',
     collaborator: 'Instituto Brasileiro de Geografia e Estatística',

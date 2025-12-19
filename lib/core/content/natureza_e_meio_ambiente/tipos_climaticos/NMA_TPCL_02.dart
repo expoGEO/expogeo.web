@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel NMA_TPCL_02 = ContentModel(
   id: 'NMA_TPCL_02',
+  theme: ThemeEnum.naturezaMeioAmbiente,
+  subtheme: SubthemeEnum.tiposClimaticos,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Instituto de Pesquisas e Estudos Florestais - IPEF',
     collaborator: 'Clayton Alcarde Alvares e José Luiz Stape',

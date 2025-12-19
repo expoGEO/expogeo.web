@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel NMA_BIO_02 = ContentModel(
   id: 'NMA_BIO_02',
+  theme: ThemeEnum.naturezaMeioAmbiente,
+  subtheme: SubthemeEnum.biomas,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Empresa Brasileira de Pesquisa Agropecuária - EMBRAPA',
     collaborator: 'Empresa Brasileira de Pesquisa Agropecuária - EMBRAPA',

@@ -3,6 +3,7 @@ import 'package:expogeo/core/models/content_model.dart';
 import 'package:expogeo/core/theme/app_theme.dart';
 import 'package:expogeo/core/utils/extensions/num_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ContentCard extends StatelessWidget {
@@ -10,51 +11,10 @@ class ContentCard extends StatelessWidget {
 
   const ContentCard({super.key, required this.content});
 
-  IconData _getContentTypeIcon(ContentType type) {
-    switch (type) {
-      case ContentType.site:
-        return Icons.language;
-      case ContentType.video:
-        return Icons.play_circle_outline;
-      case ContentType.imagem:
-        return Icons.image_outlined;
-      case ContentType.documento:
-        return Icons.description_outlined;
-      case ContentType.aplicativo:
-        return Icons.apps_outlined;
-      case ContentType.outro:
-        return Icons.info_outline;
-    }
-  }
-
-  Color _getContentTypeColor(ContentType type) {
-    switch (type) {
-      case ContentType.site:
-        return AppTheme.colors.primaryBlue;
-      case ContentType.video:
-        return AppTheme.colors.primaryRed;
-      case ContentType.imagem:
-        return AppTheme.colors.primaryGreen;
-      case ContentType.documento:
-        return AppTheme.colors.primaryOrange;
-      case ContentType.aplicativo:
-        return AppTheme.colors.secondaryBlue;
-      case ContentType.outro:
-        return AppTheme.colors.mediumGray;
-    }
-  }
-
-  Future<void> _openUrl(String url) async {
-    final uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    final contentTypeColor = _getContentTypeColor(content.originInfo.type);
-    final contentTypeIcon = _getContentTypeIcon(content.originInfo.type);
+    final contentTypeColor = content.originInfo.type.color;
+    final contentTypeIcon = content.originInfo.type.icon;
 
     return RoundedCard(
       padding: EdgeInsets.all(AppTheme.dimensions.space.large.scale),
@@ -68,7 +28,7 @@ class ContentCard extends StatelessWidget {
         ),
       ],
       child: InkWell(
-        onTap: () => _openUrl(content.registrationInfo.location),
+        onTap: () => _handleContentTap(context),
         borderRadius: BorderRadius.circular(AppTheme.dimensions.radius.huge),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -118,10 +78,7 @@ class ContentCard extends StatelessWidget {
             SizedBox(height: AppTheme.dimensions.space.medium.height),
             Text(
               content.contentInfo.description,
-              style: AppTheme.typography.body.medium.copyWith(
-                color: AppTheme.colors.mediumGray,
-                height: 1.6,
-              ),
+              style: AppTheme.typography.body.medium.copyWith(color: AppTheme.colors.mediumGray),
             ),
             if (content.contentInfo.subjects.isNotEmpty) ...[
               SizedBox(height: AppTheme.dimensions.space.medium.height),
@@ -166,5 +123,26 @@ class ContentCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _handleContentTap(BuildContext context) {
+    final route = content.route;
+
+    if (route == null) {
+      _openUrl(content.registrationInfo.location);
+      return;
+    }
+
+    final contentType = content.originInfo.type;
+
+    context.push(route, extra: {'type': contentType});
+  }
+
+  Future<void> _openUrl(String url) async {
+    final uri = Uri.parse(url);
+
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    }
   }
 }

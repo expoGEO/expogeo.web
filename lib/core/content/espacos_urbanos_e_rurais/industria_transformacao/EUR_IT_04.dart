@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel EUR_IT_04 = ContentModel(
   id: 'EUR_IT_04',
+  theme: ThemeEnum.espacosUrbanosRurais,
+  subtheme: SubthemeEnum.industriaTransformacao,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Museu da cana',
     collaborator: 'Museu da cana',

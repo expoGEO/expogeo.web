@@ -1,7 +1,17 @@
+import 'package:expogeo/core/models/theme_data_model.dart';
+import 'package:expogeo/core/theme/app_theme.dart';
+import 'package:flutter/material.dart';
+
 /// Modelo que representa um conteúdo educacional com seus metadados completos
 class ContentModel {
   /// Identificador único do conteúdo (ex: RE_CG_01)
   final String id;
+
+  /// Tema do conteúdo
+  final ThemeEnum theme;
+
+  /// Subtema do conteúdo
+  final SubthemeEnum subtheme;
 
   /// Indicativo Intelectual do Objeto Digital
   final IntellectualIndicator intellectualIndicator;
@@ -23,6 +33,8 @@ class ContentModel {
 
   const ContentModel({
     required this.id,
+    required this.theme,
+    required this.subtheme,
     required this.intellectualIndicator,
     required this.contentInfo,
     required this.originInfo,
@@ -30,6 +42,15 @@ class ContentModel {
     required this.rightsInfo,
     this.preservationAction,
   });
+
+  String? get route {
+    return switch (originInfo.type) {
+      ContentType.video => '/${theme.value}/${subtheme.value}/$id',
+      ContentType.imagem => '/${theme.value}/${subtheme.value}/$id',
+      ContentType.documento => '/${theme.value}/${subtheme.value}/$id',
+      _ => null,
+    };
+  }
 }
 
 /// Indicativo Intelectual do Objeto Digital
@@ -108,6 +129,24 @@ enum ContentType {
 
   final String label;
   const ContentType(this.label);
+
+  IconData get icon => switch (this) {
+    ContentType.site => Icons.language,
+    ContentType.video => Icons.play_circle_outline,
+    ContentType.imagem => Icons.image_outlined,
+    ContentType.documento => Icons.description_outlined,
+    ContentType.aplicativo => Icons.apps_outlined,
+    ContentType.outro => Icons.info_outline,
+  };
+
+  Color get color => switch (this) {
+    ContentType.site => AppTheme.colors.primaryBlue,
+    ContentType.video => AppTheme.colors.primaryRed,
+    ContentType.imagem => AppTheme.colors.primaryGreen,
+    ContentType.documento => AppTheme.colors.primaryOrange,
+    ContentType.aplicativo => AppTheme.colors.secondaryBlue,
+    ContentType.outro => AppTheme.colors.mediumGray,
+  };
 }
 
 /// Formatos de conteúdo disponíveis

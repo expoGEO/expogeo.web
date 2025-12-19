@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel EUR_EUB_04 = ContentModel(
   id: 'EUR_EUB_04',
+  theme: ThemeEnum.espacosUrbanosRurais,
+  subtheme: SubthemeEnum.espacoUrbanoBrasileiro,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Jornalismo TV Cultura',
     collaborator: 'Jornalismo TV Cultura - Canal Youtube',

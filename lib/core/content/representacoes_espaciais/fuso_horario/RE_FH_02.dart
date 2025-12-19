@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel RE_FH_02 = ContentModel(
   id: 'RE_FH_02',
+  theme: ThemeEnum.representacoesEspaciais,
+  subtheme: SubthemeEnum.fusoHorario,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Programa de Educação Tutorial – GEOPET/UFU',
     collaborator: 'Celso Tamborin, Rafael Araujo, Stefany Mamede e Henrique Vian',
@@ -33,5 +36,3 @@ ContentModel RE_FH_02 = ContentModel(
     updateDate: DateTime(2026, 12),
   ),
 );
-
-

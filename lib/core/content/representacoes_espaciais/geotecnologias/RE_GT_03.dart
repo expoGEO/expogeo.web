@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel RE_GT_03 = ContentModel(
   id: 'RE_GT_03',
+  theme: ThemeEnum.representacoesEspaciais,
+  subtheme: SubthemeEnum.geotecnologias,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Ministério do Planejamento e Orçamento',
     collaborator: 'Instituto Brasileiro de Geografia e Estatística',

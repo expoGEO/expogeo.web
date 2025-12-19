@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel RE_CG_04 = ContentModel(
   id: 'RE_CG_04',
+  theme: ThemeEnum.representacoesEspaciais,
+  subtheme: SubthemeEnum.coordenadasGeograficas,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Público – Site de notícias',
     collaborator: 'Gonçalo Dias',
@@ -34,5 +37,3 @@ ContentModel RE_CG_04 = ContentModel(
     updateDate: DateTime(2026, 12),
   ),
 );
-
-

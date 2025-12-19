@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel EUR_MA_05 = ContentModel(
   id: 'EUR_MA_05',
+  theme: ThemeEnum.espacosUrbanosRurais,
+  subtheme: SubthemeEnum.mercadoAgropecuario,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Ministério da Agricultura e Pecuária',
     collaborator: 'Secretaria de Política Agrícola (SPA)',

@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel CP_CD_05 = ContentModel(
   id: 'CP_CD_05',
+  theme: ThemeEnum.culturaPolitica,
+  subtheme: SubthemeEnum.censoDemografico,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Fundação Getúlio Vargas',
     collaborator: 'Fundação Getúlio Vargas',

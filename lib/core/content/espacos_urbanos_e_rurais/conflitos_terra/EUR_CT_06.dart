@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel EUR_CT_06 = ContentModel(
   id: 'EUR_CT_06',
+  theme: ThemeEnum.espacosUrbanosRurais,
+  subtheme: SubthemeEnum.conflitosTerra,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Despejo Zero',
     collaborator: 'Despejo Zero',

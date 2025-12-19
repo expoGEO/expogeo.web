@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel RE_HC_05 = ContentModel(
   id: 'RE_HC_05',
+  theme: ThemeEnum.representacoesEspaciais,
+  subtheme: SubthemeEnum.historiaCartografia,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Fundação Oswaldo Cruz',
     collaborator: 'Escola Politécnica de Saúde Joaquim Venâncio',
@@ -33,5 +36,3 @@ ContentModel RE_HC_05 = ContentModel(
     updateDate: DateTime(2026, 12),
   ),
 );
-
-

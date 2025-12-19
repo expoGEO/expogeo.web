@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel EUR_IT_03 = ContentModel(
   id: 'EUR_IT_03',
+  theme: ThemeEnum.espacosUrbanosRurais,
+  subtheme: SubthemeEnum.industriaTransformacao,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Confederação Nacional das Indústrias',
     collaborator: 'Confederação Nacional das Indústrias',

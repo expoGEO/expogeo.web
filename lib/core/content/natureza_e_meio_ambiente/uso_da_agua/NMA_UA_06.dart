@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel NMA_UA_06 = ContentModel(
-  id: 'NMA_UA_07',
+  id: 'NMA_UA_06',
+  theme: ThemeEnum.naturezaMeioAmbiente,
+  subtheme: SubthemeEnum.usoAgua,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Banco do Brasil',
     collaborator: 'Programa Água Brasil',

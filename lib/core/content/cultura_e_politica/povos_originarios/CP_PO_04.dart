@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel CP_PO_04 = ContentModel(
   id: 'CP_PO_04',
+  theme: ThemeEnum.culturaPolitica,
+  subtheme: SubthemeEnum.povosOriginarios,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Jornalismo TV Cultura',
     collaborator: 'Jornalismo TV Cultura',

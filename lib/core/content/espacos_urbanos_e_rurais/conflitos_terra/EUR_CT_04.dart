@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel EUR_CT_04 = ContentModel(
   id: 'EUR_CT_04',
+  theme: ThemeEnum.espacosUrbanosRurais,
+  subtheme: SubthemeEnum.conflitosTerra,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Comissão Pastoral da Terra (CPT)',
     collaborator: 'Comissão Pastoral da Terra (CPT)',

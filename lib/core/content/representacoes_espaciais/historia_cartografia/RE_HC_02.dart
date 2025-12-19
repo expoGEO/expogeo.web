@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel RE_HC_02 = ContentModel(
   id: 'RE_HC_02',
+  theme: ThemeEnum.representacoesEspaciais,
+  subtheme: SubthemeEnum.historiaCartografia,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Missão para as Comemorações do V Centenário da Circum-Navegação',
     collaborator: 'João Paulo Oliveira e Costa',
@@ -33,5 +36,3 @@ ContentModel RE_HC_02 = ContentModel(
     updateDate: DateTime(2026, 12),
   ),
 );
-
-

@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel NMA_BH_01 = ContentModel(
   id: 'NMA_BH_01',
+  theme: ThemeEnum.naturezaMeioAmbiente,
+  subtheme: SubthemeEnum.baciasHidrograficas,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Manual do Mundo',
     collaborator: 'Manual do Mundo',

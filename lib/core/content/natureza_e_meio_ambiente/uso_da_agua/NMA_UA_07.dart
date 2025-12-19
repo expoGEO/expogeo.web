@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel NMA_UA_07 = ContentModel(
-  id: 'NMA_UA_08',
+  id: 'NMA_UA_07',
+  theme: ThemeEnum.naturezaMeioAmbiente,
+  subtheme: SubthemeEnum.usoAgua,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Agência Nacional das Águas - ANA',
     collaborator: 'Agência Nacional das Águas - ANA',

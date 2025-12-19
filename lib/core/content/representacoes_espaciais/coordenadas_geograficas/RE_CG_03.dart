@@ -1,15 +1,17 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel RE_CG_03 = ContentModel(
   id: 'RE_CG_03',
+  theme: ThemeEnum.representacoesEspaciais,
+  subtheme: SubthemeEnum.coordenadasGeograficas,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Canal Youtube: Você sabia?',
     collaborator: 'Canal Youtube: Você sabia?',
   ),
   contentInfo: ContentInfo(
     title: 'Latitude e Longitude',
-    description:
-        'Vídeo com resumo sobre os principais conceitos de latitude e longitude',
+    description: 'Vídeo com resumo sobre os principais conceitos de latitude e longitude',
     subjects: ['Coordenadas geográficas', 'Longitude', 'Latitude'],
     contentNote:
         'Vídeo do canal “Você sabia?” com resumo sobre os conceitos de latitude e longitude',
@@ -33,5 +35,3 @@ ContentModel RE_CG_03 = ContentModel(
     updateDate: DateTime(2026, 12),
   ),
 );
-
-

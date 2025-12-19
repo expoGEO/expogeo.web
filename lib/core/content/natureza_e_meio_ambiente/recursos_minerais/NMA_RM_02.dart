@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel NMA_RM_02 = ContentModel(
   id: 'NMA_RM_02',
+  theme: ThemeEnum.naturezaMeioAmbiente,
+  subtheme: SubthemeEnum.recursosMinerais,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Universidade de São Paulo',
     collaborator: 'Instituto de Geociências',

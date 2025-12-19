@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel CP_CD_01 = ContentModel(
   id: 'CP_CD_01',
+  theme: ThemeEnum.culturaPolitica,
+  subtheme: SubthemeEnum.censoDemografico,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Instituto Brasileiro de Geografia e Estatística (IBGE)',
     collaborator: 'Sistema IBGE de Recuperação Automática - SIDRA',

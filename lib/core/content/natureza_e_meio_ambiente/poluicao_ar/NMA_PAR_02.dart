@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel NMA_PAR_02 = ContentModel(
   id: 'NMA_PAR_02',
+  theme: ThemeEnum.naturezaMeioAmbiente,
+  subtheme: SubthemeEnum.poluicaoAr,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Projeto Índice Mundial de Qualidade do Ar',
     collaborator: 'Embaixadas dos EUA na China',

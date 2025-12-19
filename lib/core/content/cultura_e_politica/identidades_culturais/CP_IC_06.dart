@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel CP_IC_06 = ContentModel(
-  id: 'CP_IC_07',
+  id: 'CP_IC_06',
+  theme: ThemeEnum.culturaPolitica,
+  subtheme: SubthemeEnum.identidadesCulturais,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Instituto Brasileiro de Geografia e Estatística (IBGE)',
     collaborator: 'Instituto Brasileiro de Geografia e Estatística (IBGE)',

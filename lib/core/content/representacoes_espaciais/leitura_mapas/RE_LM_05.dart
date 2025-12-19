@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel RE_LM_05 = ContentModel(
   id: 'RE_LM_05',
+  theme: ThemeEnum.representacoesEspaciais,
+  subtheme: SubthemeEnum.leituraMapas,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Museu Virtual do Vale do Mucuri',
     collaborator: 'Museu Virtual do Vale do Mucuri',
@@ -33,5 +36,3 @@ ContentModel RE_LM_05 = ContentModel(
     updateDate: DateTime(2026, 12),
   ),
 );
-
-

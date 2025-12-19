@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel RE_PC_01 = ContentModel(
   id: 'RE_PC_01',
+  theme: ThemeEnum.representacoesEspaciais,
+  subtheme: SubthemeEnum.pontosCardeais,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Wordwall',
     collaborator: 'Perfil: juliaalvesdemor',
@@ -31,5 +34,3 @@ ContentModel RE_PC_01 = ContentModel(
     updateDate: DateTime(2026, 12),
   ),
 );
-
-

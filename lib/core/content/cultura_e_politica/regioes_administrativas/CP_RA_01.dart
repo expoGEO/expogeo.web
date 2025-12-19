@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel CP_RA_01 = ContentModel(
-  id: 'CP_RA_02',
+  id: 'CP_RA_01',
+  theme: ThemeEnum.culturaPolitica,
+  subtheme: SubthemeEnum.regioesAdministrativas,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Instituto Federal do Paraná - União da Vitória',
     collaborator: 'Curso Técnico em Meio Ambiente integrado ao Ensino Médio',

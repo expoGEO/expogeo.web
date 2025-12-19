@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel NMA_BH_03 = ContentModel(
   id: 'NMA_BH_03',
+  theme: ThemeEnum.naturezaMeioAmbiente,
+  subtheme: SubthemeEnum.baciasHidrograficas,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Serviço Geológico do Brasil - SGB',
     collaborator: 'Serviço Geológico do Brasil - SGB',

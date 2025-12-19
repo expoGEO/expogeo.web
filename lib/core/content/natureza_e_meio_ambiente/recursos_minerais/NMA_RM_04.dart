@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel NMA_RM_04 = ContentModel(
   id: 'NMA_RM_04',
+  theme: ThemeEnum.naturezaMeioAmbiente,
+  subtheme: SubthemeEnum.recursosMinerais,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Google Arts and Culture',
     collaborator: 'MM Gerdau - Museu das Minas e do Metal',

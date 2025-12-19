@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel CP_IC_08 = ContentModel(
   id: 'CP_IC_08',
+  theme: ThemeEnum.culturaPolitica,
+  subtheme: SubthemeEnum.identidadesCulturais,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'SlaveVoyages',
     collaborator: 'Herbert S. Klein, David Richardson, David Eltis e Stephen Behrendt',

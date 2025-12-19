@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel RE_FH_04 = ContentModel(
   id: 'RE_FH_04',
+  theme: ThemeEnum.representacoesEspaciais,
+  subtheme: SubthemeEnum.fusoHorario,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Sociedade Beneficente Israelita Brasileira Albert Einstein',
     collaborator: 'Sociedade Beneficente Israelita Brasileira Albert Einstein',
@@ -34,5 +37,3 @@ ContentModel RE_FH_04 = ContentModel(
     updateDate: DateTime(2026, 12),
   ),
 );
-
-

@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel RE_CM_03 = ContentModel(
   id: 'RE_CM_03',
+  theme: ThemeEnum.representacoesEspaciais,
+  subtheme: SubthemeEnum.compositorMapas,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'OpenStreetMap',
     collaborator: 'OpenStreetMap',

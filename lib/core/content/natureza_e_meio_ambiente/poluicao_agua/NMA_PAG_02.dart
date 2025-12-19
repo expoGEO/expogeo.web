@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel NMA_PAG_02 = ContentModel(
   id: 'NMA_PAG_02',
+  theme: ThemeEnum.naturezaMeioAmbiente,
+  subtheme: SubthemeEnum.poluicaoAgua,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Observatório Nacional dos Direitos à Água e ao Saneamento - ONDAS',
     collaborator: 'Observatório Nacional dos Direitos à Água e ao Saneamento - ONDAS',

@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel RE_LM_04 = ContentModel(
   id: 'RE_LM_04',
+  theme: ThemeEnum.representacoesEspaciais,
+  subtheme: SubthemeEnum.leituraMapas,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Instituto Virtual para o Desenvolvimento Sustentável',
     collaborator: 'Instituto Virtual para o Desenvolvimento Sustentável',
@@ -31,5 +34,3 @@ ContentModel RE_LM_04 = ContentModel(
     updateDate: DateTime(2026, 12),
   ),
 );
-
-

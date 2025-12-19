@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel NMA_TC_04 = ContentModel(
   id: 'NMA_TC_04',
+  theme: ThemeEnum.naturezaMeioAmbiente,
+  subtheme: SubthemeEnum.tempoClima,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Universidade de Brasília',
     collaborator: 'Museu virtual',

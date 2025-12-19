@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel NMA_QUE_02 = ContentModel(
   id: 'NMA_QUE_02',
+  theme: ThemeEnum.naturezaMeioAmbiente,
+  subtheme: SubthemeEnum.queimadas,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Centro Gestor e Operacional do Sistema de Proteção da Amazônia - CENSIPAM',
     collaborator: 'Centro Gestor e Operacional do Sistema de Proteção da Amazônia - CENSIPAM',

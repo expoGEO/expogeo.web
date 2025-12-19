@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel NMA_BIO_01 = ContentModel(
   id: 'NMA_BIO_01',
+  theme: ThemeEnum.naturezaMeioAmbiente,
+  subtheme: SubthemeEnum.biomas,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Universidade de Brasília',
     collaborator: 'Universidade de Brasília',

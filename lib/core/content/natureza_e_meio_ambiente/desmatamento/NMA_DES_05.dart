@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel NMA_DES_05 = ContentModel(
   id: 'NMA_DES_05',
+  theme: ThemeEnum.naturezaMeioAmbiente,
+  subtheme: SubthemeEnum.desmatamento,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Ministério Público do Estado do Tocantins - MPTO',
     collaborator: 'Centro de Apoio Operacional de Habilitação, Urbanismo e Meio Ambiente - CAOMA',

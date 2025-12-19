@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel CP_POP_03 = ContentModel(
   id: 'CP_POP_03',
+  theme: ThemeEnum.culturaPolitica,
+  subtheme: SubthemeEnum.demografia,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Google Arts and Culture',
     collaborator: 'Google Arts and Culture',

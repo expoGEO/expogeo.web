@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel NMA_SUS_08 = ContentModel(
   id: 'NMA_SUS_08',
+  theme: ThemeEnum.naturezaMeioAmbiente,
+  subtheme: SubthemeEnum.sustentabilidade,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Instituto Chico Mendes de Bioconversação - ICMBio',
     collaborator: 'Instituto Chico Mendes de Bioconversação - ICMBio',

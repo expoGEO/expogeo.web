@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel RE_HC_01 = ContentModel(
   id: 'RE_HC_01',
+  theme: ThemeEnum.representacoesEspaciais,
+  subtheme: SubthemeEnum.historiaCartografia,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Museu da Marinha',
     collaborator: 'Museu da Marinha',

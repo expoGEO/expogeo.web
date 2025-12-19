@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel EUR_GM_04 = ContentModel(
   id: 'EUR_GM_04',
+  theme: ThemeEnum.espacosUrbanosRurais,
+  subtheme: SubthemeEnum.globalizacaoMobilidade,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Biblioteca Central da Marinha',
     collaborator: 'Google Arts and Culture',

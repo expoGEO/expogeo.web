@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel CP_PO_05 = ContentModel(
   id: 'CP_PO_05',
+  theme: ThemeEnum.culturaPolitica,
+  subtheme: SubthemeEnum.povosOriginarios,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Universidade Federal do Rio Grande do Sul',
     collaborator: 'Universidade Federal do Rio Grande do Sul',

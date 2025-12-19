@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel NMA_UA_05 = ContentModel(
-  id: 'NMA_UA_06',
+  id: 'NMA_UA_05',
+  theme: ThemeEnum.naturezaMeioAmbiente,
+  subtheme: SubthemeEnum.usoAgua,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Novo Tempo',
     collaborator: 'Origens - NT',

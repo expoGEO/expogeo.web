@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel NMA_EFR_01 = ContentModel(
   id: 'NMA_EFR_01',
+  theme: ThemeEnum.naturezaMeioAmbiente,
+  subtheme: SubthemeEnum.estruturasFormasRelevo,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Google Arts and Culture',
     collaborator: 'Patrimônio Mundial – UNESCO e Parques Nacionais da Tanzânia (TANAPA)',

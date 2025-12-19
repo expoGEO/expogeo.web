@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel EUR_ERB_05 = ContentModel(
   id: 'EUR_ERB_05',
+  theme: ThemeEnum.espacosUrbanosRurais,
+  subtheme: SubthemeEnum.espacoRuralBrasileiro,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Instituto Interamericano de Cooperação para a Agricultura (IICA)',
     collaborator: 'Instituto Interamericano de Cooperação para a Agricultura (IICA)',

@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel NMA_UA_04 = ContentModel(
-  id: 'NMA_UA_05',
+  id: 'NMA_UA_04',
+  theme: ThemeEnum.naturezaMeioAmbiente,
+  subtheme: SubthemeEnum.usoAgua,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Instituto Confúcio para Negócios - Fundação Armando Alvares Penteado',
     collaborator: 'Museu de Arte Brasileira - Fundação Armando Alvares Penteado',

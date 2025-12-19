@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel NMA_TC_05 = ContentModel(
   id: 'NMA_TC_05',
+  theme: ThemeEnum.naturezaMeioAmbiente,
+  subtheme: SubthemeEnum.tempoClima,
   intellectualIndicator: const IntellectualIndicator(creator: 'Windy', collaborator: 'Windy'),
   contentInfo: ContentInfo(
     title: 'Windy',

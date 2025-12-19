@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel EUR_EUB_03 = ContentModel(
   id: 'EUR_EUB_03',
+  theme: ThemeEnum.espacosUrbanosRurais,
+  subtheme: SubthemeEnum.espacoUrbanoBrasileiro,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Instituto dos Arquitetos do Brasil',
     collaborator: 'Departamento Distrito Federal',

@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel NMA_BH_02 = ContentModel(
   id: 'NMA_BH_02',
+  theme: ThemeEnum.naturezaMeioAmbiente,
+  subtheme: SubthemeEnum.baciasHidrograficas,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Agência Nacional de Águas - ANA',
     collaborator: 'Agência Nacional de Águas - ANA',

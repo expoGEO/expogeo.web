@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel RE_HC_03 = ContentModel(
   id: 'RE_HC_03',
+  theme: ThemeEnum.representacoesEspaciais,
+  subtheme: SubthemeEnum.historiaCartografia,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Fundação Biblioteca Nacional',
     collaborator: 'Biblioteca Nacional Digital',
@@ -34,5 +37,3 @@ ContentModel RE_HC_03 = ContentModel(
     updateDate: DateTime(2026, 12),
   ),
 );
-
-

@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel CP_GP_05 = ContentModel(
   id: 'CP_GP_05',
+  theme: ThemeEnum.culturaPolitica,
+  subtheme: SubthemeEnum.geopolitica,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Fundação Alexandre de Gusmão',
     collaborator: 'Fundação Alexandre de Gusmão',

@@ -1,7 +1,10 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 
 ContentModel CP_GP_04 = ContentModel(
   id: 'CP_GP_04',
+  theme: ThemeEnum.culturaPolitica,
+  subtheme: SubthemeEnum.geopolitica,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Nexo Jornal',
     collaborator: 'Marcelo Viana Estevão de Moraes',

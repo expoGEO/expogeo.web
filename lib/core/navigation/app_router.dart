@@ -1,6 +1,8 @@
+import 'package:expogeo/core/models/content_model.dart';
 import 'package:expogeo/core/models/theme_data_model.dart';
 import 'package:expogeo/core/pages/not_found_page.dart';
 import 'package:expogeo/features/contact/pages/contact_page.dart';
+import 'package:expogeo/features/content/pages/youtube_video_view_page.dart';
 import 'package:expogeo/features/home/pages/home_page.dart';
 import 'package:expogeo/features/theme/pages/subtheme_page.dart';
 import 'package:expogeo/features/theme/pages/theme_page.dart';
@@ -84,6 +86,37 @@ class AppRouter {
 
       // Rota de contato
       GoRoute(path: contact, name: 'contact', builder: (context, state) => const ContactPage()),
+
+      // Rotas de conteúdo
+      GoRoute(
+        path: '/:themeId/:subthemeId/:contentId',
+        builder: (context, state) {
+          final extra = state.extra as Map<String, dynamic>?;
+          if (extra == null) return const NotFoundPage();
+
+          final themeId = state.pathParameters['themeId'];
+          final subthemeId = state.pathParameters['subthemeId'];
+          final contentId = state.pathParameters['contentId'];
+
+          if (themeId == null || subthemeId == null || contentId == null) {
+            return const NotFoundPage();
+          }
+
+          final type = extra['type'] as ContentType?;
+          if (type == null) return const NotFoundPage();
+
+          switch (type) {
+            case ContentType.video:
+              return YoutubeVideoViewPage(
+                themeId: themeId,
+                subthemeId: subthemeId,
+                contentId: contentId,
+              );
+            default:
+              return const NotFoundPage();
+          }
+        },
+      ),
     ],
   );
 }

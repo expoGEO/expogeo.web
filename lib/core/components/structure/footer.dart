@@ -1,31 +1,49 @@
 import 'package:expogeo/core/components/image/app_asset_image.dart';
+import 'package:expogeo/core/theme/app_theme.dart';
 import 'package:expogeo/core/utils/enums/app_images.dart';
 import 'package:expogeo/core/utils/extensions/num_extension.dart';
+import 'package:expogeo/core/utils/screen/screen_utils.dart';
 import 'package:flutter/material.dart';
-
-import '../../theme/app_theme.dart';
 
 class Footer extends StatelessWidget {
   const Footer({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = ScreenUtils.isMobile(context);
+
     return Container(
-      padding: EdgeInsets.all(AppTheme.dimensions.space.huge),
+      padding: EdgeInsets.all(AppTheme.dimensions.space.huge.scale),
       decoration: BoxDecoration(color: AppTheme.colors.darkGray),
       child: Column(
         children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(flex: 2, child: _buildProjectInfo(context)),
-              SizedBox(width: AppTheme.dimensions.space.large),
-              Expanded(flex: 1, child: _buildContactInfo(context)),
-            ],
-          ),
-          SizedBox(height: AppTheme.dimensions.space.large),
+          if (!isMobile)
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(child: _projectInfo),
+                SizedBox(width: AppTheme.dimensions.space.large.width),
+                Expanded(
+                  child: Row(
+                    children: [
+                      Expanded(flex: 1, child: Container()),
+                      Expanded(flex: 2, child: _contactInfo),
+                    ],
+                  ),
+                ),
+              ],
+            )
+          else
+            Column(
+              children: [
+                _projectInfo,
+                SizedBox(height: AppTheme.dimensions.space.large.height),
+                _contactInfo,
+              ],
+            ),
+          SizedBox(height: AppTheme.dimensions.space.large.height),
           Container(height: 1, color: AppTheme.colors.gray200.withValues(alpha: 0.2)),
-          SizedBox(height: AppTheme.dimensions.space.medium),
+          SizedBox(height: AppTheme.dimensions.space.medium.height),
           Text(
             '© 2025 | Desenvolvido para fins educativos',
             style: AppTheme.typography.body.small.copyWith(
@@ -37,7 +55,7 @@ class Footer extends StatelessWidget {
     );
   }
 
-  Widget _buildProjectInfo(BuildContext context) {
+  Widget get _projectInfo {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -62,7 +80,7 @@ class Footer extends StatelessWidget {
     );
   }
 
-  Widget _buildContactInfo(BuildContext context) {
+  Widget get _contactInfo {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -74,19 +92,18 @@ class Footer extends StatelessWidget {
           ),
         ),
         SizedBox(height: AppTheme.dimensions.space.medium),
-        _buildContactItem(context, icon: Icons.email, text: 'expogeo@edu.com', onTap: () {}),
+        _buildContactItem(icon: Icons.email, text: 'expogeo@edu.com', onTap: () {}),
         SizedBox(height: AppTheme.dimensions.space.mini),
-        _buildContactItem(context, icon: Icons.people, text: 'Instagram', onTap: () {}),
+        _buildContactItem(icon: Icons.people, text: 'Instagram', onTap: () {}),
         SizedBox(height: AppTheme.dimensions.space.mini),
-        _buildContactItem(context, icon: Icons.book, text: 'Material Complementar', onTap: () {}),
+        _buildContactItem(icon: Icons.book, text: 'Material Complementar', onTap: () {}),
         SizedBox(height: AppTheme.dimensions.space.mini),
-        _buildContactItem(context, icon: Icons.link, text: 'Materiais Extras (PDF)', onTap: () {}),
+        _buildContactItem(icon: Icons.link, text: 'Materiais Extras (PDF)', onTap: () {}),
       ],
     );
   }
 
-  Widget _buildContactItem(
-    BuildContext context, {
+  Widget _buildContactItem({
     required IconData icon,
     required String text,
     required VoidCallback onTap,
@@ -98,17 +115,17 @@ class Footer extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppTheme.dimensions.radius.small),
         child: Padding(
           padding: EdgeInsets.symmetric(
-            vertical: AppTheme.dimensions.space.small,
-            horizontal: AppTheme.dimensions.space.small,
+            vertical: AppTheme.dimensions.space.small.height,
+            horizontal: AppTheme.dimensions.space.small.width,
           ),
           child: Row(
             children: [
-              Icon(icon, size: 16.scale, color: Colors.white.withValues(alpha: 0.7)),
-              SizedBox(width: AppTheme.dimensions.space.small),
+              Icon(icon, size: 16.scale, color: AppTheme.colors.white.withValues(alpha: 0.7)),
+              SizedBox(width: AppTheme.dimensions.space.small.width),
               Text(
                 text,
                 style: AppTheme.typography.body.medium.copyWith(
-                  color: Colors.white.withValues(alpha: 0.8),
+                  color: AppTheme.colors.white.withValues(alpha: 0.8),
                 ),
               ),
             ],

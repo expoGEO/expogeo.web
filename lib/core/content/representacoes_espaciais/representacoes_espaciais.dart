@@ -44,7 +44,7 @@ ThemeModel representacoesEspaciais = ThemeModel(
   type: ThemeEnum.representacoesEspaciais,
   title: 'Representações Espaciais',
   description:
-      'Explore mapas, cartografia e geotecnologias. Descubra como representamos o nosso planeta!',
+      'Explore conteúdos relacionados aos diferentes modos de representação da superfície terrestre. Descubra mais sobre Cartografia, Geotecnologias e Mapas.',
   imagePath: 'assets/images/representacoes.jpg',
   color: AppTheme.colors.primaryRed,
   icon: Icons.map_outlined,

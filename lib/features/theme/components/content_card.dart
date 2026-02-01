@@ -2,147 +2,189 @@ import 'package:expogeo/core/components/card/rounded_card.dart';
 import 'package:expogeo/core/models/content_model.dart';
 import 'package:expogeo/core/theme/app_theme.dart';
 import 'package:expogeo/core/utils/extensions/num_extension.dart';
+import 'package:expogeo/core/utils/url/url_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-class ContentCard extends StatelessWidget {
+class ContentCard extends StatefulWidget {
   final ContentModel content;
 
   const ContentCard({super.key, required this.content});
 
   @override
-  Widget build(BuildContext context) {
-    final contentTypeColor = content.originInfo.type.color;
-    final contentTypeIcon = content.originInfo.type.icon;
+  State<ContentCard> createState() => _ContentCardState();
+}
 
-    return RoundedCard(
-      padding: EdgeInsets.all(AppTheme.dimensions.space.large.scale),
-      borderRadius: BorderRadius.circular(AppTheme.dimensions.radius.huge),
-      borderColor: AppTheme.colors.gray50,
-      boxShadow: [
-        BoxShadow(
-          color: AppTheme.colors.black.withValues(alpha: 0.1),
-          blurRadius: 20,
-          offset: Offset(0, 10),
-        ),
-      ],
-      child: InkWell(
-        onTap: () => _handleContentTap(context),
-        borderRadius: BorderRadius.circular(AppTheme.dimensions.radius.huge),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Container(
-                  padding: EdgeInsets.all(AppTheme.dimensions.space.small.scale),
-                  decoration: BoxDecoration(
-                    color: contentTypeColor.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(AppTheme.dimensions.radius.medium),
-                  ),
-                  child: Icon(contentTypeIcon, color: contentTypeColor, size: 24.scale),
-                ),
-                SizedBox(width: AppTheme.dimensions.space.medium.width),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        content.originInfo.type.label,
-                        style: AppTheme.typography.body.small.copyWith(
-                          color: AppTheme.colors.mediumGray,
-                          fontWeight: FontWeight.w500,
+class _ContentCardState extends State<ContentCard> with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<double> _scaleAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 200),
+      vsync: this,
+    );
+    _scaleAnimation = Tween<double>(
+      begin: 1.0,
+      end: 1.02,
+    ).animate(CurvedAnimation(parent: _animationController, curve: Curves.easeInOut));
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) {
+        _animationController.forward();
+      },
+      onExit: (_) {
+        _animationController.reverse();
+      },
+      child: AnimatedBuilder(
+        animation: _scaleAnimation,
+        builder: (context, child) {
+          return Transform.scale(
+            scale: _scaleAnimation.value,
+            child: GestureDetector(
+              onTap: () => _handleContentTap(context),
+              child: RoundedCard(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: AppTheme.dimensions.space.large.height,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(AppTheme.dimensions.space.small),
+                              decoration: BoxDecoration(
+                                color: AppTheme.colors.darkOrange.withValues(alpha: 0.1),
+                                shape: BoxShape.circle,
+                              ),
+                              child: Icon(
+                                widget.content.originInfo.type.icon,
+                                size: 40,
+                                color: AppTheme.colors.darkOrange,
+                              ),
+                            ),
+                            SizedBox(width: AppTheme.dimensions.space.medium.width),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    widget.content.originInfo.type.label,
+                                    style: AppTheme.typography.body.big.copyWith(
+                                      color: AppTheme.colors.mediumGray,
+                                    ),
+                                  ),
+                                  if (widget.content.registrationInfo.issueYear != null)
+                                    Text(
+                                      '${widget.content.registrationInfo.issueYear}',
+                                      style: AppTheme.typography.body.small.copyWith(
+                                        color: AppTheme.colors.mediumGray,
+                                      ),
+                                    ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                      if (content.registrationInfo.issueYear != null)
+                        SizedBox(height: AppTheme.dimensions.space.large.height),
                         Text(
-                          '${content.registrationInfo.issueYear}',
-                          style: AppTheme.typography.body.small.copyWith(
+                          widget.content.contentInfo.title,
+                          style: AppTheme.typography.title.big.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: AppTheme.colors.darkGray,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          widget.content.contentInfo.description,
+                          style: AppTheme.typography.body.medium.copyWith(
                             color: AppTheme.colors.mediumGray,
                           ),
                         ),
-                    ],
-                  ),
+                        if (widget.content.contentInfo.subjects.isNotEmpty) ...[
+                          SizedBox(height: AppTheme.dimensions.space.medium.height),
+                          Wrap(
+                            spacing: AppTheme.dimensions.space.small.width,
+                            runSpacing: AppTheme.dimensions.space.small.height,
+                            children: widget.content.contentInfo.subjects.map((subject) {
+                              return Container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: AppTheme.dimensions.space.small.width,
+                                  vertical: AppTheme.dimensions.space.mini.height,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: AppTheme.colors.lightGray,
+                                  borderRadius: BorderRadius.circular(
+                                    AppTheme.dimensions.radius.small,
+                                  ),
+                                ),
+                                child: Text(
+                                  subject,
+                                  style: AppTheme.typography.body.small.copyWith(
+                                    color: AppTheme.colors.darkGray,
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                          ),
+                        ],
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.open_in_new,
+                          size: 16.scale,
+                          color: AppTheme.colors.primaryOrange,
+                        ),
+                        SizedBox(width: AppTheme.dimensions.space.small.width),
+                        Text(
+                          'Abrir conteúdo',
+                          style: AppTheme.typography.body.medium.copyWith(
+                            color: AppTheme.colors.primaryOrange,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            SizedBox(height: AppTheme.dimensions.space.large.height),
-            Text(
-              content.contentInfo.title,
-              style: AppTheme.typography.title.big.copyWith(
-                fontWeight: FontWeight.bold,
-                color: AppTheme.colors.darkGray,
               ),
             ),
-            SizedBox(height: AppTheme.dimensions.space.medium.height),
-            Text(
-              content.contentInfo.description,
-              style: AppTheme.typography.body.medium.copyWith(color: AppTheme.colors.mediumGray),
-            ),
-            if (content.contentInfo.subjects.isNotEmpty) ...[
-              SizedBox(height: AppTheme.dimensions.space.medium.height),
-              Wrap(
-                spacing: AppTheme.dimensions.space.small.width,
-                runSpacing: AppTheme.dimensions.space.small.height,
-                children: content.contentInfo.subjects.take(3).map((subject) {
-                  return Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: AppTheme.dimensions.space.small.width,
-                      vertical: AppTheme.dimensions.space.mini.height,
-                    ),
-                    decoration: BoxDecoration(
-                      color: AppTheme.colors.lightGray,
-                      borderRadius: BorderRadius.circular(AppTheme.dimensions.radius.small),
-                    ),
-                    child: Text(
-                      subject,
-                      style: AppTheme.typography.body.small.copyWith(
-                        color: AppTheme.colors.darkGray,
-                      ),
-                    ),
-                  );
-                }).toList(),
-              ),
-            ],
-            SizedBox(height: AppTheme.dimensions.space.large.height),
-            Row(
-              children: [
-                Icon(Icons.open_in_new, size: 16.scale, color: contentTypeColor),
-                SizedBox(width: AppTheme.dimensions.space.small.width),
-                Text(
-                  'Abrir conteúdo',
-                  style: AppTheme.typography.body.medium.copyWith(
-                    color: contentTypeColor,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
 
   void _handleContentTap(BuildContext context) {
-    final route = content.route;
+    final route = widget.content.route;
 
     if (route == null) {
-      _openUrl(content.registrationInfo.location);
+      UrlUtils.openUrl(widget.content.registrationInfo.location);
       return;
     }
 
-    final contentType = content.originInfo.type;
+    final contentType = widget.content.originInfo.type;
 
     context.push(route, extra: {'type': contentType});
-  }
-
-  Future<void> _openUrl(String url) async {
-    final uri = Uri.parse(url);
-
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
-    }
   }
 }

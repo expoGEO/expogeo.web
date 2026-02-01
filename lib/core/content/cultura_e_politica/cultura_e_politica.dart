@@ -48,7 +48,7 @@ ThemeModel culturaPolitica = ThemeModel(
   type: ThemeEnum.culturaPolitica,
   title: 'Cultura e Política',
   description:
-      'Mergulhe na diversidade, cultura e política global: povos originários, demografia e geopolítica!',
+      'Navegue por objetos digitais que representam a diversidade, cultura identidades culturais, demografia e geopolítica global. ',
   imagePath: 'assets/images/cultura-politica.jpg',
   color: AppTheme.colors.secondaryRed,
   icon: Icons.people_outlined,

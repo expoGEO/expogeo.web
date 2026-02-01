@@ -1,7 +1,6 @@
 import 'package:expogeo/core/models/content_model.dart';
 import 'package:expogeo/core/models/theme_data_model.dart';
 import 'package:expogeo/core/pages/not_found_page.dart';
-import 'package:expogeo/features/contact/pages/contact_page.dart';
 import 'package:expogeo/features/content/pages/youtube_video_view_page.dart';
 import 'package:expogeo/features/home/pages/home_page.dart';
 import 'package:expogeo/features/theme/pages/subtheme_page.dart';
@@ -83,9 +82,6 @@ class AppRouter {
           return SubthemePage(themeId: culturaPolitica, subthemeId: subthemeId);
         },
       ),
-
-      // Rota de contato
-      GoRoute(path: contact, name: 'contact', builder: (context, state) => const ContactPage()),
 
       // Rotas de conteúdo
       GoRoute(

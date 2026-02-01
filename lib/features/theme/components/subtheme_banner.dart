@@ -16,20 +16,10 @@ class SubthemeBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RoundedCard(
-      padding: EdgeInsets.all(AppTheme.dimensions.space.large.scale),
       margin: EdgeInsets.symmetric(
         horizontal: AppTheme.dimensions.space.large.width,
         vertical: AppTheme.dimensions.space.large.height,
       ),
-      borderRadius: BorderRadius.circular(AppTheme.dimensions.radius.huge),
-      borderColor: AppTheme.colors.gray50,
-      boxShadow: [
-        BoxShadow(
-          color: AppTheme.colors.black.withValues(alpha: 0.1),
-          blurRadius: 20,
-          offset: Offset(0, 10),
-        ),
-      ],
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -37,28 +27,15 @@ class SubthemeBanner extends StatelessWidget {
           SizedBox(height: AppTheme.dimensions.space.large.height),
           Row(
             children: [
-              AppAssetImage(image: subtheme.image, width: 80.scale),
+              AppAssetImage(image: subtheme.image, width: 56.scale),
               SizedBox(width: AppTheme.dimensions.space.medium.width),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      subtheme.title,
-                      style: AppTheme.typography.title.medium.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: AppTheme.colors.darkGray,
-                      ),
-                    ),
-                    SizedBox(height: AppTheme.dimensions.space.mini.height),
-                    Text(
-                      subtheme.description,
-                      style: AppTheme.typography.body.medium.copyWith(
-                        color: AppTheme.colors.mediumGray,
-                        height: 1.4,
-                      ),
-                    ),
-                  ],
+              Flexible(
+                child: Text(
+                  subtheme.title,
+                  style: AppTheme.typography.title.medium.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: AppTheme.colors.darkGray,
+                  ),
                 ),
               ),
             ],

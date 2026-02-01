@@ -3,6 +3,7 @@ import 'package:expogeo/core/theme/app_theme.dart';
 import 'package:expogeo/core/utils/enums/app_images.dart';
 import 'package:expogeo/core/utils/extensions/num_extension.dart';
 import 'package:expogeo/core/utils/screen/screen_utils.dart';
+import 'package:expogeo/core/utils/url/url_utils.dart';
 import 'package:flutter/material.dart';
 
 class Footer extends StatelessWidget {
@@ -14,36 +15,32 @@ class Footer extends StatelessWidget {
 
     return Container(
       padding: EdgeInsets.all(AppTheme.dimensions.space.huge.scale),
-      decoration: BoxDecoration(color: AppTheme.colors.darkGray),
+      decoration: BoxDecoration(color: AppTheme.colors.lightGray),
       child: Column(
         children: [
           if (!isMobile)
             Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              spacing: AppTheme.dimensions.space.large.width,
               children: [
-                Expanded(child: _projectInfo),
-                SizedBox(width: AppTheme.dimensions.space.large.width),
                 Expanded(
-                  child: Row(
-                    children: [
-                      Expanded(flex: 1, child: Container()),
-                      Expanded(flex: 2, child: _contactInfo),
-                    ],
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    spacing: AppTheme.dimensions.space.large.height,
+                    children: [_projectInfo, _contactInfo],
                   ),
                 ),
+                Expanded(child: _partnersInfo),
               ],
             )
           else
             Column(
-              children: [
-                _projectInfo,
-                SizedBox(height: AppTheme.dimensions.space.large.height),
-                _contactInfo,
-              ],
+              spacing: AppTheme.dimensions.space.large.height,
+              children: [_projectInfo, _contactInfo, _partnersInfo],
             ),
-          SizedBox(height: AppTheme.dimensions.space.large.height),
-          Container(height: 1, color: AppTheme.colors.gray200.withValues(alpha: 0.2)),
-          SizedBox(height: AppTheme.dimensions.space.medium.height),
+          SizedBox(height: AppTheme.dimensions.space.huge.height),
+          Container(height: 1, color: AppTheme.colors.gray200),
+          SizedBox(height: AppTheme.dimensions.space.huge.height),
           Text(
             '© 2025 | Desenvolvido para fins educativos',
             style: AppTheme.typography.body.small.copyWith(
@@ -55,25 +52,46 @@ class Footer extends StatelessWidget {
     );
   }
 
+  Widget get _partnersInfo {
+    final images = [
+      AppImages.capes,
+      AppImages.faced,
+      AppImages.observatorio,
+      AppImages.ppged,
+      AppImages.ufu,
+    ];
+    return Wrap(
+      alignment: WrapAlignment.center,
+      crossAxisAlignment: WrapCrossAlignment.start,
+      spacing: AppTheme.dimensions.space.large.width,
+      runSpacing: AppTheme.dimensions.space.large.height,
+      children: images.map((image) => AppAssetImage(image: image, width: 180.width)).toList(),
+    );
+  }
+
   Widget get _projectInfo {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: AppTheme.dimensions.space.medium.height,
       children: [
         Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          spacing: AppTheme.dimensions.space.small.width,
           children: [
-            AppAssetImage(image: AppImages.logoSimple, width: 32.scale, height: 32.scale),
-            SizedBox(width: AppTheme.dimensions.space.small),
+            AppAssetImage(image: AppImages.logoSimple, width: 80.scale, height: 80.scale),
             Text(
-              'ExpoGEO',
-              style: AppTheme.typography.title.big.copyWith(color: AppTheme.colors.white),
+              'expoGEO',
+              style: AppTheme.typography.title.big.copyWith(color: AppTheme.colors.darkGray),
             ),
           ],
         ),
-        SizedBox(height: AppTheme.dimensions.space.medium),
-        Text(
-          'ExpoGEO - Explorando o Mundo pela Geografia',
-          style: AppTheme.typography.body.medium.copyWith(
-            color: AppTheme.colors.gray500.withValues(alpha: 0.8),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: AppTheme.dimensions.space.small.width),
+          child: Text(
+            'Conhecimento, Tecnologia e Interatividade.',
+            style: AppTheme.typography.body.medium.copyWith(
+              color: AppTheme.colors.gray500.withValues(alpha: 0.8),
+            ),
           ),
         ),
       ],
@@ -85,20 +103,40 @@ class Footer extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppTheme.dimensions.space.small),
+          padding: EdgeInsets.symmetric(horizontal: AppTheme.dimensions.space.small.width),
           child: Text(
-            'Entre em contato',
-            style: AppTheme.typography.title.medium.copyWith(color: AppTheme.colors.white),
+            'Entre em contato:',
+            style: AppTheme.typography.title.medium.copyWith(color: AppTheme.colors.darkGray),
           ),
         ),
         SizedBox(height: AppTheme.dimensions.space.medium),
-        _buildContactItem(icon: Icons.email, text: 'expogeo@edu.com', onTap: () {}),
-        SizedBox(height: AppTheme.dimensions.space.mini),
-        _buildContactItem(icon: Icons.people, text: 'Instagram', onTap: () {}),
-        SizedBox(height: AppTheme.dimensions.space.mini),
-        _buildContactItem(icon: Icons.book, text: 'Material Complementar', onTap: () {}),
-        SizedBox(height: AppTheme.dimensions.space.mini),
-        _buildContactItem(icon: Icons.link, text: 'Materiais Extras (PDF)', onTap: () {}),
+        _buildContactItem(
+          icon: Icons.email,
+          text: 'expogeoufu@gmail.com',
+          onTap: () {
+            UrlUtils.openUrl('mailto:expogeoufu@gmail.com');
+          },
+        ),
+        SizedBox(height: AppTheme.dimensions.space.medium),
+        _buildContactItem(
+          icon: Icons.book,
+          text: 'Metadados da nossa Curadoria Digital',
+          onTap: () {
+            UrlUtils.openUrl(
+              'https://drive.google.com/drive/folders/1xpVY1bm14ZwBdAPHYhb8s9ic4FACuUKb?usp=sharing',
+            );
+          },
+        ),
+        SizedBox(height: AppTheme.dimensions.space.medium),
+        _buildContactItem(
+          icon: Icons.book,
+          text: 'Tese de Doutorado',
+          onTap: () {
+            UrlUtils.openUrl(
+              'https://drive.google.com/file/d/1Br4J2nR6GBuKVY8xwwBJzZoOLD3Nftmz/view?usp=sharing',
+            );
+          },
+        ),
       ],
     );
   }
@@ -119,13 +157,14 @@ class Footer extends StatelessWidget {
             horizontal: AppTheme.dimensions.space.small.width,
           ),
           child: Row(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(icon, size: 16.scale, color: AppTheme.colors.white.withValues(alpha: 0.7)),
+              Icon(icon, size: 24.scale, color: AppTheme.colors.primaryOrange),
               SizedBox(width: AppTheme.dimensions.space.small.width),
-              Text(
-                text,
-                style: AppTheme.typography.body.medium.copyWith(
-                  color: AppTheme.colors.white.withValues(alpha: 0.8),
+              Flexible(
+                child: Text(
+                  text,
+                  style: AppTheme.typography.body.medium.copyWith(color: AppTheme.colors.darkGray),
                 ),
               ),
             ],

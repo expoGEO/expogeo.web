@@ -83,7 +83,7 @@ ThemeModel naturezaMeioAmbiente = ThemeModel(
   type: ThemeEnum.naturezaMeioAmbiente,
   title: 'Meio Ambiente e Natureza',
   description:
-      'Conheça os elementos naturais e desafios ambientais do mundo: clima, água, relevo, biomas e sustentabilidade.',
+      'Investigue conteúdos sobre os elementos geográficos da natureza e pesquise informações acerca da sustentabilidade em nosso planeta.',
   imagePath: 'assets/images/meio-ambiente.jpg',
   color: AppTheme.colors.primaryGreen,
   icon: Icons.eco_outlined,

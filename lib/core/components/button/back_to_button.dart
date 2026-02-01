@@ -26,11 +26,13 @@ class BackToButton extends StatelessWidget {
             children: [
               Icon(Icons.arrow_back_ios, size: 16.scale, color: AppTheme.colors.mediumGray),
               SizedBox(width: AppTheme.dimensions.space.small),
-              Text(
-                label,
-                style: AppTheme.typography.body.medium.copyWith(
-                  color: AppTheme.colors.mediumGray,
-                  decoration: TextDecoration.underline,
+              Flexible(
+                child: Text(
+                  label,
+                  style: AppTheme.typography.body.medium.copyWith(
+                    color: AppTheme.colors.mediumGray,
+                    decoration: TextDecoration.underline,
+                  ),
                 ),
               ),
             ],

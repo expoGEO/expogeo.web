@@ -12,17 +12,6 @@ class SubthemeContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RoundedCard(
-      padding: EdgeInsets.all(AppTheme.dimensions.space.large.scale),
-      margin: EdgeInsets.symmetric(horizontal: AppTheme.dimensions.space.large.width),
-      borderRadius: BorderRadius.circular(AppTheme.dimensions.radius.huge),
-      borderColor: AppTheme.colors.gray50,
-      boxShadow: [
-        BoxShadow(
-          color: AppTheme.colors.black.withValues(alpha: 0.1),
-          blurRadius: 20,
-          offset: Offset(0, 10),
-        ),
-      ],
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

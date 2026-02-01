@@ -3,6 +3,11 @@ import "package:expogeo/core/utils/string/string_utils.dart";
 enum AppImages {
   logoSimple,
   logo,
+  capes,
+  faced,
+  observatorio,
+  ppged,
+  ufu,
   baciasHidrograficas,
   biomas,
   censoDemografico,

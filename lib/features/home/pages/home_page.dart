@@ -1,9 +1,8 @@
+import 'package:expogeo/core/components/structure/footer.dart';
+import 'package:expogeo/core/theme/app_theme.dart';
+import 'package:expogeo/features/home/components/carousel/themes_row.dart';
 import 'package:expogeo/features/home/components/home_banner.dart';
 import 'package:flutter/material.dart';
-
-import '../../../core/components/structure/footer.dart';
-import '../../../core/theme/app_theme.dart';
-import '../components/carousel/theme_carousel.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -13,17 +12,15 @@ class HomePage extends StatelessWidget {
     final space = SliverToBoxAdapter(child: SizedBox(height: AppTheme.dimensions.space.massive));
 
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(gradient: AppTheme.gradients.primaryGradient),
-        child: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(child: HomeBanner()),
-            space,
-            SliverToBoxAdapter(child: Center(child: ThemeCarousel())),
-            space,
-            SliverToBoxAdapter(child: Footer()),
-          ],
-        ),
+      backgroundColor: AppTheme.colors.gray100,
+      body: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(child: const HomeBanner()),
+          space,
+          SliverToBoxAdapter(child: const Center(child: ThemesRow())),
+          space,
+          SliverToBoxAdapter(child: const Footer()),
+        ],
       ),
     );
   }

@@ -1,4 +1,4 @@
-# ExpoGEO - Explorando o Mundo pela Geografia
+# expoGEO: Exposição Geográfica
 
 ## 📋 Visão Geral
 

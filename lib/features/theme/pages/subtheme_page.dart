@@ -27,28 +27,26 @@ class SubthemePage extends StatelessWidget {
     );
 
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(color: subtheme.color.withValues(alpha: 0.1)),
-        child: Column(
-          children: [
-            const Navbar(),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    SubthemeBanner(theme: theme, subtheme: subtheme),
-                    if (subtheme.contents.isNotEmpty)
-                      ContentGrid(subtheme: subtheme)
-                    else
-                      SubthemeContent(subtheme: subtheme),
-                    SizedBox(height: AppTheme.dimensions.space.large.height),
-                    const Footer(),
-                  ],
-                ),
+      backgroundColor: AppTheme.colors.gray100,
+      body: Column(
+        children: [
+          const Navbar(),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  SubthemeBanner(theme: theme, subtheme: subtheme),
+                  if (subtheme.contents.isNotEmpty)
+                    ContentGrid(subtheme: subtheme)
+                  else
+                    SubthemeContent(subtheme: subtheme),
+                  SizedBox(height: AppTheme.dimensions.space.large.height),
+                  const Footer(),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

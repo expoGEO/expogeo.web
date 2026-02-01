@@ -51,7 +51,7 @@ ThemeModel espacosUrbanosRurais = ThemeModel(
   type: ThemeEnum.espacosUrbanosRurais,
   title: 'Espaços Urbanos e Rurais',
   description:
-      'Entenda a dinâmica das cidades, campo, indústria, mobilidade, e a vida em diferentes territórios.',
+      'Acesse conteúdos relacionados à produção dos espaços urbanos e rurais no Brasil e no mundo, com foco em temas sobre Mobilidade, Globalização, Indústria e Mercado Agropecuário.',
   imagePath: 'assets/images/espacos-urbanos.jpg',
   color: AppTheme.colors.primaryBlue,
   icon: Icons.location_city_outlined,

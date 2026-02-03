@@ -17,6 +17,6 @@ class SubthemeModel {
     required this.description,
     required this.image,
     required this.color,
-    this.contents = const [],
+    required this.contents,
   });
 }

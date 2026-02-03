@@ -58,13 +58,6 @@ ThemeModel representacoesEspaciais = ThemeModel(
       contents: [RE_HC_01, RE_HC_02, RE_HC_03, RE_HC_04, RE_HC_05],
     ),
     SubthemeModel(
-      type: SubthemeEnum.movimentosTerra,
-      title: 'MOVIMENTOS DA TERRA',
-      description: 'Movimentos da Terra',
-      image: AppImages.movimentosTerra,
-      color: AppTheme.colors.primaryRed,
-    ),
-    SubthemeModel(
       type: SubthemeEnum.pontosCardeais,
       title: 'PONTOS CARDEAIS',
       description: 'Pontos cardeais',

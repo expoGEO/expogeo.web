@@ -21,18 +21,15 @@ class HomeBanner extends StatelessWidget {
           AppAssetImage(image: AppImages.logo, width: MediaQuery.of(context).size.width * 0.3),
           SizedBox(height: AppTheme.dimensions.space.large),
           Text(
-            'Bem-vindo(a) à curadoria digital expoGEO! Essa é uma plataforma criada '
-            'para atender estudantes e professores, com o intuito de divulgar '
-            'materiais que fazem relação com o saber geográfico. Aqui você '
-            'encontrará conteúdos digitais relacionados aos temas do currículo '
-            'geográfico escolar de forma dinâmica e interativa.\n\n'
-            'A expoGEO faz parte de uma pesquisa acadêmica em nível de Doutorado '
-            'desenvolvida no Programa de Pós-Graduação em Educação da Universidade '
-            'Federal de Uberlândia (PPGED/UFU). Conta com o apoio financeiro da '
-            'Coordenação de Aperfeiçoamento de Pessoal de Nível Superior '
-            '(CAPES/CNPQ/MEC) e vinculada ao Grupo de Estudos e Pesquisas '
-            '"Observatório do Ensino de História e Geografia" da Universidade '
-            'Federal de Uberlândia (OEHGEO/UFU).',
+            '''Seja bem-vindo(a) à expoGEO — Curadoria Digital do Saber Geográfico!
+
+Este é um espaço pensado especialmente para estudantes, professores e todos que se interessam por compreender o mundo a partir da Geografia. Aqui, você encontrará uma seleção cuidadosa de conteúdos digitais que abordam os principais temas geográficos de forma dinâmica, interativa e pedagogicamente qualificada.
+
+A expoGEO reúne materiais confiáveis, recursos educacionais digitais e propostas inovadoras que potencializam os processos de ensino e aprendizagem da Geografia escolar, aproximando conhecimento científico, práticas pedagógicas e tecnologias contemporâneas.
+
+Este projeto integra as ações do Programa de Pós-Graduação em Educação da Universidade Federal de Uberlândia (PPGED/UFU) e foi desenvolvido no âmbito do Observatório do Ensino de História e Geografia (OEHGEO/UFU), fortalecendo a articulação entre pesquisa, formação docente e curadoria de conteúdos educacionais.
+
+Para começar sua experiência, explore os cards abaixo e embarque em um percurso de descobertas pelo universo do conhecimento geográfico.''',
             textAlign: TextAlign.center,
             style: AppTheme.typography.body.big.copyWith(color: AppTheme.colors.mediumGray),
           ),

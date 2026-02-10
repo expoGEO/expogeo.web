@@ -6,26 +6,26 @@ ContentModel CP_RA_02 = ContentModel(
   theme: ThemeEnum.culturaPolitica,
   subtheme: SubthemeEnum.regioesAdministrativas,
   intellectualIndicator: const IntellectualIndicator(
-    creator: 'Governo do Estado de São Paulo',
-    collaborator: 'Núcleo de Ação Educativa',
+    creator: 'Instituto Brasileiro de Geografia e Estatística (IBGE)',
+    collaborator: 'Instituto Brasileiro de Geografia e Estatística (IBGE)',
   ),
   contentInfo: ContentInfo(
-    title: 'Oeste Paulista',
+    title: 'Quantas pessoas moram no Brasil e onde vivem?',
     description:
-        'Exposição virtual que apresenta documentos históricos sobre o processo de ocupação e urbanização de uma das mais importantes regiões de São Paulo',
-    subjects: ['São Paulo', 'Desenvolvimento', 'Exposição'],
+        'Vídeo com informações sobre quantos somos, onde vivemos, como vivemos, como somos, e tantas outras perguntas que só são respondidas pelo Censo Demográfico, única pesquisa que vai a todas as residências em todos os municípios do país',
+    subjects: ['Brasil', 'População', 'Regiões'],
     contentNote:
-        'Refletir sobre esse processo é fundamental para entender a região sudeste e, assim, termos maior clareza quanto aos cenários futuros',
+        'Neste vídeo, você vai conhecer o total de habitantes que os recenseadores contaram no Censo 2022, tanto no país quanto nas regiões e estados brasileiros. Onde moram mais pessoas? Quais os estados com menos habitantes?',
   ),
   originInfo: OriginInfo(
-    insertionDate: DateTime(2024, 12, 3),
+    insertionDate: DateTime(2026, 2, 4),
     language: 'Português',
-    type: ContentType.site,
+    type: ContentType.video,
     format: ContentFormat.outro,
     requirements: 'Acesso à internet',
   ),
   registrationInfo: RegistrationInfo(
-    location: 'https://www.arquivoestado.sp.gov.br/exposicao_oeste/index.php',
+    location: 'https://youtu.be/BAIR2C7CFRU',
     registrationRules:
         'Descrição de acordo com o Tema_Geral/Tema_Específico/Número_Referência da curadoria ExpoGEO',
   ),

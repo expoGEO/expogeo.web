@@ -24,7 +24,7 @@ ContentModel NMA_BH_04 = ContentModel(
   ),
   registrationInfo: RegistrationInfo(
     location:
-        'https://atlasescolar.ibge.gov.br/brasil/3046-diversidade-ambiental/recursos-hidricos.html',
+        'https://atlasescolar.ibge.gov.br/brasil/3024-diversidade-ambiental/3046-recursos-hidricos.html',
     issueYear: 2024,
     registrationRules:
         'Descrição de acordo com o Tema_Geral/Tema_Específico/Número_Referência da curadoria ExpoGEO',

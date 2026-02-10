@@ -24,7 +24,7 @@ ContentModel RE_FH_01 = ContentModel(
   ),
   registrationInfo: RegistrationInfo(
     location:
-        'https://atlasescolar.ibge.gov.br/mundo/2984-divisoes-politicas-e-regionais/fuso-horario.html',
+        'https://atlasescolar.ibge.gov.br/mundo/2972-divisoes-politicas-e-regionais/2984-fuso-horario.html',
     issueYear: 2024,
     registrationRules:
         'Descrição de acordo com o Tema_Geral/Tema_Específico/Número_Referência da curadoria ExpoGEO',

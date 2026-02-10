@@ -6,26 +6,28 @@ ContentModel RE_PC_02 = ContentModel(
   theme: ThemeEnum.representacoesEspaciais,
   subtheme: SubthemeEnum.pontosCardeais,
   intellectualIndicator: const IntellectualIndicator(
-    creator: 'Wordwall',
-    collaborator: 'Perfil: Regianet37',
+    creator:
+        'Núcleo de Educação a Distância da Universidade Federal do Rio de Janeiro (NEaD - UFRJ)',
+    collaborator:
+        'Núcleo de Educação a Distância da Universidade Federal do Rio de Janeiro (NEaD - UFRJ)',
   ),
   contentInfo: ContentInfo(
-    title: 'Caça-palavras pontos cardeais e colaterais',
-    description: 'Caça-palavras sobre pontos cardeais e colaterais',
-    subjects: ['Caça-palavras', 'Pontos cardeais', 'Pontos colaterais'],
+    title: 'Você sabe como funciona uma bússola?',
+    description:
+        'Vídeo explicando o funcionamento de uma bússola e como ela permite nos orientarmos na superfície da Terra',
+    subjects: ['Bússola', 'Vídeo', 'Pontos colaterais'],
     contentNote:
-        'Atividade de caça-palavras que apresenta opções para preencher campos de resposta conforme a rosa dos ventos',
+        'Vídeo explicando o funcionamento de uma bússola e como ela permite nos orientarmos na superfície da Terra',
   ),
   originInfo: OriginInfo(
-    insertionDate: DateTime(2024, 10, 8),
+    insertionDate: DateTime(2024, 2, 4),
     language: 'Português',
     type: ContentType.site,
     format: ContentFormat.outro,
     requirements: 'Acesso à internet',
   ),
   registrationInfo: RegistrationInfo(
-    location:
-        'https://wordwall.net/pt/resource/12076008/ca%C3%A7a-palavras-pontos-cardeais-e-colaterais',
+    location: 'https://youtu.be/h01K7-bD8Jg',
     registrationRules:
         'Descrição de acordo com o Tema_Geral/Tema_Específico/Número_Referência da curadoria ExpoGEO',
   ),

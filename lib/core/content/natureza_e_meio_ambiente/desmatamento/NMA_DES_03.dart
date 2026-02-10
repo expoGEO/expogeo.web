@@ -21,7 +21,7 @@ ContentModel NMA_DES_03 = ContentModel(
     requirements: 'Acesso à internet',
   ),
   registrationInfo: RegistrationInfo(
-    location: 'https://imazon.org.br/categorias/sad/',
+    location: 'https://imazon.fly.dev/categories/boletins?locale=pt_BR',
     registrationRules:
         'Descrição de acordo com o Tema_Geral/Tema_Específico/Número_Referência da curadoria ExpoGEO',
   ),

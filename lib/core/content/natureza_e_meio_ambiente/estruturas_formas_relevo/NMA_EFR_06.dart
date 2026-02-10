@@ -24,7 +24,7 @@ ContentModel NMA_EFR_06 = ContentModel(
     requirements: 'Acesso à internet',
   ),
   registrationInfo: RegistrationInfo(
-    location: 'https://atlasescolar.ibge.gov.br/brasil/3039-diversidade-ambiental/relevo.html',
+    location: 'https://atlasescolar.ibge.gov.br/brasil/3024-diversidade-ambiental/3039-relevo.html',
     issueYear: 2024,
     registrationRules:
         'Descrição de acordo com o Tema_Geral/Tema_Específico/Número_Referência da curadoria ExpoGEO',

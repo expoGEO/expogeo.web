@@ -6,27 +6,25 @@ ContentModel EUR_ERB_01 = ContentModel(
   theme: ThemeEnum.espacosUrbanosRurais,
   subtheme: SubthemeEnum.espacoRuralBrasileiro,
   intellectualIndicator: const IntellectualIndicator(
-    creator: 'EMBRAPA - Territorial',
-    collaborator: 'EMBRAPA - Territorial',
+    creator: 'Medeiros Braga',
+    collaborator: 'Movimento dos Trabalhadores Rurais Sem Terra - MST',
   ),
   contentInfo: ContentInfo(
-    title: 'Sistema de observação e monitoramento da agricultura brasileira - SOMA Brasil',
-    description:
-        'WebSIG que apresenta informações geográficas sobre meio físico biótico, logística, monitoramento da agricultura e quadro agrário brasileiro',
-    subjects: ['Agricultura', 'Monitoramento', 'WebSIG'],
-    contentNote:
-        'WebSIG que apresenta informações geográficas sobre meio físico biótico, logística, monitoramento da agricultura e quadro agrário brasileiro',
+    title: 'O Cordel da Reforma Agrária',
+    description: 'Cordel que aborda questões relacionadas à luta por reforma agrária no Brasil',
+    subjects: ['Agricultura', 'Reforma Agrária', 'Cordel'],
+    contentNote: 'Cordel que aborda questões relacionadas à luta por reforma agrária no Brasil',
   ),
   originInfo: OriginInfo(
-    insertionDate: DateTime(2024, 11, 28),
+    insertionDate: DateTime(2024, 02, 04),
     language: 'Português',
     type: ContentType.site,
-    format: ContentFormat.outro,
+    format: ContentFormat.texto,
     requirements: 'Acesso à internet - Necessita criar login e senha de usuário',
   ),
   registrationInfo: RegistrationInfo(
-    location: 'https://mapas.cnpm.embrapa.br/somabrasil/webgis.html',
-    issueYear: 2014,
+    location: 'https://mst.org.br/2009/06/30/o-cordel-da-reforma-agraria-2/',
+    issueYear: 2007,
     registrationRules:
         'Descrição de acordo com o Tema_Geral/Tema_Específico/Número_Referência da curadoria ExpoGEO',
   ),

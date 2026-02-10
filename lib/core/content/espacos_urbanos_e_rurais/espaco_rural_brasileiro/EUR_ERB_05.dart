@@ -24,7 +24,7 @@ ContentModel EUR_ERB_05 = ContentModel(
     requirements: 'Acesso à internet',
   ),
   registrationInfo: RegistrationInfo(
-    location: 'https://agroart.iica.int/room/14',
+    location: 'https://agroart.iica.int/',
     registrationRules:
         'Descrição de acordo com o Tema_Geral/Tema_Específico/Número_Referência da curadoria ExpoGEO',
   ),

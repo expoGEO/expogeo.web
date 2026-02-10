@@ -24,7 +24,7 @@ ContentModel RE_LM_01 = ContentModel(
     requirements: 'Acesso à internet',
   ),
   registrationInfo: RegistrationInfo(
-    location: 'https://educa.ibge.gov.br/jovens/jovens-mapas.html',
+    location: 'https://educa.ibge.gov.br/jovens/material-de-estudo/mapas/22709-mapas.html',
     issueYear: 2024,
     registrationRules:
         'Descrição de acordo com o Tema_Geral/Tema_Específico/Número_Referência da curadoria ExpoGEO',

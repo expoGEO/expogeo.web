@@ -26,7 +26,7 @@ ContentModel CP_PO_08 = ContentModel(
   ),
   registrationInfo: RegistrationInfo(
     location:
-        'https://atlasescolar.ibge.gov.br/brasil/3105-caracteristicas-demograficas/povos-e-comunidades-tradicionais.html',
+        'https://atlasescolar.ibge.gov.br/brasil/3027-caracteristicas-demograficas/3105-povos-e-comunidades-tradicionais.html',
     issueYear: 2024,
     registrationRules:
         'Descrição de acordo com o Tema_Geral/Tema_Específico/Número_Referência da curadoria ExpoGEO',

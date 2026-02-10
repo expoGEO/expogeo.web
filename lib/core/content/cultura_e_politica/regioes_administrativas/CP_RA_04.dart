@@ -26,7 +26,7 @@ ContentModel CP_RA_04 = ContentModel(
   ),
   registrationInfo: RegistrationInfo(
     location:
-        'https://atlasescolar.ibge.gov.br/brasil/3035-federacao-e-territorio/evolucao-da-divisao-politico-administrativa.html',
+        'https://atlasescolar.ibge.gov.br/brasil/3025-federacao-e-territorio/3035-evolucao-da-divisao-politico-administrativa.html',
     issueYear: 2024,
     registrationRules:
         'Descrição de acordo com o Tema_Geral/Tema_Específico/Número_Referência da curadoria ExpoGEO',

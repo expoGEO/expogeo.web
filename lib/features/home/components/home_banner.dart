@@ -27,15 +27,13 @@ Este é um espaço pensado especialmente para estudantes, professores e todos qu
 
 A expoGEO reúne materiais confiáveis, recursos educacionais digitais e propostas inovadoras que potencializam os processos de ensino e aprendizagem da Geografia escolar, aproximando conhecimento científico, práticas pedagógicas e tecnologias contemporâneas.
 
-Este projeto integra as ações do Programa de Pós-Graduação em Educação da Universidade Federal de Uberlândia (PPGED/UFU) e foi desenvolvido no âmbito do Observatório do Ensino de História e Geografia (OEHGEO/UFU), fortalecendo a articulação entre pesquisa, formação docente e curadoria de conteúdos educacionais.
-
-Para começar sua experiência, explore os cards abaixo e embarque em um percurso de descobertas pelo universo do conhecimento geográfico.''',
+Este projeto integra as ações do Programa de Pós-Graduação em Educação da Universidade Federal de Uberlândia (PPGED/UFU) e foi desenvolvido no âmbito do Observatório do Ensino de História e Geografia (OEHGEO/UFU), fortalecendo a articulação entre pesquisa, formação docente e curadoria de conteúdos educacionais.''',
             textAlign: TextAlign.center,
             style: AppTheme.typography.body.big.copyWith(color: AppTheme.colors.mediumGray),
           ),
           SizedBox(height: AppTheme.dimensions.space.huge),
           Text(
-            'Para facilitar a sua navegação, clique nos cards abaixo e inicie um passeio através do conhecimento geográfico.',
+            'Para começar sua experiência, explore os cards abaixo e embarque em um percurso de descobertas pelo universo do conhecimento geográfico.',
             textAlign: TextAlign.center,
             style: AppTheme.typography.body.big.copyWith(color: AppTheme.colors.darkGray),
           ),

@@ -4,7 +4,7 @@ import 'package:expogeo/core/models/theme_data_model.dart';
 ContentModel CP_POP_08 = ContentModel(
   id: 'CP_POP_08',
   theme: ThemeEnum.culturaPolitica,
-  subtheme: SubthemeEnum.demografia,
+  subtheme: SubthemeEnum.populacao,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Instituto Brasileiro de Geografia Estatística',
     collaborator: 'Instituto Brasileiro de Geografia Estatística',

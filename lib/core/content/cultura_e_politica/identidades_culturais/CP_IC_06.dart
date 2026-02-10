@@ -25,7 +25,7 @@ ContentModel CP_IC_06 = ContentModel(
   ),
   registrationInfo: RegistrationInfo(
     location:
-        'https://atlasescolar.ibge.gov.br/brasil/3053-caracteristicas-demograficas/cor-ou-raca.html',
+        'https://atlasescolar.ibge.gov.br/brasil/3027-caracteristicas-demograficas/3053-cor-ou-raca.html',
     issueYear: 2024,
     registrationRules:
         'Descrição de acordo com o Tema_Geral/Tema_Específico/Número_Referência da curadoria ExpoGEO',

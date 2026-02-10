@@ -62,7 +62,7 @@ enum SubthemeEnum {
   geopolitica('geopolitica'),
   censoDemografico('censo-demografico'),
   regioesAdministrativas('regioes-administrativas'),
-  demografia('demografia'),
+  populacao('populacao'),
   identidadesCulturais('identidades-culturais'),
   povosOriginarios('povos-originarios');
 
@@ -99,7 +99,7 @@ enum SubthemeEnum {
     SubthemeEnum.geopolitica => ThemeEnum.culturaPolitica,
     SubthemeEnum.censoDemografico => ThemeEnum.culturaPolitica,
     SubthemeEnum.regioesAdministrativas => ThemeEnum.culturaPolitica,
-    SubthemeEnum.demografia => ThemeEnum.culturaPolitica,
+    SubthemeEnum.populacao => ThemeEnum.culturaPolitica,
     SubthemeEnum.identidadesCulturais => ThemeEnum.culturaPolitica,
     SubthemeEnum.povosOriginarios => ThemeEnum.culturaPolitica,
   };

@@ -4,7 +4,6 @@ import 'package:expogeo/core/theme/app_theme.dart';
 import 'package:expogeo/core/utils/extensions/num_extension.dart';
 import 'package:expogeo/core/utils/url/url_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class ContentCard extends StatefulWidget {
   final ContentModel content;
@@ -54,7 +53,7 @@ class _ContentCardState extends State<ContentCard> with SingleTickerProviderStat
           return Transform.scale(
             scale: _scaleAnimation.value,
             child: GestureDetector(
-              onTap: () => _handleContentTap(context),
+              onTap: () => UrlUtils.openUrl(widget.content.registrationInfo.location),
               child: RoundedCard(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -173,18 +172,5 @@ class _ContentCardState extends State<ContentCard> with SingleTickerProviderStat
         },
       ),
     );
-  }
-
-  void _handleContentTap(BuildContext context) {
-    final route = widget.content.route;
-
-    if (route == null) {
-      UrlUtils.openUrl(widget.content.registrationInfo.location);
-      return;
-    }
-
-    final contentType = widget.content.originInfo.type;
-
-    context.push(route, extra: {'type': contentType});
   }
 }

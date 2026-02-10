@@ -59,6 +59,8 @@ class Footer extends StatelessWidget {
       AppImages.observatorio,
       AppImages.ppged,
       AppImages.ufu,
+      AppImages.cnpq,
+      AppImages.fapemig,
     ];
     return Wrap(
       alignment: WrapAlignment.center,

@@ -4,7 +4,7 @@ import 'package:expogeo/core/models/theme_data_model.dart';
 ContentModel CP_POP_06 = ContentModel(
   id: 'CP_POP_06',
   theme: ThemeEnum.culturaPolitica,
-  subtheme: SubthemeEnum.demografia,
+  subtheme: SubthemeEnum.populacao,
   intellectualIndicator: const IntellectualIndicator(
     creator: 'Google Arts and Culture',
     collaborator: 'Museum Alka of Sinj',

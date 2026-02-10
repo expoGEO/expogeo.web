@@ -6,15 +6,14 @@ ContentModel NMA_TPCL_04 = ContentModel(
   theme: ThemeEnum.naturezaMeioAmbiente,
   subtheme: SubthemeEnum.tiposClimaticos,
   intellectualIndicator: const IntellectualIndicator(
-    creator: 'Instituto Brasileiro de Geografia e Estatística - IBGE',
-    collaborator: 'Instituto Brasileiro de Geografia e Estatística - IBGE',
+    creator: 'Robson Renato',
+    collaborator: 'Recanto das letras',
   ),
   contentInfo: ContentInfo(
-    title: 'Atlas Geográfico Escolar',
-    description: 'Atlas que aborda o tema clima e correntes marítimas do mundo',
-    subjects: ['Clima', 'Corrente marítima', 'Atlas'],
-    contentNote:
-        'As zonas climáticas são definidas por faixas onde a incidência da radiação e iluminação solar são distintas. As correntes marítimas indicam a temperatura e a direção predominante de grandes porções do oceano e influenciam significativamente os padrões climáticos regionais',
+    title: 'Os climas do Brasil',
+    description: 'Poesia criada para explicar os tipos climáticos do Brasil',
+    subjects: ['Clima', 'Poesia', 'Brasil'],
+    contentNote: 'Poesia criada para explicar os tipos climáticos do Brasil',
   ),
   originInfo: OriginInfo(
     insertionDate: DateTime(2024, 12, 10),
@@ -24,9 +23,8 @@ ContentModel NMA_TPCL_04 = ContentModel(
     requirements: 'Acesso à internet',
   ),
   registrationInfo: RegistrationInfo(
-    location:
-        'https://atlasescolar.ibge.gov.br/mundo/2990-dinamica-dos-climas/clima-e-correntes-maritimas.html',
-    issueYear: 2024,
+    location: 'https://www.recantodasletras.com.br/cordel/5547478',
+    issueYear: 2016,
     registrationRules:
         'Descrição de acordo com o Tema_Geral/Tema_Específico/Número_Referência da curadoria ExpoGEO',
   ),

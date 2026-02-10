@@ -42,15 +42,6 @@ class ContentModel {
     required this.rightsInfo,
     this.preservationAction,
   });
-
-  String? get route {
-    return switch (originInfo.type) {
-      ContentType.video => '/${theme.value}/${subtheme.value}/$id',
-      ContentType.imagem => '/${theme.value}/${subtheme.value}/$id',
-      ContentType.documento => '/${theme.value}/${subtheme.value}/$id',
-      _ => null,
-    };
-  }
 }
 
 /// Indicativo Intelectual do Objeto Digital

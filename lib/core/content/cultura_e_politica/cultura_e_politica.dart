@@ -78,10 +78,10 @@ ThemeModel culturaPolitica = ThemeModel(
       contents: [CP_RA_01, CP_RA_02, CP_RA_03, CP_RA_04],
     ),
     SubthemeModel(
-      type: SubthemeEnum.demografia,
-      title: 'DEMOGRAFIA',
-      description: 'Demografia',
-      image: AppImages.demografia,
+      type: SubthemeEnum.populacao,
+      title: 'POPULAÇÃO',
+      description: 'População',
+      image: AppImages.populacao,
       color: AppTheme.colors.secondaryRed,
       contents: [
         CP_POP_01,

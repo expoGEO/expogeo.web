@@ -14,62 +14,82 @@ class ThemeDataModel {
 }
 
 enum ThemeEnum {
-  representacoesEspaciais('representacoes-espaciais'),
-  naturezaMeioAmbiente('natureza-meio-ambiente'),
-  espacosUrbanosRurais('espacos-urbanos-rurais'),
-  culturaPolitica('cultura-politica');
+  representacoesEspaciais('representacoes-espaciais', 'Representações Espaciais'),
+  naturezaMeioAmbiente('natureza-meio-ambiente', 'Natureza e Meio Ambiente'),
+  espacosUrbanosRurais('espacos-urbanos-rurais', 'Espaços Urbanos e Rurais'),
+  culturaPolitica('cultura-politica', 'Cultura e Política');
 
   final String value;
-  const ThemeEnum(this.value);
+  final String name;
+
+  const ThemeEnum(this.value, this.name);
 
   String get route => '/$value';
+
+  String get id => switch (this) {
+    ThemeEnum.representacoesEspaciais => 'RE',
+    ThemeEnum.naturezaMeioAmbiente => 'NMA',
+    ThemeEnum.espacosUrbanosRurais => 'EUR',
+    ThemeEnum.culturaPolitica => 'CP',
+  };
+
+  static ThemeEnum fromName(String name) {
+    try {
+      return ThemeEnum.values.firstWhere((e) => e.name == name);
+    } catch (_) {
+      throw ArgumentError('Tema desconhecido: $name');
+    }
+  }
 }
 
 enum SubthemeEnum {
   // Representações Espaciais
-  coordenadasGeograficas('coordenadas-geograficas'),
-  compositorMapas('compositor-mapas'),
-  fusoHorario('fuso-horario'),
-  geotecnologias('geotecnologias'),
-  historiaCartografia('historia-cartografia'),
-  leituraMapas('leitura-mapas'),
-  movimentosTerra('movimentos-terra'),
-  pontosCardeais('pontos-cardeais'),
+  coordenadasGeograficas('coordenadas-geograficas', 'Coordenadas Geográficas'),
+  compositorMapas('compositor-mapas', 'Compositor de Mapas'),
+  fusoHorario('fuso-horario', 'Fuso Horário'),
+  geotecnologias('geotecnologias', 'Geotecnologias'),
+  historiaCartografia('historia-cartografia', 'História da Cartografia'),
+  leituraMapas('leitura-mapas', 'Leitura de Mapas'),
+  movimentosTerra('movimentos-terra', 'Movimentos da Terra'),
+  pontosCardeais('pontos-cardeais', 'Pontos Cardeais'),
 
   // Natureza e Meio Ambiente
-  poluicaoAgua('poluicao-agua'),
-  poluicaoAr('poluicao-ar'),
-  desmatamento('desmatamento'),
-  queimadas('queimadas'),
-  recursosMinerais('recursos-minerais'),
-  sustentabilidade('sustentabilidade'),
-  biomas('biomas'),
-  estruturasFormasRelevo('estruturas-formas-relevo'),
-  tempoClima('tempo-clima'),
-  tiposClimaticos('tipos-climaticos'),
-  baciasHidrograficas('bacias-hidrograficas'),
-  usoAgua('uso-agua'),
+  poluicaoAgua('poluicao-agua', 'Poluição da Água'),
+  poluicaoAr('poluicao-ar', 'Poluição do Ar'),
+  desmatamento('desmatamento', 'Desmatamento'),
+  queimadas('queimadas', 'Queimadas'),
+  recursosMinerais('recursos-minerais', 'Recursos Minerais'),
+  sustentabilidade('sustentabilidade', 'Sustentabilidade'),
+  biomas('biomas', 'Biomas'),
+  estruturasFormasRelevo('estruturas-formas-relevo', 'Estruturas e Formas do Relevo'),
+  tempoClima('tempo-clima', 'Tempo e Clima'),
+  tiposClimaticos('tipos-climaticos', 'Tipos Climáticos'),
+  baciasHidrograficas('bacias-hidrograficas', 'Bacias Hidrográficas'),
+  usoAgua('uso-agua', 'Uso da Água'),
 
   // Espaços Urbanos e Rurais
-  espacoUrbanoBrasileiro('espaco-urbano-brasileiro'),
-  globalizacaoMobilidade('globalizacao-mobilidade'),
-  industriaTransformacao('industria-transformacao'),
-  espacoRuralBrasileiro('espaco-rural-brasileiro'),
-  conflitosTerra('conflitos-terra'),
-  mercadoAgropecuario('mercado-agropecuario'),
+  espacoUrbanoBrasileiro('espaco-urbano-brasileiro', 'Espaço Urbano Brasileiro'),
+  globalizacaoMobilidade('globalizacao-mobilidade', 'Globalização e Mobilidade'),
+  industriaTransformacao('industria-transformacao', 'Indústria e Transformação'),
+  espacoRuralBrasileiro('espaco-rural-brasileiro', 'Espaço Rural Brasileiro'),
+  conflitosTerra('conflitos-terra', 'Conflitos pela Terra'),
+  mercadoAgropecuario('mercado-agropecuario', 'Mercado Agropecuário'),
 
   // Cultura e Política
-  geopolitica('geopolitica'),
-  censoDemografico('censo-demografico'),
-  regioesAdministrativas('regioes-administrativas'),
-  populacao('populacao'),
-  identidadesCulturais('identidades-culturais'),
-  povosOriginarios('povos-originarios');
+  geopolitica('geopolitica', 'Geopolítica'),
+  censoDemografico('censo-demografico', 'Censo Demográfico'),
+  regioesAdministrativas('regioes-administrativas', 'Regiões Administrativas'),
+  populacao('populacao', 'População'),
+  identidadesCulturais('identidades-culturais', 'Identidades Culturais'),
+  povosOriginarios('povos-originarios', 'Povos Originários');
 
   final String value;
-  const SubthemeEnum(this.value);
+  final String name;
+
+  const SubthemeEnum(this.value, this.name);
 
   ThemeEnum get theme => switch (this) {
+    // Representações Espaciais
     SubthemeEnum.coordenadasGeograficas => ThemeEnum.representacoesEspaciais,
     SubthemeEnum.compositorMapas => ThemeEnum.representacoesEspaciais,
     SubthemeEnum.fusoHorario => ThemeEnum.representacoesEspaciais,
@@ -78,6 +98,8 @@ enum SubthemeEnum {
     SubthemeEnum.leituraMapas => ThemeEnum.representacoesEspaciais,
     SubthemeEnum.movimentosTerra => ThemeEnum.representacoesEspaciais,
     SubthemeEnum.pontosCardeais => ThemeEnum.representacoesEspaciais,
+
+    // Natureza e Meio Ambiente
     SubthemeEnum.poluicaoAgua => ThemeEnum.naturezaMeioAmbiente,
     SubthemeEnum.poluicaoAr => ThemeEnum.naturezaMeioAmbiente,
     SubthemeEnum.desmatamento => ThemeEnum.naturezaMeioAmbiente,
@@ -90,12 +112,16 @@ enum SubthemeEnum {
     SubthemeEnum.usoAgua => ThemeEnum.naturezaMeioAmbiente,
     SubthemeEnum.biomas => ThemeEnum.naturezaMeioAmbiente,
     SubthemeEnum.estruturasFormasRelevo => ThemeEnum.naturezaMeioAmbiente,
+
+    // Espaços Urbanos e Rurais
     SubthemeEnum.espacoUrbanoBrasileiro => ThemeEnum.espacosUrbanosRurais,
     SubthemeEnum.globalizacaoMobilidade => ThemeEnum.espacosUrbanosRurais,
     SubthemeEnum.industriaTransformacao => ThemeEnum.espacosUrbanosRurais,
     SubthemeEnum.espacoRuralBrasileiro => ThemeEnum.espacosUrbanosRurais,
     SubthemeEnum.conflitosTerra => ThemeEnum.espacosUrbanosRurais,
     SubthemeEnum.mercadoAgropecuario => ThemeEnum.espacosUrbanosRurais,
+
+    // Cultura e Política
     SubthemeEnum.geopolitica => ThemeEnum.culturaPolitica,
     SubthemeEnum.censoDemografico => ThemeEnum.culturaPolitica,
     SubthemeEnum.regioesAdministrativas => ThemeEnum.culturaPolitica,
@@ -105,4 +131,54 @@ enum SubthemeEnum {
   };
 
   String get route => '/${theme.value}/$value';
+
+  String get id => switch (this) {
+    // Representações Espaciais
+    SubthemeEnum.coordenadasGeograficas => 'RE_CG',
+    SubthemeEnum.compositorMapas => 'RE_CM',
+    SubthemeEnum.fusoHorario => 'RE_FH',
+    SubthemeEnum.geotecnologias => 'RE_GT',
+    SubthemeEnum.historiaCartografia => 'RE_HC',
+    SubthemeEnum.leituraMapas => 'RE_LM',
+    SubthemeEnum.movimentosTerra => 'RE_MOT',
+    SubthemeEnum.pontosCardeais => 'RE_PC',
+
+    // Natureza e Meio Ambiente
+    SubthemeEnum.poluicaoAgua => 'NMA_PA',
+    SubthemeEnum.poluicaoAr => 'NMA_PAR',
+    SubthemeEnum.desmatamento => 'NMA_DES',
+    SubthemeEnum.queimadas => 'NMA_QUE',
+    SubthemeEnum.recursosMinerais => 'NMA_RM',
+    SubthemeEnum.sustentabilidade => 'NMA_SUS',
+    SubthemeEnum.tempoClima => 'NMA_TC',
+    SubthemeEnum.tiposClimaticos => 'NMA_TPCL',
+    SubthemeEnum.baciasHidrograficas => 'NMA_BH',
+    SubthemeEnum.usoAgua => 'NMA_UA',
+    SubthemeEnum.biomas => 'NMA_BIO',
+    SubthemeEnum.estruturasFormasRelevo => 'NMA_EFR',
+
+    // Espaços Urbanos e Rurais
+    SubthemeEnum.espacoUrbanoBrasileiro => 'EUR_EUB',
+    SubthemeEnum.globalizacaoMobilidade => 'EUR_GM',
+    SubthemeEnum.industriaTransformacao => 'EUR_IT',
+    SubthemeEnum.espacoRuralBrasileiro => 'EUR_ERB',
+    SubthemeEnum.conflitosTerra => 'EUR_CT',
+    SubthemeEnum.mercadoAgropecuario => 'EUR_MA',
+
+    // Cultura e Política
+    SubthemeEnum.geopolitica => 'CP_GP',
+    SubthemeEnum.censoDemografico => 'CP_CD',
+    SubthemeEnum.regioesAdministrativas => 'CP_RA',
+    SubthemeEnum.populacao => 'CP_POP',
+    SubthemeEnum.identidadesCulturais => 'CP_IC',
+    SubthemeEnum.povosOriginarios => 'CP_PO',
+  };
+
+  static SubthemeEnum fromName(String name) {
+    try {
+      return SubthemeEnum.values.firstWhere((e) => e.name == name);
+    } catch (_) {
+      throw ArgumentError('Subtema desconhecido: $name');
+    }
+  }
 }

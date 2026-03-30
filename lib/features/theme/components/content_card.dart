@@ -83,7 +83,7 @@ class _ContentCardState extends State<ContentCard> with SingleTickerProviderStat
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    widget.content.originInfo.type.label,
+                                    widget.content.originInfo.type.value,
                                     style: AppTheme.typography.body.big.copyWith(
                                       color: AppTheme.colors.mediumGray,
                                     ),

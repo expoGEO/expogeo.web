@@ -1,0 +1,73 @@
+import 'package:expogeo/features/admin/login/infra/repositories/auth_repository.dart';
+import 'package:expogeo/features/admin/login/presentation/stores/auth_state.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mobx/mobx.dart';
+
+part 'auth_store.g.dart';
+
+/// Store MobX para gerenciar autenticação
+class AuthStore = AuthStoreBase with _$AuthStore;
+
+abstract class AuthStoreBase with Store {
+  final AuthRepository _authRepository;
+
+  AuthStoreBase(this._authRepository);
+
+  @observable
+  bool passwordVisible = false;
+
+  @observable
+  User? user;
+
+  @observable
+  AuthState state = const AuthState(
+    loginState: LoginState.initial(),
+    logoutState: LogoutState.initial(),
+  );
+
+  /// Alterna a visibilidade da senha
+  @action
+  void togglePasswordVisibility() {
+    passwordVisible = !passwordVisible;
+  }
+
+  /// Obtém o usuário atualmente logado
+  @action
+  Future<void> currentUser() async {
+    final result = await _authRepository.currentUser();
+
+    result.fold((failure) => user = null, (user) => this.user = user);
+  }
+
+  /// Faz login com email e senha
+  @action
+  Future<void> login(String email, String password) async {
+    state = state.copyWith(loginState: const LoginState.loading());
+
+    final result = await _authRepository.login(email, password);
+
+    result.fold((failure) => state = state.copyWith(loginState: LoginState.error(failure)), (user) {
+      this.user = user;
+      state = state.copyWith(
+        loginState: const LoginState.success(),
+        logoutState: const LogoutState.initial(),
+      );
+    });
+  }
+
+  /// Faz logout
+  @action
+  Future<void> logout() async {
+    state = state.copyWith(logoutState: const LogoutState.loading());
+
+    final result = await _authRepository.logout();
+
+    result.fold((failure) => state = state.copyWith(logoutState: LogoutState.error(failure)), (_) {
+      user = null;
+      state = state.copyWith(
+        loginState: const LoginState.initial(),
+        logoutState: const LogoutState.success(),
+      );
+    });
+  }
+}

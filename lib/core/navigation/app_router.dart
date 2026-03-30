@@ -1,13 +1,18 @@
 import 'package:expogeo/core/models/theme_data_model.dart';
 import 'package:expogeo/core/pages/not_found_page.dart';
+import 'package:expogeo/features/admin/login/presentation/pages/signin_page.dart';
+import 'package:expogeo/features/admin/panel/presentation/pages/panel_page.dart';
 import 'package:expogeo/features/home/pages/home_page.dart';
 import 'package:expogeo/features/theme/pages/subtheme_page.dart';
 import 'package:expogeo/features/theme/pages/theme_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRouter {
   static const String home = '/';
   static const String contact = '/contato';
+  static const String admin = '/admin';
+  static const String adminPanel = '/admin/painel';
 
   static String representacoesEspaciais = ThemeEnum.representacoesEspaciais.value;
   static String meioAmbiente = ThemeEnum.naturezaMeioAmbiente.value;
@@ -17,9 +22,38 @@ class AppRouter {
   static final GoRouter router = GoRouter(
     initialLocation: home,
     errorBuilder: (context, state) => const NotFoundPage(),
+    redirect: (context, state) async {
+      final isLogged = FirebaseAuth.instance.currentUser != null;
+      final isAdminPanel = state.fullPath == adminPanel;
+
+      // Se tenta acessar /admin/painel sem estar logado, redireciona para /admin (login)
+      if (isAdminPanel && !isLogged) {
+        return admin;
+      }
+
+      // Se está na rota /admin base, o router decide entre login ou painel
+      return null;
+    },
     routes: [
       // Rota principal
-      GoRoute(path: home, name: 'home', builder: (context, state) => const HomePage()),
+      GoRoute(path: home, name: home, builder: (context, state) => const HomePage()),
+
+      // Rota do painel administrativo (com login/panel como subrotas)
+      GoRoute(
+        path: admin,
+        builder: (context, state) {
+          // Redirecionar baseado no estado de autenticação
+          final isLogged = FirebaseAuth.instance.currentUser != null;
+          return isLogged ? const PanelPage() : const SignInPage();
+        },
+        routes: [
+          GoRoute(
+            path: 'painel',
+            name: 'admin-painel',
+            builder: (context, state) => const PanelPage(),
+          ),
+        ],
+      ),
 
       // Rotas dos temas principais
       GoRoute(

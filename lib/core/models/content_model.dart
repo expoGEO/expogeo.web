@@ -4,31 +4,14 @@ import 'package:flutter/material.dart';
 
 /// Modelo que representa um conteúdo educacional com seus metadados completos
 class ContentModel {
-  /// Identificador único do conteúdo (ex: RE_CG_01)
   final String id;
-
-  /// Tema do conteúdo
   final ThemeEnum theme;
-
-  /// Subtema do conteúdo
   final SubthemeEnum subtheme;
-
-  /// Indicativo Intelectual do Objeto Digital
   final IntellectualIndicator intellectualIndicator;
-
-  /// Conteúdo do Objeto Digital
   final ContentInfo contentInfo;
-
-  /// Informação de Origem do Objeto Digital
   final OriginInfo originInfo;
-
-  /// Informação de Registro do Objeto Digital
   final RegistrationInfo registrationInfo;
-
-  /// Direitos do Objeto Digital
   final RightsInfo rightsInfo;
-
-  /// Ações de Preservação para o Objeto Digital
   final PreservationAction? preservationAction;
 
   const ContentModel({
@@ -50,6 +33,18 @@ class IntellectualIndicator {
   final String? collaborator;
 
   const IntellectualIndicator({required this.creator, this.collaborator});
+
+  factory IntellectualIndicator.fromJson(Map<String, dynamic> json) {
+    return IntellectualIndicator(
+      creator: json['creator'] as String,
+      collaborator: json['collaborator'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+    'creator': creator,
+    if (collaborator != null) 'collaborator': collaborator,
+  };
 }
 
 /// Conteúdo do Objeto Digital
@@ -66,6 +61,22 @@ class ContentInfo {
     required this.subjects,
     this.contentNote,
   });
+
+  factory ContentInfo.fromJson(Map<String, dynamic> json) {
+    return ContentInfo(
+      title: json['title'] as String,
+      description: json['description'] as String,
+      subjects: List<String>.from(json['subjects'] as List? ?? []),
+      contentNote: json['contentNote'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+    'title': title,
+    'description': description,
+    'subjects': subjects,
+    if (contentNote != null) 'contentNote': contentNote,
+  };
 }
 
 /// Informação de Origem do Objeto Digital
@@ -83,6 +94,24 @@ class OriginInfo {
     required this.format,
     this.requirements,
   });
+
+  factory OriginInfo.fromJson(Map<String, dynamic> json) {
+    return OriginInfo(
+      insertionDate: DateTime.parse(json['insertionDate'] as String),
+      language: json['language'] as String,
+      type: ContentType.fromString(json['type'] as String),
+      format: ContentFormat.fromString(json['format'] as String),
+      requirements: json['requirements'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+    'insertionDate': insertionDate.toIso8601String(),
+    'language': language,
+    'type': type.value,
+    'format': format.value,
+    if (requirements != null) 'requirements': requirements,
+  };
 }
 
 /// Informação de Registro do Objeto Digital
@@ -92,6 +121,20 @@ class RegistrationInfo {
   final String? registrationRules; // Regras de registro
 
   const RegistrationInfo({required this.location, this.issueYear, this.registrationRules});
+
+  factory RegistrationInfo.fromJson(Map<String, dynamic> json) {
+    return RegistrationInfo(
+      location: json['location'] as String? ?? '',
+      issueYear: json['issueYear'] as int?,
+      registrationRules: json['registrationRules'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+    'location': location,
+    if (issueYear != null) 'issueYear': issueYear,
+    if (registrationRules != null) 'registrationRules': registrationRules,
+  };
 }
 
 /// Direitos do Objeto Digital
@@ -99,6 +142,12 @@ class RightsInfo {
   final String rights; // Descrição dos direitos (ex: "Objeto digital em domínio público")
 
   const RightsInfo({required this.rights});
+
+  factory RightsInfo.fromJson(Map<String, dynamic> json) {
+    return RightsInfo(rights: json['rights'] as String? ?? '');
+  }
+
+  Map<String, dynamic> toJson() => {'rights': rights};
 }
 
 /// Ações de Preservação para o Objeto Digital
@@ -107,6 +156,18 @@ class PreservationAction {
   final DateTime? updateDate; // Data de atualização
 
   const PreservationAction({required this.operation, this.updateDate});
+
+  factory PreservationAction.fromJson(Map<String, dynamic> json) {
+    return PreservationAction(
+      operation: json['operation'] as String? ?? '',
+      updateDate: json['updateDate'] != null ? DateTime.parse(json['updateDate'] as String) : null,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+    'operation': operation,
+    if (updateDate != null) 'updateDate': updateDate!.toIso8601String(),
+  };
 }
 
 /// Tipos de conteúdo disponíveis
@@ -118,8 +179,8 @@ enum ContentType {
   aplicativo('Aplicativo'),
   outro('Outro');
 
-  final String label;
-  const ContentType(this.label);
+  final String value;
+  const ContentType(this.value);
 
   IconData get icon => switch (this) {
     ContentType.site => Icons.language,
@@ -138,6 +199,10 @@ enum ContentType {
     ContentType.aplicativo => AppTheme.colors.secondaryBlue,
     ContentType.outro => AppTheme.colors.mediumGray,
   };
+
+  static ContentType fromString(String value) {
+    return ContentType.values.firstWhere((e) => e.name == value, orElse: () => ContentType.outro);
+  }
 }
 
 /// Formatos de conteúdo disponíveis
@@ -150,6 +215,13 @@ enum ContentFormat {
   audio('Áudio'),
   outro('Outro');
 
-  final String label;
-  const ContentFormat(this.label);
+  final String value;
+  const ContentFormat(this.value);
+
+  static ContentFormat fromString(String value) {
+    return ContentFormat.values.firstWhere(
+      (e) => e.name == value,
+      orElse: () => ContentFormat.outro,
+    );
+  }
 }

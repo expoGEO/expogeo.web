@@ -2,8 +2,8 @@ import "package:expogeo/core/theme/app_theme.dart";
 import "package:expogeo/core/utils/extensions/num_extension.dart";
 import "package:flutter/material.dart";
 
-class LoadingCircle extends StatelessWidget {
-  const LoadingCircle({this.color, this.size, super.key});
+class CircularLoading extends StatelessWidget {
+  const CircularLoading({this.color, this.size, super.key});
 
   final Color? color;
   final double? size;

@@ -44,3 +44,8 @@ app.*.map.json
 
 # FVM Version Cache
 .fvm/
+# Credenciais e ambiente local do seed: nunca versionar
+firebase-credentials.json
+*-credentials.json
+.env*
+bin/venv/

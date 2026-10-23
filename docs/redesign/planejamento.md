@@ -58,7 +58,7 @@ A aba Fundamentos do protótipo resume paleta, tipografia, regra das ilustraçõ
 ### Fase 0: Ambiente, fundação e casco
 | # | Entrega | Principais arquivos |
 |---|---|---|
-| 0.0 | Ambiente de testes: branch `develop` com deploy para um endereço de dev. Hoje só existe a `main`, e todo push nela publica o site | `.github/workflows/*` |
+| 0.0 | Ambiente de testes: branch `develop` com deploy para um endereço de dev. Hoje só existe a `main`, e todo push nela publica o site. Plano em [docs/cicd/planejamento.md](../cicd/planejamento.md) | `.github/workflows/*` |
 | 0.1 | Tokens de cor, raios, espaçamentos e sombras do Observatório, mais o token do degradê | `core/theme/app_colors`, `app_dimensions`, `app_gradients` |
 | 0.2 | Tipografia nova com Bricolage Grotesque e Figtree **embutidas** em `assets/fonts` (sai o `GoogleFonts.aleo` em tempo de execução) | `core/theme/app_typography`, `pubspec.yaml` |
 | 0.3 | Breakpoints e largura máxima de conteúdo | `core/utils/screen/screen_utils.dart` |
@@ -95,7 +95,6 @@ A aba Fundamentos do protótipo resume paleta, tipografia, regra das ilustraçõ
 | ID | Pergunta | Onde decidir |
 |---|---|---|
 | Q-01 | Formato do código na rota do objeto: `nma_bio_03` como está ou `nma-bio-03` (hífen, como as outras rotas)? | Spec da página do objeto (Fase 2) |
-| Q-02 | Endereço do ambiente de testes (subdomínio de dev) | Spec 0.0 |
 | Q-03 | A expoGEO terá redes sociais próprias? Hoje o rodapé leva às do Observatório | Spec do rodapé (0.6) |
 
 ---

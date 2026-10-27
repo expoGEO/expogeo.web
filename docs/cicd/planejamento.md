@@ -87,7 +87,7 @@ Environments `DEV` e `PROD`, cada um com `FTP_HOST`, `FTP_USER`, `FTP_PASSWORD` 
 ### Firebase
 - `firebase.json` com os dois projetos e `firestore.indexes.json` versionados. Os deploys publicam os índices antes do site.
 - Índice já previsto pelo redesign: grupo de coleções `contents`, `originInfo.insertionDate` ↓ (seção "Adicionados recentemente" da Home).
-- Regras do Firestore exportadas do console para `firestore.rules` e aplicadas aos dois projetos, para o dev ter as mesmas permissões da produção. A publicação automática das regras fica fora deste plano: elas seguem mudando pelo console até haver motivo para automatizar.
+- Regras do Firestore exportadas do console para `firestore.rules` e aplicadas aos dois projetos, para o dev ter as mesmas permissões da produção. A publicação automática das regras fica fora deste plano: elas seguem mudando pelo console até haver motivo para automatizar. Por isso o `firebase.json` não aponta para o `firestore.rules`: se apontasse, o `deploy --only firestore:indexes` também compilaria as regras e pediria à conta de serviço um papel a mais.
 
 ---
 

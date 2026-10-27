@@ -42,7 +42,7 @@ Os mesmos do Observatório: escala de 4 px (4 a 96), raios de 6 a 20 e pílula, 
 ### Fontes (0.2)
 - **Bricolage Grotesque** (600, 700, 800) nos títulos e **Figtree** (400, 500, 600, 700) no texto, **embutidas** em `assets/fonts/` com as licenças OFL. Copiar os arquivos do Observatório.
 - Escala de texto com tamanho fixo por faixa, igual à do Observatório (h1 32/40/52, h2 26/30/36, h3 18/20/20, leitura 17/18/18, padrão 16, pequeno 14, rótulo 12,5/12,5/13).
-- Um estilo **monoespaçado** para o código de referência (ex.: `NMA_BH_03`), usado na ficha, no painel e no editor. Fonte do sistema, sem arquivo novo.
+- Um estilo para o código de referência (ex.: `NMA_BH_03`), usado na ficha, no painel e no editor: **Figtree 600 com algarismos tabulares**, sem arquivo novo. O Flutter web não acessa fontes do sistema, então uma monoespaçada "do sistema" cairia numa fonte proporcional baixada da internet; embutir uma monoespaçada fica para a spec que exigir de fato (009 ou 014).
 - Os estilos antigos (Aleo) continuam como estão até a limpeza (spec 016).
 
 ### Breakpoints e largura de conteúdo (0.3)
@@ -73,7 +73,7 @@ Cada valor novo tem uma versão por faixa (390, 768 e 1280 px) e não muda com a
 - [ ] Todas as telas atuais e o painel ficam **idênticos** ao que eram.
 - [ ] Todas as cores da tabela e o degradê existem no tema com os valores indicados.
 - [ ] Espaçamentos, raios, sombras e foco padrão existem no tema; nenhum valor solto no código novo.
-- [ ] Bricolage Grotesque e Figtree estão em `assets/fonts/`, declaradas no `pubspec.yaml`, com licenças, e renderizam **sem internet**.
+- [ ] Bricolage Grotesque e Figtree estão em `assets/fonts/`, declaradas no `pubspec.yaml`, com licenças, e renderizam **sem buscar fonte na internet** (vêm de `assets/fonts/`; nenhuma requisição a `fonts.googleapis.com` ou `fonts.gstatic.com` para essas famílias).
 - [ ] Os estilos novos não usam `google_fonts` nem `num_extension`.
 - [ ] Uma tela de teste temporária (não commitada) mostra cada estilo em 390, 768 e 1280 px com os tamanhos da tabela.
 - [ ] As faixas retornam o valor certo em 390, 599, 600, 768, 1023, 1024 e 1280 px.
@@ -92,3 +92,4 @@ Cada valor novo tem uma versão por faixa (390, 768 e 1280 px) e não muda com a
 ## Histórico de mudanças
 - 2026-10-27: criada.
 - 2026-10-27: aprovada.
+- 2026-10-27 (planejamento, decisão em modo autônomo): estilo do código de referência passa de "monoespaçado do sistema" para Figtree 600 com algarismos tabulares, porque o Flutter web (CanvasKit) não usa fontes do sistema. Critério das fontes reescrito como "sem buscar fonte na internet", porque o app inteiro depende de rede para abrir (CanvasKit via CDN) e o teste literal não se aplica.

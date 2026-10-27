@@ -66,7 +66,7 @@ class AppGradients {
   );
 
   /// Assinatura da expoGEO, só decorativa: nunca sob texto nem em botões.
-  /// A rotação de 30° sobre o eixo horizontal reproduz o ângulo de 120° do CSS.
+  /// A rotação de 30° sobre o eixo horizontal dá a inclinação de 120° (medida do topo, no sentido horário).
   LinearGradient brand = const LinearGradient(
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,

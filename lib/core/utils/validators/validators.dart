@@ -14,8 +14,9 @@ class Validators {
   static String? isValidPassword(String? password) {
     if (password == null || password.isEmpty) return 'Por favor, insira uma senha';
 
-    final hasMatch =
-        RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$').hasMatch(password);
+    final hasMatch = RegExp(
+      r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$',
+    ).hasMatch(password);
     return hasMatch ? null : 'Senha inválida';
   }
 

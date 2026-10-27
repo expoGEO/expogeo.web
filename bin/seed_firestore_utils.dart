@@ -10,7 +10,7 @@ library;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:expogeo/core/models/theme_data_model.dart';
-import 'package:expogeo/firebase_options.dart';
+import 'package:expogeo/core/utils/environment/app_environment.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 /// Valida se os dados estão estruturados corretamente antes do seed
@@ -107,7 +107,7 @@ Future<void> testFirestoreConnection() async {
 
   try {
     print('📱 Inicializando Firebase...');
-    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+    await Firebase.initializeApp(options: AppEnvironment.current.firebaseOptions);
     print('✅ Firebase inicializado\n');
 
     final firestore = FirebaseFirestore.instance;

@@ -36,6 +36,8 @@ class AppDimensions {
     immense: 6.0,
     gigantic: 7.0,
   );
+
+  double environmentBannerHeight = 32.0;
 }
 
 class DimensionStyle {

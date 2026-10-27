@@ -39,7 +39,7 @@ class ContentDatasource {
   }) async {
     try {
       final themeId = theme?.id ?? subtheme.theme.id;
-     
+
       final snapshot = await _firestore
           .collection('themes')
           .doc(themeId)

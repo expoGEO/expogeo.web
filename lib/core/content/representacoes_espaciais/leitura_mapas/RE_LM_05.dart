@@ -11,11 +11,9 @@ ContentModel RE_LM_05 = ContentModel(
   ),
   contentInfo: ContentInfo(
     title: 'Cartografia do Mucuri',
-    description:
-        'Site que apresenta exposição cartográfica virtual sobre o Vale do Mucuri',
+    description: 'Site que apresenta exposição cartográfica virtual sobre o Vale do Mucuri',
     subjects: ['Mapa temático', 'Vale do Mucuri', 'Exposição virtual'],
-    contentNote:
-        'Exposição com diversos mapas temáticos sobre o Vale do Mucuri',
+    contentNote: 'Exposição com diversos mapas temáticos sobre o Vale do Mucuri',
   ),
   originInfo: OriginInfo(
     insertionDate: DateTime(2024, 10, 11),

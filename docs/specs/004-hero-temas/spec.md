@@ -36,7 +36,7 @@ Quem chega à Home entende em uma frase o que é a expoGEO, vê quanto há para 
 - Substitui o carrossel (`themes_row`, `theme_card`). O texto de boas-vindas sai da Home e vai para `/sobre` (spec 006).
 
 ### Componente de medalhão
-Criado aqui e reutilizado no menu, nas páginas de tema e subtema, no painel e no editor: ilustração inteira em círculo (1:1, `contain`), fundo branco, borda de linha, tamanho definido por quem usa. Sem imagem ou com falha: fundo acento suave com ícone de mapa.
+Criado na spec 002 (menu Temas da navbar) e reutilizado aqui, nas páginas de tema e subtema, no painel e no editor: ilustração inteira em círculo (1:1, `contain`), fundo branco, borda de linha, tamanho definido por quem usa. Sem imagem ou com falha: fundo acento suave com ícone de mapa.
 
 ## Estados
 - **Carregando:** as contagens mostram um esqueleto do tamanho dos números; título, texto, anel e cartões aparecem na hora (vêm do código). Nos cartões, o trecho "N objetos" mostra esqueleto.
@@ -91,3 +91,4 @@ Criado aqui e reutilizado no menu, nas páginas de tema e subtema, no painel e n
 - 2026-10-27: criada.
 - 2026-10-27: Q-04 respondida; a spec passa a criar o catálogo único e a regra do Firestore.
 - 2026-10-27: aprovada.
+- 2026-10-27: o componente de medalhão passa a nascer na 002 (o menu Temas precisa dele antes); aqui ele é reaproveitado. A seção de temas da Home deve manter a chave usada por "Ver todos na página inicial" (`HomeSections`).

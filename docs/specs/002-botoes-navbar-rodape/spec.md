@@ -19,10 +19,11 @@ Trocar os componentes que aparecem em todas as páginas (botões, navbar e rodap
 Os mesmos do Observatório, nos tokens da spec 001:
 - **Primário:** fundo `#C94400`, texto branco; hover `#A33600`.
 - **Secundário:** borda e texto na cor do texto principal; hover com fundo escuro e texto branco.
-- **Discreto:** texto no acento, sem fundo; hover com fundo acento suave.
+- **Discreto:** texto no acento forte (`#A33600`), sem fundo; hover com fundo acento suave. (O acento normal sobre o acento suave fica em 4,38:1.)
 - Tamanho normal e pequeno, ícone opcional antes ou depois do texto (seta, link externo).
 - Estado desativado (opacidade reduzida, sem hover, cursor de bloqueio) e foco visível.
 - Link externo abre em aba nova e anuncia isso no nome acessível.
+- Os botões novos são componentes novos e entram em todas as páginas públicas. O painel admin continua com os botões antigos até ser redesenhado (specs 013 a 015); eles saem na 016. Os botões só de ícone da paginação de conteúdos ficam como estão (grade redesenhada na 008).
 
 ### Faixa do Observatório (0.5)
 - Faixa escura fina acima da navbar: "Um projeto do Observatório do Ensino de História e Geografia · UFU" e o link "Visitar ↗" (`https://observatoriogeohistoria.net.br/`, aba nova).
@@ -35,8 +36,9 @@ Os mesmos do Observatório, nos tokens da spec 001:
 - Itens: **Temas** (menu), **Sobre** (`/sobre`) e **Contato** (`/contato`). À direita, botão discreto "Observatório ↗".
 - **Menu Temas:** os 4 temas, cada um com o medalhão, o nome e "N subtemas"; separador e "Ver todos na página inicial" (leva à seção de temas da Home). Abre por clique, por teclado (Enter/Espaço/seta para baixo) e por hover no desktop; fecha com Esc devolvendo o foco ao botão.
 - Item ativo em acento com sublinhado: "Temas" nas páginas de tema, subtema e objeto; "Sobre" e "Contato" nas suas páginas.
-- **Até 900 px:** botão de menu (ícone) abre um painel com sanfona "Temas" (os 4 temas), "Sobre", "Contato" e "Observatório ↗". O botão diz "Abrir menu" / "Fechar menu".
-- Enquanto `/sobre` não existir (spec 006), o item leva ao 404 atual; aceitável porque as specs vão em sequência na mesma fase.
+- **Até 900 px:** botão de menu (ícone) abre um painel lateral (entra pela direita, como no Observatório) com sanfona "Temas" (os 4 temas), "Sobre", "Contato" e "Observatório ↗". O botão diz "Abrir menu" / "Fechar menu".
+- Enquanto `/sobre` não existir (spec 006) e `/contato` não tiver rota (spec 010), os itens levam ao 404 atual, que abre com navbar e rodapé e já marca o item ativo pelo endereço; aceitável porque as specs vão em sequência.
+- **Medalhão:** o componente de medalhão (ilustração inteira em círculo 1:1, `contain`, fundo branco, borda de linha, placeholder de acento suave com ícone de mapa) nasce nesta spec, porque o menu Temas precisa dele; a 004 o reaproveita.
 
 ### Rodapé (0.6)
 Rodapé escuro em quatro colunas (duas no tablet, uma no celular):
@@ -44,6 +46,7 @@ Rodapé escuro em quatro colunas (duas no tablet, uma no celular):
 2. **Temas:** os 4 temas.
 3. **Curadoria:** Sobre a expoGEO, Metadados da curadoria ↗, Tese de doutorado ↗, Fale com a gente (`/contato`).
 4. **Observatório:** Visitar o site ↗, `expogeoufu@gmail.com` (abre o e-mail) e ícones das redes (Instagram, Facebook, YouTube) do Observatório.
+- Os logos de apoio que hoje ficam no rodapé saem dele e voltam na seção "Realização e apoio" (spec 006). Nenhum arquivo de imagem é apagado.
 - Linha final: "© {ano atual} expoGEO · Desenvolvido para fins educativos" e "Uma iniciativa do Observatório do Ensino de História e Geografia". O ano vem do relógio, não é fixo.
 
 ## Estados
@@ -74,8 +77,8 @@ Rodapé escuro em quatro colunas (duas no tablet, uma no celular):
 - [ ] O menu Temas lista os 4 temas com medalhão e "N subtemas" corretos (hoje 7, 12, 6 e 6, conforme `ThemeDataModel`) e leva a cada tema.
 - [ ] O menu abre e fecha por teclado e Esc devolve o foco ao botão "Temas".
 - [ ] O item ativo aparece em tema, subtema, Sobre e Contato.
-- [ ] Abaixo de 900 px o botão de menu abre o painel com a sanfona; acima, o painel não aparece.
-- [ ] O rodapé mostra as quatro colunas com os links da tabela, o ano atual e abre os externos em aba nova.
+- [ ] Até 900 px o botão de menu abre o painel com a sanfona; acima, o painel não aparece.
+- [ ] O rodapé mostra as quatro colunas com os links da seção "Rodapé", o ano atual e abre os externos em aba nova.
 - [ ] Em 390, 768 e 1280 px não há rolagem horizontal nem `overflow`.
 - [ ] Contraste ≥ 4,5:1 em todo texto da faixa, da navbar e do rodapé.
 - [ ] Nenhum valor de cor, fonte ou espaçamento solto no código novo.
@@ -92,3 +95,4 @@ Rodapé escuro em quatro colunas (duas no tablet, uma no celular):
 - 2026-10-27: criada.
 - 2026-10-27: Q-03 respondida.
 - 2026-10-27: aprovada.
+- 2026-10-27: ajustes do plano, decididos sem a pessoa (modo autônomo): botão discreto em acento forte, por contraste; botões novos como componentes novos, com o painel mantendo os antigos; painel do celular lateral; medalhão criado aqui em vez da 004; logos de apoio saem do rodapé até a 006; Contato também cai no 404 até a 010; critério do painel com "até 900 px" e do rodapé sem citar uma tabela que não existe.

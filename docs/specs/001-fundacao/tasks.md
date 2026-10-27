@@ -16,9 +16,11 @@ Critérios de aceite da spec, na ordem: **CA1** compila e `analyze` limpo; **CA2
 - [x] **B3.** Acrescentar ao `AppDimensions` `spacing` (4 a 96), `radii` (6 a 20 e `pill`), `shadows` (`soft`, `elevated`) e `focus` (3 px, afastamento 2 px, cor `accent`), copiando as classes do Observatório. Arquivos: `lib/core/theme/app_dimensions/app_dimensions.dart`. Atende: CA4.
 
 ## Grupo C: breakpoints e largura de conteúdo
-- [ ] **C1.** Acrescentar ao `screen_utils.dart` o `enum Breakpoint` (`fromWidth`, cortes 600 e 1024), `contentMaxWidth = 1120`, `breakpointOf(context)` e `contentMargin(breakpoint)` (20 / 32 / 32, pelos tokens `spacing`). As funções atuais ficam iguais. Arquivos: `lib/core/utils/screen/screen_utils.dart`, `lib/core/theme/app_theme.dart` (import). Atende: CA8, CA9.
-- [ ] **C2.** Criar o teste das faixas e margens em 390, 599, 600, 768, 1023, 1024 e 1280 px, e das funções antigas (`isMobile`, `isTablet`, `isDesktop`) nos mesmos pontos, e rodar `fvm flutter test`. Arquivos: `test/core/utils/screen/breakpoint_test.dart`. Atende: CA8.
-- [ ] **C3.** Criar o `PageContent` (caixa de 1120 px centralizada, margem por faixa), copiado do Observatório. Arquivos: `lib/core/components/structure/page_content.dart`. Atende: CA9.
+- [x] **C1.** Acrescentar ao `screen_utils.dart` o `enum Breakpoint` (`fromWidth`, cortes 600 e 1024), `contentMaxWidth = 1120`, `breakpointOf(context)` e `contentMargin(breakpoint)` (20 / 32 / 32, pelos tokens `spacing`). As funções atuais ficam iguais. Arquivos: `lib/core/utils/screen/screen_utils.dart`, `lib/core/theme/app_theme.dart` (import). Atende: CA8, CA9.
+  - Nota: o import do `screen_utils.dart` no `app_theme.dart` entrou na D2, quando o `Breakpoint` passou a ser usado no tema; antes disso seria import sem uso.
+- [x] **C2.** Criar o teste das faixas e margens em 390, 599, 600, 768, 1023, 1024 e 1280 px, e das funções antigas (`isMobile`, `isTablet`, `isDesktop`) nos mesmos pontos, e rodar `fvm flutter test`. Arquivos: `test/core/utils/screen/breakpoint_test.dart`. Atende: CA8.
+  - Nota: 14 testes passando (7 de faixa e margem, 7 das funções antigas com `MediaQuery` simulado).
+- [x] **C3.** Criar o `PageContent` (caixa de 1120 px centralizada, margem por faixa), copiado do Observatório. Arquivos: `lib/core/components/structure/page_content.dart`. Atende: CA9.
 
 ## Grupo D: fontes e tipografia
 - [ ] **D1.** Copiar de `../observatorio_geo_hist/assets/fonts/` os 7 `.ttf` (Bricolage 600/700/800, Figtree 400/500/600/700) e as 2 licenças OFL, e declarar as famílias `BricolageGrotesque` e `Figtree` no `pubspec.yaml` ao lado da `Aleo`. Arquivos: `assets/fonts/*`, `assets/fonts/licenses/*`, `pubspec.yaml`. Atende: CA5.

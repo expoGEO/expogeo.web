@@ -1,4 +1,4 @@
-import 'package:expogeo/core/components/button/primary_button.dart';
+import 'package:expogeo/core/components/button/app_button.dart';
 import 'package:expogeo/core/components/card/rounded_card.dart';
 import 'package:expogeo/core/components/image/app_asset_image.dart';
 import 'package:expogeo/core/models/subtheme_model.dart';
@@ -77,7 +77,7 @@ class _SubthemeCardState extends State<SubthemeCard> with SingleTickerProviderSt
                       fit: BoxFit.cover,
                     ),
                     SizedBox(height: AppTheme.dimensions.space.large.height),
-                    PrimaryButton(onPressed: widget.onTap, label: 'Explorar'),
+                    AppButton.primary(onPressed: widget.onTap, text: 'Explorar'),
                   ],
                 ),
               ),

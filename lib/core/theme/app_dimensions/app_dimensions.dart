@@ -43,6 +43,7 @@ class AppDimensions {
   RadiiScale radii = const RadiiScale._();
   ShadowStyle shadows = const ShadowStyle._();
   FocusStyle focus = const FocusStyle._();
+  ComponentSizes components = const ComponentSizes._();
 }
 
 class DimensionStyle {
@@ -117,4 +118,16 @@ class FocusStyle {
   final double offset = 2.0;
 
   Color get color => AppColors.instance.accent;
+}
+
+class ComponentSizes {
+  const ComponentSizes._();
+
+  final double buttonMinHeightRegular = 44.0;
+  final double buttonMinHeightSmall = 40.0;
+  final double buttonTextRegular = 16.0;
+  final double buttonTextSmall = 14.0;
+  final double buttonIconScale = 1.15;
+  final double buttonBorder = 1.5;
+  final double disabledOpacity = 0.5;
 }

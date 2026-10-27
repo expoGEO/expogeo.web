@@ -1,4 +1,4 @@
-import 'package:expogeo/core/components/button/primary_button.dart';
+import 'package:expogeo/core/components/button/app_button.dart';
 import 'package:expogeo/core/components/card/rounded_card.dart';
 import 'package:expogeo/core/models/theme_model.dart';
 import 'package:expogeo/core/theme/app_theme.dart';
@@ -104,7 +104,7 @@ class _ThemeCardState extends State<ThemeCard> with SingleTickerProviderStateMix
                       ),
                     ),
                     SizedBox(height: AppTheme.dimensions.space.medium),
-                    PrimaryButton(onPressed: widget.onTap, label: 'Explorar'),
+                    AppButton.primary(onPressed: widget.onTap, text: 'Explorar'),
                   ],
                 ),
               ),

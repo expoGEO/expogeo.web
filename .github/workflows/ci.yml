@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - main
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # O validar é check obrigatório: com paths-ignore no gatilho ele nunca reportava e PR só de
+  # docs ficava travado. Por isso o filtro fica aqui; job pulado por `if` conta como aprovado.
+  mudancas:
+    runs-on: ubuntu-latest
+    outputs:
+      site: ${{ steps.filtro.outputs.site }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Ver se algo do site mudou
+      id: filtro
+      run: |
+        alterados=$(git diff --name-only "origin/${{ github.base_ref }}...HEAD" \
+          | grep -Ev '^(docs/|\.claude/|\.vscode/|bin/|\.github/workflows/deploy-[^/]*\.yml$)|\.md$' || true)
+        echo "site=$([ -n "$alterados" ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+
+  validar:
+    needs: mudancas
+    if: needs.mudancas.outputs.site == 'true'
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Ler versão do Flutter do .fvmrc
+      id: fvm
+      run: echo "version=$(jq -r .flutter .fvmrc)" >> "$GITHUB_OUTPUT"
+
+    - name: Set up Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: ${{ steps.fvm.outputs.version }}
+        cache: true
+
+    - name: Install dependencies
+      run: flutter pub get
+
+    - name: Conferir formatação
+      run: |
+        find lib -name '*.dart' ! -name '*.g.dart' ! -name '*.freezed.dart' -print0 \
+          | xargs -0 dart format --output=none --set-exit-if-changed
+
+    - name: Analyze
+      run: flutter analyze --no-fatal-infos
+
+    - name: Build Flutter Web app
+      run: flutter build web --release

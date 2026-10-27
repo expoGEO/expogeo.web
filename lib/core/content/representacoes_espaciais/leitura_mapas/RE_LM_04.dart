@@ -13,8 +13,7 @@ ContentModel RE_LM_04 = ContentModel(
     title: 'Exposição Virtual – Mapas Estáticos',
     description: 'Site com diversos mapas estatísticos sobre a região amazônica',
     subjects: ['Mapa temático', 'Estatística', 'Amazônia'],
-    contentNote:
-        'Site do IVIDES com diversos mapas estatísticos sobre a região amazônica',
+    contentNote: 'Site do IVIDES com diversos mapas estatísticos sobre a região amazônica',
   ),
   originInfo: OriginInfo(
     insertionDate: DateTime(2024, 10, 11),

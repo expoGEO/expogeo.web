@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """
-Upload para Firestore em PRODUÇÃO - Simples e Direto
-Este é o método mais fácil e confiável!
+Upload para o Firestore do projeto escolhido (dev ou produção)
 
 Requisitos:
   pip install firebase-admin
@@ -10,10 +9,11 @@ Autenticação (escolha UMA):
   Opção 1: gcloud auth application-default login (mais fácil)
   Opção 2: export GOOGLE_APPLICATION_CREDENTIALS=firebase-credentials.json
 
-Execução:
-  python3 bin/seed_firestore_production.py
+Execução (prefira ./run_seed.sh <dev|prod>, que confirma antes de gravar em produção):
+  python3 bin/seed_firestore.py --project expogeo-dev
 """
 
+import argparse
 import json
 import sys
 from pathlib import Path
@@ -28,11 +28,10 @@ except ImportError:
     sys.exit(1)
 
 
-PROJECT_ID = "expogeo-fad33"
 JSON_FILE = Path("bin/content_seed_data.json")
 
 
-def init_firebase():
+def init_firebase(project_id):
     """Inicializar Firebase (automático com credenciais do sistema)"""
     # Verificar se app já está inicializado
     try:
@@ -51,7 +50,7 @@ def init_firebase():
         print("  2. Ou: export GOOGLE_APPLICATION_CREDENTIALS=/path/to/firebase-credentials.json")
         sys.exit(1)
 
-    firebase_admin.initialize_app(cred, {"projectId": PROJECT_ID})
+    firebase_admin.initialize_app(cred, {"projectId": project_id})
     return firebase_admin.get_app()
 
 
@@ -116,15 +115,19 @@ def upload_content(db, content):
 
 
 def main():
-    print("🚀 Upload para Firestore em PRODUÇÃO")
-    print(f"   Projeto: {PROJECT_ID}")
+    parser = argparse.ArgumentParser(description="Seed do Firestore")
+    parser.add_argument("--project", required=True, help="id do projeto Firebase")
+    project_id = parser.parse_args().project
+
+    print("🚀 Upload para Firestore")
+    print(f"   Projeto: {project_id}")
     print(f"   Host: firestore.googleapis.com")
     print()
 
     # 1. Inicializar Firebase
     print("🔐 Inicializando Firebase...")
     try:
-        app = init_firebase()
+        app = init_firebase(project_id)
         db = firestore.client()
         print("   ✅ Conectado com sucesso!")
     except Exception as e:
@@ -201,7 +204,7 @@ def main():
         print("   Estrutura criada (verificação simplificada):")
         print("   - Execute no Firebase Console para ver a estrutura completa:")
         print(
-            f"   https://console.firebase.google.com/project/{PROJECT_ID}/firestore"
+            f"   https://console.firebase.google.com/project/{project_id}/firestore"
         )
 
     except Exception as e:
@@ -211,7 +214,7 @@ def main():
     print("✅ Seed de produção concluído! 🎉")
     print()
     print("📊 Próximos passos:")
-    print(f"  1. Verifique os dados em: https://console.firebase.google.com/project/{PROJECT_ID}/firestore")
+    print(f"  1. Verifique os dados em: https://console.firebase.google.com/project/{project_id}/firestore")
     print("  2. Configure Firestore Security Rules (se necessário)")
     print("  3. Teste o admin panel: flutter run")
     print()

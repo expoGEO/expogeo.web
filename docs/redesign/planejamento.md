@@ -4,7 +4,7 @@ Este documento registra as decisões de design, as telas do protótipo e a ordem
 
 - **Protótipo (v1, todas as telas, inclusive login, painel e editor):** https://claude.ai/artifact/6tQuscgpFQk87MU2JZPNNs
 - **Referência:** protótipo e código do redesign do Observatório (https://claude.ai/artifact/PimRbbQyUDbqrapiv8HseH e o repositório `observatorio_geo_hist`).
-- **Situação:** protótipo aprovado em 2026-10-23. Nenhuma fase iniciada.
+- **Situação:** protótipo aprovado em 2026-10-23. Item 0.0 em andamento pelo [plano de CI/CD](../cicd/planejamento.md). Specs 001 a 016 criadas e **aprovadas** em 2026-10-27 (ver [mapa das specs](#mapa-das-specs)).
 
 ---
 
@@ -56,6 +56,8 @@ A aba Fundamentos do protótipo resume paleta, tipografia, regra das ilustraçõ
 5. **Cada fase termina com aceite** conferido contra o protótipo em 390, 768 e 1280 px: sem rolagem horizontal, sem `overflow`, contraste mínimo de 4,5:1 e navegação por teclado.
 
 ### Fase 0: Ambiente, fundação e casco
+Dividida em três specs: 0.1 a 0.3 → 001-fundacao; 0.4 a 0.6 → 002-botoes-navbar-rodape; 0.7 e 0.8 → 003-index-ilustracoes. O 0.0 segue o plano de CI/CD, sem spec.
+
 | # | Entrega | Principais arquivos |
 |---|---|---|
 | 0.0 | Ambiente de testes: branch `develop` com deploy para um endereço de dev. Hoje só existe a `main`, e todo push nela publica o site. Plano em [docs/cicd/planejamento.md](../cicd/planejamento.md) | `.github/workflows/*` |
@@ -65,37 +67,102 @@ A aba Fundamentos do protótipo resume paleta, tipografia, regra das ilustraçõ
 | 0.4 | Botões primário, secundário e discreto, com foco visível e estado desativado | `core/components/button/*` |
 | 0.5 | Faixa do Observatório e navbar fixa: menu Temas (4 temas com medalhão e quantidade de subtemas), Sobre, Contato, link Observatório; sanfona no celular | `core/components/structure/navbar.dart` |
 | 0.6 | Rodapé escuro em colunas: marca, Temas, Curadoria (Sobre, metadados, tese, contato), Observatório (site e redes) | `core/components/structure/footer.dart` |
-| 0.7 | `<title>`, descrição e ícones do `web/index.html` | `web/index.html`, `web/manifest.json` |
+| 0.7 | `<title>`, descrição, metadados de compartilhamento, ícones e tela de carregamento inicial do `web/index.html` | `web/index.html`, `web/manifest.json`, `web/icons/` |
+| 0.8 | Ilustrações de temas e subtemas e logos de apoio em WebP leve (os PNGs saem só na Fase 5) | `assets/images/`, `core/utils/enums/app_images.dart` |
 
 **Aceite:** todas as páginas atuais abrem sem erro com navbar, rodapé e botões novos. Navegação por teclado na navbar.
 
-### Fase 1: Home (T-01)
-| # | Seção | Notas técnicas |
-|---|---|---|
-| 1.1 | Hero, contagens e anel dos temas | Contagens vêm dos dados (ver Riscos) |
-| 1.2 | Cartões dos 4 temas | Substituem `themes_row` e `theme_card` (carrossel) |
-| 1.3 | Como explorar | Exemplos com links reais |
-| 1.4 | Adicionados recentemente | 6 objetos mais recentes por data de inserção; consulta nova |
-| 1.5 | Resumo do Sobre e públicos | Depende da rota `/sobre` (T-05) |
-| 1.6 | Realização e apoio, bloco do Observatório | Logos com hover; mesmo componente do Observatório |
+### Fase 1: Home (T-01) e Sobre (T-05)
+Três specs: 1.1 e 1.2 → 004-hero-temas; 1.3 e 1.4 → 005-como-explorar-recentes; 1.5, 1.6 e 1.7 → 006-sobre-apoio. A página Sobre veio da Fase 3 porque o resumo da Home leva a ela e as duas usam o apoio e o bloco do Observatório; assim não é preciso página provisória.
 
-### Fases seguintes
-| Fase | Escopo | Motivo da posição |
-|---|---|---|
-| 2 | Navegação de conteúdo: Tema (T-02), Subtema (T-03) e Objeto (T-04, rota nova) | Núcleo do site e maior volume de uso |
-| 3 | Sobre (T-05), Contato (T-06) e estados especiais (T-07) | Páginas simples, reaproveitam o layout de leitura e o formulário do Observatório |
-| 4 | Login (T-08), painel (T-09) e editor (T-10) | Mesmo desenho da Fase 8 do Observatório, sem mudar dados nem regras |
-| 5 | Limpeza: tokens e cores antigas, Aleo, `num_extension`, `carousel_slider` e assets sem uso | Só depois que nenhuma tela usa o que sai |
+| # | Seção | Notas técnicas | Depende de |
+|---|---|---|---|
+| 1.1 | Hero, contagens e anel dos temas | Contagens vêm dos dados (Q-04). Cria o componente de medalhão | 0.x, Q-04 |
+| 1.2 | Cartões dos 4 temas | Substituem `themes_row` e `theme_card` (carrossel) | 1.1 |
+| 1.3 | Como explorar | Exemplos fixos (Natureza e Meio Ambiente → Biomas), título e contagem dos dados | 1.4 (cartão), 2.3 (link do passo 3) |
+| 1.4 | Adicionados recentemente | 6 objetos mais recentes por `originInfo.insertionDate`; cria o cartão de objeto | Q-04 |
+| 1.5 | Resumo do Sobre e públicos | Leva a `/sobre` | 1.7 |
+| 1.6 | Realização e apoio, bloco do Observatório | Logos com hover; mesmo componente do Observatório | Q-07 |
+| 1.7 | Página Sobre (T-05) | Rota nova `/sobre`, texto de boas-vindas, código de referência, metadados e tese | 1.6 |
 
-**Aceite das Fases 2 a 4:** telas iguais ao protótipo nas três larguras, com estados de carregando, vazio e erro. No painel, entrar, listar, filtrar, criar, editar e excluir funcionam como antes. Todo botão só de ícone tem dica e nome acessível.
+**Aceite:** a Home e o Sobre reproduzem o protótipo em 390, 768 e 1280 px, com estados de carregando e erro nas contagens e nos recentes.
+
+### Fase 2: Navegação de conteúdo
+Uma spec por tela: 2.1 → 007-pagina-tema; 2.2 → 008-pagina-subtema; 2.3 → 009-pagina-objeto.
+
+| # | Tela | Notas técnicas | Depende de |
+|---|---|---|---|
+| 2.1 | Tema (T-02) | Cabeçalho com contagens e medalhão, grade de subtemas com "N objetos", "Outros temas" | 1.1 (medalhão), Q-04 |
+| 2.2 | Subtema (T-03) | Busca sem acento, chips de tipo, assuntos frequentes, linhas de objeto, "Carregar mais" de 6 em 6. Sai a paginação por cursor | Q-04 |
+| 2.3 | Objeto (T-04) | Rota nova `/:tema/:subtema/:codigo` que abre por link direto; ficha completa; "Outros objetos" | 1.4 (cartão), Q-01 |
+
+**Aceite:** telas iguais ao protótipo nas três larguras, com carregando, vazio, erro e 404 para endereços inexistentes.
+
+### Fase 3: Contato e estados
+Duas specs: 3.1 → 010-contato; 3.2 → 011-estados-especiais.
+
+| # | Entrega | Notas técnicas | Depende de |
+|---|---|---|---|
+| 3.1 | Contato (T-06) | `/contato` com `mailto:` preenchido, validação, confirmação e "Copiar mensagem", como no Observatório | 0.x |
+| 3.2 | Estados (T-07) | Caixa de estado e esqueletos compartilhados, 404 "Este lugar não está no mapa", remoção dos componentes de estado antigos | Fases 1 e 2 |
+
+### Fase 4: Painel
+Quatro specs: 4.1 → 012-login; 4.2 → 013-painel-estrutura; 4.3 → 014-painel-objetos; 4.4 → 015-editor-objeto.
+
+| # | Entrega | Notas técnicas | Depende de |
+|---|---|---|---|
+| 4.1 | Login (T-08) | Duas colunas, erro único de credenciais, "Entrando…" | 0.x |
+| 4.2 | Moldura do painel e "Temas e subtemas" (T-09) | Barra, menu lateral com contagens, gaveta, endereços por vista, toast, dica e diálogo compartilhados | 4.1, Q-04 |
+| 4.3 | Lista de objetos (T-09) | Linhas no lugar da `DataTable`, busca e filtros no endereço, ações com dica, exclusão com confirmação | 4.2 |
+| 4.4 | Editor (T-10) | Página própria em `/admin/painel/objetos/novo` e `/:codigo/editar`, resumo de pendências, prévia, código gerado | 4.3, Q-01, Q-05 |
+
+**Aceite das Fases 2 a 4:** telas iguais ao protótipo nas três larguras, com estados de carregando, vazio e erro. No painel, entrar, listar, filtrar, criar, editar e excluir funcionam como antes. Todo botão só de ícone tem dica e nome acessível. O que exige login precisa de credenciais de teste no dev.
+
+### Fase 5: Limpeza
+Uma spec: 5.1 e 5.2 → 016-limpeza-legado.
+
+| # | Entrega | Notas técnicas |
+|---|---|---|
+| 5.1 | Código, tokens, Aleo, `google_fonts`, `num_extension` e pacotes sem uso | Só o que nenhuma tela usa; README atualizado |
+| 5.2 | Assets sem uso | PNGs substituídos pelos WebP e arquivos sem referência |
+
+### Mapa das specs
+| Spec | Itens | Status |
+|---|---|---|
+| [001-fundacao](../specs/001-fundacao/spec.md) | 0.1–0.3 | aprovada |
+| [002-botoes-navbar-rodape](../specs/002-botoes-navbar-rodape/spec.md) | 0.4–0.6 | aprovada |
+| [003-index-ilustracoes](../specs/003-index-ilustracoes/spec.md) | 0.7–0.8 | aprovada |
+| [004-hero-temas](../specs/004-hero-temas/spec.md) | 1.1–1.2 | aprovada |
+| [005-como-explorar-recentes](../specs/005-como-explorar-recentes/spec.md) | 1.3–1.4 | aprovada |
+| [006-sobre-apoio](../specs/006-sobre-apoio/spec.md) | 1.5–1.7 | aprovada |
+| [007-pagina-tema](../specs/007-pagina-tema/spec.md) | 2.1 | aprovada |
+| [008-pagina-subtema](../specs/008-pagina-subtema/spec.md) | 2.2 | aprovada |
+| [009-pagina-objeto](../specs/009-pagina-objeto/spec.md) | 2.3 | aprovada |
+| [010-contato](../specs/010-contato/spec.md) | 3.1 | aprovada |
+| [011-estados-especiais](../specs/011-estados-especiais/spec.md) | 3.2 | aprovada |
+| [012-login](../specs/012-login/spec.md) | 4.1 | aprovada |
+| [013-painel-estrutura](../specs/013-painel-estrutura/spec.md) | 4.2 | aprovada |
+| [014-painel-objetos](../specs/014-painel-objetos/spec.md) | 4.3 | aprovada |
+| [015-editor-objeto](../specs/015-editor-objeto/spec.md) | 4.4 | aprovada |
+| [016-limpeza-legado](../specs/016-limpeza-legado/spec.md) | 5.1–5.2 | aprovada |
+
+Todas as perguntas foram respondidas e as 16 specs aprovadas em 2026-10-27. Próximo passo: `/sdd-plan` de cada spec, a começar pela 001.
 
 ---
 
-## 4. Perguntas em aberto
-| ID | Pergunta | Onde decidir |
-|---|---|---|
-| Q-01 | Formato do código na rota do objeto: `nma_bio_03` como está ou `nma-bio-03` (hífen, como as outras rotas)? | Spec da página do objeto (Fase 2) |
-| Q-03 | A expoGEO terá redes sociais próprias? Hoje o rodapé leva às do Observatório | Spec do rodapé (0.6) |
+## 4. Perguntas e respostas
+
+### Respondidas (2026-10-27, todas pela recomendação)
+| ID | Pergunta | Resposta | Specs |
+|---|---|---|---|
+| Q-01 | Formato do código na rota do objeto | `nma-bio-03` (minúsculas e hífen) no endereço; o código original (`NMA_BIO_03`) também abre o objeto | 009, 015 |
+| Q-03 | Redes sociais próprias da expoGEO | Não por enquanto: o rodapé leva às redes do Observatório, com nome acessível "… do Observatório" | 002 |
+| Q-04 | Fonte das contagens e listas | **Catálogo único:** todos os objetos são carregados uma vez por `collectionGroup('contents')` e servem Home, tema, subtema, objeto e painel. Entra no `firestore.rules` a regra de leitura para grupo de coleções (`match /{path=**}/contents/{id} { allow read: if true; }`); quem pode gravar não muda. A regra não é publicada pelo deploy (só os índices) e precisa ser publicada à mão no dev e na produção | 004 (cria), 005, 007, 008, 009, 013, 014 |
+| Q-05 | Código de referência no editor e campo "Regras de registro" | Código **gerado**: prefixo que os objetos do subtema já usam (ex.: `NMA_PAG`) + próximo número com 2 dígitos; o do enum só em subtema vazio; ao editar sem trocar de subtema, não muda. "Regras de registro" continua como campo opcional | 015 |
+| Q-07 | Destino dos logos de apoio | Sites institucionais, iguais aos do Observatório quando a instituição for a mesma | 006 |
+
+### Em aberto
+Nenhuma no momento.
 
 ---
 
@@ -110,7 +177,9 @@ A aba Fundamentos do protótipo resume paleta, tipografia, regra das ilustraçõ
 - **Deploy direto na produção:** sem `develop`, qualquer push na `main` publica o site. Por isso a Fase 0 começa pelo ambiente de testes.
 - **Contagens:** os objetos ficam em `themes/{tema}/subthemes/{subtema}/contents`, enquanto títulos, descrições e imagens de temas e subtemas estão no código (`ThemeDataModel`). Contar por tema e por subtema pede consultas `count()` no Firestore ou um contador mantido pelo painel.
 - **Busca e filtros do subtema:** cada subtema tem de 4 a 10 objetos (190 nos dados de seed em `lib/core/content`). Carregar o subtema inteiro e filtrar no navegador é mais simples que a paginação por cursor atual. "Carregar mais" passa a ser só visual. Confirmar se o volume continua pequeno.
-- **Adicionados recentemente:** exige `collectionGroup('contents')` ordenado por `originInfo.insertionDate` (texto ISO), com índice novo no Firestore.
+- **Adicionados recentemente:** exige `collectionGroup('contents')` ordenado por `originInfo.insertionDate` (texto ISO). O índice de grupo de coleções já está em `firestore.indexes.json`; falta a regra de leitura para grupo de coleções (Q-04).
+- **Prefixos de código:** em Poluição da Água os objetos usam `NMA_PAG_*`, mas o enum diz `NMA_PA`. Gerar código pelo enum criaria uma sequência paralela (Q-05).
+- **Movimentos da Terra:** existe no `SubthemeEnum` (`RE_MOT`) e tem ilustração, mas não está em `ThemeDataModel` nem nos dados de seed. As telas novas seguem o `ThemeDataModel` (7 subtemas em Representações Espaciais, 31 no total).
 - **Página do objeto:** a rota antiga de conteúdo está comentada no `app_router.dart` e dependia de `extra`. A nova precisa carregar o objeto só pelo endereço, para funcionar ao abrir um link direto.
 - **Imagens das ilustrações:** são PNGs de cerca de 400 KB. Vale gerar versões menores (WebP) antes da Fase 1.
 - **Regras do projeto:** o Expogeo não tem `CLAUDE.md`. Regras de design, comandos, git e referências ficam em [docs/specs/README.md](../specs/README.md), que as skills `sdd-*` (em `.claude/skills/`) leem primeiro.

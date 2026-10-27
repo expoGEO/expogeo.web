@@ -1,6 +1,6 @@
 # 001. Fundação visual (tokens, fontes e breakpoints)
 
-- **Status:** implementada
+- **Status:** verificada
 - **Item do planejamento:** Fase 0, entregas 0.1, 0.2 e 0.3
 - **Protótipo:** aba "Fundamentos" (link em docs/specs/README.md)
 - **Criada em:** 2026-10-27
@@ -94,3 +94,4 @@ Cada valor novo tem uma versão por faixa (390, 768 e 1280 px) e não muda com a
 - 2026-10-27: aprovada.
 - 2026-10-27 (planejamento, decisão em modo autônomo): estilo do código de referência passa de "monoespaçado do sistema" para Figtree 600 com algarismos tabulares, porque o Flutter web (CanvasKit) não usa fontes do sistema. Critério das fontes reescrito como "sem buscar fonte na internet", porque o app inteiro depende de rede para abrir (CanvasKit via CDN) e o teste literal não se aplica.
 - 2026-10-27: implementada.
+- 2026-10-27: verificada (sem ressalvas; ver verificacao.md). Decisão em modo autônomo: a única correção (comentário do degradê) foi feita sem consulta, por ser de regra do projeto.

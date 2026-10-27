@@ -61,9 +61,9 @@ Dividida em três specs: 0.1 a 0.3 → 001-fundacao; 0.4 a 0.6 → 002-botoes-na
 | # | Entrega | Principais arquivos |
 |---|---|---|
 | 0.0 | Ambiente de testes: branch `develop` com deploy para um endereço de dev. Hoje só existe a `main`, e todo push nela publica o site. Plano em [docs/cicd/planejamento.md](../cicd/planejamento.md) | `.github/workflows/*` |
-| 0.1 | Tokens de cor, raios, espaçamentos e sombras do Observatório, mais o token do degradê | `core/theme/app_colors`, `app_dimensions`, `app_gradients` |
-| 0.2 | Tipografia nova com Bricolage Grotesque e Figtree **embutidas** em `assets/fonts` (sai o `GoogleFonts.aleo` em tempo de execução) | `core/theme/app_typography`, `pubspec.yaml` |
-| 0.3 | Breakpoints e largura máxima de conteúdo | `core/utils/screen/screen_utils.dart` |
+| 0.1 | Tokens de cor, raios, espaçamentos e sombras do Observatório, mais o token do degradê → specs/001-fundacao (concluído) | `core/theme/app_colors`, `app_dimensions`, `app_gradients` |
+| 0.2 | Tipografia nova com Bricolage Grotesque e Figtree **embutidas** em `assets/fonts` (sai o `GoogleFonts.aleo` em tempo de execução) → specs/001-fundacao (concluído) | `core/theme/app_typography`, `pubspec.yaml` |
+| 0.3 | Breakpoints e largura máxima de conteúdo → specs/001-fundacao (concluído) | `core/utils/screen/screen_utils.dart` |
 | 0.4 | Botões primário, secundário e discreto, com foco visível e estado desativado | `core/components/button/*` |
 | 0.5 | Faixa do Observatório e navbar fixa: menu Temas (4 temas com medalhão e quantidade de subtemas), Sobre, Contato, link Observatório; sanfona no celular | `core/components/structure/navbar.dart` |
 | 0.6 | Rodapé escuro em colunas: marca, Temas, Curadoria (Sobre, metadados, tese, contato), Observatório (site e redes) | `core/components/structure/footer.dart` |
@@ -129,7 +129,7 @@ Uma spec: 5.1 e 5.2 → 016-limpeza-legado.
 ### Mapa das specs
 | Spec | Itens | Status |
 |---|---|---|
-| [001-fundacao](../specs/001-fundacao/spec.md) | 0.1–0.3 | aprovada |
+| [001-fundacao](../specs/001-fundacao/spec.md) | 0.1–0.3 | verificada |
 | [002-botoes-navbar-rodape](../specs/002-botoes-navbar-rodape/spec.md) | 0.4–0.6 | aprovada |
 | [003-index-ilustracoes](../specs/003-index-ilustracoes/spec.md) | 0.7–0.8 | aprovada |
 | [004-hero-temas](../specs/004-hero-temas/spec.md) | 1.1–1.2 | aprovada |

@@ -5,7 +5,7 @@
 
 | Spec | Itens | Spec+plano | Implementação | Verificação | Resultado |
 |---|---|---|---|---|---|
-| 001-fundacao | 0.1-0.3 | feito (plano com 13 tarefas) | pendente | pendente | |
+| 001-fundacao | 0.1-0.3 | feito (plano com 13 tarefas) | feito (3 commits) | feito (1 correção: comentário do degradê) | verificada |
 | 002-botoes-navbar-rodape | 0.4-0.6 | pendente | pendente | pendente | |
 | 003-index-ilustracoes | 0.7-0.8 | pendente | pendente | pendente | |
 
@@ -23,4 +23,5 @@ O item 0.0 (branch `develop` com deploy de dev) já existe no remoto e fica fora
 - (nenhuma até agora)
 
 ## Ocorrências
-- (nenhuma até agora)
+- (001, implementação) Um `pub get` atualizou transitivos no `pubspec.lock` (`characters` 1.4.1, `matcher` 0.12.19) fora da entrega; o arquivo foi restaurado pela orquestradora.
+- (001, implementação) Defeito anterior à fase: a página Contato abre cinza com `GoError: There is no GoRouterState above the current context`. Fica para a spec 010 (Contato).

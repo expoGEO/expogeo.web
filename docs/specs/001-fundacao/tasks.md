@@ -52,3 +52,6 @@ Critérios de aceite da spec, na ordem: **CA1** compila e `analyze` limpo; **CA2
 | CA8 faixas nos pontos de corte | C1, C2, F3 |
 | CA9 1120 px e margens 20/32 | C1, C3, E1, F3 |
 | CA10 contraste anotado | F2 |
+
+## Verificação
+- [x] **V1.** `/sdd-verify 001` em 2026-10-27: aprovada, sem ressalvas (ver `verificacao.md`). Correção: comentário do degradê sem citar CSS (`d707181`). Tela de teste `lib/dev/` apagada.

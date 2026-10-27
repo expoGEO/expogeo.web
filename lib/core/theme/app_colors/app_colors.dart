@@ -41,4 +41,28 @@ class AppColors {
   Color get gray200 => Color(0xFFE4E4E7);
   Color get gray100 => Color(0xFFEFEFF4);
   Color get gray50 => Color(0xFFFAFCFE);
+
+  Color page = const Color(0xFFFFFFFF);
+  Color surface = const Color(0xFFF7F5F2);
+  Color ink = const Color(0xFF1F1B18);
+  Color inkSecondary = const Color(0xFF5E5852);
+  Color line = const Color(0xFFE6E1DA);
+
+  /// Cor de tudo que é clicável.
+  Color accent = const Color(0xFFC94400);
+
+  /// Hover, e texto ou ícone laranja sobre [surface] e [accentSoft],
+  /// onde [accent] fica abaixo de 4,5:1.
+  Color accentStrong = const Color(0xFFA33600);
+  Color accentSoft = const Color(0xFFFFF0E6);
+
+  Color footerBackground = const Color(0xFF1C1917);
+  Color footerLine = const Color(0xFF37322E);
+  Color footerText = const Color(0xFFD8D2CA);
+  Color footerHighlight = const Color(0xFFFF9A62);
+
+  Color error = const Color(0xFFB3261E);
+  Color errorSurface = const Color(0xFFFBE9E7);
+  Color success = const Color(0xFF1C6B34);
+  Color successSurface = const Color(0xFFE4F3E8);
 }

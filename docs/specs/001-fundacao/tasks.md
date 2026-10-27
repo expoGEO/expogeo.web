@@ -7,12 +7,13 @@ Critérios de aceite da spec, na ordem: **CA1** compila e `analyze` limpo; **CA2
 `analyze` e `test` rodam na cópia ASCII do scratchpad (rsync sem `build/` e `.dart_tool/`, depois `fvm flutter pub get`). Toda tarefa termina com `fvm flutter analyze` sem avisos.
 
 ## Grupo A: linha de base
-- [ ] **A1.** Gerar o build web do estado atual (antes de qualquer mudança) e capturar Home, uma página de tema, uma de subtema, Contato, 404 e login em 390, 768 e 1280 px, guardando as imagens no scratchpad. Arquivos: nenhum no projeto. Atende: CA2 (referência do "antes").
+- [x] **A1.** Gerar o build web do estado atual (antes de qualquer mudança) e capturar Home, uma página de tema, uma de subtema, Contato, 404 e login em 390, 768 e 1280 px, guardando as imagens no scratchpad. Arquivos: nenhum no projeto. Atende: CA2 (referência do "antes").
+  - Nota: capturas feitas com Chrome sem janela via protocolo de depuração (18 imagens). A página Contato já abria cinza no estado atual (`GoError: There is no GoRouterState above the current context`), defeito anterior a esta spec.
 
 ## Grupo B: tokens
-- [ ] **B1.** Acrescentar ao `AppColors` as 16 cores da tabela da spec com os nomes do plano, sem tocar nas atuais. Arquivos: `lib/core/theme/app_colors/app_colors.dart`. Atende: CA3.
-- [ ] **B2.** Acrescentar `AppGradients.brand` (`#F97316 → #FB923C → #FACC15`, paradas 0 / 0,45 / 1, 120°). Arquivos: `lib/core/theme/app_gradients/app_gradients.dart`. Atende: CA3.
-- [ ] **B3.** Acrescentar ao `AppDimensions` `spacing` (4 a 96), `radii` (6 a 20 e `pill`), `shadows` (`soft`, `elevated`) e `focus` (3 px, afastamento 2 px, cor `accent`), copiando as classes do Observatório. Arquivos: `lib/core/theme/app_dimensions/app_dimensions.dart`. Atende: CA4.
+- [x] **B1.** Acrescentar ao `AppColors` as 16 cores da tabela da spec com os nomes do plano, sem tocar nas atuais. Arquivos: `lib/core/theme/app_colors/app_colors.dart`. Atende: CA3.
+- [x] **B2.** Acrescentar `AppGradients.brand` (`#F97316 → #FB923C → #FACC15`, paradas 0 / 0,45 / 1, 120°). Arquivos: `lib/core/theme/app_gradients/app_gradients.dart`. Atende: CA3.
+- [x] **B3.** Acrescentar ao `AppDimensions` `spacing` (4 a 96), `radii` (6 a 20 e `pill`), `shadows` (`soft`, `elevated`) e `focus` (3 px, afastamento 2 px, cor `accent`), copiando as classes do Observatório. Arquivos: `lib/core/theme/app_dimensions/app_dimensions.dart`. Atende: CA4.
 
 ## Grupo C: breakpoints e largura de conteúdo
 - [ ] **C1.** Acrescentar ao `screen_utils.dart` o `enum Breakpoint` (`fromWidth`, cortes 600 e 1024), `contentMaxWidth = 1120`, `breakpointOf(context)` e `contentMargin(breakpoint)` (20 / 32 / 32, pelos tokens `spacing`). As funções atuais ficam iguais. Arquivos: `lib/core/utils/screen/screen_utils.dart`, `lib/core/theme/app_theme.dart` (import). Atende: CA8, CA9.

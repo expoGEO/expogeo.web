@@ -64,4 +64,14 @@ class AppGradients {
       Color(0xFF6B7280), // mediumGray
     ],
   );
+
+  /// Assinatura da expoGEO, só decorativa: nunca sob texto nem em botões.
+  /// A rotação de 30° sobre o eixo horizontal reproduz o ângulo de 120° do CSS.
+  LinearGradient brand = const LinearGradient(
+    begin: Alignment.centerLeft,
+    end: Alignment.centerRight,
+    stops: [0, 0.45, 1],
+    transform: GradientRotation(math.pi / 6),
+    colors: [Color(0xFFF97316), Color(0xFFFB923C), Color(0xFFFACC15)],
+  );
 }

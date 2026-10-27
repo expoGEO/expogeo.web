@@ -2,7 +2,9 @@
 
 Plano para separar dev e produção e validar cada PR, no mesmo modelo do Observatório (`../observatorio_geo_hist/docs/deploy-ambientes.md`). Ao concluir, este documento vira `docs/deploy-ambientes.md`, que descreve o estado final, e o item 0.0 do [planejamento do redesign](../redesign/planejamento.md) é marcado como concluído.
 
-- **Situação:** decisões fechadas em 2026-10-23. Nenhuma etapa iniciada.
+- **Situação (2026-10-27):** chave revogada; `expogeo-dev` criado, com `firebase_options_dev.dart` gerado e o índice de `contents` publicado; subdomínio e environments do GitHub configurados; regras exportadas para `firestore.rules`. Produção não tinha índices personalizados para copiar. Repositório de E4, E5 e E6 na branch `chore/cicd-ambientes`. Dev populado pelo `run_seed.sh dev` (4 temas, 31 subtemas, 190 objetos). Faltam E7, E8 e E9.
+- **E4 sem spec:** a mudança é pequena e de infraestrutura, então foi feita direto, sem o fluxo SDD.
+- **Formatação:** o CI confere o `dart format` com `page_width: 100` (o mesmo do `.vscode/settings.json`), agora em `analysis_options.yaml`; os 10 arquivos que estavam fora do formato foram formatados.
 
 ---
 
@@ -85,7 +87,7 @@ Environments `DEV` e `PROD`, cada um com `FTP_HOST`, `FTP_USER`, `FTP_PASSWORD` 
 ### Firebase
 - `firebase.json` com os dois projetos e `firestore.indexes.json` versionados. Os deploys publicam os índices antes do site.
 - Índice já previsto pelo redesign: grupo de coleções `contents`, `originInfo.insertionDate` ↓ (seção "Adicionados recentemente" da Home).
-- Regras do Firestore exportadas do console para `firestore.rules` e aplicadas aos dois projetos, para o dev ter as mesmas permissões da produção. A publicação automática das regras fica fora deste plano: elas seguem mudando pelo console até haver motivo para automatizar.
+- Regras do Firestore exportadas do console para `firestore.rules` e aplicadas aos dois projetos, para o dev ter as mesmas permissões da produção. A publicação automática das regras fica fora deste plano: elas seguem mudando pelo console até haver motivo para automatizar. Por isso o `firebase.json` não aponta para o `firestore.rules`: se apontasse, o `deploy --only firestore:indexes` também compilaria as regras e pediria à conta de serviço um papel a mais.
 
 ---
 

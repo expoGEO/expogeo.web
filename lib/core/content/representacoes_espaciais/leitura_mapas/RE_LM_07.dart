@@ -14,8 +14,7 @@ ContentModel RE_LM_07 = ContentModel(
     description:
         'Site que apresenta exposição cartográfica virtual sobre os relevos de diversos países em todos os continentes',
     subjects: ['Mapa temático', 'Topografia', 'Exposição virtual'],
-    contentNote:
-        'Site com exposição cartográfica virtual de relevos em diferentes continentes',
+    contentNote: 'Site com exposição cartográfica virtual de relevos em diferentes continentes',
   ),
   originInfo: OriginInfo(
     insertionDate: DateTime(2024, 10, 11),

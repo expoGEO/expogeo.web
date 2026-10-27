@@ -1,0 +1,23 @@
+{
+  "flutter": {
+    "platforms": {
+      "dart": {
+        "lib/firebase_options_prod.dart": {
+          "projectId": "expogeo-fad33",
+          "configurations": {
+            "web": "1:117354785316:web:c348a8e95f9d4aeada86b1"
+          }
+        },
+        "lib/firebase_options_dev.dart": {
+          "projectId": "expogeo-dev",
+          "configurations": {
+            "web": "1:190180065288:web:fabc5843a0221dbc2511bd"
+          }
+        }
+      }
+    }
+  },
+  "firestore": {
+    "indexes": "firestore.indexes.json"
+  }
+}

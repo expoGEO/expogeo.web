@@ -15,7 +15,8 @@ Proporcionar uma experiência de aprendizado dinâmica e visual sobre os princip
 ```
 ├── lib/
 │   ├── main.dart                    # Ponto de entrada da aplicação
-│   ├── firebase_options.dart        # Configuração Firebase
+│   ├── firebase_options_dev.dart    # Configuração Firebase (dev)
+│   ├── firebase_options_prod.dart   # Configuração Firebase (produção)
 │   ├── core/
 │   │   ├── components/              # Componentes reutilizáveis
 │   │   ├── content/                 # Lógica de conteúdo compartilhada
@@ -175,17 +176,13 @@ firebase login
 flutterfire configure
 
 # Fazer seed do banco de dados
-python3 bin/seed_firestore_production.py
+./run_seed.sh dev   # ou prod, com confirmação
 ```
 
 ### 🏗️ Build para Produção
 
 ```bash
-# Web
 flutter build web --release
-
-# Mobile/Desktop
-flutter build <platform> --release
 ```
 
 ---

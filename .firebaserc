@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "default": "expogeo-dev",
+    "dev": "expogeo-dev",
+    "prod": "expogeo-fad33"
+  }
+}

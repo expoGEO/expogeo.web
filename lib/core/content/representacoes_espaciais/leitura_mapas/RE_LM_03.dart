@@ -25,8 +25,7 @@ ContentModel RE_LM_03 = ContentModel(
     requirements: 'Acesso à internet',
   ),
   registrationInfo: RegistrationInfo(
-    location:
-        'https://atlasescolar.ibge.gov.br/cartografia/21737-convencoes-cartograficas.html',
+    location: 'https://atlasescolar.ibge.gov.br/cartografia/21737-convencoes-cartograficas.html',
     issueYear: 2024,
     registrationRules:
         'Descrição de acordo com o Tema_Geral/Tema_Específico/Número_Referência da curadoria ExpoGEO',

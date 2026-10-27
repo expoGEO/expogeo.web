@@ -13,8 +13,7 @@ ContentModel RE_LM_02 = ContentModel(
     title: 'Mapas - IBGE',
     description: 'Site com diversos mapas sobre o Brasil e o mundo',
     subjects: ['Mapa temático', 'Brasil', 'Atlas geográfico'],
-    contentNote:
-        'Portal do IBGE com extensa relação de mapas temáticos sobre o Brasil e o mundo',
+    contentNote: 'Portal do IBGE com extensa relação de mapas temáticos sobre o Brasil e o mundo',
   ),
   originInfo: OriginInfo(
     insertionDate: DateTime(2024, 10, 11),

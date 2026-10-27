@@ -6,7 +6,7 @@ import 'package:get_it/get_it.dart';
 /// Coordena as subfeatures: login e panel
 class AdminSetup {
   static final GetIt getIt = GetIt.instance;
-  
+
   static void setup() {
     // Setup da subfeature de login
     LoginSetup.setup();

@@ -25,8 +25,7 @@ ContentModel RE_FH_04 = ContentModel(
     requirements: 'Acesso à internet',
   ),
   registrationInfo: RegistrationInfo(
-    location:
-        'https://www.einstein.br/especialidades/medicina-do-sono/doencas-sintomas/jet-lag',
+    location: 'https://www.einstein.br/especialidades/medicina-do-sono/doencas-sintomas/jet-lag',
     issueYear: 2020,
     registrationRules:
         'Descrição de acordo com o Tema_Geral/Tema_Específico/Número_Referência da curadoria ExpoGEO',

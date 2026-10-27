@@ -182,11 +182,7 @@ flutterfire configure
 ### 🏗️ Build para Produção
 
 ```bash
-# Web
 flutter build web --release
-
-# Mobile/Desktop
-flutter build <platform> --release
 ```
 
 ---

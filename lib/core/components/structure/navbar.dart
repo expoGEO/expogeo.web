@@ -178,7 +178,6 @@ class _MenuButton extends StatelessWidget {
   }
 }
 
-/// Navbar presa ao topo dentro de um `CustomScrollView`.
 class NavbarSliver extends StatelessWidget {
   const NavbarSliver({super.key});
 

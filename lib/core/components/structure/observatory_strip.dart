@@ -6,7 +6,6 @@ import 'package:expogeo/core/utils/screen/screen_utils.dart';
 import 'package:expogeo/core/utils/url/url_utils.dart';
 import 'package:flutter/material.dart';
 
-/// Faixa escura acima da navbar, ligando a expoGEO ao Observatório.
 class ObservatoryStrip extends StatelessWidget {
   const ObservatoryStrip({super.key});
 

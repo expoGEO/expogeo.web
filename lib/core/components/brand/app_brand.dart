@@ -3,7 +3,6 @@ import 'package:expogeo/core/theme/app_theme.dart';
 import 'package:expogeo/core/utils/enums/app_images.dart';
 import 'package:flutter/material.dart';
 
-/// Símbolo + "expoGEO" + linha opcional.
 class AppBrand extends StatelessWidget {
   const AppBrand({super.key, this.tagline, this.onDark = false, this.onTap});
 

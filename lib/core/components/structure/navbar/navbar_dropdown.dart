@@ -199,7 +199,6 @@ class _NavbarDropdownState extends State<NavbarDropdown> {
     final spacing = AppTheme.dimensions.spacing;
     final screen = MediaQuery.sizeOf(context);
     final maxWidth = components.menuMaxWidth.clamp(0.0, screen.width - spacing.s32).toDouble();
-    // Deixa o menu um pouco abaixo da linha da navbar.
     final gapAboveMenu = spacing.s12;
     final maxHeight = (screen.height - components.navbarHeight - gapAboveMenu - spacing.s16).clamp(
       0.0,

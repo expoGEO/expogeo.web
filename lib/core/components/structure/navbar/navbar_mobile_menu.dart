@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 
-/// Painel lateral da navbar em telas estreitas.
 class NavbarMobileMenu extends StatefulWidget {
   const NavbarMobileMenu({super.key, required this.location});
 

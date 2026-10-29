@@ -2,7 +2,6 @@ import 'package:expogeo/core/theme/app_theme.dart';
 import 'package:expogeo/core/utils/enums/app_images.dart';
 import 'package:flutter/material.dart';
 
-/// Ilustração inteira dentro de um círculo, sem corte, com placeholder quando falta ou falha.
 class AppMedallion extends StatelessWidget {
   const AppMedallion({super.key, required this.size, this.image, this.semanticLabel});
 

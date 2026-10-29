@@ -1,5 +1,4 @@
-import 'package:expogeo/core/components/structure/footer.dart';
-import 'package:expogeo/core/components/structure/navbar.dart';
+import 'package:expogeo/core/components/structure/site_scaffold.dart';
 import 'package:expogeo/core/models/theme_data_model.dart';
 import 'package:expogeo/core/theme/app_theme.dart';
 import 'package:expogeo/core/utils/extensions/num_extension.dart';
@@ -21,25 +20,19 @@ class ThemePage extends StatelessWidget {
       orElse: () => ThemeDataModel.themes.first,
     );
 
-    return Scaffold(
-      backgroundColor: AppTheme.colors.gray100,
-      body: Column(
-        children: [
-          const Navbar(),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  ThemeBanner(theme: theme),
-                  SubthemeGrid(theme: theme),
-                  SizedBox(height: AppTheme.dimensions.space.large.height),
-                  const Footer(),
-                ],
-              ),
-            ),
+    return SiteScaffold(
+      background: AppTheme.colors.gray100,
+      slivers: [
+        SliverToBoxAdapter(
+          child: Column(
+            children: [
+              ThemeBanner(theme: theme),
+              SubthemeGrid(theme: theme),
+              SizedBox(height: AppTheme.dimensions.space.large.height),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

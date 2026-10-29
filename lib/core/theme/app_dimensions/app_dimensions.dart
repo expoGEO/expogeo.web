@@ -123,6 +123,16 @@ class FocusStyle {
 class ComponentSizes {
   const ComponentSizes._();
 
+  final double navbarHeight = 68.0;
+  final double navbarOpacity = 0.94;
+  final double navbarBlur = 10.0;
+
+  /// Abaixo dessa largura os itens da navbar não cabem ao lado da marca e viram o menu lateral.
+  final double navbarCollapseWidth = 900.0;
+
+  final double stripMinHeight = 34.0;
+  final double stripText = 13.0;
+
   final double buttonMinHeightRegular = 44.0;
   final double buttonMinHeightSmall = 40.0;
   final double buttonTextRegular = 16.0;
@@ -130,4 +140,28 @@ class ComponentSizes {
   final double buttonIconScale = 1.15;
   final double buttonBorder = 1.5;
   final double disabledOpacity = 0.5;
+
+  final double brandMark = 38.0;
+  final double brandName = 19.0;
+  final double brandTagline = 11.5;
+
+  final double navItemText = 15.5;
+  final double navIcon = 20.0;
+  final double navUnderline = 2.0;
+  final double navItemPaddingH = 14.0;
+  final double navItemPaddingV = 10.0;
+
+  final double menuMinWidth = 320.0;
+  final double menuMaxWidth = 360.0;
+  final double menuMedallion = 30.0;
+  final double menuIconSize = 24.0;
+  final double menuOptionText = 15.0;
+  final double menuOptionPaddingV = 9.0;
+  final double menuCountText = 13.0;
+  final double mobileMenuMaxWidth = 420.0;
+  final double scrimOpacity = 0.4;
+  final Duration menuAnimation = const Duration(milliseconds: 160);
+  final Duration menuCloseDelay = const Duration(milliseconds: 150);
+
+  final double minTapTarget = 44.0;
 }

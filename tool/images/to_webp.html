@@ -1,0 +1,39 @@
+<!doctype html>
+<!--
+  Converte uma imagem em WebP pelo codificador do próprio Chrome.
+  Parâmetros: ?src=<caminho>&max=<lado máximo em px, 0 mantém>&q=<qualidade 0 a 1>.
+  Usada por generate_webp.sh, que lê o resultado com --dump-dom.
+-->
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <pre id="saida"></pre>
+    <script>
+      var parametros = new URLSearchParams(location.search);
+      var maximo = Number(parametros.get("max") || 0);
+      var qualidade = Number(parametros.get("q") || 0.8);
+      var saida = document.getElementById("saida");
+      var imagem = new Image();
+      imagem.onload = function () {
+        var escala = 1;
+        if (maximo > 0) {
+          escala = Math.min(1, maximo / Math.max(imagem.naturalWidth, imagem.naturalHeight));
+        }
+        var canvas = document.createElement("canvas");
+        canvas.width = Math.round(imagem.naturalWidth * escala);
+        canvas.height = Math.round(imagem.naturalHeight * escala);
+        var contexto = canvas.getContext("2d");
+        contexto.imageSmoothingEnabled = true;
+        contexto.imageSmoothingQuality = "high";
+        contexto.drawImage(imagem, 0, 0, canvas.width, canvas.height);
+        saida.textContent = canvas.toDataURL("image/webp", qualidade);
+      };
+      imagem.onerror = function () {
+        saida.textContent = "erro";
+      };
+      imagem.src = parametros.get("src");
+    </script>
+  </body>
+</html>

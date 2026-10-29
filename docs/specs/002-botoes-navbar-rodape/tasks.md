@@ -54,3 +54,6 @@ Critérios de aceite da spec, na ordem: **CA1** todas as páginas atuais abrem s
 | CA8 sem rolagem horizontal nem `overflow` | C3, F1, F2, G3 |
 | CA9 contraste ≥ 4,5:1 | A2, C2, C3, E1, G2 |
 | CA10 sem valor solto | A2, B1, C2, E1, G1 |
+
+## Verificação
+Conferida em 2026-10-29 (`verificacao.md`): os pontos que a G3 deixou sem tela (hover dos botões, destinos e aba nova dos externos, `mailto:`, `/sobre`, os quatro temas e um subtema de cada) foram conferidos. Correção em `383ef40`.

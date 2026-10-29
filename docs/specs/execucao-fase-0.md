@@ -6,7 +6,7 @@
 | Spec | Itens | Spec+plano | Implementação | Verificação | Resultado |
 |---|---|---|---|---|---|
 | 001-fundacao | 0.1-0.3 | feito (plano com 13 tarefas) | feito (3 commits) | feito (1 correção: comentário do degradê) | verificada |
-| 002-botoes-navbar-rodape | 0.4-0.6 | feito (plano com 21 tarefas) | feito (3 commits) | pendente | |
+| 002-botoes-navbar-rodape | 0.4-0.6 | feito (plano com 21 tarefas) | feito (3 commits) | feito (1 correção: comentários que só descreviam o código; teste do hover dos botões) | verificada |
 | 003-index-ilustracoes | 0.7-0.8 | pendente | pendente | pendente | |
 
 O item 0.0 (branch `develop` com deploy de dev) já existe no remoto e fica fora do fluxo SDD.
@@ -33,4 +33,6 @@ O item 0.0 (branch `develop` com deploy de dev) já existe no remoto e fica fora
 
 ## Ocorrências
 - (001, implementação) Um `pub get` atualizou transitivos no `pubspec.lock` (`characters` 1.4.1, `matcher` 0.12.19) fora da entrega; o arquivo foi restaurado pela orquestradora.
-- (001, implementação) Defeito anterior à fase: a página Contato abre cinza com `GoError: There is no GoRouterState above the current context`. Fica para a spec 010 (Contato).
+- (001, implementação) Defeito anterior à fase: a página Contato abre cinza com `GoError: There is no GoRouterState above the current context`. Corrigido na 002 (navbar nova sem `GoRouterState.of`).
+- (002, implementação) A sessão parou no limite de uso no meio do grupo da navbar e foi retomada de onde parou (2026-10-29), sem perda de trabalho.
+- (002, implementação) A orquestradora retomou por engano a sessão já encerrada da implementação da 001; ela não alterou nada (conferido no `git status`).

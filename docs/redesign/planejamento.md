@@ -64,9 +64,9 @@ Dividida em três specs: 0.1 a 0.3 → 001-fundacao; 0.4 a 0.6 → 002-botoes-na
 | 0.1 | Tokens de cor, raios, espaçamentos e sombras do Observatório, mais o token do degradê → specs/001-fundacao (concluído) | `core/theme/app_colors`, `app_dimensions`, `app_gradients` |
 | 0.2 | Tipografia nova com Bricolage Grotesque e Figtree **embutidas** em `assets/fonts` (sai o `GoogleFonts.aleo` em tempo de execução) → specs/001-fundacao (concluído) | `core/theme/app_typography`, `pubspec.yaml` |
 | 0.3 | Breakpoints e largura máxima de conteúdo → specs/001-fundacao (concluído) | `core/utils/screen/screen_utils.dart` |
-| 0.4 | Botões primário, secundário e discreto, com foco visível e estado desativado | `core/components/button/*` |
-| 0.5 | Faixa do Observatório e navbar fixa: menu Temas (4 temas com medalhão e quantidade de subtemas), Sobre, Contato, link Observatório; sanfona no celular | `core/components/structure/navbar.dart` |
-| 0.6 | Rodapé escuro em colunas: marca, Temas, Curadoria (Sobre, metadados, tese, contato), Observatório (site e redes) | `core/components/structure/footer.dart` |
+| 0.4 | Botões primário, secundário e discreto, com foco visível e estado desativado → specs/002-botoes-navbar-rodape (concluído) | `core/components/button/*` |
+| 0.5 | Faixa do Observatório e navbar fixa: menu Temas (4 temas com medalhão e quantidade de subtemas), Sobre, Contato, link Observatório; sanfona no celular → specs/002-botoes-navbar-rodape (concluído) | `core/components/structure/navbar.dart` |
+| 0.6 | Rodapé escuro em colunas: marca, Temas, Curadoria (Sobre, metadados, tese, contato), Observatório (site e redes) → specs/002-botoes-navbar-rodape (concluído) | `core/components/structure/footer.dart` |
 | 0.7 | `<title>`, descrição, metadados de compartilhamento, ícones e tela de carregamento inicial do `web/index.html` | `web/index.html`, `web/manifest.json`, `web/icons/` |
 | 0.8 | Ilustrações de temas e subtemas e logos de apoio em WebP leve (os PNGs saem só na Fase 5) | `assets/images/`, `core/utils/enums/app_images.dart` |
 
@@ -130,7 +130,7 @@ Uma spec: 5.1 e 5.2 → 016-limpeza-legado.
 | Spec | Itens | Status |
 |---|---|---|
 | [001-fundacao](../specs/001-fundacao/spec.md) | 0.1–0.3 | verificada |
-| [002-botoes-navbar-rodape](../specs/002-botoes-navbar-rodape/spec.md) | 0.4–0.6 | aprovada |
+| [002-botoes-navbar-rodape](../specs/002-botoes-navbar-rodape/spec.md) | 0.4–0.6 | verificada |
 | [003-index-ilustracoes](../specs/003-index-ilustracoes/spec.md) | 0.7–0.8 | aprovada |
 | [004-hero-temas](../specs/004-hero-temas/spec.md) | 1.1–1.2 | aprovada |
 | [005-como-explorar-recentes](../specs/005-como-explorar-recentes/spec.md) | 1.3–1.4 | aprovada |

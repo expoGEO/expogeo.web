@@ -7,7 +7,7 @@
 |---|---|---|---|---|---|
 | 001-fundacao | 0.1-0.3 | feito (plano com 13 tarefas) | feito (3 commits) | feito (1 correção: comentário do degradê) | verificada |
 | 002-botoes-navbar-rodape | 0.4-0.6 | feito (plano com 21 tarefas) | feito (3 commits) | feito (1 correção: comentários que só descreviam o código; teste do hover dos botões) | verificada |
-| 003-index-ilustracoes | 0.7-0.8 | pendente | pendente | pendente | |
+| 003-index-ilustracoes | 0.7-0.8 | feito (plano com 13 tarefas) | pendente | pendente | |
 
 O item 0.0 (branch `develop` com deploy de dev) já existe no remoto e fica fora do fluxo SDD.
 
@@ -27,6 +27,12 @@ O item 0.0 (branch `develop` com deploy de dev) já existe no remoto e fica fora
 - (002, plano) Logos de apoio saem do rodapé (não estão no rodapé novo) e voltam na 006; nenhum asset apagado. Spec ajustada.
 - (002, plano) "Ver todos na página inicial" por `ValueNotifier` em `HomeSections` + rolagem até a seção de temas, sem rota nova; constante `AppRouter.about` só como texto, sem `GoRoute`. A 004 foi anotada para manter a chave.
 - (002, plano) Ícones de redes em SVG copiados do Observatório (`flutter_svg`, já dependência); links sem `linkUrl` na semântica, para não precisar do contorno com `package:web`. Nenhum pacote novo.
+- (003, plano) WebP gerado pelo Chrome sem janela (`canvas.toDataURL`), por script em `tool/images/`: a máquina não tem `cwebp`, ImageMagick nem Pillow, e o `sips` só lê WebP. Nada instalado e nenhum pacote no `pubspec`. Teste no planejamento: maior ilustração de 480 KB para 60 KB (qualidade 0,8, 512 px, transparência mantida).
+- (003, plano) WebP com o nome do `AppImages` em snake_case, sem acento (`cultura_politica.webp`), o que tira Cultura e Política do placeholder; o PNG com acento fica até a 016. `AppImages` ganha formato por entrada (ilustrações e logos de apoio em WebP; `logo`, `logoSimple` e `observatorio` em PNG), sem mexer em modelo. Spec ajustada.
+- (003, plano) Logos de apoio em WebP na resolução original (qualidade 0,95), com critério de aceite novo (CA8). Spec ajustada.
+- (003, plano) Imagem de compartilhamento em PNG 1200 × 630 (`web/og-image.png`) com endereço absoluto `https://expogeo.com.br/`, mais `twitter:*`; ícones e imagem gerados por `tool/web_icons/` (Chrome sem janela + `sips`), como no Observatório, a partir do `logo_simple.png`. Spec ajustada.
+- (003, plano) Tela de carregamento do Observatório com aviso de demora em 15 s, botão "Recarregar" e mensagem `<noscript>` (a spec não tratava falha de carregamento); manifesto com descrição e `lang`, sem `orientation`. Spec ajustada.
+- (003, plano) Prévia real em aplicativo de mensagem só com o site publicado; na conferência local valem as tags e a imagem, e a prévia fica pendente para o dev publicado.
 
 ## Ressalvas
 - (nenhuma até agora)

@@ -164,4 +164,11 @@ class ComponentSizes {
   final Duration menuCloseDelay = const Duration(milliseconds: 150);
 
   final double minTapTarget = 44.0;
+
+  final double footerPaddingTop = 56.0;
+  final double footerPaddingBottom = 28.0;
+  final double footerGap = 36.0;
+  final double footerText = 15.0;
+  final double footerBottomText = 13.5;
+  final double socialButton = 40.0;
 }

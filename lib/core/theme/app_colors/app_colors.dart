@@ -60,6 +60,7 @@ class AppColors {
   Color footerLine = const Color(0xFF37322E);
   Color footerText = const Color(0xFFD8D2CA);
   Color footerHighlight = const Color(0xFFFF9A62);
+  Color footerMuted = const Color(0xFFB9B1A7);
   Color footerSubtle = const Color(0xFFA39A8F);
 
   Color error = const Color(0xFFB3261E);

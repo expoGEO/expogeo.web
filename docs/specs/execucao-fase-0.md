@@ -6,7 +6,7 @@
 | Spec | Itens | Spec+plano | Implementação | Verificação | Resultado |
 |---|---|---|---|---|---|
 | 001-fundacao | 0.1-0.3 | feito (plano com 13 tarefas) | feito (3 commits) | feito (1 correção: comentário do degradê) | verificada |
-| 002-botoes-navbar-rodape | 0.4-0.6 | feito (plano com 21 tarefas) | pendente | pendente | |
+| 002-botoes-navbar-rodape | 0.4-0.6 | feito (plano com 21 tarefas) | feito (3 commits) | pendente | |
 | 003-index-ilustracoes | 0.7-0.8 | pendente | pendente | pendente | |
 
 O item 0.0 (branch `develop` com deploy de dev) já existe no remoto e fica fora do fluxo SDD.

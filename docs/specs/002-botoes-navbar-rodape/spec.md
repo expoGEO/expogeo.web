@@ -1,6 +1,6 @@
 # 002. Botões, faixa do Observatório, navbar e rodapé
 
-- **Status:** aprovada
+- **Status:** implementada
 - **Item do planejamento:** Fase 0, entregas 0.4, 0.5 e 0.6
 - **Protótipo:** navbar e rodapé de qualquer aba pública; botões na aba "Fundamentos" (link em docs/specs/README.md)
 - **Criada em:** 2026-10-27
@@ -96,3 +96,4 @@ Rodapé escuro em quatro colunas (duas no tablet, uma no celular):
 - 2026-10-27: Q-03 respondida.
 - 2026-10-27: aprovada.
 - 2026-10-27: ajustes do plano, decididos sem a pessoa (modo autônomo): botão discreto em acento forte, por contraste; botões novos como componentes novos, com o painel mantendo os antigos; painel do celular lateral; medalhão criado aqui em vez da 004; logos de apoio saem do rodapé até a 006; Contato também cai no 404 até a 010; critério do painel com "até 900 px" e do rodapé sem citar uma tabela que não existe.
+- 2026-10-29: implementada (sem divergências; a ilustração de Cultura e Política aparece como placeholder no menu porque o arquivo tem acento no nome, caso previsto em "Imagem com falha").

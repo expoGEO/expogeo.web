@@ -58,15 +58,17 @@ class _PartnerLogoState extends State<PartnerLogo> {
         borderRadius: radius,
         child: Material(
           type: MaterialType.transparency,
-          child: InkWell(
-            onTap: _open,
-            onHover: (value) => setState(() => _hovered = value),
-            onFocusChange: (value) => setState(() => _focused = value),
-            borderRadius: radius,
-            splashFactory: NoSplash.splashFactory,
-            overlayColor: const WidgetStatePropertyAll(Colors.transparent),
-            mouseCursor: SystemMouseCursors.click,
-            child: _content(context, radius),
+          child: SelectionContainer.disabled(
+            child: InkWell(
+              onTap: _open,
+              onHover: (value) => setState(() => _hovered = value),
+              onFocusChange: (value) => setState(() => _focused = value),
+              borderRadius: radius,
+              splashFactory: NoSplash.splashFactory,
+              overlayColor: const WidgetStatePropertyAll(Colors.transparent),
+              mouseCursor: SystemMouseCursors.click,
+              child: _content(context, radius),
+            ),
           ),
         ),
       ),

@@ -29,15 +29,16 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    # Antes do site, para a consulta nova não chegar sem os índices. Só cria e atualiza:
-    # sem --force, índices que existam só no projeto não são apagados.
-    - name: Publicar índices do Firestore
+    # Antes do site, para o código novo não chegar sem as regras e os índices de que depende.
+    # As regras do repositório substituem as do projeto; edições feitas no console se perdem.
+    # Índices só são criados e atualizados: sem --force, os que existam só no projeto ficam.
+    - name: Publicar regras e índices do Firestore
       env:
         FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
       run: |
         printf '%s' "$FIREBASE_SERVICE_ACCOUNT" > "$RUNNER_TEMP/firebase-sa.json"
         GOOGLE_APPLICATION_CREDENTIALS="$RUNNER_TEMP/firebase-sa.json" \
-          npx --yes firebase-tools@15 deploy --only firestore:indexes \
+          npx --yes firebase-tools@15 deploy --only firestore \
           --project expogeo-dev --non-interactive
 
     - name: Ler versão do Flutter do .fvmrc

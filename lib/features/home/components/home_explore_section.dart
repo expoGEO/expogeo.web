@@ -307,22 +307,24 @@ class _ExampleLinkState extends State<_ExampleLink> {
       link: true,
       child: AppFocusRing(
         borderRadius: radius,
-        child: InkWell(
-          onTap: () => GoRouter.of(context).go(widget.route),
-          onHover: (value) => setState(() => _hovered = value),
-          borderRadius: radius,
-          hoverColor: Colors.transparent,
-          focusColor: Colors.transparent,
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent,
-          mouseCursor: SystemMouseCursors.click,
-          child: Text(
-            widget.text,
-            style: TextStyle(
-              color: _hovered ? colors.accentStrong : colors.accent,
-              fontWeight: FontWeight.w600,
-              decoration: _hovered ? TextDecoration.underline : TextDecoration.none,
-              decorationColor: colors.accentStrong,
+        child: SelectionContainer.disabled(
+          child: InkWell(
+            onTap: () => GoRouter.of(context).go(widget.route),
+            onHover: (value) => setState(() => _hovered = value),
+            borderRadius: radius,
+            hoverColor: Colors.transparent,
+            focusColor: Colors.transparent,
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            mouseCursor: SystemMouseCursors.click,
+            child: Text(
+              widget.text,
+              style: TextStyle(
+                color: _hovered ? colors.accentStrong : colors.accent,
+                fontWeight: FontWeight.w600,
+                decoration: _hovered ? TextDecoration.underline : TextDecoration.none,
+                decorationColor: colors.accentStrong,
+              ),
             ),
           ),
         ),

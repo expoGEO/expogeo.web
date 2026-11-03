@@ -23,6 +23,7 @@ class ThemeOverviewCard extends StatefulWidget {
   final CatalogStore? store;
 
   static const int visibleSubthemes = 4;
+  static const int visibleSubthemesCompact = 3;
 
   @override
   State<ThemeOverviewCard> createState() => _ThemeOverviewCardState();
@@ -56,86 +57,114 @@ class _ThemeOverviewCardState extends State<ThemeOverviewCard> {
     final lift = _hovered && !reduceMotion ? -components.themeCardHoverLift : 0.0;
     final turn = _hovered && !reduceMotion ? components.themeCardMedallionTurn / 360 : 0.0;
 
+    final medallionView = AnimatedRotation(
+      turns: turn,
+      duration: reduceMotion ? Duration.zero : duration,
+      curve: Curves.easeOut,
+      child: AppMedallion(size: medallion, image: widget.theme.type.illustration),
+    );
+    final store = widget.store ?? GetIt.I<CatalogStore>();
+
+    // No celular, com o medalhão ao lado, o texto ficava numa coluna estreita e o cartão alto demais.
     final body = Padding(
       padding: compact ? components.themeCardPaddingCompact : components.themeCardPadding,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          AnimatedRotation(
-            turns: turn,
-            duration: reduceMotion ? Duration.zero : duration,
-            curve: Curves.easeOut,
-            child: AppMedallion(size: medallion, image: widget.theme.type.illustration),
-          ),
-          SizedBox(width: compact ? components.themeCardGapCompact : components.themeCardGap),
-          Expanded(
-            child: _CardText(theme: widget.theme, store: widget.store, compact: compact),
-          ),
-        ],
-      ),
-    );
-
-    return Semantics(
-      link: true,
-      label: widget.theme.title,
-      onTap: _open,
-      // Sem o nó do InkWell, o foco precisa estar neste; senão o leitor de tela perde o foco.
-      focusable: true,
-      focused: _focused,
-      onFocus: _focusNode.requestFocus,
-      container: true,
-      explicitChildNodes: true,
-      child: AnimatedContainer(
-        duration: reduceMotion ? Duration.zero : duration,
-        curve: Curves.easeOut,
-        transform: Matrix4.translationValues(0, lift, 0),
-        decoration: BoxDecoration(
-          borderRadius: radius,
-          boxShadow: _hovered ? dimensions.shadows.elevated : const [],
-        ),
-        child: AppFocusRing(
-          borderRadius: radius,
-          fit: StackFit.passthrough,
-          child: Material(
-            color: colors.page,
-            clipBehavior: Clip.antiAlias,
-            shape: RoundedRectangleBorder(
-              borderRadius: radius,
-              side: BorderSide(
-                color: _hovered ? colors.accent : colors.line,
-                width: dimensions.stroke.small,
-              ),
-            ),
-            child: Stack(
+      child: compact
+          ? Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                body,
-                Positioned(
-                  left: 0,
-                  top: 0,
-                  right: 0,
-                  height: components.themeCardStrip,
-                  child: ExcludeSemantics(
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(gradient: AppTheme.gradients.brand),
-                    ),
-                  ),
+                Row(
+                  children: [
+                    medallionView,
+                    SizedBox(width: components.themeCardGapCompact),
+                    Expanded(child: _CardTitle(theme: widget.theme, compact: true)),
+                  ],
                 ),
-                // Por cima do conteúdo e fora da semântica: assim o cabeçalho e os textos
-                // continuam nós próprios dentro do link, sem um segundo ponto de foco.
-                Positioned.fill(
-                  child: ExcludeSemantics(
-                    child: InkWell(
-                      focusNode: _focusNode,
-                      onTap: _open,
-                      onHover: (value) => setState(() => _hovered = value),
-                      onFocusChange: (value) => setState(() => _focused = value),
-                      hoverColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      mouseCursor: SystemMouseCursors.click,
-                    ),
+                SizedBox(height: components.themeCardHeaderGapCompact),
+                _CardDetails(theme: widget.theme, store: store, compact: true),
+              ],
+            )
+          : Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                medallionView,
+                SizedBox(width: components.themeCardGap),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _CardTitle(theme: widget.theme, compact: false),
+                      SizedBox(height: components.themeCardDescriptionGap),
+                      _CardDetails(theme: widget.theme, store: store, compact: false),
+                    ],
                   ),
                 ),
               ],
+            ),
+    );
+
+    return SelectionContainer.disabled(
+      child: Semantics(
+        link: true,
+        label: widget.theme.title,
+        onTap: _open,
+        // Sem o nó do InkWell, o foco precisa estar neste; senão o leitor de tela perde o foco.
+        focusable: true,
+        focused: _focused,
+        onFocus: _focusNode.requestFocus,
+        container: true,
+        explicitChildNodes: true,
+        child: AnimatedContainer(
+          duration: reduceMotion ? Duration.zero : duration,
+          curve: Curves.easeOut,
+          transform: Matrix4.translationValues(0, lift, 0),
+          decoration: BoxDecoration(
+            borderRadius: radius,
+            boxShadow: _hovered ? dimensions.shadows.elevated : const [],
+          ),
+          child: AppFocusRing(
+            borderRadius: radius,
+            fit: StackFit.passthrough,
+            child: Material(
+              color: colors.page,
+              clipBehavior: Clip.antiAlias,
+              shape: RoundedRectangleBorder(
+                borderRadius: radius,
+                side: BorderSide(
+                  color: _hovered ? colors.accent : colors.line,
+                  width: dimensions.stroke.small,
+                ),
+              ),
+              child: Stack(
+                children: [
+                  body,
+                  Positioned(
+                    left: 0,
+                    top: 0,
+                    right: 0,
+                    height: components.themeCardStrip,
+                    child: ExcludeSemantics(
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(gradient: AppTheme.gradients.brand),
+                      ),
+                    ),
+                  ),
+                  // Por cima do conteúdo e fora da semântica: assim o cabeçalho e os textos
+                  // continuam nós próprios dentro do link, sem um segundo ponto de foco.
+                  Positioned.fill(
+                    child: ExcludeSemantics(
+                      child: InkWell(
+                        focusNode: _focusNode,
+                        onTap: _open,
+                        onHover: (value) => setState(() => _hovered = value),
+                        onFocusChange: (value) => setState(() => _focused = value),
+                        hoverColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        mouseCursor: SystemMouseCursors.click,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -144,11 +173,39 @@ class _ThemeOverviewCardState extends State<ThemeOverviewCard> {
   }
 }
 
-class _CardText extends StatelessWidget {
-  const _CardText({required this.theme, required this.store, required this.compact});
+class _CardTitle extends StatelessWidget {
+  const _CardTitle({required this.theme, required this.compact});
 
   final ThemeModel theme;
-  final CatalogStore? store;
+  final bool compact;
+
+  @override
+  Widget build(BuildContext context) {
+    final components = AppTheme.dimensions.components;
+
+    return Semantics(
+      container: true,
+      header: true,
+      headingLevel: 3,
+      child: Text(
+        theme.title,
+        style: AppTheme.typography
+            .of(context)
+            .h3
+            .copyWith(
+              fontSize: compact ? components.themeCardTitleCompact : components.themeCardTitle,
+              color: AppTheme.colors.ink,
+            ),
+      ),
+    );
+  }
+}
+
+class _CardDetails extends StatelessWidget {
+  const _CardDetails({required this.theme, required this.store, required this.compact});
+
+  final ThemeModel theme;
+  final CatalogStore store;
   final bool compact;
 
   @override
@@ -157,7 +214,10 @@ class _CardText extends StatelessWidget {
     final components = AppTheme.dimensions.components;
     final styles = AppTheme.typography.of(context);
     final subthemes = theme.subthemes;
-    final visible = math.min(subthemes.length, ThemeOverviewCard.visibleSubthemes);
+    final visible = math.min(
+      subthemes.length,
+      compact ? ThemeOverviewCard.visibleSubthemesCompact : ThemeOverviewCard.visibleSubthemes,
+    );
     final rest = subthemes.length - visible;
 
     return Column(
@@ -165,29 +225,18 @@ class _CardText extends StatelessWidget {
       children: [
         Semantics(
           container: true,
-          header: true,
-          headingLevel: 3,
-          child: Text(
-            theme.title,
-            style: styles.h3.copyWith(
-              fontSize: compact ? components.themeCardTitleCompact : components.themeCardTitle,
-              color: colors.ink,
-            ),
-          ),
-        ),
-        SizedBox(height: components.themeCardDescriptionGap),
-        Semantics(
-          container: true,
           child: Text(
             theme.description.trim(),
             style: styles.regular.copyWith(
-              fontSize: components.themeCardDescription,
+              fontSize: compact
+                  ? components.themeCardDescriptionCompact
+                  : components.themeCardDescription,
               color: colors.inkSecondary,
             ),
           ),
         ),
         SizedBox(height: components.themeCardStatsGap),
-        _CardStats(theme: theme, store: store ?? GetIt.I<CatalogStore>()),
+        _CardStats(theme: theme, store: store),
         SizedBox(height: components.miniChipsGap),
         Wrap(
           spacing: components.miniChipSpacing,

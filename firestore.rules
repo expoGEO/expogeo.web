@@ -2,7 +2,6 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Leitura de todos os objetos numa consulta só (grupo de coleções), para as contagens e o catálogo.
     match /{path=**}/contents/{contentId} {
       allow read: if true;
     }

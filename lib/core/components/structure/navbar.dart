@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:expogeo/core/components/brand/app_brand.dart';
 import 'package:expogeo/core/components/button/app_button.dart';
 import 'package:expogeo/core/components/focus/app_focus_ring.dart';
@@ -74,63 +72,59 @@ class _NavbarState extends State<Navbar> {
     final location = NavbarLocation.of(context);
     final isWide = MediaQuery.sizeOf(context).width > components.navbarCollapseWidth;
 
-    return ClipRect(
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: components.navbarBlur, sigmaY: components.navbarBlur),
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            color: colors.page.withValues(alpha: components.navbarOpacity),
-            border: Border(bottom: BorderSide(color: colors.line)),
-          ),
-          child: PageContent(
-            child: SizedBox(
-              height: components.navbarHeight,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: AppBrand(
-                        tagline: isWide ? 'Curadoria digital do saber geográfico' : null,
-                        onTap: () => GoRouter.of(context).go(AppRouter.home),
-                      ),
-                    ),
+    // Opaca e sem desfoque: o desfoque da barra fixa era refeito a cada quadro da rolagem e travava a página.
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: colors.page,
+        border: Border(bottom: BorderSide(color: colors.line)),
+      ),
+      child: PageContent(
+        child: SizedBox(
+          height: components.navbarHeight,
+          child: Row(
+            children: [
+              Expanded(
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: AppBrand(
+                    tagline: isWide ? 'Curadoria digital do saber geográfico' : null,
+                    onTap: () => GoRouter.of(context).go(AppRouter.home),
                   ),
-                  SizedBox(width: spacing.s24),
-                  if (isWide) ...[
-                    NavbarDropdown(
-                      label: 'Temas',
-                      isActive: location.section == NavbarSection.themes,
-                      menuBuilder: (context, close) =>
-                          NavbarThemesMenu(selectedTheme: location.theme, onSelected: close),
-                    ),
-                    SizedBox(width: spacing.s4),
-                    NavbarItem(
-                      label: 'Sobre',
-                      isActive: location.section == NavbarSection.about,
-                      onTap: () => GoRouter.of(context).go(AppRouter.about),
-                    ),
-                    SizedBox(width: spacing.s4),
-                    NavbarItem(
-                      label: 'Contato',
-                      isActive: location.section == NavbarSection.contact,
-                      onTap: () => GoRouter.of(context).go(AppRouter.contact),
-                    ),
-                    SizedBox(width: spacing.s16),
-                    const AppButton.ghost(
-                      text: 'Observatório',
-                      size: AppButtonSize.small,
-                      externalUrl: AppLinks.observatory,
-                    ),
-                  ] else
-                    _MenuButton(
-                      focusNode: _menuButtonFocus,
-                      isOpen: _isMenuOpen,
-                      onPressed: () => _openMenu(location),
-                    ),
-                ],
+                ),
               ),
-            ),
+              SizedBox(width: spacing.s24),
+              if (isWide) ...[
+                NavbarDropdown(
+                  label: 'Temas',
+                  isActive: location.section == NavbarSection.themes,
+                  menuBuilder: (context, close) =>
+                      NavbarThemesMenu(selectedTheme: location.theme, onSelected: close),
+                ),
+                SizedBox(width: spacing.s4),
+                NavbarItem(
+                  label: 'Sobre',
+                  isActive: location.section == NavbarSection.about,
+                  onTap: () => GoRouter.of(context).go(AppRouter.about),
+                ),
+                SizedBox(width: spacing.s4),
+                NavbarItem(
+                  label: 'Contato',
+                  isActive: location.section == NavbarSection.contact,
+                  onTap: () => GoRouter.of(context).go(AppRouter.contact),
+                ),
+                SizedBox(width: spacing.s16),
+                const AppButton.ghost(
+                  text: 'Observatório',
+                  size: AppButtonSize.small,
+                  externalUrl: AppLinks.observatory,
+                ),
+              ] else
+                _MenuButton(
+                  focusNode: _menuButtonFocus,
+                  isOpen: _isMenuOpen,
+                  onPressed: () => _openMenu(location),
+                ),
+            ],
           ),
         ),
       ),
@@ -195,7 +189,8 @@ class _NavbarHeaderDelegate extends SliverPersistentHeaderDelegate {
   double get maxExtent => AppTheme.dimensions.components.navbarHeight;
 
   @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) => const Navbar();
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) =>
+      const SelectionContainer.disabled(child: Navbar());
 
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) => false;

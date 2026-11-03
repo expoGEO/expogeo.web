@@ -47,57 +47,59 @@ class _ObjectCardState extends State<ObjectCard> {
     final radius = BorderRadius.circular(dimensions.radii.r16);
     final lift = _hovered && !reduceMotion ? -components.objectCardHoverLift : 0.0;
 
-    return Semantics(
-      link: true,
-      label: widget.content.contentInfo.title,
-      onTap: widget.onOpen,
-      // Sem o nó do InkWell, o foco precisa estar neste; senão o leitor de tela perde o foco.
-      focusable: true,
-      focused: _focused,
-      onFocus: _focusNode.requestFocus,
-      container: true,
-      explicitChildNodes: true,
-      child: AnimatedContainer(
-        duration: duration,
-        curve: Curves.easeOut,
-        transform: Matrix4.translationValues(0, lift, 0),
-        decoration: BoxDecoration(
-          borderRadius: radius,
-          boxShadow: _hovered ? dimensions.shadows.elevated : const [],
-        ),
-        child: AppFocusRing(
-          borderRadius: radius,
-          fit: StackFit.passthrough,
-          child: Material(
-            color: colors.page,
-            clipBehavior: Clip.antiAlias,
-            shape: RoundedRectangleBorder(
-              borderRadius: radius,
-              side: BorderSide(
-                color: _hovered ? colors.accent : colors.line,
-                width: dimensions.stroke.small,
+    return SelectionContainer.disabled(
+      child: Semantics(
+        link: true,
+        label: widget.content.contentInfo.title,
+        onTap: widget.onOpen,
+        // Sem o nó do InkWell, o foco precisa estar neste; senão o leitor de tela perde o foco.
+        focusable: true,
+        focused: _focused,
+        onFocus: _focusNode.requestFocus,
+        container: true,
+        explicitChildNodes: true,
+        child: AnimatedContainer(
+          duration: duration,
+          curve: Curves.easeOut,
+          transform: Matrix4.translationValues(0, lift, 0),
+          decoration: BoxDecoration(
+            borderRadius: radius,
+            boxShadow: _hovered ? dimensions.shadows.elevated : const [],
+          ),
+          child: AppFocusRing(
+            borderRadius: radius,
+            fit: StackFit.passthrough,
+            child: Material(
+              color: colors.page,
+              clipBehavior: Clip.antiAlias,
+              shape: RoundedRectangleBorder(
+                borderRadius: radius,
+                side: BorderSide(
+                  color: _hovered ? colors.accent : colors.line,
+                  width: dimensions.stroke.small,
+                ),
               ),
-            ),
-            child: Stack(
-              fit: StackFit.passthrough,
-              children: [
-                _CardBody(content: widget.content, subtheme: widget.subtheme, hovered: _hovered),
-                // Por cima do conteúdo e fora da semântica: assim o cabeçalho e os textos
-                // continuam nós próprios dentro do link, sem um segundo ponto de foco.
-                Positioned.fill(
-                  child: ExcludeSemantics(
-                    child: InkWell(
-                      focusNode: _focusNode,
-                      onTap: widget.onOpen,
-                      onHover: (value) => setState(() => _hovered = value),
-                      onFocusChange: (value) => setState(() => _focused = value),
-                      hoverColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      mouseCursor: SystemMouseCursors.click,
+              child: Stack(
+                fit: StackFit.passthrough,
+                children: [
+                  _CardBody(content: widget.content, subtheme: widget.subtheme, hovered: _hovered),
+                  // Por cima do conteúdo e fora da semântica: assim o cabeçalho e os textos
+                  // continuam nós próprios dentro do link, sem um segundo ponto de foco.
+                  Positioned.fill(
+                    child: ExcludeSemantics(
+                      child: InkWell(
+                        focusNode: _focusNode,
+                        onTap: widget.onOpen,
+                        onHover: (value) => setState(() => _hovered = value),
+                        onFocusChange: (value) => setState(() => _focused = value),
+                        hoverColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        mouseCursor: SystemMouseCursors.click,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

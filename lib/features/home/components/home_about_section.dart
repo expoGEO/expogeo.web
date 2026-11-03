@@ -216,22 +216,24 @@ class _AboutLinkState extends State<_AboutLink> {
         borderRadius: radius,
         child: Material(
           type: MaterialType.transparency,
-          child: InkWell(
-            onTap: _open,
-            onHover: (value) => setState(() => _hovered = value),
-            borderRadius: radius,
-            splashFactory: NoSplash.splashFactory,
-            overlayColor: const WidgetStatePropertyAll(Colors.transparent),
-            mouseCursor: SystemMouseCursors.click,
-            child: ConstrainedBox(
-              constraints: BoxConstraints(minHeight: components.minTapTarget),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Flexible(child: Text('Saiba mais sobre o projeto', style: style)),
-                  SizedBox(width: components.aboutLinkGap),
-                  Icon(Icons.arrow_forward, size: style.fontSize, color: colors.accentStrong),
-                ],
+          child: SelectionContainer.disabled(
+            child: InkWell(
+              onTap: _open,
+              onHover: (value) => setState(() => _hovered = value),
+              borderRadius: radius,
+              splashFactory: NoSplash.splashFactory,
+              overlayColor: const WidgetStatePropertyAll(Colors.transparent),
+              mouseCursor: SystemMouseCursors.click,
+              child: ConstrainedBox(
+                constraints: BoxConstraints(minHeight: components.minTapTarget),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Flexible(child: Text('Saiba mais sobre o projeto', style: style)),
+                    SizedBox(width: components.aboutLinkGap),
+                    Icon(Icons.arrow_forward, size: style.fontSize, color: colors.accentStrong),
+                  ],
+                ),
               ),
             ),
           ),

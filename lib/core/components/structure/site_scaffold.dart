@@ -15,17 +15,20 @@ class SiteScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: background ?? AppTheme.colors.page,
-      body: CustomScrollView(
-        controller: controller,
-        slivers: [
-          const SliverToBoxAdapter(child: ObservatoryStrip()),
-          const NavbarSliver(),
-          ...slivers,
-          const SliverFillRemaining(
-            hasScrollBody: false,
-            child: Align(alignment: Alignment.bottomCenter, child: Footer()),
-          ),
-        ],
+      // Textos soltos podem ser selecionados e copiados; os clicáveis desligam a seleção em si mesmos.
+      body: SelectionArea(
+        child: CustomScrollView(
+          controller: controller,
+          slivers: [
+            const SliverToBoxAdapter(child: ObservatoryStrip()),
+            const NavbarSliver(),
+            ...slivers,
+            const SliverFillRemaining(
+              hasScrollBody: false,
+              child: Align(alignment: Alignment.bottomCenter, child: Footer()),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -35,22 +35,26 @@ class RoundedIconButton extends StatelessWidget {
     final size = this.size?.scale;
     final iconSize = size != null ? size - padding * 2 : null;
 
-    return GestureDetector(
-      onTap: onPressed,
-      child: Container(
-        alignment: Alignment.center,
-        width: size,
-        height: size,
-        padding: EdgeInsets.all(padding),
-        decoration: BoxDecoration(
-          color: backgroundColor ?? AppTheme.colors.gray900,
-          borderRadius: BorderRadius.circular(borderRadius ?? AppTheme.dimensions.radius.gigantic),
-          border: Border.all(
-            color: borderColor ?? AppTheme.colors.gray900,
-            width: AppTheme.dimensions.stroke.small,
+    return SelectionContainer.disabled(
+      child: GestureDetector(
+        onTap: onPressed,
+        child: Container(
+          alignment: Alignment.center,
+          width: size,
+          height: size,
+          padding: EdgeInsets.all(padding),
+          decoration: BoxDecoration(
+            color: backgroundColor ?? AppTheme.colors.gray900,
+            borderRadius: BorderRadius.circular(
+              borderRadius ?? AppTheme.dimensions.radius.gigantic,
+            ),
+            border: Border.all(
+              color: borderColor ?? AppTheme.colors.gray900,
+              width: AppTheme.dimensions.stroke.small,
+            ),
           ),
+          child: AppIcon(icon: icon, color: iconColor ?? AppTheme.colors.white, size: iconSize),
         ),
-        child: AppIcon(icon: icon, color: iconColor ?? AppTheme.colors.white, size: iconSize),
       ),
     );
   }

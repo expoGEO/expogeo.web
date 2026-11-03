@@ -16,6 +16,9 @@ class CatalogItem {
   final ThemeEnum theme;
   final SubthemeEnum subtheme;
   final ContentResponseModel content;
+
+  /// Sem página própria do objeto, leva ao subtema dele.
+  String get route => subtheme.route;
 }
 
 /// Todos os objetos do acervo, com tema e subtema tirados do caminho do documento.
@@ -42,6 +45,16 @@ class CatalogModel {
   int countByTheme(ThemeEnum theme) => _byTheme[theme] ?? 0;
 
   int countBySubtheme(SubthemeEnum subtheme) => _bySubtheme[subtheme] ?? 0;
+
+  /// O de menor código de referência, que segue a ordem da curadoria.
+  CatalogItem? firstOf(SubthemeEnum subtheme) {
+    CatalogItem? first;
+    for (final item in items) {
+      if (item.subtheme != subtheme) continue;
+      if (first == null || item.content.id.compareTo(first.content.id) < 0) first = item;
+    }
+    return first;
+  }
 
   static CatalogItem? _parse(CatalogRecord record) {
     final segments = record.path.split('/');

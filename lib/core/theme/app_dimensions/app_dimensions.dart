@@ -252,6 +252,19 @@ class ComponentSizes {
   final double miniChipText = 13.0;
   final EdgeInsets miniChipPadding = const EdgeInsets.symmetric(vertical: 3, horizontal: 10);
 
+  final double stepsGap = 24.0;
+  final double stepRule = 2.0;
+  final double stepPaddingTop = 18.0;
+  final double stepGap = 8.0;
+  final double stepNumber = 30.0;
+  final double stepNumberText = 14.0;
+  final double stepTitle = 20.0;
+  final double stepExampleText = 14.0;
+  final double stepExampleTop = 6.0;
+  final EdgeInsets stepExamplePadding = const EdgeInsets.symmetric(vertical: 8, horizontal: 12);
+  final double stepExampleSkeletonCount = 64.0;
+  final double stepExampleSkeletonTitle = 140.0;
+
   final double objectCardPadding = 20.0;
   final double objectCardGap = 10.0;
   final double objectCardIconBox = 40.0;

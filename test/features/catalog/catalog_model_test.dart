@@ -53,4 +53,24 @@ void main() {
       expect(catalog.countByTheme(theme), 0);
     }
   });
+
+  test('o primeiro de Biomas é o de menor código, mesmo fora de ordem', () {
+    final catalog = CatalogModel.fromRecords([...devRecords(), ...biomasRecords()]);
+
+    final first = catalog.firstOf(SubthemeEnum.biomas);
+    expect(first?.content.id, 'NMA_BIO_01');
+    expect(first?.content.contentInfo.title, 'aVoar Cerrado');
+  });
+
+  test('sem objetos no subtema, não há primeiro', () {
+    final catalog = CatalogModel.fromRecords([recordAt('RE_CG', 'a')]);
+
+    expect(catalog.firstOf(SubthemeEnum.biomas), isNull);
+  });
+
+  test('o objeto leva ao próprio subtema', () {
+    final catalog = CatalogModel.fromRecords(biomasRecords());
+
+    expect(catalog.items.first.route, '/natureza-meio-ambiente/biomas');
+  });
 }

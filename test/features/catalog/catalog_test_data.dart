@@ -54,6 +54,29 @@ CatalogRecord recordAt(String subthemeId, String docId, {Map<String, dynamic>? d
   );
 }
 
+/// Objeto com código, data de inserção e título próprios, para conferir ordem e escolha.
+CatalogRecord objectAt(String subthemeId, String code, {required DateTime date, String? title}) {
+  final data = validContentJson();
+  data['id'] = code;
+  (data['contentInfo'] as Map<String, dynamic>)['title'] = title ?? 'Objeto $code';
+  (data['originInfo'] as Map<String, dynamic>)
+    ..['insertionDate'] = date.toIso8601String()
+    ..['type'] = 'site'
+    ..['format'] = 'html';
+  return recordAt(subthemeId, 'doc_$code', data: data);
+}
+
+/// Os 7 objetos de Biomas fora de ordem, para conferir a escolha pelo menor código.
+List<CatalogRecord> biomasRecords() => [
+  for (final n in [4, 2, 7, 1, 6, 3, 5])
+    objectAt(
+      'NMA_BIO',
+      'NMA_BIO_0$n',
+      date: DateTime(2024, 12, n),
+      title: n == 1 ? 'aVoar Cerrado' : null,
+    ),
+];
+
 List<CatalogRecord> devRecords() => [
   for (final entry in devCountsBySubtheme.entries)
     for (var i = 0; i < entry.value; i++) recordAt(entry.key, '${entry.key}_$i'),

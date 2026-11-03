@@ -7,7 +7,7 @@
 |---|---|---|---|---|---|
 | 004-hero-temas | 1.1-1.2 | feito (13 critérios, 21 tarefas) | feito (3 commits) | feito (3 ajustes pequenos, 1 commit `fix:`) | verificada com ressalvas |
 | 005-como-explorar-recentes | 1.3-1.4 | feito (7 critérios, 17 tarefas) | feito (3 commits + 1 fix) | feito (nenhuma correção) | verificada com ressalvas |
-| 006-sobre-apoio | 1.5-1.7 | pendente | pendente | pendente | |
+| 006-sobre-apoio | 1.5-1.7 | feito (13 critérios, 18 tarefas) | pendente | pendente | |
 
 ## Decisões tomadas sem a pessoa
 - (geral) As três specs já estavam aprovadas desde 2026-10-27; a etapa "spec+plano" só revisa a spec diante do que a Fase 0 entregou e cria o plano.
@@ -22,6 +22,12 @@
 - (005) Sem consulta nova: `latest(6)` e `firstOf(biomas)` no `CatalogModel`; destino do objeto num só getter (`CatalogItem.route`).
 - (005) Cartão de objeto em `lib/core/components/card/` com dados simples (serve à 009 e à 015); erro compacto portado do Observatório até a 011.
 - (005) Número do passo em círculo (spec), não só o algarismo do protótipo; rótulo "Como explorar" em `accentStrong` por contraste.
+- (006) Spec revisada diante da Fase 0, da 004 e da 005: "Situação atual" reescrita (constante `/sobre` já existe e os links caem na não encontrada; `home_banner.dart` e `logo.dart` sem uso; logos em WebP fora do rodapé desde a 002); código de referência em Figtree 600 tabular (001), não monoespaçada como no protótipo; critérios de 7 para 13.
+- (006) Seções novas da Home depois de "Adicionados recentemente", na ordem do protótipo; os três parágrafos do Sobre são os do protótipo e substituem o texto antigo (a frase sobre "os cards abaixo" não volta); `home_banner.dart` e `logo.dart` são apagados na 006.
+- (006) Logos em 2/3/6 colunas por faixa (a spec dizia "3 a 4" no tablet); logo com falha mostra a sigla, como no Observatório.
+- (006) Bloco do Observatório escuro, empilhado também em 768, com o símbolo do redesign do Observatório (SVG copiado de lá); o `observatorio.png` daqui tem o nome em escuro e some no fundo escuro.
+- (006) Apoio, bloco, migalhas, cabeçalho e coluna de leitura portados do Observatório para `lib/core/components/` (a 007 a 009 reaproveitam); página em `lib/features/about/` sem dados nem store. Rótulo, link "Saiba mais" e ícones dos públicos em `accentStrong` por contraste.
+- (006) Sem datasource falso: nada da 006 usa o catálogo; a Home com o Firestore real mostra o erro dos recentes (ressalva da 004/005) e as seções novas normalmente.
 
 ## Ressalvas
 - (004) Regra de leitura por grupo de coleções não publicada no dev (`PERMISSION_DENIED` em 2026-11-03): a Home mostra o erro das contagens até a pessoa publicar; publicar também na produção antes do merge na `main`.

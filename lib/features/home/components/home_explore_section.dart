@@ -136,20 +136,23 @@ class _Step extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.only(top: components.stepPaddingTop),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             ExcludeSemantics(
-              child: Container(
-                width: components.stepNumber,
-                height: components.stepNumber,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(color: colors.accentSoft, shape: BoxShape.circle),
-                child: Text(
-                  '$number',
-                  style: styles.label.copyWith(
-                    fontSize: components.stepNumberText,
-                    letterSpacing: 0,
-                    color: colors.accentStrong,
+              child: Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: Container(
+                  alignment: Alignment.center,
+                  width: components.stepNumber,
+                  height: components.stepNumber,
+                  decoration: BoxDecoration(color: colors.accentSoft, shape: BoxShape.circle),
+                  child: Text(
+                    '$number',
+                    style: styles.label.copyWith(
+                      fontSize: components.stepNumberText,
+                      letterSpacing: 0,
+                      color: colors.accentStrong,
+                    ),
                   ),
                 ),
               ),

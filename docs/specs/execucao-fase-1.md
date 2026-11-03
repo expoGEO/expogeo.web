@@ -7,7 +7,7 @@
 |---|---|---|---|---|---|
 | 004-hero-temas | 1.1-1.2 | feito (13 critérios, 21 tarefas) | feito (3 commits) | feito (3 ajustes pequenos, 1 commit `fix:`) | verificada com ressalvas |
 | 005-como-explorar-recentes | 1.3-1.4 | feito (7 critérios, 17 tarefas) | feito (3 commits + 1 fix) | feito (nenhuma correção) | verificada com ressalvas |
-| 006-sobre-apoio | 1.5-1.7 | feito (13 critérios, 18 tarefas) | pendente | pendente | |
+| 006-sobre-apoio | 1.5-1.7 | feito (13 critérios, 18 tarefas) | feito (2 commits) | feito (2 ajustes pequenos, 1 commit `fix:`) | verificada com ressalvas |
 
 ## Decisões tomadas sem a pessoa
 - (geral) As três specs já estavam aprovadas desde 2026-10-27; a etapa "spec+plano" só revisa a spec diante do que a Fase 0 entregou e cria o plano.
@@ -34,6 +34,8 @@
 - (004) Critério 4 (190 objetos; 35, 74, 42, 39 por tema) conferido só com dados simulados e no teste do modelo: **conferir na Home do dev após publicar a regra**.
 - (005) Estado de sucesso dos recentes conferido só com datasource falso (dados do dev lidos por subtema) até a regra ser publicada.
 - (005) Critérios 2 e 3 ("Biomas · 7 objetos", exemplo 3 "aVoar Cerrado" e os 6 recentes CP_RA_02, CP_CD_05, CP_GP_05, CP_IC_08, EUR_CT_01, EUR_CT_02): **conferir na Home do dev após publicar a regra**. Rede desligada não testada (navegador embutido não permite); falha simulada cobre o fluxo de erro.
+- (006) Navbar de altura fixa transborda com texto a 200% e títulos do rodapé são `h2` (anteriores à Fase 1, fora do escopo).
+- (006) Aceite da fase conferido em 390, 768 e 1280 pelo código do protótipo (o link não abre no navegador embutido, que pede login); recentes em erro com dados reais até publicar a regra.
 
 ## Ocorrências
 - Fase 0 já foi integrada à `develop` (PR #8); a branch da fase saiu de `origin/develop`.

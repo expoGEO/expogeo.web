@@ -156,7 +156,6 @@ class _HeroText extends StatelessWidget {
   }
 }
 
-/// Dois conjuntos de círculos concêntricos finos, esmaecendo para baixo.
 class _HeroCirclesPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {

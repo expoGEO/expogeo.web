@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:go_router/go_router.dart';
 
-/// Anel com o símbolo ao centro e os 4 temas nos pontos cardeais.
 class ThemesOrbit extends StatelessWidget {
   const ThemesOrbit({super.key});
 

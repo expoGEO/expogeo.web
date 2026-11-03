@@ -70,8 +70,8 @@ class _Count extends StatelessWidget {
 
     final numberStyle = styles.h1.copyWith(
       fontSize: components.heroCountNumber,
-      height: 1.1,
-      letterSpacing: components.heroCountNumber * -0.03,
+      height: components.heroCountLineHeight,
+      letterSpacing: components.heroCountNumber * components.heroCountLetterSpacing,
       color: colors.ink,
       fontFeatures: const [FontFeature.tabularFigures()],
     );
@@ -86,7 +86,7 @@ class _Count extends StatelessWidget {
         children: [
           if (value == null)
             SizedBox(
-              height: components.heroCountNumber * 1.1,
+              height: components.heroCountNumber * components.heroCountLineHeight,
               child: Center(
                 widthFactor: 1,
                 child: AppSkeleton(

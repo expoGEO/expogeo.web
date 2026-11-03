@@ -194,6 +194,10 @@ class ComponentSizes {
   final double heroCirclesFadeStart = 0.55;
 
   final double heroCountNumber = 30.0;
+  final double heroCountLineHeight = 1.1;
+
+  /// Espaçamento entre letras do número, em fração do tamanho da fonte.
+  final double heroCountLetterSpacing = -0.03;
   final double heroCountsTop = 34.0;
   final double heroCountsPaddingTop = 20.0;
   final double heroCountsGapH = 36.0;

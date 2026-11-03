@@ -142,7 +142,8 @@ void main() {
     testWidgets('tocar no $name leva ao tema', (tester) async {
       await pump(tester, [natureza]);
 
-      await tester.tap(target(natureza).first);
+      // O toque cai na camada clicável que cobre o cartão inteiro, não no próprio alvo.
+      await tester.tap(target(natureza).first, warnIfMissed: false);
       await tester.pumpAndSettle();
 
       expect(find.text('rota ${natureza.type.value}'), findsOneWidget);

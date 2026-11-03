@@ -34,6 +34,7 @@ class _PartnerLogoState extends State<PartnerLogo> {
 
   bool _hovered = false;
   bool _focused = false;
+  bool _failed = false;
 
   Partner get _partner => widget.partner;
 
@@ -81,13 +82,21 @@ class _PartnerLogoState extends State<PartnerLogo> {
     final logo = Image.asset(
       _partner.image.path,
       fit: BoxFit.contain,
-      errorBuilder: (context, error, stackTrace) => Center(
-        child: Text(
-          _partner.acronym,
-          textAlign: TextAlign.center,
-          style: AppTheme.typography.of(context).small.copyWith(color: colors.inkSecondary),
-        ),
-      ),
+      errorBuilder: (context, error, stackTrace) {
+        // A sigla fica fora do filtro cinza e transparente, que a deixaria sem contraste.
+        if (!_failed) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (mounted) setState(() => _failed = true);
+          });
+        }
+        return Center(
+          child: Text(
+            _partner.acronym,
+            textAlign: TextAlign.center,
+            style: AppTheme.typography.of(context).small.copyWith(color: colors.inkSecondary),
+          ),
+        );
+      },
     );
 
     // Tudo sai de um único valor animado para, em repouso, não pintar sombra transparente
@@ -124,7 +133,7 @@ class _PartnerLogoState extends State<PartnerLogo> {
                   aspectRatio: components.partnerLogoAspectRatio,
                   child: Transform.scale(
                     scale: reduceMotion ? 1 : lerpDouble(1, components.partnerHoverScale, t)!,
-                    child: t == 1
+                    child: t == 1 || _failed
                         ? logo
                         : ColorFiltered(
                             colorFilter: ColorFilter.matrix(

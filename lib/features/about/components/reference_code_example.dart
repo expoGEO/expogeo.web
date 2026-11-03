@@ -2,7 +2,6 @@ import 'package:expogeo/core/theme/app_theme.dart';
 import 'package:expogeo/core/utils/screen/screen_utils.dart';
 import 'package:flutter/material.dart';
 
-/// Exemplo das três partes do código de referência de um objeto.
 class ReferenceCodeExample extends StatelessWidget {
   const ReferenceCodeExample({super.key});
 

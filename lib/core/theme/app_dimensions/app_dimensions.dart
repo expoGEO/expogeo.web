@@ -327,7 +327,6 @@ class ComponentSizes {
   final double observatoryTitleGap = 6.0;
   final double observatoryTextGap = 8.0;
 
-  /// Círculos concêntricos do canto do bloco: passo, quantidade e opacidade da cor.
   final double observatoryCirclesStep = 31.0;
   final int observatoryCirclesCount = 9;
   final double observatoryCirclesOpacity = 0.13;

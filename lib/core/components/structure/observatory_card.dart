@@ -6,7 +6,6 @@ import 'package:expogeo/core/utils/screen/screen_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-/// Cartão que apresenta o Observatório, do qual a expoGEO faz parte.
 class ObservatoryCard extends StatelessWidget {
   const ObservatoryCard({super.key});
 
@@ -95,13 +94,17 @@ class ObservatoryCard extends StatelessWidget {
             count: components.observatoryCirclesCount,
             stroke: AppTheme.dimensions.stroke.small,
           ),
-          child: Padding(
-            padding: EdgeInsets.all(
-              breakpoint == Breakpoint.mobile
-                  ? components.observatoryPaddingMobile
-                  : components.observatoryPadding,
+          // Empilhado, a coluna mediria só o texto e o cartão ficaria mais estreito que a página.
+          child: SizedBox(
+            width: double.infinity,
+            child: Padding(
+              padding: EdgeInsets.all(
+                breakpoint == Breakpoint.mobile
+                    ? components.observatoryPaddingMobile
+                    : components.observatoryPadding,
+              ),
+              child: content,
             ),
-            child: content,
           ),
         ),
       ),

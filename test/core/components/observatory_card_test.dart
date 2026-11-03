@@ -19,7 +19,11 @@ void main() {
           data: MediaQueryData(size: Size(width, 1600), textScaler: TextScaler.linear(textScale)),
           child: const Scaffold(
             body: SingleChildScrollView(
-              child: Padding(padding: EdgeInsets.all(20), child: ObservatoryCard()),
+              // Restrição frouxa, como dentro do `PageContent`.
+              child: Padding(
+                padding: EdgeInsets.all(20),
+                child: Align(alignment: Alignment.topCenter, child: ObservatoryCard()),
+              ),
             ),
           ),
         ),
@@ -54,6 +58,7 @@ void main() {
     testWidgets('empilhado em ${width.toInt()} px', (tester) async {
       await pump(tester, width: width);
       expect(buttonTop(tester), greaterThan(symbolTop(tester) + 100));
+      expect(tester.getSize(find.byType(ObservatoryCard)).width, width - 40);
       expect(tester.takeException(), isNull);
     });
   }

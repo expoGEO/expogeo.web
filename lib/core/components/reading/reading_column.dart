@@ -2,7 +2,6 @@ import 'package:expogeo/core/components/structure/page_content.dart';
 import 'package:expogeo/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
-/// Coluna estreita para texto corrido, centralizada na largura do conteúdo.
 class ReadingColumn extends StatelessWidget {
   const ReadingColumn({super.key, required this.children});
 

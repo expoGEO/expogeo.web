@@ -94,6 +94,11 @@ void main() {
     for (final partner in Partner.values) {
       expect(find.text(partner.acronym), findsOneWidget);
       expect(find.bySemanticsLabel('${partner.fullName}, abre em nova aba'), findsOneWidget);
+      // Em repouso, a sigla não passa pelo filtro cinza e transparente dos logos.
+      expect(
+        find.ancestor(of: find.text(partner.acronym), matching: find.byType(ColorFiltered)),
+        findsNothing,
+      );
     }
     expect(tester.takeException(), isNull);
   });

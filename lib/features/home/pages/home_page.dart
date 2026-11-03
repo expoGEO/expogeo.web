@@ -1,7 +1,12 @@
+import 'package:expogeo/core/components/partners/partners_section.dart';
+import 'package:expogeo/core/components/structure/observatory_card.dart';
+import 'package:expogeo/core/components/structure/page_content.dart';
 import 'package:expogeo/core/components/structure/site_scaffold.dart';
 import 'package:expogeo/core/navigation/home_sections.dart';
 import 'package:expogeo/core/theme/app_theme.dart';
+import 'package:expogeo/core/utils/screen/screen_utils.dart';
 import 'package:expogeo/features/catalog/presentation/stores/catalog_store.dart';
+import 'package:expogeo/features/home/components/home_about_section.dart';
 import 'package:expogeo/features/home/components/home_explore_section.dart';
 import 'package:expogeo/features/home/components/home_hero.dart';
 import 'package:expogeo/features/home/components/home_recent_section.dart';
@@ -64,6 +69,13 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final components = AppTheme.dimensions.components;
+    final sectionPadding = switch (ScreenUtils.breakpointOf(context)) {
+      Breakpoint.mobile => components.sectionPaddingMobile,
+      Breakpoint.tablet => components.sectionPaddingTablet,
+      Breakpoint.desktop => components.sectionPaddingDesktop,
+    };
+
     return SiteScaffold(
       background: AppTheme.colors.page,
       slivers: [
@@ -76,6 +88,16 @@ class _HomePageState extends State<HomePage> {
         ),
         const SliverToBoxAdapter(child: HomeExploreSection()),
         const SliverToBoxAdapter(child: HomeRecentSection()),
+        const SliverToBoxAdapter(child: HomeAboutSection()),
+        const SliverToBoxAdapter(child: PartnersSection()),
+        SliverToBoxAdapter(
+          child: PageContent(
+            child: Padding(
+              padding: EdgeInsets.only(bottom: sectionPadding),
+              child: const ObservatoryCard(),
+            ),
+          ),
+        ),
       ],
     );
   }

@@ -1,6 +1,6 @@
 # 006. Página Sobre, resumo na Home, apoio e bloco do Observatório
 
-- **Status:** aprovada
+- **Status:** implementada
 - **Item do planejamento:** Fase 1, seções 1.5, 1.6 e 1.7 (tela T-05, Sobre, antecipada da Fase 3)
 - **Protótipo:** abas "Home" (seções "Sobre a expoGEO", "Realização e apoio" e bloco do Observatório) e "Sobre" (link em docs/specs/README.md)
 - **Criada em:** 2026-10-27

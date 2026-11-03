@@ -305,6 +305,19 @@ class ComponentSizes {
   final double readingHeadingGap = 12.0;
   final double readingBlockGap = 22.0;
 
+  final double aboutColumnGap = 72.0;
+  final double aboutTitleTop = 10.0;
+  final double aboutTitleBottom = 16.0;
+  final double aboutLinkTop = 20.0;
+  final double aboutLinkGap = 6.0;
+  final double aboutAudienceIcon = 44.0;
+  final double aboutAudienceGlyph = 20.0;
+  final double aboutAudiencePadding = 18.0;
+  final double aboutAudienceGap = 16.0;
+  final double aboutAudienceTitle = 18.0;
+  final double aboutAudienceText = 15.5;
+  final double aboutAudienceTextGap = 2.0;
+
   final double observatoryPaddingMobile = 26.0;
   final double observatoryPadding = 44.0;
   final double observatoryRowGap = 28.0;

@@ -1,6 +1,6 @@
 # 004. Home: hero, contagens e cartões dos temas
 
-- **Status:** implementada
+- **Status:** verificada com ressalvas
 - **Item do planejamento:** Fase 1, seções 1.1 e 1.2
 - **Protótipo:** aba "Home", topo e seção "Temas" (link em docs/specs/README.md)
 - **Criada em:** 2026-10-27
@@ -99,3 +99,4 @@ Criado na spec 002 (menu Temas da navbar) e reutilizado aqui, nas páginas de te
 - 2026-11-03: decisões do plano (modo autônomo): (1) a grade de cartões tem 2 colunas só no desktop; "Comportamento" dizia "desktop e tablet" e contradizia "Responsivo" e o protótipo, que mandam 1 coluna em 768. (2) No carregamento, só o número de objetos mostra esqueleto; subtemas e temas vêm do código e aparecem na hora. (3) O rótulo e a parte em destaque do título do hero usam o laranja forte (`accentStrong`), porque o acento sobre o fundo de superfície fica em 4,45:1, abaixo do mínimo de 4,5:1. (4) "Explorar os temas" põe o foco no título "Por onde começar" sem anel visível (o título não é clicável). (5) O arquivo do texto de boas-vindas (`home_banner.dart`) sai da Home mas fica no repositório até a 006 levar o texto para `/sobre`.
 - 2026-11-03: implementação (modo autônomo). Os mini-chips mostram o nome do subtema em caixa normal (o do `SubthemeEnum`), porque os títulos de subtema no `ThemeDataModel` estão em maiúsculas. O nome do tema no anel e nos cartões é o título do `ThemeModel` ("Meio Ambiente e Natureza"), o mesmo da navbar. O critério das contagens com dados reais segue pendente da publicação da regra no dev.
 - 2026-11-03: implementada.
+- 2026-11-03: verificada com ressalvas (modo autônomo). Ressalva: contagens com dados reais só podem ser conferidas depois que a pessoa publicar a regra de leitura por grupo de coleções no dev. Decisão: "Como fazemos a curadoria" passa mesmo com a barra de endereço em `/` (o GoRouter não troca a URL ao cair na página não encontrada; some quando a 006 criar `/sobre`). Ver verificacao.md.

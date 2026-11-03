@@ -77,8 +77,8 @@ Três specs: 1.1 e 1.2 → 004-hero-temas; 1.3 e 1.4 → 005-como-explorar-recen
 
 | # | Seção | Notas técnicas | Depende de |
 |---|---|---|---|
-| 1.1 | Hero, contagens e anel dos temas | Contagens vêm dos dados (Q-04). Cria o componente de medalhão | 0.x, Q-04 |
-| 1.2 | Cartões dos 4 temas | Substituem `themes_row` e `theme_card` (carrossel) | 1.1 |
+| 1.1 | Hero, contagens e anel dos temas → specs/004-hero-temas (concluído com ressalvas) | Contagens vêm dos dados (Q-04). Cria o componente de medalhão | 0.x, Q-04 |
+| 1.2 | Cartões dos 4 temas → specs/004-hero-temas (concluído com ressalvas) | Substituem `themes_row` e `theme_card` (carrossel) | 1.1 |
 | 1.3 | Como explorar | Exemplos fixos (Natureza e Meio Ambiente → Biomas), título e contagem dos dados | 1.4 (cartão), 2.3 (link do passo 3) |
 | 1.4 | Adicionados recentemente | 6 objetos mais recentes por `originInfo.insertionDate`; cria o cartão de objeto | Q-04 |
 | 1.5 | Resumo do Sobre e públicos | Leva a `/sobre` | 1.7 |
@@ -132,7 +132,7 @@ Uma spec: 5.1 e 5.2 → 016-limpeza-legado.
 | [001-fundacao](../specs/001-fundacao/spec.md) | 0.1–0.3 | verificada |
 | [002-botoes-navbar-rodape](../specs/002-botoes-navbar-rodape/spec.md) | 0.4–0.6 | verificada |
 | [003-index-ilustracoes](../specs/003-index-ilustracoes/spec.md) | 0.7–0.8 | verificada |
-| [004-hero-temas](../specs/004-hero-temas/spec.md) | 1.1–1.2 | aprovada |
+| [004-hero-temas](../specs/004-hero-temas/spec.md) | 1.1–1.2 | verificada com ressalvas |
 | [005-como-explorar-recentes](../specs/005-como-explorar-recentes/spec.md) | 1.3–1.4 | aprovada |
 | [006-sobre-apoio](../specs/006-sobre-apoio/spec.md) | 1.5–1.7 | aprovada |
 | [007-pagina-tema](../specs/007-pagina-tema/spec.md) | 2.1 | aprovada |

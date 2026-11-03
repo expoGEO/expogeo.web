@@ -8,6 +8,7 @@ import 'package:expogeo/core/utils/screen/screen_utils.dart';
 import 'package:expogeo/features/home/components/hero_counts.dart';
 import 'package:expogeo/features/home/components/themes_orbit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:go_router/go_router.dart';
 
 class HomeHero extends StatelessWidget {
@@ -26,8 +27,19 @@ class HomeHero extends StatelessWidget {
       Breakpoint.desktop => components.heroPaddingDesktop,
     };
 
-    final text = _HeroText(onExploreThemes: onExploreThemes);
-    const orbit = Center(child: ThemesOrbit());
+    // O texto vem antes do anel para o leitor de tela, mesmo quando o anel aparece em cima.
+    final text = Semantics(
+      container: true,
+      explicitChildNodes: true,
+      sortKey: const OrdinalSortKey(0),
+      child: _HeroText(onExploreThemes: onExploreThemes),
+    );
+    final orbit = Semantics(
+      container: true,
+      explicitChildNodes: true,
+      sortKey: const OrdinalSortKey(1),
+      child: const Center(child: ThemesOrbit()),
+    );
 
     final Widget content = breakpoint == Breakpoint.desktop
         ? Row(
@@ -35,7 +47,7 @@ class HomeHero extends StatelessWidget {
             children: [
               Expanded(flex: 115, child: text),
               SizedBox(width: components.heroColumnGap),
-              const Expanded(flex: 100, child: orbit),
+              Expanded(flex: 100, child: orbit),
             ],
           )
         : Column(

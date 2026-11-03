@@ -217,4 +217,34 @@ class ComponentSizes {
   final double orbitDashGap = 4.0;
   final double orbitHoverScale = 1.06;
   final Duration hoverAnimation = const Duration(milliseconds: 200);
+
+  final double sectionPaddingMobile = 48.0;
+  final double sectionPaddingTablet = 72.0;
+  final double sectionPaddingDesktop = 96.0;
+  final double sectionHeadGap = 28.0;
+  final double sectionLabelGap = 6.0;
+
+  /// Largura de conteúdo a partir da qual os cartões dos temas ficam em duas colunas.
+  final double themeGridTwoColumnsWidth = 760.0;
+  final double themeGridGap = 20.0;
+  final double themeCardMedallion = 116.0;
+  final double themeCardMedallionCompact = 68.0;
+  final double themeCardGap = 22.0;
+  final double themeCardGapCompact = 14.0;
+  final EdgeInsets themeCardPadding = const EdgeInsets.fromLTRB(24, 26, 24, 24);
+  final EdgeInsets themeCardPaddingCompact = const EdgeInsets.fromLTRB(18, 22, 18, 18);
+  final double themeCardStrip = 4.0;
+  final double themeCardTitle = 22.0;
+  final double themeCardTitleCompact = 19.0;
+  final double themeCardDescription = 15.5;
+  final double themeCardDescriptionGap = 6.0;
+  final double themeCardStatsGap = 12.0;
+  final double themeCardHoverLift = 3.0;
+
+  /// Giro do medalhão no hover do cartão, em graus.
+  final double themeCardMedallionTurn = -8.0;
+  final double miniChipsGap = 14.0;
+  final double miniChipSpacing = 6.0;
+  final double miniChipText = 13.0;
+  final EdgeInsets miniChipPadding = const EdgeInsets.symmetric(vertical: 3, horizontal: 10);
 }

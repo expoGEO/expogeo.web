@@ -9,6 +9,7 @@ import 'package:expogeo/core/theme/app_theme.dart';
 import 'package:expogeo/core/utils/enums/app_images.dart';
 import 'package:expogeo/core/utils/screen/screen_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:go_router/go_router.dart';
 
 /// Anel com o símbolo ao centro e os 4 temas nos pontos cardeais.
@@ -64,7 +65,10 @@ class ThemesOrbit extends StatelessWidget {
                     top: positions[i].dy,
                     child: FocusTraversalOrder(
                       order: NumericFocusOrder(i.toDouble()),
-                      child: _OrbitMedallion(theme: themes[i], size: medallion),
+                      child: Semantics(
+                        sortKey: OrdinalSortKey(i.toDouble()),
+                        child: _OrbitMedallion(theme: themes[i], size: medallion),
+                      ),
                     ),
                   ),
               ],

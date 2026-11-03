@@ -1,9 +1,9 @@
 import 'package:expogeo/core/components/structure/site_scaffold.dart';
 import 'package:expogeo/core/navigation/home_sections.dart';
 import 'package:expogeo/core/theme/app_theme.dart';
-import 'package:expogeo/features/home/components/carousel/themes_row.dart';
 import 'package:expogeo/features/catalog/presentation/stores/catalog_store.dart';
 import 'package:expogeo/features/home/components/home_hero.dart';
+import 'package:expogeo/features/home/components/home_themes_section.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
@@ -16,6 +16,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final _themesKey = GlobalKey();
+  final _themesTitleFocus = FocusNode(debugLabel: 'Por onde começar');
 
   @override
   void initState() {
@@ -28,6 +29,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void dispose() {
     HomeSections.themesRequested.removeListener(_scrollToThemes);
+    _themesTitleFocus.dispose();
     super.dispose();
   }
 
@@ -40,13 +42,16 @@ class _HomePageState extends State<HomePage> {
     _ensureThemesVisible(target);
   }
 
-  void _exploreThemes() {
+  Future<void> _exploreThemes() async {
     final target = _themesKey.currentContext;
-    if (target != null) _ensureThemesVisible(target);
+    if (target == null) return;
+
+    await _ensureThemesVisible(target);
+    if (mounted) _themesTitleFocus.requestFocus();
   }
 
-  void _ensureThemesVisible(BuildContext target) {
-    Scrollable.ensureVisible(
+  Future<void> _ensureThemesVisible(BuildContext target) {
+    return Scrollable.ensureVisible(
       target,
       duration: MediaQuery.disableAnimationsOf(context)
           ? Duration.zero
@@ -57,17 +62,16 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final space = SliverToBoxAdapter(child: SizedBox(height: AppTheme.dimensions.space.massive));
-
     return SiteScaffold(
-      background: AppTheme.colors.gray100,
+      background: AppTheme.colors.page,
       slivers: [
         SliverToBoxAdapter(child: HomeHero(onExploreThemes: _exploreThemes)),
-        space,
         SliverToBoxAdapter(
-          child: Center(key: _themesKey, child: const ThemesRow()),
+          child: KeyedSubtree(
+            key: _themesKey,
+            child: HomeThemesSection(titleFocusNode: _themesTitleFocus),
+          ),
         ),
-        space,
       ],
     );
   }

@@ -77,6 +77,7 @@ class _Count extends StatelessWidget {
     );
 
     return Semantics(
+      container: true,
       label: value == null ? 'Carregando $label' : '$value $label',
       excludeSemantics: true,
       child: Column(

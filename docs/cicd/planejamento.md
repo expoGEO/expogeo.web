@@ -60,8 +60,8 @@ feature/*  ──PR──▶  develop  ──PR──▶  main
 | Arquivo | Gatilho | O que faz |
 |---|---|---|
 | `ci.yml` | PR para `develop` ou `main` | `pub get`, conferência de formato, `analyze` e `build web`. Não publica. PR só com `docs/`, `*.md`, `.claude/`, `.vscode/`, `bin/` ou `deploy-*.yml` pula a validação (job pulado por `if` conta como aprovado, então o check obrigatório não trava) |
-| `deploy-dev.yml` | push na `develop` ou manual | Índices do Firestore, build com `APP_ENV=dev`, sem a tag do Analytics, `robots.txt` bloqueando tudo e FTP para o dev |
-| `deploy-prod.yml` | push na `main` ou manual | Índices do Firestore, build com `APP_ENV=prod` e FTP para produção |
+| `deploy-dev.yml` | push na `develop` ou manual | Regras e índices do Firestore, build com `APP_ENV=dev`, sem a tag do Analytics, `robots.txt` bloqueando tudo e FTP para o dev |
+| `deploy-prod.yml` | push na `main` ou manual | Regras e índices do Firestore, build com `APP_ENV=prod` e FTP para produção |
 
 Comum aos três, como no Observatório:
 - Versão do Flutter lida do `.fvmrc` com `jq`; `actions/checkout@v4`; cache do Flutter ligado; sem `flutter clean`.
@@ -75,7 +75,7 @@ Comum aos três, como no Observatório:
 - **Analytics:** a tag fica no `web/index.html` entre marcadores (`<!-- analytics:inicio -->` … `<!-- analytics:fim -->`). O `deploy-dev.yml` remove esse trecho depois do build.
 
 ### GitHub
-Environments `DEV` e `PROD`, cada um com `FTP_HOST`, `FTP_USER`, `FTP_PASSWORD` e `FIREBASE_SERVICE_ACCOUNT` (JSON de conta de serviço do projeto correspondente, com os papéis *Cloud Datastore Index Admin* e *Service Usage Consumer*, só para publicar índices). Os segredos `FTP_*` de nível de repositório, usados pelo `deploy.yml` atual, saem no fim.
+Environments `DEV` e `PROD`, cada um com `FTP_HOST`, `FTP_USER`, `FTP_PASSWORD` e `FIREBASE_SERVICE_ACCOUNT` (JSON de conta de serviço do projeto correspondente, com os papéis *Cloud Datastore Index Admin*, *Firebase Rules Admin* e *Service Usage Consumer*, para publicar índices e regras). Os segredos `FTP_*` de nível de repositório, usados pelo `deploy.yml` atual, saem no fim.
 
 ### HostGator
 - Subdomínio `dev.expogeo.com.br` com pasta própria e **usuário FTP restrito a ela**: o dev não alcança a produção, e vice-versa.
@@ -85,9 +85,9 @@ Environments `DEV` e `PROD`, cada um com `FTP_HOST`, `FTP_USER`, `FTP_PASSWORD` 
   - no dev, a senha (`.htpasswd`, pelo cPanel).
 
 ### Firebase
-- `firebase.json` com os dois projetos e `firestore.indexes.json` versionados. Os deploys publicam os índices antes do site.
+- `firebase.json` com os dois projetos, `firestore.indexes.json` e `firestore.rules` versionados. Os deploys publicam regras e índices antes do site.
 - Índice já previsto pelo redesign: grupo de coleções `contents`, `originInfo.insertionDate` ↓ (seção "Adicionados recentemente" da Home).
-- Regras do Firestore exportadas do console para `firestore.rules` e aplicadas aos dois projetos, para o dev ter as mesmas permissões da produção. A publicação automática das regras fica fora deste plano: elas seguem mudando pelo console até haver motivo para automatizar. Por isso o `firebase.json` não aponta para o `firestore.rules`: se apontasse, o `deploy --only firestore:indexes` também compilaria as regras e pediria à conta de serviço um papel a mais.
+- Regras do Firestore exportadas do console para `firestore.rules` e aplicadas aos dois projetos, para o dev ter as mesmas permissões da produção. Desde 2026-11-03 os deploys também publicam as regras: o redesign passou a depender de uma regra nova (leitura por grupo de coleções), e publicá-la à mão deixava o site no ar sem ela. O repositório é a fonte das regras: mudança feita direto no console é desfeita no próximo deploy.
 
 ---
 
@@ -119,6 +119,5 @@ A ordem importa: a segurança vem primeiro, a infraestrutura manual antes dos wo
 
 ## 6. Fora do escopo
 - Testes automatizados (ainda não há pasta `test/`).
-- Publicação automática das regras do Firestore.
 - Previews por PR (um endereço por branch).
 - Trocar a HostGator por outra hospedagem.

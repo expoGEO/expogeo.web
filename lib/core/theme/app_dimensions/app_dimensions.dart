@@ -251,4 +251,32 @@ class ComponentSizes {
   final double miniChipSpacing = 6.0;
   final double miniChipText = 13.0;
   final EdgeInsets miniChipPadding = const EdgeInsets.symmetric(vertical: 3, horizontal: 10);
+
+  final double objectCardPadding = 20.0;
+  final double objectCardGap = 10.0;
+  final double objectCardIconBox = 40.0;
+  final double objectCardIconRadius = 11.0;
+  final double objectCardIcon = 19.0;
+  final double objectCardTypeText = 12.5;
+
+  /// Espaçamento entre letras do rótulo do tipo, em fração do tamanho da fonte.
+  final double objectCardTypeLetterSpacing = 0.06;
+  final double objectCardTitle = 18.0;
+  final double objectCardTitleHeight = 1.3;
+  final int objectCardTitleLines = 3;
+  final double objectCardDescription = 15.0;
+  final int objectCardDescriptionLines = 2;
+  final double objectCardFooterText = 13.5;
+  final double objectCardFooterPaddingTop = 10.0;
+  final double objectCardFooterGap = 8.0;
+  final double objectCardMedallion = 22.0;
+  final double objectCardHoverLift = 2.0;
+  final double objectCardSkeletonTypeWidth = 96.0;
+  final double objectCardSkeletonFooterWidth = 160.0;
+
+  /// Largura da última linha de cada bloco de texto no esqueleto, em fração da largura do cartão.
+  final double objectCardSkeletonShortLine = 0.6;
+
+  /// Parte da altura de cada linha de texto ocupada pela barra do esqueleto; o resto é o vão.
+  final double objectCardSkeletonBarFill = 0.75;
 }

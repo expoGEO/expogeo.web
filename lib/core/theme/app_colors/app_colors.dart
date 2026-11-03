@@ -63,6 +63,12 @@ class AppColors {
   Color footerMuted = const Color(0xFFB9B1A7);
   Color footerSubtle = const Color(0xFFA39A8F);
 
+  Color skeletonBase = const Color(0xFFEEEAE4);
+  Color skeletonHighlight = const Color(0xFFF8F6F3);
+
+  /// Anel tracejado interno do anel dos temas, só decorativo.
+  Color orbitDashed = const Color(0xFFD6CABB);
+
   Color error = const Color(0xFFB3261E);
   Color errorSurface = const Color(0xFFFBE9E7);
   Color success = const Color(0xFF1C6B34);

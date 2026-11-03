@@ -171,4 +171,50 @@ class ComponentSizes {
   final double footerText = 15.0;
   final double footerBottomText = 13.5;
   final double socialButton = 40.0;
+
+  final Duration skeletonShimmer = const Duration(milliseconds: 1400);
+
+  final double heroPaddingMobile = 44.0;
+  final double heroPaddingTablet = 64.0;
+  final double heroPaddingDesktop = 88.0;
+  final double heroColumnGap = 40.0;
+  final double heroStackGap = 24.0;
+  final double heroTitleGap = 14.0;
+  final double heroLeadGap = 20.0;
+  final double heroActionsGap = 30.0;
+  final double heroLeadMaxWidth = 620.0;
+
+  /// Círculos concêntricos do fundo do hero: centro (fração da largura e da altura) e passo.
+  final Offset heroCirclesAccentCenter = const Offset(0.86, 0.18);
+  final Offset heroCirclesInkCenter = const Offset(0.08, 1.10);
+  final double heroCirclesAccentStep = 27.0;
+  final double heroCirclesInkStep = 35.0;
+  final double heroCirclesAccentOpacity = 0.11;
+  final double heroCirclesInkOpacity = 0.06;
+  final double heroCirclesFadeStart = 0.55;
+
+  final double heroCountNumber = 30.0;
+  final double heroCountsTop = 34.0;
+  final double heroCountsPaddingTop = 20.0;
+  final double heroCountsGapH = 36.0;
+  final double heroCountsGapV = 12.0;
+  final double heroCountSkeletonWidth = 56.0;
+
+  final double orbitMaxMobile = 230.0;
+  final double orbitMaxTablet = 300.0;
+  final double orbitMaxDesktop = 440.0;
+
+  /// Proporções do anel em relação ao lado do quadrado.
+  final double orbitRingInset = 0.14;
+  final double orbitDashedInset = 0.31;
+  final double orbitCoreInset = 0.38;
+  final double orbitMedallion = 0.30;
+  final double orbitMedallionPadding = 0.03;
+  final double orbitRingStroke = 9.0;
+  final double orbitRingOpacity = 0.9;
+  final double orbitDashedStroke = 1.5;
+  final double orbitDashLength = 5.0;
+  final double orbitDashGap = 4.0;
+  final double orbitHoverScale = 1.06;
+  final Duration hoverAnimation = const Duration(milliseconds: 200);
 }

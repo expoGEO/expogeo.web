@@ -7,7 +7,7 @@
 |---|---|---|---|---|---|
 | 001-fundacao | 0.1-0.3 | feito (plano com 13 tarefas) | feito (3 commits) | feito (1 correção: comentário do degradê) | verificada |
 | 002-botoes-navbar-rodape | 0.4-0.6 | feito (plano com 21 tarefas) | feito (3 commits) | feito (1 correção: comentários que só descreviam o código; teste do hover dos botões) | verificada |
-| 003-index-ilustracoes | 0.7-0.8 | feito (plano com 13 tarefas) | feito (3 commits; 1 ajuste na spec: título do `MaterialApp`) | pendente | |
+| 003-index-ilustracoes | 0.7-0.8 | feito (plano com 13 tarefas) | feito (3 commits; 1 ajuste na spec: título do `MaterialApp`) | feito (1 correção: comentário em inglês no `index.html`; prévia real em aplicativo de mensagem pendente até o deploy) | verificada |
 
 O item 0.0 (branch `develop` com deploy de dev) já existe no remoto e fica fora do fluxo SDD.
 
@@ -37,12 +37,14 @@ O item 0.0 (branch `develop` com deploy de dev) já existe no remoto e fica fora
 - (003, plano) Prévia real em aplicativo de mensagem só com o site publicado; na conferência local valem as tags e a imagem, e a prévia fica pendente para o dev publicado.
 
 ## Ressalvas
-- (003, implementação) Prévia real em aplicativo de mensagem e anel parado com "reduzir movimento" não conferidos (precisam do dev publicado e de emulação que o navegador embutido não tem); painel admin não conferido na tela.
-- (nenhuma até agora)
+- (003, verificação) Nenhuma ressalva de código. Pendente de conferência após o deploy: prévia real em aplicativo de mensagem (`dev.expogeo.com.br`). O anel parado com "reduzir movimento" foi conferido forçando a regra do CSS por script; painel admin não conferido na tela (sem credenciais).
 
 ## Ocorrências
+- (003, verificação) Aceite da Fase 0 conferido: todas as páginas atuais abrem em debug sem erro com navbar, rodapé e botões novos; navbar navegável por teclado.
 - (003, implementação) A sessão parou no limite de uso durante a conferência e foi retomada em 2026-11-03, sem perda de trabalho.
 - (001, implementação) Um `pub get` atualizou transitivos no `pubspec.lock` (`characters` 1.4.1, `matcher` 0.12.19) fora da entrega; o arquivo foi restaurado pela orquestradora.
 - (001, implementação) Defeito anterior à fase: a página Contato abre cinza com `GoError: There is no GoRouterState above the current context`. Corrigido na 002 (navbar nova sem `GoRouterState.of`).
 - (002, implementação) A sessão parou no limite de uso no meio do grupo da navbar e foi retomada de onde parou (2026-10-29), sem perda de trabalho.
 - (002, implementação) A orquestradora retomou por engano a sessão já encerrada da implementação da 001; ela não alterou nada (conferido no `git status`).
+- (003, implementação) A sessão parou no limite semanal de uso depois de 2 commits e foi retomada de onde parou (2026-11-03), sem perda de trabalho.
+- (003, implementação) Defeito anterior à fase: `/representacoes-espaciais/movimentos-terra` mostra o conteúdo de História da Cartografia, porque Movimentos da Terra não está na lista de subtemas do tema. Fica para a spec 008 (página de subtema).

@@ -1,6 +1,6 @@
 # 003. `index.html`, ícones e ilustrações otimizadas
 
-- **Status:** implementada
+- **Status:** verificada
 - **Item do planejamento:** Fase 0, entregas 0.7 e 0.8
 - **Protótipo:** não tem aba própria; segue o Observatório (`../observatorio_geo_hist/docs/specs/003-index-carregamento/`)
 - **Criada em:** 2026-10-27
@@ -52,14 +52,14 @@ A tela de carregamento fica centralizada em 390, 768 e 1280 px.
 - Os marcadores do Analytics não mudam de nome (o `deploy-dev.yml` depende deles).
 
 ## Critérios de aceite
-- [ ] A aba do navegador mostra o título e o favicon novos.
-- [ ] Colar o endereço num aplicativo de mensagem mostra título, descrição e imagem.
-- [ ] O `manifest.json` tem nome, nome curto e cores novos; os ícones "maskable" existem.
-- [ ] Ao abrir o site com a rede lenta (throttling), aparece o símbolo em vez da tela branca, e ele some sem piscar.
-- [ ] O trecho do Analytics continua entre `<!-- analytics:inicio -->` e `<!-- analytics:fim -->`, e o build do dev o remove.
-- [ ] Todas as ilustrações de temas e subtemas têm versão WebP ≤ 512 px; a soma delas é pelo menos 80% menor que a dos PNGs.
-- [ ] As telas atuais mostram as ilustrações WebP sem corte nem perda visível, inclusive a de Cultura e Política no menu Temas.
-- [ ] Os seis logos de apoio têm versão WebP na mesma resolução do PNG e menor que ele em bytes.
+- [x] A aba do navegador mostra o título e o favicon novos.
+- [x] Colar o endereço num aplicativo de mensagem mostra título, descrição e imagem. (Tags e imagem conferidas; prévia real pendente até o deploy.)
+- [x] O `manifest.json` tem nome, nome curto e cores novos; os ícones "maskable" existem.
+- [x] Ao abrir o site com a rede lenta (throttling), aparece o símbolo em vez da tela branca, e ele some sem piscar.
+- [x] O trecho do Analytics continua entre `<!-- analytics:inicio -->` e `<!-- analytics:fim -->`, e o build do dev o remove.
+- [x] Todas as ilustrações de temas e subtemas têm versão WebP ≤ 512 px; a soma delas é pelo menos 80% menor que a dos PNGs.
+- [x] As telas atuais mostram as ilustrações WebP sem corte nem perda visível, inclusive a de Cultura e Política no menu Temas.
+- [x] Os seis logos de apoio têm versão WebP na mesma resolução do PNG e menor que ele em bytes.
 
 ## Fora do escopo
 - Remover os PNGs antigos (spec 016).
@@ -73,3 +73,4 @@ A tela de carregamento fica centralizada em 390, 768 e 1280 px.
 - 2026-10-27: aprovada.
 - 2026-10-29 (plano): imagem de compartilhamento definida (PNG 1200 × 630, endereço absoluto, `twitter:*`); manifesto com descrição e `lang`, sem orientação fixa; ícone do iOS; aviso de demora e mensagem sem JavaScript na tela de carregamento, como no Observatório; nomes dos WebP sem acento (corrige Cultura e Política); logos de apoio em WebP na resolução original, com critério de aceite próprio; conversão e ícones por scripts em `tool/` com o Chrome sem janela.
 - 2026-10-29 (implementação): o `MaterialApp.router` em `lib/main.dart` tinha `title: 'expoGEO: Exposição Geográfica'` e trocava o título da aba assim que o app carregava, o que impedia o critério do título. O `title` do app passa a usar o mesmo título do `index.html`.
+- 2026-11-03: verificada (ver `verificacao.md`); prévia real em aplicativo de mensagem pendente até o deploy.

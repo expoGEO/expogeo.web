@@ -67,8 +67,8 @@ Dividida em três specs: 0.1 a 0.3 → 001-fundacao; 0.4 a 0.6 → 002-botoes-na
 | 0.4 | Botões primário, secundário e discreto, com foco visível e estado desativado → specs/002-botoes-navbar-rodape (concluído) | `core/components/button/*` |
 | 0.5 | Faixa do Observatório e navbar fixa: menu Temas (4 temas com medalhão e quantidade de subtemas), Sobre, Contato, link Observatório; sanfona no celular → specs/002-botoes-navbar-rodape (concluído) | `core/components/structure/navbar.dart` |
 | 0.6 | Rodapé escuro em colunas: marca, Temas, Curadoria (Sobre, metadados, tese, contato), Observatório (site e redes) → specs/002-botoes-navbar-rodape (concluído) | `core/components/structure/footer.dart` |
-| 0.7 | `<title>`, descrição, metadados de compartilhamento, ícones e tela de carregamento inicial do `web/index.html` | `web/index.html`, `web/manifest.json`, `web/icons/` |
-| 0.8 | Ilustrações de temas e subtemas e logos de apoio em WebP leve (os PNGs saem só na Fase 5) | `assets/images/`, `core/utils/enums/app_images.dart` |
+| 0.7 | `<title>`, descrição, metadados de compartilhamento, ícones e tela de carregamento inicial do `web/index.html` → specs/003-index-ilustracoes (concluído) | `web/index.html`, `web/manifest.json`, `web/icons/` |
+| 0.8 | Ilustrações de temas e subtemas e logos de apoio em WebP leve (os PNGs saem só na Fase 5) → specs/003-index-ilustracoes (concluído) | `assets/images/`, `core/utils/enums/app_images.dart` |
 
 **Aceite:** todas as páginas atuais abrem sem erro com navbar, rodapé e botões novos. Navegação por teclado na navbar.
 
@@ -131,7 +131,7 @@ Uma spec: 5.1 e 5.2 → 016-limpeza-legado.
 |---|---|---|
 | [001-fundacao](../specs/001-fundacao/spec.md) | 0.1–0.3 | verificada |
 | [002-botoes-navbar-rodape](../specs/002-botoes-navbar-rodape/spec.md) | 0.4–0.6 | verificada |
-| [003-index-ilustracoes](../specs/003-index-ilustracoes/spec.md) | 0.7–0.8 | aprovada |
+| [003-index-ilustracoes](../specs/003-index-ilustracoes/spec.md) | 0.7–0.8 | verificada |
 | [004-hero-temas](../specs/004-hero-temas/spec.md) | 1.1–1.2 | aprovada |
 | [005-como-explorar-recentes](../specs/005-como-explorar-recentes/spec.md) | 1.3–1.4 | aprovada |
 | [006-sobre-apoio](../specs/006-sobre-apoio/spec.md) | 1.5–1.7 | aprovada |

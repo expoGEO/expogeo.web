@@ -191,9 +191,11 @@ flutter build web --release
 
 ### Breakpoints
 
-- **Mobile**: < 600px (1 coluna)
-- **Tablet**: 600px - 1024px (2 colunas)
-- **Desktop**: > 1024px (3 colunas)
+- **Celular**: < 600 px
+- **Tablet**: 600 a 1023 px
+- **Desktop**: ≥ 1024 px
+
+Faixas em `ScreenUtils` (`lib/core/utils/screen/`). Os componentes novos usam tamanhos fixos por faixa e a caixa de conteúdo de 1120 px (`PageContent`), sem escalar pela largura da tela.
 
 ### Adaptações por Device
 
@@ -206,25 +208,14 @@ flutter build web --release
 
 ## 🎨 Design System
 
-### 🖌️ Paleta de Cores
+O redesign (em andamento, ver [planejamento](docs/redesign/planejamento.md)) usa a base visual do Observatório. Tokens novos convivem com os antigos até a limpeza final.
 
-- **Primary**: Orange/Yellow (temas geográficos)
-- **Gradientes**: `from-orange-400 via-orange-500 to-yellow-400`
-- **Fundo**: Branco com variações sutis
-- **Texto**: Dark gray para legibilidade
-
-### ✨ Animações
-
-- Fade in/out
-- Scale in/out
-- Slide transitions
-- Autoplay de carrossel (2500ms)
-
-### 🔤 Tipografia
-
-- Headlines: Bold, sizes variadas
-- Body: Regular, 16px base
-- Captions: Small, 12px
+- **Tokens:** `AppTheme.colors` (`page`, `ink`, `accent`...), `.dimensions` (`spacing`, `radii`, `shadows`, `focus`), `AppGradients.brand` (degradê decorativo, nunca sob texto pequeno ou botões) e `AppTheme.typography.of(context)`, com tamanhos por faixa de largura.
+- **Fontes:** Bricolage Grotesque (títulos) e Figtree (texto), embutidas em `assets/fonts/`.
+- **Clicável:** `#C94400`, com foco visível e contraste mínimo de 4,5:1.
+- **Estrutura das páginas públicas:** `SiteScaffold` (faixa do Observatório que rola, navbar fixa com menu Temas e rodapé escuro) em `lib/core/components/structure/`.
+- **Componentes:** `AppButton.primary/.secondary/.ghost` (`components/button/`) e `AppMedallion` (`components/image/`), para ilustrações de temas em 1:1 com placeholder.
+- **Imagens:** ilustrações e logos de apoio em WebP (`AppImages`), gerados pelos scripts de `tool/images/`; ícones e imagem de compartilhamento por `tool/web_icons/`.
 
 ---
 

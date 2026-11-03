@@ -146,7 +146,7 @@ Uma spec: 5.1 e 5.2 → 016-limpeza-legado.
 | [015-editor-objeto](../specs/015-editor-objeto/spec.md) | 4.4 | aprovada |
 | [016-limpeza-legado](../specs/016-limpeza-legado/spec.md) | 5.1–5.2 | aprovada |
 
-Todas as perguntas foram respondidas e as 16 specs aprovadas em 2026-10-27. Próximo passo: `/sdd-plan` de cada spec, a começar pela 001.
+Todas as perguntas foram respondidas e as 16 specs aprovadas em 2026-10-27. Fase 0 (001 a 003) concluída em 2026-11-03; próximo passo: Fase 1 (`/sdd-fase Fase 1`).
 
 ---
 

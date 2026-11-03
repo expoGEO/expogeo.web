@@ -1,5 +1,6 @@
 import 'package:expogeo/core/models/theme_data_model.dart';
 import 'package:expogeo/core/pages/not_found_page.dart';
+import 'package:expogeo/features/about/pages/about_page.dart';
 import 'package:expogeo/features/admin/login/presentation/pages/signin_page.dart';
 import 'package:expogeo/features/admin/panel/presentation/pages/panel_page.dart';
 import 'package:expogeo/features/home/pages/home_page.dart';
@@ -38,6 +39,7 @@ class AppRouter {
     routes: [
       // Rota principal
       GoRoute(path: home, name: home, builder: (context, state) => const HomePage()),
+      GoRoute(path: about, name: about, builder: (context, state) => const AboutPage()),
 
       // Rota do painel administrativo (com login/panel como subrotas)
       GoRoute(

@@ -109,6 +109,12 @@ class ShadowStyle {
   List<BoxShadow> get elevated => const [
     BoxShadow(color: Color(0x241F1B18), blurRadius: 36, offset: Offset(0, 14)),
   ];
+
+  /// [shadows] com a opacidade multiplicada por [opacity], para acompanhar uma animação.
+  List<BoxShadow> fade(List<BoxShadow> shadows, double opacity) => [
+    for (final shadow in shadows)
+      shadow.copyWith(color: shadow.color.withValues(alpha: shadow.color.a * opacity)),
+  ];
 }
 
 class FocusStyle {
@@ -266,6 +272,57 @@ class ComponentSizes {
   final double stepExampleSkeletonTitle = 140.0;
 
   final double recentGridGap = 16.0;
+
+  final int partnerColumnsMobile = 2;
+  final int partnerColumnsTablet = 3;
+  final int partnerColumnsDesktop = 6;
+  final double partnerGap = 12.0;
+  final double partnerPadding = 12.0;
+  final double partnerPaddingMobile = 8.0;
+  final double partnerLogoMaxWidth = 150.0;
+
+  /// Proporção da caixa de cada logo, a da maioria das imagens (512 × 216); as outras cabem inteiras.
+  final double partnerLogoAspectRatio = 512 / 216;
+  final double partnerRestOpacity = 0.55;
+  final double partnerHoverLift = 3.0;
+  final double partnerHoverScale = 1.05;
+
+  final double breadcrumbGap = 6.0;
+  final double breadcrumbIcon = 16.0;
+
+  final double pageHeadPaddingTop = 28.0;
+  final double pageHeadPaddingBottomMobile = 32.0;
+  final double pageHeadPaddingBottomTablet = 44.0;
+  final double pageHeadPaddingBottomDesktop = 56.0;
+  final double pageHeadTitleGap = 22.0;
+  final double pageHeadLeadGap = 14.0;
+
+  final double readingMaxWidth = 720.0;
+  final double readingPaddingTop = 48.0;
+  final double readingPaddingBottom = 24.0;
+  final double readingParagraphGap = 20.0;
+  final double readingSectionGap = 44.0;
+  final double readingHeadingGap = 12.0;
+  final double readingBlockGap = 22.0;
+
+  final double observatoryPaddingMobile = 26.0;
+  final double observatoryPadding = 44.0;
+  final double observatoryRowGap = 28.0;
+  final double observatoryStackGap = 18.0;
+  final double observatorySymbol = 64.0;
+  final double observatoryTextMaxWidth = 560.0;
+  final double observatoryTitleGap = 6.0;
+  final double observatoryTextGap = 8.0;
+
+  /// Círculos concêntricos do canto do bloco: passo, quantidade e opacidade da cor.
+  final double observatoryCirclesStep = 31.0;
+  final int observatoryCirclesCount = 9;
+  final double observatoryCirclesOpacity = 0.13;
+
+  final double codeExampleText = 24.0;
+  final EdgeInsets codeExamplePadding = const EdgeInsets.symmetric(vertical: 12, horizontal: 16);
+  final double codeExampleGap = 10.0;
+  final double codeExampleCaptionGap = 4.0;
 
   final double objectCardPadding = 20.0;
   final double objectCardGap = 10.0;

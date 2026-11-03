@@ -56,29 +56,31 @@ class _SubthemeCardState extends State<SubthemeCard> with SingleTickerProviderSt
         builder: (context, child) {
           return Transform.scale(
             scale: _scaleAnimation.value,
-            child: GestureDetector(
-              onTap: widget.onTap,
-              child: RoundedCard(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      widget.subtheme.title,
-                      textAlign: TextAlign.center,
-                      style: AppTheme.typography.title.big.copyWith(
-                        color: AppTheme.colors.darkGray,
+            child: SelectionContainer.disabled(
+              child: GestureDetector(
+                onTap: widget.onTap,
+                child: RoundedCard(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        widget.subtheme.title,
+                        textAlign: TextAlign.center,
+                        style: AppTheme.typography.title.big.copyWith(
+                          color: AppTheme.colors.darkGray,
+                        ),
                       ),
-                    ),
-                    SizedBox(height: AppTheme.dimensions.space.large.height),
-                    AppAssetImage(
-                      image: widget.subtheme.image,
-                      width: 100.scale,
-                      height: 100.scale,
-                      fit: BoxFit.cover,
-                    ),
-                    SizedBox(height: AppTheme.dimensions.space.large.height),
-                    AppButton.primary(onPressed: widget.onTap, text: 'Explorar'),
-                  ],
+                      SizedBox(height: AppTheme.dimensions.space.large.height),
+                      AppAssetImage(
+                        image: widget.subtheme.image,
+                        width: 100.scale,
+                        height: 100.scale,
+                        fit: BoxFit.cover,
+                      ),
+                      SizedBox(height: AppTheme.dimensions.space.large.height),
+                      AppButton.primary(onPressed: widget.onTap, text: 'Explorar'),
+                    ],
+                  ),
                 ),
               ),
             ),

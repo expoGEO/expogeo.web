@@ -244,23 +244,25 @@ class _FooterLinkState extends State<_FooterLink> {
       child: AppFocusRing(
         borderRadius: radius,
         color: colors.footerHighlight,
-        child: InkWell(
-          borderRadius: radius,
-          onTap: _open,
-          onHover: (value) => setState(() => _hovered = value),
-          hoverColor: Colors.transparent,
-          mouseCursor: SystemMouseCursors.click,
-          child: ConstrainedBox(
-            constraints: BoxConstraints(minHeight: components.minTapTarget - spacing.s8),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Flexible(child: Text(widget.data.label, style: style)),
-                if (_opensNewTab) ...[
-                  SizedBox(width: spacing.s4),
-                  Icon(Icons.north_east, size: style.fontSize, color: color),
+        child: SelectionContainer.disabled(
+          child: InkWell(
+            borderRadius: radius,
+            onTap: _open,
+            onHover: (value) => setState(() => _hovered = value),
+            hoverColor: Colors.transparent,
+            mouseCursor: SystemMouseCursors.click,
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: components.minTapTarget - spacing.s8),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Flexible(child: Text(widget.data.label, style: style)),
+                  if (_opensNewTab) ...[
+                    SizedBox(width: spacing.s4),
+                    Icon(Icons.north_east, size: style.fontSize, color: color),
+                  ],
                 ],
-              ],
+              ),
             ),
           ),
         ),
@@ -327,25 +329,27 @@ class _SocialButtonState extends State<_SocialButton> {
         child: AppFocusRing(
           borderRadius: radius,
           color: colors.footerHighlight,
-          child: InkWell(
-            borderRadius: radius,
-            onTap: _open,
-            onHover: (value) => setState(() => _hovered = value),
-            hoverColor: Colors.transparent,
-            mouseCursor: SystemMouseCursors.click,
-            child: Ink(
-              width: components.socialButton,
-              height: components.socialButton,
-              decoration: BoxDecoration(
-                borderRadius: radius,
-                border: Border.all(color: borderColor),
-              ),
-              child: Center(
-                child: SvgPicture.asset(
-                  'assets/icons/${widget.icon}.svg',
-                  width: components.navIcon,
-                  height: components.navIcon,
-                  colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn),
+          child: SelectionContainer.disabled(
+            child: InkWell(
+              borderRadius: radius,
+              onTap: _open,
+              onHover: (value) => setState(() => _hovered = value),
+              hoverColor: Colors.transparent,
+              mouseCursor: SystemMouseCursors.click,
+              child: Ink(
+                width: components.socialButton,
+                height: components.socialButton,
+                decoration: BoxDecoration(
+                  borderRadius: radius,
+                  border: Border.all(color: borderColor),
+                ),
+                child: Center(
+                  child: SvgPicture.asset(
+                    'assets/icons/${widget.icon}.svg',
+                    width: components.navIcon,
+                    height: components.navIcon,
+                    colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn),
+                  ),
                 ),
               ),
             ),

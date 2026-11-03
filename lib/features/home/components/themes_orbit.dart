@@ -134,20 +134,22 @@ class _OrbitMedallionState extends State<_OrbitMedallion> {
               color: colors.page,
               shape: const CircleBorder(),
               clipBehavior: Clip.antiAlias,
-              child: InkWell(
-                focusNode: _focusNode,
-                customBorder: const CircleBorder(),
-                onTap: _open,
-                onHover: (value) => setState(() => _hovered = value),
-                onFocusChange: (value) => setState(() => _focused = value),
-                hoverColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                mouseCursor: SystemMouseCursors.click,
-                child: Padding(
-                  padding: EdgeInsets.all(padding),
-                  child: AppMedallion(
-                    size: widget.size - padding * 2,
-                    image: widget.theme.type.illustration,
+              child: SelectionContainer.disabled(
+                child: InkWell(
+                  focusNode: _focusNode,
+                  customBorder: const CircleBorder(),
+                  onTap: _open,
+                  onHover: (value) => setState(() => _hovered = value),
+                  onFocusChange: (value) => setState(() => _focused = value),
+                  hoverColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  mouseCursor: SystemMouseCursors.click,
+                  child: Padding(
+                    padding: EdgeInsets.all(padding),
+                    child: AppMedallion(
+                      size: widget.size - padding * 2,
+                      image: widget.theme.type.illustration,
+                    ),
                   ),
                 ),
               ),

@@ -169,21 +169,23 @@ class _AppButtonState extends State<AppButton> {
               borderRadius: radius,
               side: BorderSide(color: border, width: components.buttonBorder),
             ),
-            child: InkWell(
-              focusNode: _focusNode,
-              canRequestFocus: !inactive,
-              onFocusChange: (value) => setState(() => _focused = value),
-              customBorder: RoundedRectangleBorder(borderRadius: radius),
-              onTap: inactive ? null : _handleTap,
-              onHover: (value) => setState(() => _hovered = value),
-              hoverColor: Colors.transparent,
-              focusColor: Colors.transparent,
-              mouseCursor: inactive ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
-              child: ConstrainedBox(
-                constraints: BoxConstraints(minHeight: minHeight),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: horizontal, vertical: vertical),
-                  child: Center(widthFactor: 1, heightFactor: 1, child: content),
+            child: SelectionContainer.disabled(
+              child: InkWell(
+                focusNode: _focusNode,
+                canRequestFocus: !inactive,
+                onFocusChange: (value) => setState(() => _focused = value),
+                customBorder: RoundedRectangleBorder(borderRadius: radius),
+                onTap: inactive ? null : _handleTap,
+                onHover: (value) => setState(() => _hovered = value),
+                hoverColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                mouseCursor: inactive ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(minHeight: minHeight),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: horizontal, vertical: vertical),
+                    child: Center(widthFactor: 1, heightFactor: 1, child: content),
+                  ),
                 ),
               ),
             ),

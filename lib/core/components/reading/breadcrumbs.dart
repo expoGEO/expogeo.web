@@ -108,20 +108,22 @@ class _BreadcrumbLinkState extends State<_BreadcrumbLink> {
         borderRadius: radius,
         child: Material(
           type: MaterialType.transparency,
-          child: InkWell(
-            onTap: _open,
-            onHover: (value) => setState(() => _hovered = value),
-            borderRadius: radius,
-            splashFactory: NoSplash.splashFactory,
-            overlayColor: const WidgetStatePropertyAll(Colors.transparent),
-            mouseCursor: SystemMouseCursors.click,
-            child: Text(
-              widget.label,
-              style: widget.style.copyWith(
-                color: color,
-                fontWeight: FontWeight.w500,
-                decoration: _hovered ? TextDecoration.underline : TextDecoration.none,
-                decorationColor: color,
+          child: SelectionContainer.disabled(
+            child: InkWell(
+              onTap: _open,
+              onHover: (value) => setState(() => _hovered = value),
+              borderRadius: radius,
+              splashFactory: NoSplash.splashFactory,
+              overlayColor: const WidgetStatePropertyAll(Colors.transparent),
+              mouseCursor: SystemMouseCursors.click,
+              child: Text(
+                widget.label,
+                style: widget.style.copyWith(
+                  color: color,
+                  fontWeight: FontWeight.w500,
+                  decoration: _hovered ? TextDecoration.underline : TextDecoration.none,
+                  decorationColor: color,
+                ),
               ),
             ),
           ),

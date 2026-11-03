@@ -13,29 +13,31 @@ class BackToButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       color: Colors.transparent,
-      child: InkWell(
-        onTap: () => context.go(route),
-        borderRadius: BorderRadius.circular(AppTheme.dimensions.radius.small),
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            vertical: AppTheme.dimensions.space.small,
-            horizontal: AppTheme.dimensions.space.medium,
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(Icons.arrow_back_ios, size: 16.scale, color: AppTheme.colors.mediumGray),
-              SizedBox(width: AppTheme.dimensions.space.small),
-              Flexible(
-                child: Text(
-                  label,
-                  style: AppTheme.typography.body.medium.copyWith(
-                    color: AppTheme.colors.mediumGray,
-                    decoration: TextDecoration.underline,
+      child: SelectionContainer.disabled(
+        child: InkWell(
+          onTap: () => context.go(route),
+          borderRadius: BorderRadius.circular(AppTheme.dimensions.radius.small),
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              vertical: AppTheme.dimensions.space.small,
+              horizontal: AppTheme.dimensions.space.medium,
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(Icons.arrow_back_ios, size: 16.scale, color: AppTheme.colors.mediumGray),
+                SizedBox(width: AppTheme.dimensions.space.small),
+                Flexible(
+                  child: Text(
+                    label,
+                    style: AppTheme.typography.body.medium.copyWith(
+                      color: AppTheme.colors.mediumGray,
+                      decoration: TextDecoration.underline,
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

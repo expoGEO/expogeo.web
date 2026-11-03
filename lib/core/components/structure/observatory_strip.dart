@@ -79,24 +79,26 @@ class _VisitLinkState extends State<_VisitLink> {
       child: AppFocusRing(
         borderRadius: radius,
         color: colors.footerHighlight,
-        child: InkWell(
-          borderRadius: radius,
-          onTap: _open,
-          onHover: (value) => setState(() => _hovered = value),
-          hoverColor: Colors.transparent,
-          mouseCursor: SystemMouseCursors.click,
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: spacing.s4),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  'Visitar',
-                  style: widget.style.copyWith(fontWeight: FontWeight.w600, color: color),
-                ),
-                SizedBox(width: spacing.s4),
-                Icon(Icons.north_east, size: widget.style.fontSize, color: color),
-              ],
+        child: SelectionContainer.disabled(
+          child: InkWell(
+            borderRadius: radius,
+            onTap: _open,
+            onHover: (value) => setState(() => _hovered = value),
+            hoverColor: Colors.transparent,
+            mouseCursor: SystemMouseCursors.click,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: spacing.s4),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'Visitar',
+                    style: widget.style.copyWith(fontWeight: FontWeight.w600, color: color),
+                  ),
+                  SizedBox(width: spacing.s4),
+                  Icon(Icons.north_east, size: widget.style.fontSize, color: color),
+                ],
+              ),
             ),
           ),
         ),

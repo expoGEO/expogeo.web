@@ -17,9 +17,13 @@ void main() {
       });
     }
 
-    test('ilustrações e logos de apoio usam WebP; marca e Observatório, PNG', () {
+    test('ilustrações e logos de apoio usam WebP; marca e Observatório, PNG; símbolo, SVG', () {
       for (final image in AppImages.values) {
-        final extension = pngImages.contains(image) ? '.png' : '.webp';
+        final extension = switch (image) {
+          AppImages.observatorioSimbolo => '.svg',
+          _ when pngImages.contains(image) => '.png',
+          _ => '.webp',
+        };
         expect(image.path, endsWith(extension), reason: image.name);
       }
     });

@@ -7,6 +7,7 @@ import 'core/navigation/app_router.dart';
 import 'core/theme/app_theme.dart';
 import 'core/utils/environment/app_environment.dart';
 import 'features/admin/admin_setup.dart';
+import 'features/catalog/catalog_setup.dart';
 import 'features/theme/theme_setup.dart';
 
 void main() async {
@@ -20,6 +21,8 @@ void main() async {
 
   // Configurar injeção de dependências da feature theme
   ThemeSetup.setup();
+
+  CatalogSetup.setup();
 
   usePathUrlStrategy();
 

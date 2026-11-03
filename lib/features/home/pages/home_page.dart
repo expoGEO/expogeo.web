@@ -1,9 +1,18 @@
+import 'package:expogeo/core/components/partners/partners_section.dart';
+import 'package:expogeo/core/components/structure/observatory_card.dart';
+import 'package:expogeo/core/components/structure/page_content.dart';
 import 'package:expogeo/core/components/structure/site_scaffold.dart';
 import 'package:expogeo/core/navigation/home_sections.dart';
 import 'package:expogeo/core/theme/app_theme.dart';
-import 'package:expogeo/features/home/components/carousel/themes_row.dart';
-import 'package:expogeo/features/home/components/home_banner.dart';
+import 'package:expogeo/core/utils/screen/screen_utils.dart';
+import 'package:expogeo/features/catalog/presentation/stores/catalog_store.dart';
+import 'package:expogeo/features/home/components/home_about_section.dart';
+import 'package:expogeo/features/home/components/home_explore_section.dart';
+import 'package:expogeo/features/home/components/home_hero.dart';
+import 'package:expogeo/features/home/components/home_recent_section.dart';
+import 'package:expogeo/features/home/components/home_themes_section.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,10 +23,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final _themesKey = GlobalKey();
+  final _themesTitleFocus = FocusNode(debugLabel: 'Por onde começar');
 
   @override
   void initState() {
     super.initState();
+    GetIt.I<CatalogStore>().ensureLoaded();
     HomeSections.themesRequested.addListener(_scrollToThemes);
     WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToThemes());
   }
@@ -25,6 +36,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void dispose() {
     HomeSections.themesRequested.removeListener(_scrollToThemes);
+    _themesTitleFocus.dispose();
     super.dispose();
   }
 
@@ -34,7 +46,19 @@ class _HomePageState extends State<HomePage> {
     if (target == null) return;
 
     HomeSections.themesRequested.value = false;
-    Scrollable.ensureVisible(
+    _ensureThemesVisible(target);
+  }
+
+  Future<void> _exploreThemes() async {
+    final target = _themesKey.currentContext;
+    if (target == null) return;
+
+    await _ensureThemesVisible(target);
+    if (mounted) _themesTitleFocus.requestFocus();
+  }
+
+  Future<void> _ensureThemesVisible(BuildContext target) {
+    return Scrollable.ensureVisible(
       target,
       duration: MediaQuery.disableAnimationsOf(context)
           ? Duration.zero
@@ -45,17 +69,35 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final space = SliverToBoxAdapter(child: SizedBox(height: AppTheme.dimensions.space.massive));
+    final components = AppTheme.dimensions.components;
+    final sectionPadding = switch (ScreenUtils.breakpointOf(context)) {
+      Breakpoint.mobile => components.sectionPaddingMobile,
+      Breakpoint.tablet => components.sectionPaddingTablet,
+      Breakpoint.desktop => components.sectionPaddingDesktop,
+    };
 
     return SiteScaffold(
-      background: AppTheme.colors.gray100,
+      background: AppTheme.colors.page,
       slivers: [
-        const SliverToBoxAdapter(child: HomeBanner()),
-        space,
+        SliverToBoxAdapter(child: HomeHero(onExploreThemes: _exploreThemes)),
         SliverToBoxAdapter(
-          child: Center(key: _themesKey, child: const ThemesRow()),
+          child: KeyedSubtree(
+            key: _themesKey,
+            child: HomeThemesSection(titleFocusNode: _themesTitleFocus),
+          ),
         ),
-        space,
+        const SliverToBoxAdapter(child: HomeExploreSection()),
+        const SliverToBoxAdapter(child: HomeRecentSection()),
+        const SliverToBoxAdapter(child: HomeAboutSection()),
+        const SliverToBoxAdapter(child: PartnersSection()),
+        SliverToBoxAdapter(
+          child: PageContent(
+            child: Padding(
+              padding: EdgeInsets.only(bottom: sectionPadding),
+              child: const ObservatoryCard(),
+            ),
+          ),
+        ),
       ],
     );
   }

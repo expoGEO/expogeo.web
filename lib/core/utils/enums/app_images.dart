@@ -8,6 +8,7 @@ enum AppImages {
   faced,
   fapemig,
   observatorio(ImageFormat.png),
+  observatorioSimbolo(ImageFormat.svg),
   ppged,
   ufu,
   baciasHidrograficas,
@@ -54,4 +55,4 @@ enum AppImages {
   String get path => "assets/images/${convertToSnakeCase(name)}.${format.name}";
 }
 
-enum ImageFormat { png, webp }
+enum ImageFormat { png, webp, svg }

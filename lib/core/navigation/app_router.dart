@@ -11,6 +11,7 @@ import 'package:go_router/go_router.dart';
 class AppRouter {
   static const String home = '/';
   static const String contact = '/contato';
+  static const String about = '/sobre';
   static const String admin = '/admin';
   static const String adminPanel = '/admin/painel';
 

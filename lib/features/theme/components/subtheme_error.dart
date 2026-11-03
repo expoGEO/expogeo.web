@@ -1,4 +1,4 @@
-import 'package:expogeo/core/components/button/secondary_button.dart';
+import 'package:expogeo/core/components/button/app_button.dart';
 import 'package:expogeo/core/theme/app_theme.dart';
 import 'package:expogeo/core/utils/extensions/num_extension.dart';
 import 'package:flutter/material.dart';
@@ -24,9 +24,7 @@ class SubthemeError extends StatelessWidget {
             SizedBox(height: AppTheme.dimensions.space.medium.height),
             Text(message, textAlign: TextAlign.center, style: AppTheme.typography.body.small),
             SizedBox(height: AppTheme.dimensions.space.medium.height),
-            IntrinsicWidth(
-              child: SecondaryButton(onPressed: onRetry, label: 'Tentar Novamente'),
-            ),
+            AppButton.secondary(onPressed: onRetry, text: 'Tentar Novamente'),
           ],
         ),
       ),

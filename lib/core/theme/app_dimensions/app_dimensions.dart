@@ -38,6 +38,12 @@ class AppDimensions {
   );
 
   double environmentBannerHeight = 32.0;
+
+  SpacingScale spacing = const SpacingScale._();
+  RadiiScale radii = const RadiiScale._();
+  ShadowStyle shadows = const ShadowStyle._();
+  FocusStyle focus = const FocusStyle._();
+  ComponentSizes components = const ComponentSizes._();
 }
 
 class DimensionStyle {
@@ -60,4 +66,109 @@ class DimensionStyle {
   final double massive;
   final double immense;
   final double gigantic;
+}
+
+class SpacingScale {
+  const SpacingScale._();
+
+  final double s4 = 4.0;
+  final double s8 = 8.0;
+  final double s12 = 12.0;
+  final double s16 = 16.0;
+  final double s20 = 20.0;
+  final double s24 = 24.0;
+  final double s32 = 32.0;
+  final double s40 = 40.0;
+  final double s48 = 48.0;
+  final double s64 = 64.0;
+  final double s96 = 96.0;
+}
+
+class RadiiScale {
+  const RadiiScale._();
+
+  final double r6 = 6.0;
+  final double r8 = 8.0;
+  final double r10 = 10.0;
+  final double r12 = 12.0;
+  final double r14 = 14.0;
+  final double r16 = 16.0;
+  final double r18 = 18.0;
+  final double r20 = 20.0;
+
+  final double pill = 999.0;
+}
+
+class ShadowStyle {
+  const ShadowStyle._();
+
+  List<BoxShadow> get soft => const [
+    BoxShadow(color: Color(0x141F1B18), blurRadius: 26, offset: Offset(0, 10)),
+  ];
+
+  List<BoxShadow> get elevated => const [
+    BoxShadow(color: Color(0x241F1B18), blurRadius: 36, offset: Offset(0, 14)),
+  ];
+}
+
+class FocusStyle {
+  const FocusStyle._();
+
+  final double width = 3.0;
+  final double offset = 2.0;
+
+  Color get color => AppColors.instance.accent;
+}
+
+class ComponentSizes {
+  const ComponentSizes._();
+
+  final double navbarHeight = 68.0;
+  final double navbarOpacity = 0.94;
+  final double navbarBlur = 10.0;
+
+  /// Abaixo dessa largura os itens da navbar não cabem ao lado da marca e viram o menu lateral.
+  final double navbarCollapseWidth = 900.0;
+
+  final double stripMinHeight = 34.0;
+  final double stripText = 13.0;
+
+  final double buttonMinHeightRegular = 44.0;
+  final double buttonMinHeightSmall = 40.0;
+  final double buttonTextRegular = 16.0;
+  final double buttonTextSmall = 14.0;
+  final double buttonIconScale = 1.15;
+  final double buttonBorder = 1.5;
+  final double disabledOpacity = 0.5;
+
+  final double brandMark = 38.0;
+  final double brandName = 19.0;
+  final double brandTagline = 11.5;
+
+  final double navItemText = 15.5;
+  final double navIcon = 20.0;
+  final double navUnderline = 2.0;
+  final double navItemPaddingH = 14.0;
+  final double navItemPaddingV = 10.0;
+
+  final double menuMinWidth = 320.0;
+  final double menuMaxWidth = 360.0;
+  final double menuMedallion = 30.0;
+  final double menuIconSize = 24.0;
+  final double menuOptionText = 15.0;
+  final double menuOptionPaddingV = 9.0;
+  final double menuCountText = 13.0;
+  final double mobileMenuMaxWidth = 420.0;
+  final double scrimOpacity = 0.4;
+  final Duration menuAnimation = const Duration(milliseconds: 160);
+  final Duration menuCloseDelay = const Duration(milliseconds: 150);
+
+  final double minTapTarget = 44.0;
+
+  final double footerPaddingTop = 56.0;
+  final double footerPaddingBottom = 28.0;
+  final double footerGap = 36.0;
+  final double footerText = 15.0;
+  final double footerBottomText = 13.5;
+  final double socialButton = 40.0;
 }

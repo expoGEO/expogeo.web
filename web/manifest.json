@@ -1,12 +1,12 @@
 {
-    "name": "expogeo",
-    "short_name": "expogeo",
+    "name": "expoGEO",
+    "short_name": "expoGEO",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
-    "orientation": "portrait-primary",
+    "background_color": "#FFFFFF",
+    "theme_color": "#C94400",
+    "description": "Conteúdos digitais de Geografia escolhidos para a sala de aula: sites, vídeos, mapas e aplicativos organizados por tema, com a curadoria do Observatório do Ensino de História e Geografia da UFU.",
+    "lang": "pt-BR",
     "prefer_related_applications": false,
     "icons": [
         {

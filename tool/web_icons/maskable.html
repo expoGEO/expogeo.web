@@ -1,0 +1,22 @@
+<!doctype html>
+<!--
+  Ícone "maskable" do manifesto: fundo branco e o símbolo dentro da zona
+  segura (círculo central de 80%). Usada por generate.sh.
+-->
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      /* Cores do AppColors (lib/core/theme/app_colors/app_colors.dart). */
+      :root {
+        --page: #ffffff;
+      }
+      html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: var(--page); }
+      /* Com 1.2 o ponto mais distante do símbolo fica a 36% do lado a partir do centro, dentro dos 40% da zona segura. */
+      img { display: block; width: 100%; height: 100%; object-fit: contain; transform: scale(1.2); }
+    </style>
+  </head>
+  <body>
+    <img src="../../assets/images/logo_simple.png" alt="" />
+  </body>
+</html>

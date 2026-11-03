@@ -1,6 +1,5 @@
 import 'package:expogeo/core/components/loading/circular_loading.dart';
-import 'package:expogeo/core/components/structure/footer.dart';
-import 'package:expogeo/core/components/structure/navbar.dart';
+import 'package:expogeo/core/components/structure/site_scaffold.dart';
 import 'package:expogeo/core/models/subtheme_model.dart';
 import 'package:expogeo/core/models/theme_data_model.dart';
 import 'package:expogeo/core/models/theme_model.dart';
@@ -40,66 +39,60 @@ class _SubthemePageState extends State<SubthemePage> {
     final theme = _getCurrentTheme();
     final subtheme = _getCurrentSubtheme(theme);
 
-    return Scaffold(
-      backgroundColor: AppTheme.colors.gray100,
-      body: Column(
-        children: [
-          const Navbar(),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  SubthemeBanner(theme: theme, subtheme: subtheme),
-                  Observer(
-                    builder: (context) {
-                      final state = _contentStore.state;
+    return SiteScaffold(
+      background: AppTheme.colors.gray100,
+      slivers: [
+        SliverToBoxAdapter(
+          child: Column(
+            children: [
+              SubthemeBanner(theme: theme, subtheme: subtheme),
+              Observer(
+                builder: (context) {
+                  final state = _contentStore.state;
 
-                      if (state.isLoading &&
-                          (!state.isNextPageLoading && !state.isPreviousPageLoading)) {
-                        return Center(
-                          child: Padding(
-                            padding: EdgeInsets.all(AppTheme.dimensions.space.huge.scale),
-                            child: const CircularLoading(),
-                          ),
-                        );
-                      }
+                  if (state.isLoading &&
+                      (!state.isNextPageLoading && !state.isPreviousPageLoading)) {
+                    return Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(AppTheme.dimensions.space.huge.scale),
+                        child: const CircularLoading(),
+                      ),
+                    );
+                  }
 
-                      if (state.isError) {
-                        return SubthemeError(
-                          message: (state as ContentPaginationStateError).message,
-                          onRetry: _loadContent,
-                        );
-                      }
+                  if (state.isError) {
+                    return SubthemeError(
+                      message: (state as ContentPaginationStateError).message,
+                      onRetry: _loadContent,
+                    );
+                  }
 
-                      if (state.isSuccess) {
-                        final successState = state as ContentPaginationStateSuccess;
-                        final paginationData = successState.paginationData;
+                  if (state.isSuccess) {
+                    final successState = state as ContentPaginationStateSuccess;
+                    final paginationData = successState.paginationData;
 
-                        return ContentGrid(
-                          contents: paginationData.items,
-                          currentPage: paginationData.displayPage,
-                          totalPages: paginationData.totalPages,
-                          totalCount: paginationData.totalCount,
-                          hasNextPage: paginationData.hasNextPage,
-                          hasPreviousPage: paginationData.hasPreviousPage,
-                          onNextPage: _contentStore.nextPage,
-                          onPreviousPage: _contentStore.previousPage,
-                          isLoadingNextPage: state.isNextPageLoading,
-                          isLoadingPreviousPage: state.isPreviousPageLoading,
-                        );
-                      }
+                    return ContentGrid(
+                      contents: paginationData.items,
+                      currentPage: paginationData.displayPage,
+                      totalPages: paginationData.totalPages,
+                      totalCount: paginationData.totalCount,
+                      hasNextPage: paginationData.hasNextPage,
+                      hasPreviousPage: paginationData.hasPreviousPage,
+                      onNextPage: _contentStore.nextPage,
+                      onPreviousPage: _contentStore.previousPage,
+                      isLoadingNextPage: state.isNextPageLoading,
+                      isLoadingPreviousPage: state.isPreviousPageLoading,
+                    );
+                  }
 
-                      return SizedBox.shrink();
-                    },
-                  ),
-                  SizedBox(height: AppTheme.dimensions.space.large.height),
-                  const Footer(),
-                ],
+                  return SizedBox.shrink();
+                },
               ),
-            ),
+              SizedBox(height: AppTheme.dimensions.space.large.height),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

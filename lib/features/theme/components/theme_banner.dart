@@ -1,4 +1,4 @@
-import 'package:expogeo/core/components/button/back_to_button.dart';
+import 'package:expogeo/core/components/button/app_button.dart';
 import 'package:expogeo/core/components/card/rounded_card.dart';
 import 'package:expogeo/core/models/theme_model.dart';
 import 'package:expogeo/core/navigation/app_router.dart';
@@ -6,6 +6,7 @@ import 'package:expogeo/core/theme/app_theme.dart';
 import 'package:expogeo/core/utils/extensions/num_extension.dart';
 import 'package:expogeo/core/utils/screen/screen_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ThemeBanner extends StatelessWidget {
   const ThemeBanner({required this.theme, super.key});
@@ -24,7 +25,12 @@ class ThemeBanner extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          BackToButton(label: 'Voltar para início', route: AppRouter.home),
+          AppButton.ghost(
+            text: 'Voltar para início',
+            size: AppButtonSize.small,
+            leadingIcon: Icons.arrow_back,
+            onPressed: () => context.go(AppRouter.home),
+          ),
           SizedBox(height: AppTheme.dimensions.space.large),
           if (isMobile)
             Column(

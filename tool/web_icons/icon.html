@@ -1,0 +1,31 @@
+<!doctype html>
+<!--
+  Ícone quadrado com o símbolo da expoGEO.
+  Parâmetro ?background=transparent (padrão) ou ?background=white.
+  Usada por generate.sh; o tamanho vem da janela do Chrome.
+-->
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      /* Cores do AppColors (lib/core/theme/app_colors/app_colors.dart). */
+      :root {
+        --page: #ffffff;
+      }
+      html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: transparent; }
+      body.white { background: var(--page); }
+      /* O símbolo ocupa só 60% do logo_simple.png; a escala tira a margem transparente. */
+      img { display: block; width: 100%; height: 100%; object-fit: contain; transform: scale(1.6); }
+      /* No fundo branco o símbolo ganha respiro para não encostar nos cantos arredondados do iOS. */
+      body.white img { transform: scale(1.34); }
+    </style>
+  </head>
+  <body>
+    <img src="../../assets/images/logo_simple.png" alt="" />
+    <script>
+      if (new URLSearchParams(location.search).get("background") === "white") {
+        document.body.className = "white";
+      }
+    </script>
+  </body>
+</html>

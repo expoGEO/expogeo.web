@@ -6,6 +6,11 @@ class AppTypography {
   /// The singleton instance of the [AppTypography] class.
   static const AppTypography instance = AppTypography._();
 
+  /// Estilos com tamanho fixo por faixa de largura, sem escalar com a tela.
+  AppTextStyles of(BuildContext context) {
+    return AppTextStyles.forWidth(MediaQuery.sizeOf(context).width);
+  }
+
   TypographyStyle get headline => TypographyStyle._(
     small: GoogleFonts.aleo(
       fontSize: 26.fontSize(min: 26),

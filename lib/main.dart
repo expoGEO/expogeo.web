@@ -32,7 +32,7 @@ class ExpoGeoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'expoGEO: Exposição Geográfica',
+      title: 'expoGEO · Curadoria digital do saber geográfico',
       themeMode: ThemeMode.light,
       routerConfig: AppRouter.router,
       debugShowCheckedModeBanner: false,

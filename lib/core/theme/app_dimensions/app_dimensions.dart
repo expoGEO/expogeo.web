@@ -130,8 +130,6 @@ class ComponentSizes {
   const ComponentSizes._();
 
   final double navbarHeight = 68.0;
-  final double navbarOpacity = 0.94;
-  final double navbarBlur = 10.0;
 
   /// Abaixo dessa largura os itens da navbar não cabem ao lado da marca e viram o menu lateral.
   final double navbarCollapseWidth = 900.0;
@@ -148,6 +146,7 @@ class ComponentSizes {
   final double disabledOpacity = 0.5;
 
   final double brandMark = 38.0;
+  final double brandMarkZoom = 1.45;
   final double brandName = 19.0;
   final double brandTagline = 11.5;
 
@@ -238,15 +237,17 @@ class ComponentSizes {
   final double themeGridTwoColumnsWidth = 760.0;
   final double themeGridGap = 20.0;
   final double themeCardMedallion = 116.0;
-  final double themeCardMedallionCompact = 68.0;
+  final double themeCardMedallionCompact = 56.0;
   final double themeCardGap = 22.0;
   final double themeCardGapCompact = 14.0;
+  final double themeCardHeaderGapCompact = 12.0;
   final EdgeInsets themeCardPadding = const EdgeInsets.fromLTRB(24, 26, 24, 24);
   final EdgeInsets themeCardPaddingCompact = const EdgeInsets.fromLTRB(18, 22, 18, 18);
   final double themeCardStrip = 4.0;
   final double themeCardTitle = 22.0;
   final double themeCardTitleCompact = 19.0;
   final double themeCardDescription = 15.5;
+  final double themeCardDescriptionCompact = 14.5;
   final double themeCardDescriptionGap = 6.0;
   final double themeCardStatsGap = 12.0;
   final double themeCardHoverLift = 3.0;

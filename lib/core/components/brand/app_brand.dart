@@ -34,7 +34,10 @@ class AppBrand extends StatelessWidget {
       height: components.brandMark,
       fit: BoxFit.contain,
     );
-    if (onDark) {
+    if (!onDark) {
+      // O PNG tem uma margem transparente larga; ampliar o desenho compensa sem mudar o espaço ocupado.
+      mark = Transform.scale(scale: components.brandMarkZoom, child: mark);
+    } else {
       // O símbolo tem partes escuras que somem no fundo do rodapé.
       mark = DecoratedBox(
         decoration: BoxDecoration(color: colors.white, shape: BoxShape.circle),
@@ -99,12 +102,14 @@ class AppBrand extends StatelessWidget {
       child: AppFocusRing(
         borderRadius: radius,
         color: onDark ? colors.footerHighlight : null,
-        child: InkWell(
-          borderRadius: radius,
-          onTap: onTap,
-          hoverColor: Colors.transparent,
-          mouseCursor: SystemMouseCursors.click,
-          child: brand,
+        child: SelectionContainer.disabled(
+          child: InkWell(
+            borderRadius: radius,
+            onTap: onTap,
+            hoverColor: Colors.transparent,
+            mouseCursor: SystemMouseCursors.click,
+            child: brand,
+          ),
         ),
       ),
     );

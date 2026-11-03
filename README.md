@@ -266,7 +266,8 @@ result.fold(
 
 - Componentes compartilhados em `lib/core/`
 - Funcionalidades específicas em `lib/features/`
-- Testes unitários ao lado dos arquivos (`*.test.dart`)
+- Objetos do acervo vêm do catálogo único (`lib/features/catalog/`): uma consulta `collectionGroup('contents')`, carregada uma vez e compartilhada pelas telas
+- Testes em `test/`, espelhando `lib/` (apoios comuns em `test/support/`)
 
 ### 🔤 Nomenclatura
 

@@ -7,7 +7,7 @@
 |---|---|---|---|---|---|
 | 001-fundacao | 0.1-0.3 | feito (plano com 13 tarefas) | feito (3 commits) | feito (1 correção: comentário do degradê) | verificada |
 | 002-botoes-navbar-rodape | 0.4-0.6 | feito (plano com 21 tarefas) | feito (3 commits) | feito (1 correção: comentários que só descreviam o código; teste do hover dos botões) | verificada |
-| 003-index-ilustracoes | 0.7-0.8 | feito (plano com 13 tarefas) | pendente | pendente | |
+| 003-index-ilustracoes | 0.7-0.8 | feito (plano com 13 tarefas) | feito (3 commits; 1 ajuste na spec: título do `MaterialApp`) | pendente | |
 
 O item 0.0 (branch `develop` com deploy de dev) já existe no remoto e fica fora do fluxo SDD.
 
@@ -32,12 +32,16 @@ O item 0.0 (branch `develop` com deploy de dev) já existe no remoto e fica fora
 - (003, plano) Logos de apoio em WebP na resolução original (qualidade 0,95), com critério de aceite novo (CA8). Spec ajustada.
 - (003, plano) Imagem de compartilhamento em PNG 1200 × 630 (`web/og-image.png`) com endereço absoluto `https://expogeo.com.br/`, mais `twitter:*`; ícones e imagem gerados por `tool/web_icons/` (Chrome sem janela + `sips`), como no Observatório, a partir do `logo_simple.png`. Spec ajustada.
 - (003, plano) Tela de carregamento do Observatório com aviso de demora em 15 s, botão "Recarregar" e mensagem `<noscript>` (a spec não tratava falha de carregamento); manifesto com descrição e `lang`, sem `orientation`. Spec ajustada.
+- (003, implementação) O `title` do `MaterialApp` ("expoGEO: Exposição Geográfica") trocava o título da aba ao carregar; passa a usar o título novo. Spec ajustada.
+- (003, implementação) `movimentos_terra.webp` ficou com 67 KB (qualidade 0,7), acima da meta de 60 KB; a soma ficou 89% menor.
 - (003, plano) Prévia real em aplicativo de mensagem só com o site publicado; na conferência local valem as tags e a imagem, e a prévia fica pendente para o dev publicado.
 
 ## Ressalvas
+- (003, implementação) Prévia real em aplicativo de mensagem e anel parado com "reduzir movimento" não conferidos (precisam do dev publicado e de emulação que o navegador embutido não tem); painel admin não conferido na tela.
 - (nenhuma até agora)
 
 ## Ocorrências
+- (003, implementação) A sessão parou no limite de uso durante a conferência e foi retomada em 2026-11-03, sem perda de trabalho.
 - (001, implementação) Um `pub get` atualizou transitivos no `pubspec.lock` (`characters` 1.4.1, `matcher` 0.12.19) fora da entrega; o arquivo foi restaurado pela orquestradora.
 - (001, implementação) Defeito anterior à fase: a página Contato abre cinza com `GoError: There is no GoRouterState above the current context`. Corrigido na 002 (navbar nova sem `GoRouterState.of`).
 - (002, implementação) A sessão parou no limite de uso no meio do grupo da navbar e foi retomada de onde parou (2026-10-29), sem perda de trabalho.

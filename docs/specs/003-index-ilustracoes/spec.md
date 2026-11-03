@@ -1,6 +1,6 @@
 # 003. `index.html`, ícones e ilustrações otimizadas
 
-- **Status:** aprovada
+- **Status:** implementada
 - **Item do planejamento:** Fase 0, entregas 0.7 e 0.8
 - **Protótipo:** não tem aba própria; segue o Observatório (`../observatorio_geo_hist/docs/specs/003-index-carregamento/`)
 - **Criada em:** 2026-10-27
@@ -17,7 +17,7 @@ Fazer a expoGEO se apresentar direito antes do Flutter carregar (título, descri
 ## Comportamento
 
 ### Cabeçalho e ícones (0.7)
-- Título da aba: **"expoGEO · Curadoria digital do saber geográfico"**.
+- Título da aba: **"expoGEO · Curadoria digital do saber geográfico"**, no `index.html` e no `title` do `MaterialApp` (o Flutter troca o título da aba pelo do app quando carrega).
 - Descrição: "Conteúdos digitais de Geografia escolhidos para a sala de aula: sites, vídeos, mapas e aplicativos organizados por tema, com a curadoria do Observatório do Ensino de História e Geografia da UFU."
 - Metadados de compartilhamento (`og:title`, `og:description`, `og:image` com o logo, `og:locale` pt_BR, mais os equivalentes `twitter:*`) e `lang="pt-BR"`. A imagem de compartilhamento é um PNG de 1200 × 630 px (`web/og-image.png`, com o símbolo, o nome e a linha "Curadoria digital do saber geográfico"), com endereço absoluto em `https://expogeo.com.br/`, porque os aplicativos de mensagem não leem WebP de forma confiável nem endereço relativo.
 - `manifest.json` com nome "expoGEO", nome curto "expoGEO", cor de tema `#C94400`, fundo `#FFFFFF`, a descrição acima e `lang` pt-BR, sem travar a orientação em retrato.
@@ -72,3 +72,4 @@ A tela de carregamento fica centralizada em 390, 768 e 1280 px.
 - 2026-10-27: criada.
 - 2026-10-27: aprovada.
 - 2026-10-29 (plano): imagem de compartilhamento definida (PNG 1200 × 630, endereço absoluto, `twitter:*`); manifesto com descrição e `lang`, sem orientação fixa; ícone do iOS; aviso de demora e mensagem sem JavaScript na tela de carregamento, como no Observatório; nomes dos WebP sem acento (corrige Cultura e Política); logos de apoio em WebP na resolução original, com critério de aceite próprio; conversão e ícones por scripts em `tool/` com o Chrome sem janela.
+- 2026-10-29 (implementação): o `MaterialApp.router` em `lib/main.dart` tinha `title: 'expoGEO: Exposição Geográfica'` e trocava o título da aba assim que o app carregava, o que impedia o critério do título. O `title` do app passa a usar o mesmo título do `index.html`.

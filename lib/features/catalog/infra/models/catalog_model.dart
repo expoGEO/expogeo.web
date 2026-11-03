@@ -46,6 +46,18 @@ class CatalogModel {
 
   int countBySubtheme(SubthemeEnum subtheme) => _bySubtheme[subtheme] ?? 0;
 
+  /// Os [count] de inserção mais recente; na mesma data, o de menor código vem antes.
+  List<CatalogItem> latest(int count) {
+    final sorted = [...items]
+      ..sort((a, b) {
+        final byDate = b.content.originInfo.insertionDate.compareTo(
+          a.content.originInfo.insertionDate,
+        );
+        return byDate != 0 ? byDate : a.content.id.compareTo(b.content.id);
+      });
+    return sorted.take(count).toList();
+  }
+
   /// O de menor código de referência, que segue a ordem da curadoria.
   CatalogItem? firstOf(SubthemeEnum subtheme) {
     CatalogItem? first;

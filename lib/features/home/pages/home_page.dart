@@ -4,6 +4,7 @@ import 'package:expogeo/core/theme/app_theme.dart';
 import 'package:expogeo/features/catalog/presentation/stores/catalog_store.dart';
 import 'package:expogeo/features/home/components/home_explore_section.dart';
 import 'package:expogeo/features/home/components/home_hero.dart';
+import 'package:expogeo/features/home/components/home_recent_section.dart';
 import 'package:expogeo/features/home/components/home_themes_section.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -74,6 +75,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         const SliverToBoxAdapter(child: HomeExploreSection()),
+        const SliverToBoxAdapter(child: HomeRecentSection()),
       ],
     );
   }

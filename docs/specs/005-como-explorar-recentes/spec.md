@@ -1,6 +1,6 @@
 # 005. Home: Como explorar e Adicionados recentemente
 
-- **Status:** aprovada
+- **Status:** implementada
 - **Item do planejamento:** Fase 1, seções 1.3 e 1.4
 - **Protótipo:** aba "Home", seções "Como explorar" e "Adicionados recentemente" (link em docs/specs/README.md)
 - **Criada em:** 2026-10-27
@@ -79,3 +79,4 @@ Mostrar a quem chega o caminho tema → subtema → objeto com exemplos reais e,
 - 2026-10-27: Q-04 respondida.
 - 2026-10-27: aprovada.
 - 2026-11-03: revisada diante do que a Fase 0 e a 004 entregaram (modo autônomo, sem a pessoa). Situação atual atualizada (Home com hero e cartões, catálogo único pronto, regra ainda não publicada no dev, página do objeto inexistente). Nome do tema no exemplo 1 igual ao do site ("Meio Ambiente e Natureza", decisão da 004). "Primeiro objeto de Biomas" = menor código de referência; o exemplo 3 leva ao subtema até a 009 existir, como o cartão. Nome do subtema em caixa normal no cartão. Estados de erro e vazio de "Como explorar" detalhados; "Tentar de novo" recarrega o catálogo inteiro. Desempate por código em ordem crescente. Critério 3 com conferência por dados do dev enquanto a regra não for publicada. Status mantido em `aprovada`.
+- 2026-11-03: implementada (modo autônomo). Sem divergência da spec. Sucesso conferido com dados do dev servidos por datasource falso; conferência com o Firestore real pendente até a regra de leitura por grupo de coleções ser publicada.

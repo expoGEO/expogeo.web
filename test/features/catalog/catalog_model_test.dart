@@ -73,4 +73,38 @@ void main() {
 
     expect(catalog.items.first.route, '/natureza-meio-ambiente/biomas');
   });
+
+  test('os 6 mais recentes saem em ordem de data decrescente', () {
+    final catalog = CatalogModel.fromRecords([
+      for (var day = 1; day <= 8; day++)
+        objectAt('RE_CG', 'RE_CG_0$day', date: DateTime(2025, 1, day)),
+    ]);
+
+    expect(catalog.latest(6).map((item) => item.content.id), [
+      'RE_CG_08',
+      'RE_CG_07',
+      'RE_CG_06',
+      'RE_CG_05',
+      'RE_CG_04',
+      'RE_CG_03',
+    ]);
+  });
+
+  test('na mesma data, o menor código vem antes, em qualquer ordem de chegada', () {
+    final records = [
+      objectAt('NMA_BIO', 'NMA_BIO_03', date: DateTime(2024, 12, 13)),
+      objectAt('CP_PO', 'CP_PO_02', date: DateTime(2024, 12, 13)),
+      objectAt('RE_CG', 'RE_CG_01', date: DateTime(2025, 2)),
+      objectAt('EUR_CT', 'EUR_CT_09', date: DateTime(2024, 12, 13)),
+    ];
+    const expected = ['RE_CG_01', 'CP_PO_02', 'EUR_CT_09', 'NMA_BIO_03'];
+
+    expect(CatalogModel.fromRecords(records).latest(6).map((i) => i.content.id), expected);
+    expect(CatalogModel.fromRecords(records.reversed).latest(6).map((i) => i.content.id), expected);
+  });
+
+  test('com menos objetos que o pedido, devolve os que houver', () {
+    expect(CatalogModel.fromRecords(biomasRecords().take(4)).latest(6), hasLength(4));
+    expect(CatalogModel.fromRecords(const []).latest(6), isEmpty);
+  });
 }

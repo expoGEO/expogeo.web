@@ -265,6 +265,8 @@ class ComponentSizes {
   final double stepExampleSkeletonCount = 64.0;
   final double stepExampleSkeletonTitle = 140.0;
 
+  final double recentGridGap = 16.0;
+
   final double objectCardPadding = 20.0;
   final double objectCardGap = 10.0;
   final double objectCardIconBox = 40.0;

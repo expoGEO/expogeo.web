@@ -2,15 +2,28 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "ExpoGEO",
+      "name": "ExpoGEO (dev)",
       "request": "launch",
       "type": "dart",
       "program": "lib/main.dart",
       "args": [
         "-d",
         "chrome",
+        "--dart-define=APP_ENV=dev"
         // "--web-experimental-hot-reload",
       ]
     },
+    {
+      "name": "ExpoGEO (prod)",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "args": [
+        "-d",
+        "chrome",
+        "--dart-define=APP_ENV=prod"
+        // "--web-experimental-hot-reload",
+      ]
+    }
   ]
 }

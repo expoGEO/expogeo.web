@@ -1,6 +1,6 @@
 # 007. Página do tema
 
-- **Status:** implementada
+- **Status:** verificada com ressalvas
 - **Item do planejamento:** Fase 2, entrega 2.1 (tela T-02)
 - **Protótipo:** aba "Tema" (link em docs/specs/README.md)
 - **Criada em:** 2026-10-27
@@ -43,7 +43,7 @@ Na página de um tema, a pessoa entende do que ele trata, vê quantos objetos h�
 ## Responsivo
 Faixas do projeto: celular < 600, tablet de 600 a 1023, desktop ≥ 1024.
 - **390:** cabeçalho com o medalhão (96 px) acima das migalhas e do texto; grade em **2 colunas**; chips de outros temas quebram linha.
-- **768:** cabeçalho em uma coluna com o medalhão (96 px) acima; grade em 3 colunas.
+- **768:** cabeçalho em uma coluna com o medalhão (96 px) acima; grade em 3 colunas, com o nome do subtema e o respiro do cartão iguais aos do celular em toda a faixa de tablet.
 - **1280:** cabeçalho em duas colunas; grade em 4 colunas (cartões de ~220 px no mínimo).
 
 ## Acessibilidade
@@ -90,6 +90,8 @@ Faixas do projeto: celular < 600, tablet de 600 a 1023, desktop ≥ 1024.
 - "Outros temas" como `h2`: decidido no modo autônomo: manter `h2` com a aparência de rótulo do protótipo (lá é um parágrafo), porque a spec aprovada pede o título e isso ajuda a leitura de tela.
 - Limite de 2 linhas no nome do subtema: decidido no modo autônomo: não cortar o nome, porque o protótipo não corta e em larguras menores que 390 px ou com texto a 200% um limite esconderia parte dele.
 - Singular no cabeçalho: decidido no modo autônomo: aplicar "1 subtema" e "1 objeto digital", porque a grade e os cartões já têm singular; o protótipo só não mostra o caso.
+- Medalhão e migalhas no celular: decidido na verificação: medalhão acima das migalhas, como a spec já dizia. O `.top-row{order:-2}` do protótipo só existe no cabeçalho do subtema e fica dentro de um `div`, fora da grade, então não tem efeito; a aba "Tema" nem usa essa classe. Na aba renderizada em 390 px o medalhão vem antes das migalhas.
+- Nome do subtema no tablet: decidido na verificação: 16 px e respiro lateral de 10 px em toda a faixa, e não 18,4 px só acima de um limite, porque em 600 px o cartão tem 165 px e "Sustentabilidade" partia no meio, e o README pede tamanhos fixos por faixa. O protótipo não tem o caso: com `auto-fill` ele cai para 2 colunas em 600 px.
 - Tamanho dos chips de "Outros temas": decidido no modo autônomo: altura mínima de 44 px em vez dos cerca de 36 px do protótipo, porque é o alvo de toque usado nos demais links do projeto.
 
 ## Histórico de mudanças
@@ -98,3 +100,4 @@ Faixas do projeto: celular < 600, tablet de 600 a 1023, desktop ≥ 1024.
 - 2026-10-27: aprovada.
 - 2026-11-04: revisada diante das Fases 0 e 1 (modo autônomo, sem a pessoa). "Situação atual" atualizada (scaffold, catálogo, medalhão, `PageHeader`, 404). Definidos o nome do subtema (`SubthemeEnum`) e do tema (`ThemeModel`), o singular no cabeçalho, o medalhão de 96 px em 768, o hover do protótipo, a carga do catálogo na entrada direta e os números esperados no dev. Saiu a frase condicional do esqueleto de medalhões e o limite rígido de 2 linhas. Critérios: 3 novos (subtema sem objetos, títulos e navbar, 404), total de 12. Segue aprovada.
 - 2026-11-04: implementada, sem divergências da spec.
+- 2026-11-04: verificada com ressalvas (ver verificacao.md). Nome do subtema e respiro do cartão menores em toda a faixa de tablet; descrição do `PageHeader` com largura máxima de leitura; ordem do medalhão no celular confirmada.

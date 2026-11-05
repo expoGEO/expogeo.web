@@ -18,6 +18,7 @@ class AppButton extends StatefulWidget {
     this.isDisabled = false,
     this.externalUrl,
     this.focusNode,
+    this.semanticLabel,
   }) : kind = AppButtonKind.primary;
 
   const AppButton.secondary({
@@ -30,6 +31,7 @@ class AppButton extends StatefulWidget {
     this.isDisabled = false,
     this.externalUrl,
     this.focusNode,
+    this.semanticLabel,
   }) : kind = AppButtonKind.secondary;
 
   const AppButton.ghost({
@@ -42,6 +44,7 @@ class AppButton extends StatefulWidget {
     this.isDisabled = false,
     this.externalUrl,
     this.focusNode,
+    this.semanticLabel,
   }) : kind = AppButtonKind.ghost;
 
   final AppButtonKind kind;
@@ -56,6 +59,9 @@ class AppButton extends StatefulWidget {
   final String? externalUrl;
 
   final FocusNode? focusNode;
+
+  /// Nome acessível no lugar de [text].
+  final String? semanticLabel;
 
   @override
   State<AppButton> createState() => _AppButtonState();
@@ -130,6 +136,7 @@ class _AppButtonState extends State<AppButton> {
         .copyWith(fontSize: fontSize, fontWeight: FontWeight.w600, height: 1.2, color: foreground);
     final iconSize = fontSize * components.buttonIconScale;
     final trailingIcon = widget.trailingIcon ?? (isExternal ? Icons.north_east : null);
+    final name = widget.semanticLabel ?? widget.text;
 
     final content = Row(
       mainAxisSize: MainAxisSize.min,
@@ -152,7 +159,7 @@ class _AppButtonState extends State<AppButton> {
       button: !isExternal,
       link: isExternal,
       enabled: !inactive,
-      label: isExternal ? '${widget.text}, abre em nova aba' : widget.text,
+      label: isExternal ? '$name, abre em nova aba' : name,
       onTap: inactive ? null : _handleTap,
       // Sem o nó do InkWell, o foco precisa estar neste; senão o leitor de tela perde o foco.
       focusable: !inactive,

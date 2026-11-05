@@ -47,6 +47,29 @@ void main() {
     expect(find.bySemanticsLabel('Observatório, abre em nova aba'), findsOneWidget);
   });
 
+  testWidgets('nome acessível próprio substitui o texto', (tester) async {
+    await pump(
+      tester,
+      AppButton.ghost(text: 'Biomas', semanticLabel: 'Voltar para Biomas', onPressed: () {}),
+    );
+
+    expect(find.bySemanticsLabel('Voltar para Biomas'), findsOneWidget);
+    expect(find.bySemanticsLabel('Biomas'), findsNothing);
+  });
+
+  testWidgets('nome acessível próprio mantém o aviso de nova aba', (tester) async {
+    await pump(
+      tester,
+      const AppButton.secondary(
+        text: 'Acessar',
+        semanticLabel: 'Acessar o mapa',
+        externalUrl: 'https://example.com',
+      ),
+    );
+
+    expect(find.bySemanticsLabel('Acessar o mapa, abre em nova aba'), findsOneWidget);
+  });
+
   group('hover', () {
     Future<(Color?, Color?)> colorsOnHover(
       WidgetTester tester,

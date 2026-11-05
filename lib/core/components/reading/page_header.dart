@@ -12,6 +12,7 @@ class PageHeader extends StatelessWidget {
     this.lead,
     this.details,
     this.trailing,
+    this.topAction,
   });
 
   final List<BreadcrumbItem> breadcrumbs;
@@ -24,6 +25,9 @@ class PageHeader extends StatelessWidget {
   /// À direita do texto no desktop; nas faixas menores, acima das migalhas.
   final Widget? trailing;
 
+  /// À esquerda das migalhas; se não couberem lado a lado, elas descem de linha.
+  final Widget? topAction;
+
   @override
   Widget build(BuildContext context) {
     final colors = AppTheme.colors;
@@ -32,6 +36,7 @@ class PageHeader extends StatelessWidget {
     final lead = this.lead;
     final details = this.details;
     final trailing = this.trailing;
+    final topAction = this.topAction;
     final breakpoint = ScreenUtils.breakpointOf(context);
     final paddingBottom = switch (breakpoint) {
       Breakpoint.mobile => components.pageHeadPaddingBottomMobile,
@@ -43,10 +48,22 @@ class PageHeader extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Breadcrumbs(items: breadcrumbs),
-        ),
+        if (topAction == null)
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Breadcrumbs(items: breadcrumbs),
+          )
+        else
+          Wrap(
+            alignment: WrapAlignment.spaceBetween,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: components.pageHeadTopGap,
+            runSpacing: components.pageHeadTopGap,
+            children: [
+              topAction,
+              Breadcrumbs(items: breadcrumbs),
+            ],
+          ),
         SizedBox(height: components.pageHeadTitleGap),
         Semantics(
           header: true,

@@ -406,4 +406,6 @@ class ComponentSizes {
 
   /// Parte da altura de cada linha de texto ocupada pela barra do esqueleto; o resto é o vão.
   final double objectCardSkeletonBarFill = 0.75;
+
+  final double pageHeadTopGap = 12.0;
 }

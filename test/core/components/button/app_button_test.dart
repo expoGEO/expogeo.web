@@ -30,6 +30,22 @@ void main() {
     expect(tester.getSemantics(find.byType(AppButton)), isNot(matchesSemantics(isEnabled: true)));
   });
 
+  testWidgets('sem fullWidth acompanha o texto; com ele, ocupa a largura do pai', (tester) async {
+    Future<double> widthOf({required bool fullWidth}) async {
+      await pump(
+        tester,
+        SizedBox(
+          width: 300,
+          child: AppButton.primary(text: 'Enviar', onPressed: () {}, fullWidth: fullWidth),
+        ),
+      );
+      return tester.getSize(find.byType(Material).last).width;
+    }
+
+    expect(await widthOf(fullWidth: false), lessThan(300));
+    expect(await widthOf(fullWidth: true), 300);
+  });
+
   testWidgets('ativo responde ao toque', (tester) async {
     var taps = 0;
     await pump(tester, AppButton.secondary(text: 'Enviar', onPressed: () => taps++));

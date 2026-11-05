@@ -19,6 +19,7 @@ class AppButton extends StatefulWidget {
     this.externalUrl,
     this.focusNode,
     this.semanticLabel,
+    this.fullWidth = false,
   }) : kind = AppButtonKind.primary;
 
   const AppButton.secondary({
@@ -32,6 +33,7 @@ class AppButton extends StatefulWidget {
     this.externalUrl,
     this.focusNode,
     this.semanticLabel,
+    this.fullWidth = false,
   }) : kind = AppButtonKind.secondary;
 
   const AppButton.ghost({
@@ -45,6 +47,7 @@ class AppButton extends StatefulWidget {
     this.externalUrl,
     this.focusNode,
     this.semanticLabel,
+    this.fullWidth = false,
   }) : kind = AppButtonKind.ghost;
 
   final AppButtonKind kind;
@@ -62,6 +65,9 @@ class AppButton extends StatefulWidget {
 
   /// Nome acessível no lugar de [text].
   final String? semanticLabel;
+
+  /// Ocupa a largura imposta pelo pai, em vez de acompanhar o texto.
+  final bool fullWidth;
 
   @override
   State<AppButton> createState() => _AppButtonState();
@@ -170,6 +176,7 @@ class _AppButtonState extends State<AppButton> {
         opacity: widget.isDisabled ? components.disabledOpacity : 1,
         child: AppFocusRing(
           borderRadius: radius,
+          fit: widget.fullWidth ? StackFit.passthrough : StackFit.loose,
           child: Material(
             color: background,
             shape: RoundedRectangleBorder(

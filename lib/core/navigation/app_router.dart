@@ -1,9 +1,11 @@
 import 'package:expogeo/core/models/theme_data_model.dart';
 import 'package:expogeo/core/pages/not_found_page.dart';
+import 'package:expogeo/core/utils/string/string_utils.dart';
 import 'package:expogeo/features/about/pages/about_page.dart';
 import 'package:expogeo/features/admin/login/presentation/pages/signin_page.dart';
 import 'package:expogeo/features/admin/panel/presentation/pages/panel_page.dart';
 import 'package:expogeo/features/home/pages/home_page.dart';
+import 'package:expogeo/features/theme/pages/object_page.dart';
 import 'package:expogeo/features/theme/pages/subtheme_page.dart';
 import 'package:expogeo/features/theme/pages/theme_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -118,36 +120,27 @@ class AppRouter {
         },
       ),
 
-      // Rotas de conteúdo
-      // GoRoute(
-      //   path: '/:themeId/:subthemeId/:contentId',
-      //   builder: (context, state) {
-      //     final extra = state.extra as Map<String, dynamic>?;
-      //     if (extra == null) return const NotFoundPage();
-
-      //     final themeId = state.pathParameters['themeId'];
-      //     final subthemeId = state.pathParameters['subthemeId'];
-      //     final contentId = state.pathParameters['contentId'];
-
-      //     if (themeId == null || subthemeId == null || contentId == null) {
-      //       return const NotFoundPage();
-      //     }
-
-      //     final type = extra['type'] as ContentType?;
-      //     if (type == null) return const NotFoundPage();
-
-      //     switch (type) {
-      //       case ContentType.video:
-      //         return YoutubeVideoViewPage(
-      //           themeId: themeId,
-      //           subthemeId: subthemeId,
-      //           contentId: contentId,
-      //         );
-      //       default:
-      //         return const NotFoundPage();
-      //     }
-      //   },
-      // ),
+      // Rotas dos objetos: irmãs das de subtema, para não empilhar a página dele por baixo
+      _objectRoute(representacoesEspaciais),
+      _objectRoute(meioAmbiente),
+      _objectRoute(espacosUrbanosRurais),
+      _objectRoute(culturaPolitica),
     ],
+  );
+  static GoRoute _objectRoute(String themeId) => GoRoute(
+    path: '/$themeId/:subthemeId/:code',
+    name: '$themeId-object',
+    redirect: (context, state) {
+      final subthemeId = state.pathParameters['subthemeId']!;
+      final code = state.pathParameters['code']!;
+      final slug = referenceCodeSlug(code);
+      if (slug == code) return null;
+      return state.uri.replace(pathSegments: ['', themeId, subthemeId, slug]).toString();
+    },
+    builder: (context, state) => ObjectPage(
+      themeId: themeId,
+      subthemeId: state.pathParameters['subthemeId']!,
+      code: state.pathParameters['code']!,
+    ),
   );
 }

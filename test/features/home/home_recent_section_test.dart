@@ -36,9 +36,8 @@ void main() {
           ),
         ),
         GoRoute(
-          path: '/:theme/:subtheme',
-          builder: (context, state) =>
-              Text('subtema ${state.pathParameters['theme']}/${state.pathParameters['subtheme']}'),
+          path: '/:theme/:subtheme/:code',
+          builder: (context, state) => Text('objeto ${state.pathParameters['code']}'),
         ),
       ],
     );
@@ -143,13 +142,13 @@ void main() {
     expect(heights.toSet(), hasLength(1));
   });
 
-  testWidgets('tocar num cartão leva ao subtema do objeto', (tester) async {
+  testWidgets('tocar num cartão leva à página do objeto', (tester) async {
     await load(_records(1));
     await pump(tester);
 
     await tester.tap(find.byType(ObjectCard));
     await tester.pumpAndSettle();
 
-    expect(find.text('subtema natureza-meio-ambiente/biomas'), findsOneWidget);
+    expect(find.text('objeto nma-bio-01'), findsOneWidget);
   });
 }

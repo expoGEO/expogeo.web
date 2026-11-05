@@ -484,4 +484,67 @@ class ComponentSizes {
   final double stateBoxMarginBottom = 40.0;
   final double stateBoxDashLength = 4.0;
   final double stateBoxDashGap = 3.0;
+
+  /// Largura da coluna de leitura da página do objeto, sem as margens.
+  final double objectColumnMaxWidth = 856.0;
+  final double objectHeadPaddingTop = 28.0;
+  final double objectHeadTagGap = 24.0;
+  final double objectHeadTitleGap = 14.0;
+  final double objectHeadLeadGap = 14.0;
+  final double objectHeadActionsGap = 26.0;
+  final double objectHeadLeadMobile = 17.6;
+  final double objectHeadLeadTablet = 19.2;
+  final double objectHeadLeadDesktop = 22.4;
+  final double objectHeadLeadHeight = 1.45;
+  final double objectHeadSkeletonButton = 170.0;
+
+  final double objectActionsGap = 12.0;
+  final double objectAddressTop = 12.0;
+  final double objectAddressText = 14.0;
+  final Duration copyFeedbackDuration = const Duration(milliseconds: 1800);
+
+  final double objectNoteTop = 35.0;
+  final EdgeInsets objectNotePadding = const EdgeInsets.symmetric(vertical: 20, horizontal: 24);
+  final double objectNoteLabelText = 13.0;
+  final double objectNoteLabelIcon = 15.0;
+  final double objectNoteLabelGap = 8.0;
+  final double objectNoteLabelBottom = 6.0;
+  final double objectNoteText = 16.5;
+  final double objectNoteTextHeight = 1.65;
+
+  final double objectSheetTop = 32.0;
+  final double objectSheetBottom = 64.0;
+  final EdgeInsets objectSheetHeadPadding = const EdgeInsets.symmetric(
+    vertical: 14,
+    horizontal: 20,
+  );
+  final double objectSheetHeadText = 12.5;
+
+  /// Espaçamento entre letras do cabeçalho da ficha, em fração do tamanho da fonte.
+  final double objectSheetHeadLetterSpacing = 0.09;
+  final double objectSheetHeadGap = 12.0;
+  final double objectSheetGroupPadding = 20.0;
+  final double objectSheetGroupTitle = 170.0;
+  final double objectSheetGroupTitleText = 13.0;
+  final double objectSheetGroupTitleTop = 2.0;
+  final double objectSheetGroupGapV = 12.0;
+  final double objectSheetGroupGapH = 28.0;
+  final double objectSheetLabelText = 12.5;
+
+  /// Espaçamento entre letras dos rótulos da ficha, em fração do tamanho da fonte.
+  final double objectSheetLabelLetterSpacing = 0.07;
+  final double objectSheetLabelGap = 2.0;
+  final double objectSheetValueText = 16.0;
+  final double objectSheetPairGapV = 14.0;
+  final double objectSheetPairGapH = 28.0;
+  final double objectSheetTagsTop = 4.0;
+  final int objectSheetColumnsMobile = 1;
+  final int objectSheetColumnsTablet = 2;
+  final int objectSheetColumnsDesktop = 3;
+  final int objectSheetSkeletonGroups = 3;
+
+  final EdgeInsets referenceCodePadding = const EdgeInsets.symmetric(vertical: 2, horizontal: 8);
+
+  final double objectRelatedPadding = 48.0;
+  final double objectRelatedHeadGap = 16.0;
 }

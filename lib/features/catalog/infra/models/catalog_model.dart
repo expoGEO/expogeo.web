@@ -1,4 +1,6 @@
+import 'package:expogeo/core/models/content_model.dart';
 import 'package:expogeo/core/models/theme_data_model.dart';
+import 'package:expogeo/core/utils/string/string_utils.dart';
 import 'package:expogeo/features/admin/panel/infra/models/content_response_model.dart';
 
 /// Documento como veio do Firestore, antes de virar objeto do catálogo.
@@ -11,14 +13,21 @@ class CatalogRecord {
 }
 
 class CatalogItem {
-  const CatalogItem({required this.theme, required this.subtheme, required this.content});
+  const CatalogItem({
+    required this.theme,
+    required this.subtheme,
+    required this.content,
+    this.preservation,
+  });
 
   final ThemeEnum theme;
   final SubthemeEnum subtheme;
   final ContentResponseModel content;
+  final PreservationAction? preservation;
 
-  /// Sem página própria do objeto, leva ao subtema dele.
-  String get route => subtheme.route;
+  String get slug => referenceCodeSlug(content.id);
+
+  String get route => '${subtheme.route}/$slug';
 }
 
 /// Todos os objetos do acervo, com tema e subtema tirados do caminho do documento.
@@ -68,6 +77,27 @@ class CatalogModel {
     return first;
   }
 
+  /// Procura dentro do subtema, sem diferenciar maiúsculas nem `_` e `-`.
+  /// Se dois códigos coincidirem assim, vale o menor.
+  CatalogItem? find(SubthemeEnum subtheme, String code) {
+    final slug = referenceCodeSlug(code);
+    CatalogItem? found;
+    for (final item in items) {
+      if (item.subtheme != subtheme || item.slug != slug) continue;
+      if (found == null || item.content.id.compareTo(found.content.id) < 0) found = item;
+    }
+    return found;
+  }
+
+  /// Até [count] objetos do mesmo subtema, sem [item], na ordem do código.
+  List<CatalogItem> othersOf(CatalogItem item, int count) {
+    final others = [
+      for (final other in items)
+        if (other.subtheme == item.subtheme && other.content.docId != item.content.docId) other,
+    ]..sort((a, b) => a.content.id.compareTo(b.content.id));
+    return others.take(count).toList();
+  }
+
   static CatalogItem? _parse(CatalogRecord record) {
     final segments = record.path.split('/');
     if (segments.length != 6 ||
@@ -89,7 +119,23 @@ class CatalogModel {
 
     try {
       final content = ContentResponseModel.fromJson(record.data, record.id);
-      return CatalogItem(theme: theme, subtheme: subtheme, content: content);
+      return CatalogItem(
+        theme: theme,
+        subtheme: subtheme,
+        content: content,
+        preservation: _preservationOf(record.data),
+      );
+    } catch (_) {
+      return null;
+    }
+  }
+
+  // O leitor do conteúdo procura a preservação em outra chave. Fica à parte para um valor ruim
+  // tirar só esses campos da ficha, e não o objeto do site.
+  static PreservationAction? _preservationOf(Map<String, dynamic> data) {
+    try {
+      final raw = data['preservationAction'];
+      return raw == null ? null : PreservationAction.fromJson(raw as Map<String, dynamic>);
     } catch (_) {
       return null;
     }

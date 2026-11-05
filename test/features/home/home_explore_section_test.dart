@@ -39,6 +39,10 @@ void main() {
           builder: (context, state) =>
               Text('subtema ${state.pathParameters['theme']}/${state.pathParameters['subtheme']}'),
         ),
+        GoRoute(
+          path: '/:theme/:subtheme/:code',
+          builder: (context, state) => Text('objeto ${state.pathParameters['code']}'),
+        ),
       ],
     );
     return tester.pumpWidget(MaterialApp.router(routerConfig: router));
@@ -111,7 +115,7 @@ void main() {
   for (final (label, expected) in [
     ('Meio Ambiente e Natureza', 'tema natureza-meio-ambiente'),
     ('Biomas', 'subtema natureza-meio-ambiente/biomas'),
-    ('aVoar Cerrado', 'subtema natureza-meio-ambiente/biomas'),
+    ('aVoar Cerrado', 'objeto nma-bio-01'),
   ]) {
     testWidgets('o exemplo "$label" leva ao destino certo', (tester) async {
       await load(biomasRecords());

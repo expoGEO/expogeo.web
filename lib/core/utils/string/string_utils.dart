@@ -20,3 +20,6 @@ String foldForSearch(String text) {
   }
   return buffer.toString();
 }
+
+/// Código de referência como aparece no endereço: minúsculas e hífen (`NMA_BH_03` vira `nma-bh-03`).
+String referenceCodeSlug(String code) => code.trim().toLowerCase().replaceAll('_', '-');

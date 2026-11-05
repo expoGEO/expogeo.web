@@ -14,4 +14,10 @@ void main() {
     expect(foldForSearch(''), '');
     expect(foldForSearch('   '), '');
   });
+
+  for (final code in ['NMA_BH_03', 'nma-bh-03', 'nma_BH-03', '  NMA_BH_03  ']) {
+    test('"$code" vira o código do endereço', () {
+      expect(referenceCodeSlug(code), 'nma-bh-03');
+    });
+  }
 }

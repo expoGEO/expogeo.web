@@ -25,8 +25,7 @@ class _ObjectActionsState extends State<ObjectActions> {
 
   final GlobalKey<SelectionAreaState> _selectionKey = GlobalKey();
 
-  // Só recebe foco para mostrar a seleção; não é uma parada do Tab.
-  final FocusNode _addressFocusNode = FocusNode(skipTraversal: true);
+  final FocusNode _addressFocusNode = FocusNode();
 
   _CopyStatus _status = _CopyStatus.idle;
   Timer? _timer;
@@ -134,12 +133,15 @@ class _ObjectActionsState extends State<ObjectActions> {
             Padding(
               padding: EdgeInsets.only(top: components.objectAddressTop),
               // Área própria, separada da seleção da página: assim selecionar tudo pega só o
-              // endereço.
-              child: SelectionContainer.disabled(
-                child: SelectionArea(
-                  key: _selectionKey,
-                  focusNode: _addressFocusNode,
-                  child: Semantics(container: true, child: Text(address, style: textStyle)),
+              // endereço. No web ela traz uma visão de plataforma, que seria uma parada invisível
+              // do Tab; o foco por código continua valendo.
+              child: ExcludeFocusTraversal(
+                child: SelectionContainer.disabled(
+                  child: SelectionArea(
+                    key: _selectionKey,
+                    focusNode: _addressFocusNode,
+                    child: Semantics(container: true, child: Text(address, style: textStyle)),
+                  ),
                 ),
               ),
             ),

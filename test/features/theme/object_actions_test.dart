@@ -147,6 +147,15 @@ void main() {
     expect(find.byType(SelectionArea), findsOneWidget);
   });
 
+  testWidgets('a área de seleção do endereço fica fora do Tab', (tester) async {
+    await pump(tester, location: address);
+
+    expect(
+      find.descendant(of: find.byType(ExcludeFocusTraversal), matching: find.byType(SelectionArea)),
+      findsOneWidget,
+    );
+  });
+
   testWidgets('endereço válido com espaços nas pontas funciona', (tester) async {
     await pump(tester, location: ' $address ');
 

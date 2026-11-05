@@ -43,6 +43,18 @@ void main() {
     expect(changes, ['m', 'ma']);
   });
 
+  testWidgets('Enter mantém o foco no campo', (tester) async {
+    await pump(tester);
+    await tester.tap(find.byType(TextField));
+    await tester.pump();
+    expect(focusNode.hasFocus, isTrue);
+
+    await tester.testTextInput.receiveAction(TextInputAction.search);
+    await tester.pump();
+
+    expect(focusNode.hasFocus, isTrue);
+  });
+
   testWidgets('"Limpar" só aparece com texto', (tester) async {
     await pump(tester);
     expect(find.text('Limpar'), findsNothing);

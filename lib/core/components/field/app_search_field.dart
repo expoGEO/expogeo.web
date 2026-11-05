@@ -106,6 +106,8 @@ class _AppSearchFieldState extends State<AppSearchField> {
               focusNode: _focusNode,
               onChanged: widget.onChanged,
               textInputAction: TextInputAction.search,
+              // O filtro já roda a cada tecla; sem isto, o Enter tira o foco do campo.
+              onEditingComplete: () {},
               style: styles.regular.copyWith(color: colors.ink),
               cursorColor: colors.accent,
               decoration: InputDecoration(

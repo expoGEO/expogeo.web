@@ -408,4 +408,80 @@ class ComponentSizes {
   final double objectCardSkeletonBarFill = 0.75;
 
   final double pageHeadTopGap = 12.0;
+
+  /// Puxa o botão de voltar para o texto dele alinhar com a margem da página.
+  final double pageHeadBackShift = -10.0;
+  final double subthemeLeadSkeletonWidth = 320.0;
+
+  final double searchFieldHeight = 48.0;
+  final double searchFieldMaxWidth = 520.0;
+  final double searchFieldBorder = 1.5;
+  final double searchFieldFocusRing = 4.0;
+  final double searchFieldPaddingStart = 44.0;
+  final double searchFieldPaddingEnd = 84.0;
+  final double searchFieldPaddingEndEmpty = 14.0;
+  final double searchFieldIconInset = 14.0;
+  final double searchFieldClearInset = 8.0;
+  final double searchFieldClearPaddingH = 10.0;
+  final double searchFieldClearPaddingV = 6.0;
+
+  final double chipPaddingH = 14.0;
+  final double chipCountGap = 6.0;
+  final double chipGap = 8.0;
+
+  final double subjectChipMinHeight = 32.0;
+  final EdgeInsets subjectChipPadding = const EdgeInsets.symmetric(vertical: 6, horizontal: 11);
+  final double subjectChipText = 13.5;
+  final double subjectChipGap = 6.0;
+  final double subjectsLabelText = 13.0;
+  final double subjectsLabelGap = 6.0;
+  final double subjectsPaddingTop = 4.0;
+  final double subjectsPaddingBottom = 6.0;
+
+  final double toolbarPaddingTop = 24.0;
+  final double toolbarPaddingBottom = 8.0;
+  final double toolbarGap = 16.0;
+
+  final double resultCountText = 14.5;
+  final double resultCountPaddingTop = 4.0;
+  final double resultCountPaddingBottom = 20.0;
+
+  final double objectRowPadding = 20.0;
+
+  /// Quanto o fundo do hover passa da coluna de conteúdo de cada lado.
+  final double objectRowBleed = 16.0;
+  final double objectRowColumnGap = 18.0;
+  final double objectRowColumnGapCompact = 12.0;
+  final double objectRowTextGap = 4.0;
+  final double objectRowIconBox = 44.0;
+  final double objectRowIconBoxCompact = 36.0;
+  final double objectRowIconCompact = 16.0;
+  final double objectRowTitle = 18.56;
+  final double objectRowTitleHeight = 1.3;
+  final double objectRowDescription = 15.5;
+  final double objectRowMetaText = 14.0;
+  final double objectRowMetaGapH = 14.0;
+  final double objectRowMetaGapV = 2.0;
+  final double objectRowTagText = 12.5;
+  final EdgeInsets objectRowTagPadding = const EdgeInsets.symmetric(vertical: 2, horizontal: 8);
+  final double objectRowTagGap = 6.0;
+  final double objectRowTagsTop = 6.0;
+  final double objectRowActionsGap = 6.0;
+  final double objectRowActionsTop = 10.0;
+
+  final double loadMorePaddingTop = 28.0;
+  final double objectListPaddingBottom = 56.0;
+
+  final double stateBoxPaddingVertical = 40.0;
+  final double stateBoxPaddingHorizontal = 20.0;
+  final double stateBoxIcon = 52.0;
+  final double stateBoxIconGlyph = 24.0;
+  final double stateBoxTitle = 20.8;
+  final double stateBoxTextMaxWidth = 360.0;
+  final double stateBoxGap = 10.0;
+  final double stateBoxButtonGap = 6.0;
+  final double stateBoxMarginTop = 12.0;
+  final double stateBoxMarginBottom = 40.0;
+  final double stateBoxDashLength = 4.0;
+  final double stateBoxDashGap = 3.0;
 }

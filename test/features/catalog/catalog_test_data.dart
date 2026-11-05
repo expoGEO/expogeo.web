@@ -66,6 +66,40 @@ CatalogRecord objectAt(String subthemeId, String code, {required DateTime date, 
   return recordAt(subthemeId, 'doc_$code', data: data);
 }
 
+/// Objeto com os campos que a lista do subtema mostra e procura.
+CatalogRecord objectWith(
+  String subthemeId,
+  String code, {
+  String title = 'Sem título',
+  String description = 'Sem descrição',
+  String creator = 'Sem criador',
+  String? collaborator,
+  String? note,
+  List<String> subjects = const [],
+  String type = 'site',
+  String format = 'html',
+  int? year,
+  String location = 'https://www.exemplo.org/recurso',
+}) {
+  final data = validContentJson();
+  data['id'] = code;
+  data['intellectualIndicator'] = {
+    'creator': creator,
+    if (collaborator != null) 'collaborator': collaborator,
+  };
+  data['contentInfo'] = {
+    'title': title,
+    'description': description,
+    'subjects': subjects,
+    if (note != null) 'contentNote': note,
+  };
+  (data['originInfo'] as Map<String, dynamic>)
+    ..['type'] = type
+    ..['format'] = format;
+  data['registrationInfo'] = {'location': location, if (year != null) 'issueYear': year};
+  return recordAt(subthemeId, 'doc_$code', data: data);
+}
+
 /// Os 7 objetos de Biomas fora de ordem, para conferir a escolha pelo menor código.
 List<CatalogRecord> biomasRecords() => [
   for (final n in [4, 2, 7, 1, 6, 3, 5])

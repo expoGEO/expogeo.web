@@ -1,6 +1,6 @@
 # 008. Página do subtema: busca, filtros e lista de objetos
 
-- **Status:** aprovada
+- **Status:** implementada
 - **Item do planejamento:** Fase 2, entrega 2.2 (tela T-03)
 - **Protótipo:** aba "Subtema" e, para os estados, aba "Estados" (link em docs/specs/README.md)
 - **Criada em:** 2026-10-27
@@ -47,7 +47,7 @@ Dentro de um subtema, a pessoa encontra rápido o objeto que procura (por palavr
   - criador, ano de emissão (quando houver) e o domínio do endereço, sem `www.` (ex.: `ibge.gov.br`);
   - até 4 assuntos em etiquetas (só leitura, não clicáveis);
   - ações "Ver ficha" (discreto, leva à página do objeto) e "Acessar ↗" (secundário, abre o recurso em aba nova).
-- A linha ganha fundo de superfície ao passar o mouse. Nesse fundo, rótulo e título usam o laranja forte, porque o acento normal sobre a superfície dá 4,48:1. O título com link fica sublinhado no hover.
+- A linha ganha fundo de superfície ao passar o mouse. Nesse fundo, o rótulo e o título com link usam o laranja forte, porque o acento normal sobre a superfície dá 4,48:1. O título sem link segue na cor do texto, porque laranja é a cor do que é clicável. O título com link fica sublinhado no hover.
 - **Destino da ficha até a spec 009:** o título e "Ver ficha" levam a `CatalogItem.route`, o único lugar que sabe o endereço do objeto. Hoje esse endereço é o próprio subtema, então um link ali não levaria a lugar nenhum. Enquanto o destino for a página em que a pessoa já está, o título aparece como texto e "Ver ficha" não aparece. Quando a 009 trocar `CatalogItem.route`, os dois passam a aparecer sem mudança nesta tela. "Acessar" funciona desde já.
 - Ordem: pelo código de referência (`_01`, `_02`…), que é a ordem da curadoria.
 - **"Carregar mais"** mostra mais 6 por vez; some quando não há mais. Busca, tipo ou assunto novos voltam a mostrar 6. Subtema com até 6 objetos nunca mostra o botão.
@@ -138,3 +138,4 @@ Faixas do projeto: celular < 600, tablet de 600 a 1023, desktop ≥ 1024.
 - 2026-10-27: Q-04 respondida.
 - 2026-10-27: aprovada.
 - 2026-11-04: revisada diante das Fases 0 e 1 e da 007 (modo autônomo, sem a pessoa). "Situação atual" atualizada (scaffold, catálogo, cabeçalho, causa do defeito, dados do dev). Tratada a pendência de `/representacoes-espaciais/movimentos-terra`: 404. Definidos: destino de "Ver ficha" até a 009, faixa superior do cabeçalho, frase ao carregar e com erro, estados de busca e chips, comportamento de "Limpar", tablet, troca de subtema, aspas curvas, endereço inválido, altura dos chips e remoção da pilha de paginação. Critérios: de 13 para 19 (campos e "Limpar", "Ver ficha", "Acessar", subtema sem objetos, troca de subtema, títulos e leitura de tela, paginação removida). Segue aprovada.
+- 2026-11-05: implementação (modo autônomo). Hover da linha: o laranja forte no título vale só quando ele é link, para não pintar de laranja um texto não clicável enquanto a 009 não chega. Segue implementada.

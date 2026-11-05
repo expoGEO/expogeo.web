@@ -302,6 +302,44 @@ class ComponentSizes {
   final double pageHeadColumnGap = 40.0;
   final double pageHeadStackGap = 20.0;
 
+  final double themeStatsTop = 18.0;
+  final double themeStatsText = 15.0;
+  final double themeStatsGapH = 24.0;
+  final double themeStatsGapV = 8.0;
+  final double themeStatsSkeletonWidth = 28.0;
+
+  final double subthemeSectionTop = 40.0;
+  final double subthemeSectionHeadGap = 24.0;
+  final int subthemeColumnsMobile = 2;
+  final int subthemeColumnsTablet = 3;
+  final int subthemeColumnsDesktop = 4;
+  final double subthemeGridGap = 20.0;
+  final double subthemeGridGapMobile = 12.0;
+  final EdgeInsets subthemeCardPadding = const EdgeInsets.symmetric(vertical: 22, horizontal: 18);
+  final EdgeInsets subthemeCardPaddingMobile = const EdgeInsets.symmetric(
+    vertical: 16,
+    horizontal: 10,
+  );
+  final double subthemeCardGap = 10.0;
+  final double subthemeCardNameTop = 4.0;
+  final double subthemeCardMedallionDesktop = 140.0;
+  final double subthemeCardMedallionTablet = 120.0;
+  final double subthemeCardMedallionMobile = 104.0;
+  final double subthemeCardName = 18.4;
+  final double subthemeCardNameMobile = 16.0;
+  final double subthemeCardNameHeight = 1.2;
+  final double subthemeCardCountSkeletonWidth = 64.0;
+  final double subthemeCardHoverScale = 1.03;
+
+  final double otherThemesPaddingTop = 48.0;
+  final double otherThemesPaddingBottom = 72.0;
+  final double otherThemesLabelGap = 12.0;
+  final double otherThemesGap = 10.0;
+  final EdgeInsets themeChipPadding = const EdgeInsets.fromLTRB(8, 7, 14, 7);
+  final double themeChipMedallion = 22.0;
+  final double themeChipGap = 6.0;
+  final double themeChipText = 14.0;
+
   final double readingMaxWidth = 720.0;
   final double readingPaddingTop = 48.0;
   final double readingPaddingBottom = 24.0;

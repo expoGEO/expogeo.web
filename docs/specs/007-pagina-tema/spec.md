@@ -1,6 +1,6 @@
 # 007. Página do tema
 
-- **Status:** aprovada
+- **Status:** implementada
 - **Item do planejamento:** Fase 2, entrega 2.1 (tela T-02)
 - **Protótipo:** aba "Tema" (link em docs/specs/README.md)
 - **Criada em:** 2026-10-27
@@ -97,3 +97,4 @@ Faixas do projeto: celular < 600, tablet de 600 a 1023, desktop ≥ 1024.
 - 2026-10-27: Q-04 respondida.
 - 2026-10-27: aprovada.
 - 2026-11-04: revisada diante das Fases 0 e 1 (modo autônomo, sem a pessoa). "Situação atual" atualizada (scaffold, catálogo, medalhão, `PageHeader`, 404). Definidos o nome do subtema (`SubthemeEnum`) e do tema (`ThemeModel`), o singular no cabeçalho, o medalhão de 96 px em 768, o hover do protótipo, a carga do catálogo na entrada direta e os números esperados no dev. Saiu a frase condicional do esqueleto de medalhões e o limite rígido de 2 linhas. Critérios: 3 novos (subtema sem objetos, títulos e navbar, 404), total de 12. Segue aprovada.
+- 2026-11-04: implementada, sem divergências da spec.

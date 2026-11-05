@@ -1,6 +1,6 @@
 # 009. Página do objeto digital
 
-- **Status:** implementada
+- **Status:** verificada com ressalvas
 - **Item do planejamento:** Fase 2, entrega 2.3 (tela T-04, rota nova)
 - **Protótipo:** aba "Objeto" (link em docs/specs/README.md)
 - **Criada em:** 2026-10-27
@@ -84,23 +84,23 @@ Faixas do projeto: celular < 600, tablet de 600 a 1023, desktop ≥ 1024. Coluna
 - É a única rota nova; as demais seguem iguais.
 
 ## Critérios de aceite
-- [ ] Abrir o endereço de um objeto numa aba nova mostra a página completa, sem passar pelo subtema, e recarregar funciona.
-- [ ] `…/nma-bh-03`, `…/NMA_BH_03` e `…/nma_BH-03` abrem o mesmo objeto; os dois últimos passam a mostrar o endereço com hífen, e o voltar do navegador não prende a pessoa no endereço antigo.
-- [ ] O topo mostra voltar, migalhas, ícone, tipo · formato com a regra de omissão, título, descrição, "Acessar o recurso", "Copiar link" e o endereço visível; voltar e migalhas levam ao subtema e ao tema.
-- [ ] "Acessar o recurso" abre o endereço em aba nova; "Copiar link" copia o endereço do recurso, mostra "Link copiado" e volta ao texto original depois de cerca de 2 segundos.
-- [ ] Sem acesso à área de transferência, aparece "Não deu para copiar. Selecione o endereço abaixo." e o endereço fica selecionado.
-- [ ] Endereço inválido ou vazio desativa os dois botões e mostra "Endereço indisponível".
-- [ ] A nota de conteúdo aparece só quando existe.
-- [ ] A ficha mostra o código em destaque (Figtree 600, algarismos tabulares) e todos os campos preenchidos do objeto, nos grupos certos, inclusive ação de preservação e próxima revisão ("dez 2026") com os dados reais do dev.
-- [ ] Campos vazios e grupos vazios não aparecem; "Regras de registro" vazio mostra o texto padrão; formato "Outro" aparece na ficha e não no rótulo do topo.
-- [ ] "Outros objetos" mostra até 3 objetos do mesmo subtema, na ordem do código, sem o atual; some com um objeto só; "Ver todos" leva ao subtema; abrir um cartão mostra aquele objeto, do topo.
-- [ ] Na lista do subtema, "Ver ficha" e o título levam a esta página, o foco de "Carregar mais" vai ao título do primeiro novo, e a lista segue sem `overflow` em 390, 768 e 1280 px.
-- [ ] O cartão da Home e o exemplo 3 de "Como explorar" levam a esta página.
-- [ ] Código inexistente, código de outro subtema, subtema de outro tema e `movimentos-terra` mostram a página de "não encontrada", e não outro objeto.
-- [ ] Esqueleto ao carregar, com voltar e migalhas à vista; erro com "Tentar de novo" que funciona.
-- [ ] Em 390, 768 e 1280 px, o layout segue a seção Responsivo, sem rolagem horizontal nem `overflow`; contraste ≥ 4,5:1.
-- [ ] Tudo alcançável por teclado com foco visível; um único `h1`, `h2` e `h3` como na seção Acessibilidade; "Voltar para {Subtema}", "abre em nova aba", "Link copiado" anunciado e item "Temas" ativo na navbar.
-- [ ] Rotas existentes, Home, tema, subtema e `/sobre` seguem como antes; nada no painel, nos modelos de conteúdo ou nas regras do Firestore mudou.
+- [x] Abrir o endereço de um objeto numa aba nova mostra a página completa, sem passar pelo subtema, e recarregar funciona.
+- [x] `…/nma-bh-03`, `…/NMA_BH_03` e `…/nma_BH-03` abrem o mesmo objeto; os dois últimos passam a mostrar o endereço com hífen, e o voltar do navegador não prende a pessoa no endereço antigo.
+- [x] O topo mostra voltar, migalhas, ícone, tipo · formato com a regra de omissão, título, descrição, "Acessar o recurso", "Copiar link" e o endereço visível; voltar e migalhas levam ao subtema e ao tema.
+- [x] "Acessar o recurso" abre o endereço em aba nova; "Copiar link" copia o endereço do recurso, mostra "Link copiado" e volta ao texto original depois de cerca de 2 segundos.
+- [x] Sem acesso à área de transferência, aparece "Não deu para copiar. Selecione o endereço abaixo." e o endereço fica selecionado.
+- [x] Endereço inválido ou vazio desativa os dois botões e mostra "Endereço indisponível".
+- [x] A nota de conteúdo aparece só quando existe.
+- [x] A ficha mostra o código em destaque (Figtree 600, algarismos tabulares) e todos os campos preenchidos do objeto, nos grupos certos, inclusive ação de preservação e próxima revisão ("dez 2026") com os dados reais do dev.
+- [x] Campos vazios e grupos vazios não aparecem; "Regras de registro" vazio mostra o texto padrão; formato "Outro" aparece na ficha e não no rótulo do topo.
+- [x] "Outros objetos" mostra até 3 objetos do mesmo subtema, na ordem do código, sem o atual; some com um objeto só; "Ver todos" leva ao subtema; abrir um cartão mostra aquele objeto, do topo.
+- [x] Na lista do subtema, "Ver ficha" e o título levam a esta página, o foco de "Carregar mais" vai ao título do primeiro novo, e a lista segue sem `overflow` em 390, 768 e 1280 px.
+- [x] O cartão da Home e o exemplo 3 de "Como explorar" levam a esta página.
+- [x] Código inexistente, código de outro subtema, subtema de outro tema e `movimentos-terra` mostram a página de "não encontrada", e não outro objeto.
+- [x] Esqueleto ao carregar, com voltar e migalhas à vista; erro com "Tentar de novo" que funciona.
+- [x] Em 390, 768 e 1280 px, o layout segue a seção Responsivo, sem rolagem horizontal nem `overflow`; contraste ≥ 4,5:1.
+- [x] Tudo alcançável por teclado com foco visível; um único `h1`, `h2` e `h3` como na seção Acessibilidade; "Voltar para {Subtema}", "abre em nova aba", "Link copiado" anunciado e item "Temas" ativo na navbar.
+- [x] Rotas existentes, Home, tema, subtema e `/sobre` seguem como antes; nada no painel, nos modelos de conteúdo ou nas regras do Firestore mudou.
 
 ## Fora do escopo
 - Visualizar o recurso dentro do site (vídeo, PDF) — continua abrindo na fonte.
@@ -139,3 +139,4 @@ Faixas do projeto: celular < 600, tablet de 600 a 1023, desktop ≥ 1024. Coluna
 - 2026-10-27: aprovada.
 - 2026-11-05: revisada diante das Fases 0 e 1, da 007 e da 008 (modo autônomo, sem a pessoa). "Situação atual" reescrita (`ContentCard` removido, ficha só nesta página, `CatalogItem.route`, dados do dev). Encontrado o defeito da preservação no leitor do painel; a leitura passa pelo catálogo. Código de referência em Figtree 600 com algarismos tabulares, não monoespaçado. Exemplo 3 de "Como explorar" e cartões passam a esta página. Definidos: topo sem cabeçalho de tema, voltar e migalhas ao carregar e com erro, textos do erro, volta de "Link copiado", endereço inválido, ficha por faixa, largura de 856 px, formato "Outro", mês abreviado, leitura dos pares, laranja forte e troca de objeto. Critérios: de 11 para 17 (falha ao copiar, endereço inválido, campos vazios, Home separada da lista, teclado e leitura de tela, regressões). Segue aprovada.
 - 2026-11-05: implementação. `AppButton` ganha `fullWidth`, opcional e desligado por padrão: o anel de foco soltava a largura e os botões não ocupavam a largura total em 390 px. O comportamento pedido nesta spec não muda; o plano dizia "`AppButton` sem mudança".
+- 2026-11-05: verificação. O endereço do recurso sai do Tab com `ExcludeFocusTraversal`, porque `skipTraversal` não alcança a visão de plataforma do `SelectionArea` no web. O comportamento pedido não muda. Ressalvas em verificacao.md.

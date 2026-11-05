@@ -10,7 +10,8 @@ Uma linha por fase executada. O detalhe de cada spec fica em `docs/specs/NNN-*/`
 ## Pendências em aberto
 - **Regra do Firestore (004, 005):** publicar à mão a leitura por grupo de coleções (`match /{path=**}/contents/{id}`) no `expogeo-dev` e, **antes do merge na `main`**, na produção. Sem ela, contagens e recentes da Home ficam no estado de erro. Depois de publicar, conferir na Home do dev: 190 objetos (35, 74, 42, 39 por tema), "Biomas · 7 objetos" com "aVoar Cerrado" e os 6 recentes.
 - **Acessibilidade anterior à Fase 1:** a navbar de altura fixa transborda com texto a 200% e os títulos das colunas do rodapé saem como `h2`.
-- **Exemplo 3 de "Como explorar" e cartões de objeto** levam ao subtema até a 009 criar a página do objeto (troca num só lugar, `CatalogItem.route`).
+- **Primeiro Tab de cada página (009):** cai numa parada invisível, a visão de plataforma do `SelectionArea` do `SiteScaffold`, no web.
+- **Endereços de 3 segmentos (009):** conferir a reescrita do servidor em `dev.expogeo.com.br` depois do deploy (`.htaccess` fora do repositório).
 - **003:** conferir a prévia real em aplicativo de mensagem (WhatsApp etc.) depois do deploy em `dev.expogeo.com.br`.
 - **Painel admin:** não foi conferido na tela na Fase 0, por falta de credenciais de teste. Nenhum arquivo dele mudou.
 - **014:** fala em fonte monoespaçada para o código de referência; a 001 decidiu usar Figtree 600 com algarismos tabulares (a 009 já foi corrigida).

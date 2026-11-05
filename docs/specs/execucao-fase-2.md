@@ -7,7 +7,7 @@
 |---|---|---|---|---|---|
 | 007-pagina-tema | 2.1 | feita | feita | feita | verificada com ressalvas (12/12 critérios) |
 | 008-pagina-subtema | 2.2 | feita | feita | feita | verificada com ressalvas (19/19, CA18 com ressalva) |
-| 009-pagina-objeto | 2.3 | feita | pendente | pendente | |
+| 009-pagina-objeto | 2.3 | feita | feita | pendente | |
 
 ## Decisões tomadas sem a pessoa
 - (fase) As specs 007 a 009 já existiam, aprovadas em 2026-10-27: cada sessão de spec faz uma revisão rápida contra o código atual em vez de recriar a spec.

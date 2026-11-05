@@ -1,6 +1,7 @@
 import 'package:expogeo/core/components/skeleton/app_skeleton.dart';
 import 'package:expogeo/core/models/subtheme_model.dart';
 import 'package:expogeo/core/models/theme_data_model.dart';
+import 'package:expogeo/core/theme/app_theme.dart';
 import 'package:expogeo/features/catalog/infra/models/catalog_model.dart';
 import 'package:expogeo/features/catalog/presentation/stores/catalog_store.dart';
 import 'package:expogeo/features/theme/components/subtheme_overview_card.dart';
@@ -35,8 +36,9 @@ void main() {
     List<SubthemeModel> subthemes, {
     AssetBundle? bundle,
     bool disableAnimations = false,
+    double screenWidth = 1280,
   }) {
-    tester.view.physicalSize = const Size(1280, 1000);
+    tester.view.physicalSize = Size(screenWidth, 1000);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
 
@@ -47,7 +49,7 @@ void main() {
           builder: (context, state) {
             final page = MediaQuery(
               data: MediaQueryData(
-                size: const Size(1280, 1000),
+                size: Size(screenWidth, 1000),
                 disableAnimations: disableAnimations,
               ),
               child: Scaffold(
@@ -89,6 +91,19 @@ void main() {
 
     expect(find.text('Estruturas e Formas do Relevo'), findsOneWidget);
   });
+
+  for (final (width, compact) in [(390.0, true), (600.0, true), (768.0, true), (1280.0, false)]) {
+    testWidgets('em $width, nome ${compact ? 'menor' : 'maior'}', (tester) async {
+      await pump(tester, [relevo], screenWidth: width);
+
+      final components = AppTheme.dimensions.components;
+      final name = tester.widget<Text>(find.text('Estruturas e Formas do Relevo'));
+      expect(
+        name.style?.fontSize,
+        compact ? components.subthemeCardNameMobile : components.subthemeCardName,
+      );
+    });
+  }
 
   for (final (count, phrase) in [(7, '7 objetos'), (1, '1 objeto'), (0, 'Nenhum objeto ainda')]) {
     testWidgets('com $count, mostra "$phrase"', (tester) async {

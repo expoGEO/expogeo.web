@@ -1,5 +1,6 @@
 import 'package:expogeo/core/components/reading/breadcrumbs.dart';
 import 'package:expogeo/core/components/reading/page_header.dart';
+import 'package:expogeo/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
@@ -8,7 +9,12 @@ void main() {
   const trailingKey = Key('trailing');
   const detailsKey = Key('details');
 
-  Future<void> pump(WidgetTester tester, {double width = 1280, bool slots = true}) {
+  Future<void> pump(
+    WidgetTester tester, {
+    double width = 1280,
+    bool slots = true,
+    String lead = 'Uma descrição curta.',
+  }) {
     tester.view.physicalSize = Size(width, 900);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
@@ -25,7 +31,7 @@ void main() {
                   BreadcrumbItem('Tema'),
                 ],
                 title: 'Título da página',
-                lead: 'Uma descrição curta.',
+                lead: lead,
                 details: slots ? const SizedBox(key: detailsKey, height: 20) : null,
                 trailing: slots ? const SizedBox.square(key: trailingKey, dimension: 96) : null,
               ),
@@ -69,6 +75,15 @@ void main() {
       expect(tester.takeException(), isNull);
     });
   }
+
+  testWidgets('descrição longa não passa da largura de leitura', (tester) async {
+    final lead = 'Uma descrição bem longa. ' * 20;
+    await pump(tester, slots: false, lead: lead);
+
+    final width = tester.getSize(find.text(lead)).width;
+    expect(width, AppTheme.dimensions.components.readingMaxWidth);
+    expect(tester.takeException(), isNull);
+  });
 
   testWidgets('detalhes entram abaixo da descrição', (tester) async {
     await pump(tester);

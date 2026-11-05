@@ -55,7 +55,13 @@ class PageHeader extends StatelessWidget {
         ),
         if (lead != null) ...[
           SizedBox(height: components.pageHeadLeadGap),
-          Text(lead, style: styles.reading.copyWith(color: colors.inkSecondary)),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: components.readingMaxWidth),
+              child: Text(lead, style: styles.reading.copyWith(color: colors.inkSecondary)),
+            ),
+          ),
         ],
         ?details,
       ],

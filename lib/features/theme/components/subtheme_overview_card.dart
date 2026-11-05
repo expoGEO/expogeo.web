@@ -43,7 +43,8 @@ class _SubthemeOverviewCardState extends State<SubthemeOverviewCard> {
     final components = dimensions.components;
     final styles = AppTheme.typography.of(context);
     final breakpoint = ScreenUtils.breakpointOf(context);
-    final compact = breakpoint == Breakpoint.mobile;
+    // Em 600 px a coluna do tablet é mais estreita que a do celular: o nome maior partiria palavras.
+    final compact = breakpoint != Breakpoint.desktop;
     final reduceMotion = MediaQuery.disableAnimationsOf(context);
     final duration = reduceMotion ? Duration.zero : components.hoverAnimation;
     final radius = BorderRadius.circular(dimensions.radii.r18);

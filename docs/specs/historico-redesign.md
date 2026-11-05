@@ -13,7 +13,7 @@ Uma linha por fase executada. O detalhe de cada spec fica em `docs/specs/NNN-*/`
 - **Exemplo 3 de "Como explorar" e cartões de objeto** levam ao subtema até a 009 criar a página do objeto (troca num só lugar, `CatalogItem.route`).
 - **003:** conferir a prévia real em aplicativo de mensagem (WhatsApp etc.) depois do deploy em `dev.expogeo.com.br`.
 - **Painel admin:** não foi conferido na tela na Fase 0, por falta de credenciais de teste. Nenhum arquivo dele mudou.
-- **009 e 014:** falam em fonte monoespaçada para o código de referência; a 001 decidiu usar Figtree 600 com algarismos tabulares.
+- **014:** fala em fonte monoespaçada para o código de referência; a 001 decidiu usar Figtree 600 com algarismos tabulares (a 009 já foi corrigida).
 - **Painel admin:** também não conferido na Fase 1; nenhum arquivo dele mudou.
 - **016:** PNGs das ilustrações e botões antigos (`PrimaryButton`/`SecondaryButton`, ainda no painel) saem na limpeza.
 

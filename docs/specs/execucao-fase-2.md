@@ -7,7 +7,7 @@
 |---|---|---|---|---|---|
 | 007-pagina-tema | 2.1 | feita | feita | feita | verificada com ressalvas (12/12 critérios) |
 | 008-pagina-subtema | 2.2 | feita | feita | feita | verificada com ressalvas (19/19, CA18 com ressalva) |
-| 009-pagina-objeto | 2.3 | pendente | pendente | pendente | |
+| 009-pagina-objeto | 2.3 | feita | pendente | pendente | |
 
 ## Decisões tomadas sem a pessoa
 - (fase) As specs 007 a 009 já existiam, aprovadas em 2026-10-27: cada sessão de spec faz uma revisão rápida contra o código atual em vez de recriar a spec.
@@ -16,6 +16,8 @@
 - (007) Tablet usa o nome e o respiro do celular nos cartões (18,4 → 16 px em 768) para não partir palavras.
 - (008) `/representacoes-espaciais/movimentos-terra` passa a dar 404 (subtema fora do `ThemeDataModel`, zero objetos no dev e no seed), junto com subtema inexistente ou de outro tema. Antes caía no primeiro subtema.
 - (008) "Ver ficha" ligado a `CatalogItem.route`: oculto até a 009. Paginação por cursor sai nesta entrega. Linha em hover usa `accentStrong` (accent sobre surface dá 4,48:1).
+- (009) Código de referência em Figtree 600 tabular; quatro rotas irmãs, uma por tema, com `redirect` que normaliza o código; página sem `PageHeader` nem store; endereço inválido desativa os botões e mostra "Endereço indisponível".
+- (009) `ContentResponseModel.fromJson` testa `preservationOperation`, chave que nenhum dos 190 objetos do dev tem: o catálogo lê `preservationAction` à parte, sem tocar no modelo do painel. Correção do painel fica para 014/015.
 
 ## Ressalvas
 - (007) Nome longo parte a palavra abaixo de ~346 px e com texto a 200%, sem corte; a saída pediria nova faixa de largura.

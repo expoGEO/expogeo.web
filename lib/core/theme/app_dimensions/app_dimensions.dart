@@ -297,6 +297,10 @@ class ComponentSizes {
   final double pageHeadPaddingBottomDesktop = 56.0;
   final double pageHeadTitleGap = 22.0;
   final double pageHeadLeadGap = 14.0;
+  final double pageHeadMedallion = 180.0;
+  final double pageHeadMedallionCompact = 96.0;
+  final double pageHeadColumnGap = 40.0;
+  final double pageHeadStackGap = 20.0;
 
   final double readingMaxWidth = 720.0;
   final double readingPaddingTop = 48.0;

@@ -1,6 +1,6 @@
 # 008. Página do subtema: busca, filtros e lista de objetos
 
-- **Status:** implementada
+- **Status:** verificada com ressalvas
 - **Item do planejamento:** Fase 2, entrega 2.2 (tela T-03)
 - **Protótipo:** aba "Subtema" e, para os estados, aba "Estados" (link em docs/specs/README.md)
 - **Criada em:** 2026-10-27
@@ -87,25 +87,25 @@ Faixas do projeto: celular < 600, tablet de 600 a 1023, desktop ≥ 1024.
 - Busca, tipo e quantidade mostrada valem só enquanto a página está aberta.
 
 ## Critérios de aceite
-- [ ] Os 31 subtemas abrem direto pelo endereço com botão de voltar, migalhas, `h1` em caixa normal, frase com a contagem correta (singular e plural) e medalhão; ilustração ausente mostra o placeholder.
-- [ ] "← {Tema}" e a migalha do tema levam ao tema; "Início" leva à Home.
-- [ ] Buscar "cartografia" e "CARTOGRAFIA" dá o mesmo resultado; buscar com e sem acento ("agua"/"água") também.
-- [ ] Busca com duas palavras só mostra objetos que tenham as duas, em qualquer campo (título, descrição, criador, colaborador, nota, assuntos).
-- [ ] A lista filtra a cada tecla; "Limpar" aparece só com texto, limpa a busca, mantém o tipo e devolve o foco ao campo.
-- [ ] Os chips mostram só os tipos presentes, na ordem da spec, com contagem certa, filtram a lista e voltam para "Todos" quando o tipo escolhido some.
-- [ ] "Assuntos frequentes" mostra até 8 assuntos, do mais comum ao menos comum com empate alfabético, sem o nome do subtema; clicar preenche a busca e volta para "Todos"; some sem assuntos.
-- [ ] A linha de cada objeto mostra tipo · formato, título, descrição, criador, ano (quando houver), domínio e até 4 assuntos, e sem ano não deixa buraco.
-- [ ] Com destino igual ao subtema, o título é texto e "Ver ficha" não aparece; com `CatalogItem.route` apontando para outro endereço, o título é link, "Ver ficha" aparece e ambos levam a ele.
-- [ ] "Acessar" abre o endereço do objeto em aba nova e não aparece com endereço inválido.
-- [ ] A lista segue a ordem do código; "Mostrando X de Y" está certo; "Carregar mais" acrescenta 6 por vez, leva o foco ao primeiro novo e some no fim; mudar busca, tipo ou assunto volta a 6.
-- [ ] Busca sem resultado mostra o estado vazio e "Limpar busca" restaura a lista com "Todos".
-- [ ] Esqueleto ao carregar; erro com "Tentar de novo" que funciona (testar offline e voltar); o cabeçalho continua nos dois casos.
-- [ ] Subtema sem objetos mostra a caixa com "Voltar a {Tema}", sem busca, chips, assuntos e frase.
-- [ ] Subtema inexistente, de outro tema e `/representacoes-espaciais/movimentos-terra` mostram a página de "não encontrada", e não o conteúdo de outro subtema.
-- [ ] Trocar de subtema pelo voltar e avançar do navegador recomeça sem busca, com "Todos", 6 objetos e no topo.
-- [ ] Em 390, 768 e 1280 px, o layout segue a seção Responsivo, sem rolagem horizontal nem `overflow`; contraste ≥ 4,5:1; tudo alcançável por teclado com foco visível.
-- [ ] Um único `h1`, títulos dos objetos como `h3`, rótulo do campo, grupo de chips com estado de pressionado, contagem em região anunciada, "Voltar para {Tema}", "abre em nova aba" e item "Temas" ativo na navbar.
-- [ ] Não há mais anterior/próxima nem número de página, e nada no código usa a paginação por cursor; `/`, tema e `/sobre` seguem como antes.
+- [x] Os 31 subtemas abrem direto pelo endereço com botão de voltar, migalhas, `h1` em caixa normal, frase com a contagem correta (singular e plural) e medalhão; ilustração ausente mostra o placeholder.
+- [x] "← {Tema}" e a migalha do tema levam ao tema; "Início" leva à Home.
+- [x] Buscar "cartografia" e "CARTOGRAFIA" dá o mesmo resultado; buscar com e sem acento ("agua"/"água") também.
+- [x] Busca com duas palavras só mostra objetos que tenham as duas, em qualquer campo (título, descrição, criador, colaborador, nota, assuntos).
+- [x] A lista filtra a cada tecla; "Limpar" aparece só com texto, limpa a busca, mantém o tipo e devolve o foco ao campo.
+- [x] Os chips mostram só os tipos presentes, na ordem da spec, com contagem certa, filtram a lista e voltam para "Todos" quando o tipo escolhido some.
+- [x] "Assuntos frequentes" mostra até 8 assuntos, do mais comum ao menos comum com empate alfabético, sem o nome do subtema; clicar preenche a busca e volta para "Todos"; some sem assuntos.
+- [x] A linha de cada objeto mostra tipo · formato, título, descrição, criador, ano (quando houver), domínio e até 4 assuntos, e sem ano não deixa buraco.
+- [x] Com destino igual ao subtema, o título é texto e "Ver ficha" não aparece; com `CatalogItem.route` apontando para outro endereço, o título é link, "Ver ficha" aparece e ambos levam a ele.
+- [x] "Acessar" abre o endereço do objeto em aba nova e não aparece com endereço inválido.
+- [x] A lista segue a ordem do código; "Mostrando X de Y" está certo; "Carregar mais" acrescenta 6 por vez, leva o foco ao primeiro novo e some no fim; mudar busca, tipo ou assunto volta a 6.
+- [x] Busca sem resultado mostra o estado vazio e "Limpar busca" restaura a lista com "Todos".
+- [x] Esqueleto ao carregar; erro com "Tentar de novo" que funciona (testar offline e voltar); o cabeçalho continua nos dois casos.
+- [x] Subtema sem objetos mostra a caixa com "Voltar a {Tema}", sem busca, chips, assuntos e frase.
+- [x] Subtema inexistente, de outro tema e `/representacoes-espaciais/movimentos-terra` mostram a página de "não encontrada", e não o conteúdo de outro subtema.
+- [x] Trocar de subtema pelo voltar e avançar do navegador recomeça sem busca, com "Todos", 6 objetos e no topo.
+- [x] Em 390, 768 e 1280 px, o layout segue a seção Responsivo, sem rolagem horizontal nem `overflow`; contraste ≥ 4,5:1; tudo alcançável por teclado com foco visível.
+- [x] Um único `h1`, títulos dos objetos como `h3`, rótulo do campo, grupo de chips com estado de pressionado, contagem em região anunciada, "Voltar para {Tema}", "abre em nova aba" e item "Temas" ativo na navbar.
+- [x] Não há mais anterior/próxima nem número de página, e nada no código usa a paginação por cursor; `/`, tema e `/sobre` seguem como antes.
 
 ## Fora do escopo
 - Página do objeto e sua rota (spec 009).
@@ -139,3 +139,4 @@ Faixas do projeto: celular < 600, tablet de 600 a 1023, desktop ≥ 1024.
 - 2026-10-27: aprovada.
 - 2026-11-04: revisada diante das Fases 0 e 1 e da 007 (modo autônomo, sem a pessoa). "Situação atual" atualizada (scaffold, catálogo, cabeçalho, causa do defeito, dados do dev). Tratada a pendência de `/representacoes-espaciais/movimentos-terra`: 404. Definidos: destino de "Ver ficha" até a 009, faixa superior do cabeçalho, frase ao carregar e com erro, estados de busca e chips, comportamento de "Limpar", tablet, troca de subtema, aspas curvas, endereço inválido, altura dos chips e remoção da pilha de paginação. Critérios: de 13 para 19 (campos e "Limpar", "Ver ficha", "Acessar", subtema sem objetos, troca de subtema, títulos e leitura de tela, paginação removida). Segue aprovada.
 - 2026-11-05: implementação (modo autônomo). Hover da linha: o laranja forte no título vale só quando ele é link, para não pintar de laranja um texto não clicável enquanto a 009 não chega. Segue implementada.
+- 2026-11-05: verificada com ressalvas (ver verificacao.md). Enter no campo de busca mantém o foco. Chips saem como interruptor (`aria-checked`) porque o motor web não emite `aria-pressed`.

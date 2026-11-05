@@ -93,7 +93,7 @@ Uma spec por tela: 2.1 → 007-pagina-tema; 2.2 → 008-pagina-subtema; 2.3 → 
 | # | Tela | Notas técnicas | Depende de |
 |---|---|---|---|
 | 2.1 | Tema (T-02) → specs/007-pagina-tema (concluído com ressalvas) | Cabeçalho com contagens e medalhão, grade de subtemas com "N objetos", "Outros temas" | 1.1 (medalhão), Q-04 |
-| 2.2 | Subtema (T-03) | Busca sem acento, chips de tipo, assuntos frequentes, linhas de objeto, "Carregar mais" de 6 em 6. Sai a paginação por cursor | Q-04 |
+| 2.2 | Subtema (T-03) → specs/008-pagina-subtema (concluído com ressalvas) | Busca sem acento, chips de tipo, assuntos frequentes, linhas de objeto, "Carregar mais" de 6 em 6. Sai a paginação por cursor | Q-04 |
 | 2.3 | Objeto (T-04) | Rota nova `/:tema/:subtema/:codigo` que abre por link direto; ficha completa; "Outros objetos" | 1.4 (cartão), Q-01 |
 
 **Aceite:** telas iguais ao protótipo nas três larguras, com carregando, vazio, erro e 404 para endereços inexistentes.
@@ -136,7 +136,7 @@ Uma spec: 5.1 e 5.2 → 016-limpeza-legado.
 | [005-como-explorar-recentes](../specs/005-como-explorar-recentes/spec.md) | 1.3–1.4 | verificada com ressalvas |
 | [006-sobre-apoio](../specs/006-sobre-apoio/spec.md) | 1.5–1.7 | verificada com ressalvas |
 | [007-pagina-tema](../specs/007-pagina-tema/spec.md) | 2.1 | verificada com ressalvas |
-| [008-pagina-subtema](../specs/008-pagina-subtema/spec.md) | 2.2 | aprovada |
+| [008-pagina-subtema](../specs/008-pagina-subtema/spec.md) | 2.2 | verificada com ressalvas |
 | [009-pagina-objeto](../specs/009-pagina-objeto/spec.md) | 2.3 | aprovada |
 | [010-contato](../specs/010-contato/spec.md) | 3.1 | aprovada |
 | [011-estados-especiais](../specs/011-estados-especiais/spec.md) | 3.2 | aprovada |

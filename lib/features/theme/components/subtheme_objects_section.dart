@@ -180,8 +180,7 @@ class _SubthemeObjectsSectionState extends State<SubthemeObjectsSection> {
             ObjectRow(
               key: ValueKey(item.content.docId),
               item: item,
-              // Enquanto o objeto não tem página própria, o destino é esta mesma tela.
-              detailsRoute: item.route == _store.subtheme.route ? null : item.route,
+              detailsRoute: item.route,
               primaryFocusNode: index == _firstNewIndex ? _firstNewFocusNode : null,
             ),
           if (_store.hasMore)

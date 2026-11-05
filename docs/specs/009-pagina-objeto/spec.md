@@ -1,6 +1,6 @@
 # 009. Página do objeto digital
 
-- **Status:** aprovada
+- **Status:** implementada
 - **Item do planejamento:** Fase 2, entrega 2.3 (tela T-04, rota nova)
 - **Protótipo:** aba "Objeto" (link em docs/specs/README.md)
 - **Criada em:** 2026-10-27

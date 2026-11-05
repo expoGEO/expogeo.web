@@ -6,20 +6,25 @@ import 'package:expogeo/core/theme/app_theme.dart';
 import 'package:expogeo/core/utils/screen/screen_utils.dart';
 import 'package:expogeo/core/utils/url/url_utils.dart';
 import 'package:expogeo/features/catalog/infra/models/catalog_model.dart';
+import 'package:expogeo/features/theme/components/subject_tag.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class ObjectRow extends StatefulWidget {
-  const ObjectRow({super.key, required this.item, this.detailsRoute, this.primaryFocusNode});
+  const ObjectRow({
+    super.key,
+    required this.item,
+    required this.detailsRoute,
+    this.primaryFocusNode,
+  });
 
   static const int maxTags = 4;
 
   final CatalogItem item;
 
-  /// Sem valor, o título fica como texto e "Ver ficha" não aparece.
-  final String? detailsRoute;
+  final String detailsRoute;
 
-  /// Vai para o primeiro clicável da linha.
+  /// Vai para o título, o primeiro clicável da linha.
   final FocusNode? primaryFocusNode;
 
   @override
@@ -41,12 +46,7 @@ class _ObjectRowState extends State<ObjectRow> {
     final desktop = ScreenUtils.breakpointOf(context) == Breakpoint.desktop;
     final item = widget.item;
     final type = item.content.originInfo.type;
-    final actions = _Actions(
-      inRow: desktop,
-      item: item,
-      detailsRoute: widget.detailsRoute,
-      primaryFocusNode: widget.primaryFocusNode,
-    );
+    final actions = _Actions(inRow: desktop, item: item, detailsRoute: widget.detailsRoute);
 
     final body = _RowBody(
       item: item,
@@ -63,10 +63,8 @@ class _ObjectRowState extends State<ObjectRow> {
                 Align(alignment: Alignment.topLeft, child: _TypeIcon(type.cardIcon)),
                 SizedBox(width: components.objectRowColumnGap),
                 Expanded(child: body),
-                if (actions.isNotEmpty) ...[
-                  SizedBox(width: components.objectRowColumnGap),
-                  Center(child: actions),
-                ],
+                SizedBox(width: components.objectRowColumnGap),
+                Center(child: actions),
               ],
             ),
           )
@@ -81,10 +79,8 @@ class _ObjectRowState extends State<ObjectRow> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     body,
-                    if (actions.isNotEmpty) ...[
-                      SizedBox(height: components.objectRowActionsTop),
-                      actions,
-                    ],
+                    SizedBox(height: components.objectRowActionsTop),
+                    actions,
                   ],
                 ),
               ),
@@ -185,7 +181,7 @@ class _RowBody extends StatelessWidget {
   });
 
   final CatalogItem item;
-  final String? detailsRoute;
+  final String detailsRoute;
   final FocusNode? primaryFocusNode;
   final bool hovered;
 
@@ -264,7 +260,7 @@ class _RowBody extends StatelessWidget {
           Wrap(
             spacing: components.objectRowTagGap,
             runSpacing: components.objectRowTagGap,
-            children: [for (final tag in tags) _Tag(tag)],
+            children: [for (final tag in tags) SubjectTag(tag)],
           ),
         ],
       ],
@@ -292,7 +288,7 @@ class _RowTitle extends StatefulWidget {
   });
 
   final String title;
-  final String? route;
+  final String route;
   final FocusNode? focusNode;
   final bool rowHovered;
 
@@ -313,7 +309,7 @@ class _RowTitleState extends State<_RowTitle> {
     super.dispose();
   }
 
-  void _open() => context.go(widget.route!);
+  void _open() => context.go(widget.route);
 
   @override
   Widget build(BuildContext context) {
@@ -324,15 +320,6 @@ class _RowTitleState extends State<_RowTitle> {
         .h3
         .copyWith(fontSize: components.objectRowTitle, height: components.objectRowTitleHeight);
     final radius = BorderRadius.circular(AppTheme.dimensions.radii.r6);
-
-    if (widget.route == null) {
-      return Semantics(
-        container: true,
-        header: true,
-        headingLevel: 3,
-        child: Text(widget.title, style: base.copyWith(color: colors.ink)),
-      );
-    }
 
     return SelectionContainer.disabled(
       child: Semantics(
@@ -391,93 +378,42 @@ class _RowTitleState extends State<_RowTitle> {
   }
 }
 
-class _Tag extends StatelessWidget {
-  const _Tag(this.text);
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    final colors = AppTheme.colors;
-    final dimensions = AppTheme.dimensions;
-    final components = dimensions.components;
-
-    return Semantics(
-      container: true,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: colors.surface,
-          borderRadius: BorderRadius.circular(dimensions.radii.r6),
-        ),
-        child: Padding(
-          padding: components.objectRowTagPadding,
-          child: Text(
-            text,
-            style: AppTheme.typography
-                .of(context)
-                .small
-                .copyWith(fontSize: components.objectRowTagText, color: colors.inkSecondary),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 class _Actions extends StatelessWidget {
-  const _Actions({
-    required this.inRow,
-    required this.item,
-    required this.detailsRoute,
-    required this.primaryFocusNode,
-  });
+  const _Actions({required this.inRow, required this.item, required this.detailsRoute});
 
   /// Dentro do `IntrinsicHeight`, um `Wrap` mede sem o espaçamento e a altura sai errada.
   final bool inRow;
   final CatalogItem item;
-  final String? detailsRoute;
-  final FocusNode? primaryFocusNode;
+  final String detailsRoute;
 
   String get _location => item.content.registrationInfo.location.trim();
 
-  bool get _canOpen => UrlUtils.isOpenable(_location);
-
-  bool get isNotEmpty => detailsRoute != null || _canOpen;
-
   @override
   Widget build(BuildContext context) {
-    final route = detailsRoute;
     final gap = AppTheme.dimensions.components.objectRowActionsGap;
 
-    final details = route == null
+    final details = AppButton.ghost(
+      text: 'Ver ficha',
+      size: AppButtonSize.small,
+      onPressed: () => context.go(detailsRoute),
+    );
+    final open = !UrlUtils.isOpenable(_location)
         ? null
-        : AppButton.ghost(
-            text: 'Ver ficha',
-            size: AppButtonSize.small,
-            onPressed: () => context.go(route),
-          );
-    final open = !_canOpen
-        ? null
-        : AppButton.secondary(
-            text: 'Acessar',
-            size: AppButtonSize.small,
-            externalUrl: _location,
-            focusNode: route == null ? primaryFocusNode : null,
-          );
+        : AppButton.secondary(text: 'Acessar', size: AppButtonSize.small, externalUrl: _location);
 
     if (!inRow) {
       return Wrap(
         spacing: gap,
         runSpacing: gap,
         crossAxisAlignment: WrapCrossAlignment.center,
-        children: [?details, ?open],
+        children: [details, ?open],
       );
     }
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        ?details,
-        if (details != null && open != null) SizedBox(width: gap),
+        details,
+        if (open != null) SizedBox(width: gap),
         ?open,
       ],
     );

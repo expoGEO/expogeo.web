@@ -1,3 +1,4 @@
+import 'package:expogeo/core/components/button/app_button.dart';
 import 'package:expogeo/core/components/chip/filter_chip_button.dart';
 import 'package:expogeo/core/components/state/state_message_box.dart';
 import 'package:expogeo/core/models/content_model.dart';
@@ -65,6 +66,10 @@ void main() {
           ),
         ),
         GoRoute(path: natureza.type.route, builder: (context, state) => const Text('tema')),
+        GoRoute(
+          path: '${SubthemeEnum.biomas.route}/:code',
+          builder: (context, state) => Text('objeto ${state.pathParameters['code']}'),
+        ),
       ],
     );
     await tester.pumpWidget(MaterialApp.router(routerConfig: router));
@@ -198,18 +203,26 @@ void main() {
     expect(data.flagsCollection.isLiveRegion, isTrue);
   });
 
-  testWidgets('hoje nenhum "Ver ficha" e título sem link', (tester) async {
+  testWidgets('"Ver ficha" leva à página do objeto', (tester) async {
     await load(tester);
 
-    expect(find.text('Ver ficha'), findsNothing);
-    final data = tester.getSemantics(find.text('Mapa dos biomas')).getSemanticsData();
-    expect(data.flagsCollection.isLink, isFalse);
-    expect(data.headingLevel, 3);
+    expect(find.text('Ver ficha'), findsNWidgets(6));
+    await tester.tap(find.text('Ver ficha').first);
+    await tester.pumpAndSettle();
+    expect(find.text('objeto nma-bio-01'), findsOneWidget);
   });
 
-  testWidgets('"Carregar mais" acrescenta, some e leva o foco ao "Acessar" do sétimo', (
-    tester,
-  ) async {
+  testWidgets('o título é link e leva à página do objeto', (tester) async {
+    await load(tester);
+
+    final link = tester.getSemantics(find.bySemanticsLabel('Mapa dos biomas').first);
+    expect(link.getSemanticsData().flagsCollection.isLink, isTrue);
+    await tester.tap(find.text('Mapa dos biomas'), warnIfMissed: false);
+    await tester.pumpAndSettle();
+    expect(find.text('objeto nma-bio-01'), findsOneWidget);
+  });
+
+  testWidgets('"Carregar mais" acrescenta, some e leva o foco ao título do sétimo', (tester) async {
     await load(tester);
     expect(find.byType(ObjectRow), findsNWidgets(6));
 
@@ -224,6 +237,7 @@ void main() {
     final focused = FocusManager.instance.primaryFocus?.context;
     final row = focused?.findAncestorWidgetOfExactType<ObjectRow>();
     expect(row?.item.content.id, 'NMA_BIO_07');
+    expect(focused?.findAncestorWidgetOfExactType<AppButton>(), isNull);
   });
 
   testWidgets('subtema com até 6 objetos não mostra "Carregar mais"', (tester) async {

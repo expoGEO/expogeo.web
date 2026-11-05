@@ -42,7 +42,7 @@ void main() {
   Future<void> pump(
     WidgetTester tester,
     CatalogItem object, {
-    String? route,
+    String route = '/ficha',
     double width = 1280,
     double textScale = 1,
     FocusNode? focusNode,
@@ -104,36 +104,26 @@ void main() {
     expect(find.text('E'), findsNothing);
   });
 
-  testWidgets('sem rota, título é texto e não há "Ver ficha"', (tester) async {
+  testWidgets('o título leva à ficha', (tester) async {
     await pump(tester, full());
-
-    expect(find.text('Ver ficha'), findsNothing);
-    expect(find.byType(InkWell), findsOneWidget);
-    expectHeading(tester, find.text('Mapa dos biomas'), 3);
-    final data = tester.getSemantics(find.text('Mapa dos biomas')).getSemanticsData();
-    expect(data.flagsCollection.isLink, isFalse);
-  });
-
-  testWidgets('com rota, o título leva a ela', (tester) async {
-    await pump(tester, full(), route: '/ficha');
 
     await tester.tap(find.text('Mapa dos biomas'), warnIfMissed: false);
     await tester.pumpAndSettle();
     expect(find.text('ficha'), findsOneWidget);
   });
 
-  testWidgets('com rota, "Ver ficha" leva a ela', (tester) async {
-    await pump(tester, full(), route: '/ficha');
+  testWidgets('"Ver ficha" leva à ficha', (tester) async {
+    await pump(tester, full());
 
     await tester.tap(find.text('Ver ficha'));
     await tester.pumpAndSettle();
     expect(find.text('ficha'), findsOneWidget);
   });
 
-  testWidgets('título com rota: um ponto de foco, com o h3 dentro do link', (tester) async {
+  testWidgets('título: um ponto de foco, com o h3 dentro do link', (tester) async {
     final node = FocusNode();
     addTearDown(node.dispose);
-    await pump(tester, full(), route: '/ficha', focusNode: node);
+    await pump(tester, full(), focusNode: node);
 
     expectHeading(tester, find.text('Mapa dos biomas'), 3);
     final link = tester.getSemantics(find.bySemanticsLabel('Mapa dos biomas').first);
@@ -145,21 +135,6 @@ void main() {
     expect(link.getSemanticsData().flagsCollection.isFocused, isTrue);
     final others = tester.widgetList<InkWell>(find.byType(InkWell));
     expect(others.where((ink) => identical(ink.focusNode, node)), hasLength(1));
-  });
-
-  testWidgets('primeiro clicável sem rota é o "Acessar"', (tester) async {
-    final node = FocusNode();
-    addTearDown(node.dispose);
-    await pump(tester, full(), focusNode: node);
-
-    node.requestFocus();
-    await tester.pump();
-    final button = find.ancestor(of: find.text('Acessar'), matching: find.byType(AppButton));
-    expect(node.context, isNotNull);
-    expect(
-      find.descendant(of: button, matching: find.byType(InkWell)).evaluate().single.widget,
-      isA<InkWell>().having((ink) => ink.focusNode, 'focusNode', node),
-    );
   });
 
   testWidgets('"Acessar" abre o endereço e avisa a nova aba', (tester) async {
@@ -189,7 +164,7 @@ void main() {
   });
 
   testWidgets('hover troca o rótulo para o laranja forte e dá fundo', (tester) async {
-    await pump(tester, full(), route: '/ficha');
+    await pump(tester, full());
     Color? labelColor() => tester.widget<Text>(find.text('VÍDEO · HTML')).style?.color;
     expect(labelColor(), AppTheme.colors.accent);
 
@@ -212,20 +187,8 @@ void main() {
     );
   });
 
-  testWidgets('hover sem rota deixa o título em tinta', (tester) async {
-    await pump(tester, full());
-
-    final mouse = await tester.createGesture(kind: PointerDeviceKind.mouse);
-    await mouse.addPointer(location: Offset.zero);
-    addTearDown(mouse.removePointer);
-    await mouse.moveTo(tester.getCenter(find.text('Mapa dos biomas')));
-    await tester.pump();
-
-    expect(tester.widget<Text>(find.text('Mapa dos biomas')).style?.color, AppTheme.colors.ink);
-  });
-
   testWidgets('em 1280, ações à direita e centralizadas na altura', (tester) async {
-    await pump(tester, full(), route: '/ficha');
+    await pump(tester, full());
 
     final text = tester.getRect(find.text('Mapa interativo dos biomas brasileiros.'));
     final action = tester.getRect(find.text('Acessar'));
@@ -240,8 +203,8 @@ void main() {
 
   for (final width in [768.0, 390.0]) {
     testWidgets('em $width, ações abaixo do texto, na coluna dele', (tester) async {
-      await pump(tester, full(), route: '/ficha');
-      await pump(tester, full(), route: '/ficha', width: width);
+      await pump(tester, full());
+      await pump(tester, full(), width: width);
 
       final tag = tester.getRect(find.text('Amazônia'));
       final title = tester.getRect(find.text('Mapa dos biomas'));
@@ -264,7 +227,6 @@ void main() {
             description: 'Descrição muito longa e sem nenhum corte na lista. ' * 12,
             location: 'https://www.observatorio-nacional-de-biomas-do-brasil.org.br/x',
           ),
-          route: '/ficha',
           width: width,
           textScale: scale,
         );

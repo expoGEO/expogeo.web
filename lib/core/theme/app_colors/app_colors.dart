@@ -50,6 +50,7 @@ class AppColors {
 
   /// Cor de tudo que é clicável.
   Color accent = const Color(0xFFC94400);
+  Color textSelection = const Color(0x40C94400);
 
   /// Hover, e texto ou ícone laranja sobre [surface] e [accentSoft],
   /// onde [accent] fica abaixo de 4,5:1.

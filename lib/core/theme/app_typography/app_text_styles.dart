@@ -111,6 +111,13 @@ class AppTextStyles {
     height: 1.45,
   );
 
+  TextStyle get confirmationTitle => _display(
+    size: _size(mobile: 22.4, tablet: 25.6, desktop: 25.6),
+    weight: FontWeight.w700,
+    height: 1.12,
+    letterSpacingEm: -0.02,
+  );
+
   /// Código de referência (ex.: NMA_BH_03). O Flutter web não alcança fontes do sistema,
   /// então uma monoespaçada cairia numa proporcional; algarismos tabulares mantêm o alinhamento.
   TextStyle get code => _body(

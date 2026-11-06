@@ -35,16 +35,20 @@ Não mudam: `AppButton`, navbar, menu, rodapé, `PageHeader`, `SiteScaffold`, `A
 ## Decisões técnicas
 - **`ContactForm` fixo em vez de portar o `MailForm` genérico.** O `MailFormFieldSpec` existe lá por causa do Colabore, que aqui não há. Portar a abstração deixaria configuração com um consumidor só.
 - **`FormTextField` novo, sem mexer no `AppTextField`.** O antigo está no painel, usa tokens antigos e só muda nas Fases 4 e 5.
-- **`FormField<String>` em volta de `TextField`, como lá.** O anel de foco cerca só a caixa e o erro fica abaixo. O texto visível sai da semântica; `label`, `hint` (erro) e `validationResult` vão no nó do campo. O motor 3.35.5 emite `aria-invalid` e `aria-description`; conferido no SDK.
+- **`FormField<String>` em volta de `TextField`, como lá.** O anel de foco cerca só a caixa e o erro fica abaixo. O texto visível sai da semântica; `label` e `validationResult` vão no nó do campo. O erro entra no `label`, porque o motor 3.35.5 emite `aria-invalid`, mas não publica `hint` em campo de texto: a classe `SemanticTextField` não usa `LabelAndValue`, e o `aria-description` não aparece (visto no navegador durante a implementação).
 - **`FormValidators` novo, sem mexer no `Validators`.** O `isValidEmail` é do login e do painel, tem outra regra e outra mensagem.
 - **Validação depois da primeira tentativa com `AutovalidateMode.always`.** `onUserInteraction` deixaria de fora campos ainda não tocados.
 - **Foco com rolagem:** `requestFocus` mais `Scrollable.ensureVisible` com `keepVisibleAtStart`, no campo e na caixa da confirmação. Sem isso, o campo fica sob a navbar fixa (achado da 018).
 - **Formulário sem remontar ao mudar de faixa:** `GlobalKey` no `ContactForm`, guardada no `State` da `ContactPage`, porque a troca entre `Row` e `Column` apagaria os campos. Os controladores ficam no `State` do formulário, que sobrevive à ida e volta da confirmação.
 - **`mailto:` montado à mão com `Uri.encodeComponent`.** `Uri(queryParameters:)` troca espaço por `+`. Diferença da 018: o corpo troca `%0A` por `%0D%0A`, a quebra de linha que a RFC 6068 pede. Abre com `UrlUtils.openUrl(url, sameTab: true)`, o caminho já usado pelo rodapé.
+- **Anúncio da confirmação por `SemanticsService.announce`, e não `liveRegion`.** O motor web não aplica `liveRegion` a nó de título: o `aria-live` não aparece no `h2` (visto no navegador).
+- **Rolagem antes do foco, cada uma num quadro.** O nó semântico de um campo fora da tela só nasce depois da rolagem; focar antes deixa o campo sem receber texto com o leitor de tela ativo (visto no Chrome sem janela).
+- **`FocusTraversalGroup` em cada coluna.** A ordem de Tab padrão é geométrica e, no desktop, alternaria entre formulário e "Outros meios", fora da ordem da spec.
 - **Confirmação sem animação:** troca por `if`, o que já atende movimento reduzido.
 - **Retorno da cópia repetido, sem extrair da `ObjectActions`.** Lá a falha tem outro comportamento (seleciona o endereço). A lógica é curta, e extrair mexeria numa tela já verificada. Usa `copyFeedbackDuration` e volta ao rótulo inicial também depois de falhar.
 - **Largura do botão de copiar pode variar com o rótulo.** A spec daqui não pede largura fixa, e o `AppButton` não tem `reserveTexts`; acrescentar mudaria um componente compartilhado sem necessidade.
 - **`accentStrong` nos links:** `accent` dá 4,48:1 na superfície (achado da 018).
+- **`InlineLink` com `Semantics(container: true)`.** Dentro de `WidgetSpan`, sem nó próprio, o link se funde ao parágrafo e perde o endereço.
 - **`InlineLink` abre `mailto:` na mesma aba e `http(s)` em aba nova**, deduzido do esquema. O nome acessível do Observatório acrescenta ", abre em nova aba", como no `AppButton`.
 - **Domínio do Observatório por `UrlUtils.displayDomain(AppLinks.observatory)`**, para não repetir o endereço.
 

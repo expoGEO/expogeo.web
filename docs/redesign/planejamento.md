@@ -138,7 +138,7 @@ Uma spec: 5.1 e 5.2 → 016-limpeza-legado.
 | [007-pagina-tema](../specs/007-pagina-tema/spec.md) | 2.1 | verificada com ressalvas |
 | [008-pagina-subtema](../specs/008-pagina-subtema/spec.md) | 2.2 | verificada com ressalvas |
 | [009-pagina-objeto](../specs/009-pagina-objeto/spec.md) | 2.3 | verificada com ressalvas |
-| [010-contato](../specs/010-contato/spec.md) | 3.1 | aprovada |
+| [010-contato](../specs/010-contato/spec.md) | 3.1 | implementada |
 | [011-estados-especiais](../specs/011-estados-especiais/spec.md) | 3.2 | aprovada |
 | [012-login](../specs/012-login/spec.md) | 4.1 | aprovada |
 | [013-painel-estrutura](../specs/013-painel-estrutura/spec.md) | 4.2 | aprovada |

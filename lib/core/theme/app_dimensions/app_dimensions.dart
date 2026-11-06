@@ -562,4 +562,27 @@ class ComponentSizes {
   final int formMessageMaxLines = 12;
   final double formHintTop = 12.0;
   final double formHintMaxWidth = 480.0;
+
+  final double mailConfirmationPaddingV = 48.0;
+  final double mailConfirmationPaddingH = 24.0;
+  final double mailConfirmationGap = 10.0;
+  final double mailConfirmationIcon = 56.0;
+  final double mailConfirmationIconGlyph = 26.0;
+  final double mailConfirmationTextMaxWidth = 440.0;
+  final double mailConfirmationButtonsTop = 8.0;
+  final double mailConfirmationButtonsGap = 10.0;
+
+  final double contactPaddingTop = 40.0;
+  final double contactPaddingBottom = 72.0;
+  final double contactColumnsGapMobile = 28.0;
+  final double contactColumnsGapTablet = 48.0;
+  final double contactColumnsGapDesktop = 72.0;
+  final int contactFormFlex = 3;
+  final int contactInfoFlex = 2;
+  final double contactInfoPaddingMobile = 20.0;
+  final double contactInfoPaddingTablet = 24.0;
+  final double contactInfoPaddingDesktop = 28.0;
+  final double contactInfoListTop = 18.0;
+  final double contactInfoLabelGap = 2.0;
+  final double contactInfoItemGap = 14.0;
 }

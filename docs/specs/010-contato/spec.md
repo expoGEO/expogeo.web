@@ -1,6 +1,6 @@
 # 010. Contato
 
-- **Status:** aprovada
+- **Status:** implementada
 - **Item do planejamento:** Fase 3, entrega 3.1 (tela T-06)
 - **Protótipo:** aba "Contato" (link em docs/specs/README.md)
 - **Criada em:** 2026-10-27
@@ -116,3 +116,5 @@ Ao lado do formulário, caixa em superfície com o título "Outros meios":
 - 2026-10-27: aprovada.
 - 2026-11-06 (revisão antes do plano, modo autônomo): "Situação atual" ao dia (navbar, menu e rodapé já apontam para `/contato`, e o 404 é o que aparece; `AppLinks`). Endereço corrigido para o do rodapé. Texto copiado detalhado. Acrescentados: rolagem até o foco, ícone do botão, limite de altura da mensagem, botão na largura toda a 390, níveis de título, ordem de Tab, contraste da borda, casos de borda vistos na 018 e "mudar a largura não perde o texto". Critérios de aceite passam de 7 para 12, separando itens que estavam juntos. "Fora do escopo" completado. Status segue `aprovada`.
 - 2026-11-06: plano e tarefas criados (`plan.md`, `tasks.md`).
+- 2026-11-06 (implementação, modo autônomo): sem mudança de comportamento. O motor web do Flutter 3.35.5 não publica `hint` em campo de texto, então o erro "ligado ao campo" entra no nome acessível ("Nome. Escreva seu nome.") enquanto existir. Plano e tarefas ajustados.
+- 2026-11-06: implementada.

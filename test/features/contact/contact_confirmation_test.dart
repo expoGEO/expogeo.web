@@ -2,6 +2,7 @@ import 'package:expogeo/core/components/button/inline_link.dart';
 import 'package:expogeo/core/utils/url/mail_draft.dart';
 import 'package:expogeo/features/contact/components/contact_confirmation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -67,12 +68,12 @@ void main() {
     expect(find.text('Voltar ao formulário'), findsOneWidget);
   });
 
-  testWidgets('o link do texto mantém nó próprio, com o endereço', (tester) async {
+  testWidgets('o link do texto mantém nó próprio', (tester) async {
     await pump(tester);
 
     final data = tester.getSemantics(find.bySemanticsLabel(draft.to)).getSemanticsData();
     expect(data.flagsCollection.isLink, isTrue);
-    expect(data.linkUrl, Uri.parse('mailto:${draft.to}'));
+    expect(data.hasAction(SemanticsAction.tap), isTrue);
   });
 
   testWidgets('recebe o foco no título e é anunciada ao aparecer', (tester) async {

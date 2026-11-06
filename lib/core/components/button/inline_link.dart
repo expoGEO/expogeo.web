@@ -52,11 +52,11 @@ class _InlineLinkState extends State<InlineLink> {
     final radius = BorderRadius.circular(AppTheme.dimensions.radii.r6);
 
     return Semantics(
-      // Sem nó próprio, dentro de `WidgetSpan` o link se funde ao parágrafo e perde o endereço.
+      // Sem nó próprio, dentro de `WidgetSpan` o link se funde ao parágrafo.
       container: true,
+      // Sem `linkUrl`: o `<a href>` do leitor de tela navegaria a própria aba, além do `onTap`.
       link: true,
       label: widget.semanticLabel ?? widget.text,
-      linkUrl: Uri.parse(widget.url),
       onTap: _open,
       // Sem o nó do InkWell, o foco precisa estar neste; senão o leitor de tela perde o foco.
       focusable: true,

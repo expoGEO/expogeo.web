@@ -40,7 +40,8 @@ void main() {
     final node = tester.getSemantics(find.bySemanticsLabel('exemplo.org, abre em nova aba'));
     final data = node.getSemanticsData();
     expect(data.flagsCollection.isLink, isTrue);
-    expect(data.linkUrl, Uri.parse('https://exemplo.org/'));
+    expect(data.linkUrl, isNull, reason: 'o <a href> navegaria a própria aba');
+    expect(data.hasAction(SemanticsAction.tap), isTrue);
     expect(data.hasAction(SemanticsAction.focus), isTrue);
     expect(node.childrenCount, 0);
     expect(find.bySemanticsLabel('exemplo.org'), findsNothing);

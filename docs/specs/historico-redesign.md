@@ -12,7 +12,7 @@ Uma linha por fase executada. O detalhe de cada spec fica em `docs/specs/NNN-*/`
 - **Regra do Firestore (004, 005):** os deploys publicam as regras desde o PR #10 e a leitura funciona no dev (190 objetos; 35, 74, 42, 39). Falta conferir na produção depois do merge na `main`.
 - **Acessibilidade anterior à Fase 1:** a navbar de altura fixa transborda com texto a 200% e os títulos das colunas do rodapé saem como `h2`.
 - **Primeiro Tab de cada página (009):** cai numa parada invisível, a visão de plataforma do `SelectionArea` do `SiteScaffold`, no web.
-- **Endereços de 3 segmentos (009):** conferir a reescrita do servidor em `dev.expogeo.com.br` depois do deploy (`.htaccess` fora do repositório).
+- **Reescrita de rotas no dev:** em 2026-11-06, qualquer endereço além de `/` em `dev.expogeo.com.br` dava o 404 da HostGator e a raiz abria sem senha: falta a reescrita (e a senha) no `.htaccess` do servidor, etapa E2 de [docs/cicd/planejamento.md](../cicd/planejamento.md). Depois de corrigir, conferir inclusive os endereços de 3 segmentos da 009.
 - **Preservação (009, 014/015):** `ContentResponseModel.fromJson` testa `preservationOperation`, chave ausente nos 190 objetos do dev, e o formulário do painel abre com o campo em branco. O catálogo lê `preservationAction` à parte; a correção do modelo fica para 014/015. Conferir na produção se a chave é a mesma.
 - **Ano de emissão (008, 009):** nenhum objeto do dev tem o dado, então só foi visto com datasource alterado.
 - **003:** conferir a prévia real em aplicativo de mensagem (WhatsApp etc.) depois do deploy em `dev.expogeo.com.br`.

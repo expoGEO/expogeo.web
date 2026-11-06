@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:expogeo/core/components/structure/footer.dart';
 import 'package:expogeo/core/components/structure/navbar.dart';
 import 'package:expogeo/core/components/structure/observatory_strip.dart';
@@ -23,9 +25,20 @@ class SiteScaffold extends StatelessWidget {
             const SliverToBoxAdapter(child: ObservatoryStrip()),
             const NavbarSliver(),
             ...slivers,
-            const SliverFillRemaining(
-              hasScrollBody: false,
-              child: Align(alignment: Alignment.bottomCenter, child: Footer()),
+            // `SliverFillRemaining` mediria o rodapé pela altura intrínseca, que ignora a largura
+            // máxima do conteúdo: com texto ampliado, a medida sai menor que a real e ele estoura.
+            SliverLayoutBuilder(
+              builder: (context, constraints) {
+                final remaining =
+                    constraints.viewportMainAxisExtent - constraints.precedingScrollExtent;
+
+                return SliverToBoxAdapter(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(minHeight: max(remaining, 0)),
+                    child: const Footer(),
+                  ),
+                );
+              },
             ),
           ],
         ),

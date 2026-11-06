@@ -68,10 +68,105 @@ void main() {
     expect(catalog.firstOf(SubthemeEnum.biomas), isNull);
   });
 
-  test('o objeto leva ao próprio subtema', () {
+  test('o objeto leva à própria página, com o código em minúsculas e hífen', () {
     final catalog = CatalogModel.fromRecords(biomasRecords());
 
-    expect(catalog.items.first.route, '/natureza-meio-ambiente/biomas');
+    expect(catalog.items.first.slug, 'nma-bio-04');
+    expect(catalog.items.first.route, '/natureza-meio-ambiente/biomas/nma-bio-04');
+  });
+
+  group('preservação', () {
+    Map<String, dynamic> withPreservation(Object? value) {
+      final data = validContentJson()..remove('preservationOperation');
+      data['preservationAction'] = value;
+      return data;
+    }
+
+    test('vem de preservationAction, mesmo sem preservationOperation', () {
+      final catalog = CatalogModel.fromRecords([
+        recordAt(
+          'RE_CG',
+          'a',
+          data: withPreservation({'operation': 'Revisar o link', 'updateDate': '2026-12-01'}),
+        ),
+      ]);
+
+      final preservation = catalog.items.single.preservation;
+      expect(preservation?.operation, 'Revisar o link');
+      expect(preservation?.updateDate, DateTime(2026, 12));
+    });
+
+    test('sem updateDate, fica só a operação', () {
+      final catalog = CatalogModel.fromRecords([
+        recordAt('RE_CG', 'a', data: withPreservation({'operation': 'Revisar o link'})),
+      ]);
+
+      expect(catalog.items.single.preservation?.operation, 'Revisar o link');
+      expect(catalog.items.single.preservation?.updateDate, isNull);
+    });
+
+    for (final (label, value) in [
+      ('updateDate malformado', {'operation': 'Revisar', 'updateDate': 'ontem'}),
+      ('campo que não é mapa', 'texto'),
+      ('campo ausente', null),
+    ]) {
+      test('$label mantém o objeto, sem preservação', () {
+        final catalog = CatalogModel.fromRecords([
+          recordAt('RE_CG', 'a', data: withPreservation(value)),
+        ]);
+
+        expect(catalog.total, 1);
+        expect(catalog.items.single.preservation, isNull);
+      });
+    }
+  });
+
+  group('find', () {
+    for (final code in ['NMA_BIO_03', 'nma-bio-03', 'nma_BIO-03']) {
+      test('acha "$code" sem diferenciar a grafia', () {
+        final catalog = CatalogModel.fromRecords(biomasRecords());
+
+        expect(catalog.find(SubthemeEnum.biomas, code)?.content.id, 'NMA_BIO_03');
+      });
+    }
+
+    test('código de outro subtema não acha', () {
+      final catalog = CatalogModel.fromRecords(biomasRecords());
+
+      expect(catalog.find(SubthemeEnum.sustentabilidade, 'NMA_BIO_03'), isNull);
+      expect(catalog.find(SubthemeEnum.biomas, 'nao-existe'), isNull);
+    });
+
+    test('se dois códigos coincidem, vale o menor', () {
+      final catalog = CatalogModel.fromRecords([
+        objectAt('NMA_BIO', 'NMA_BIO_01', date: DateTime(2025)),
+        objectAt('NMA_BIO', 'NMA-BIO-01', date: DateTime(2025)),
+      ]);
+
+      expect(catalog.find(SubthemeEnum.biomas, 'nma-bio-01')?.content.id, 'NMA-BIO-01');
+    });
+  });
+
+  group('othersOf', () {
+    final catalog = CatalogModel.fromRecords([
+      ...biomasRecords(),
+      objectAt('NMA_SUS', 'NMA_SUS_01', date: DateTime(2025)),
+    ]);
+    CatalogItem bySlug(String code) => catalog.find(SubthemeEnum.biomas, code)!;
+
+    test('sem o atual, em ordem, até o limite e só do subtema', () {
+      expect(catalog.othersOf(bySlug('nma-bio-02'), 3).map((item) => item.content.id), [
+        'NMA_BIO_01',
+        'NMA_BIO_03',
+        'NMA_BIO_04',
+      ]);
+    });
+
+    test('vazio com um objeto só no subtema', () {
+      final single = catalog.find(SubthemeEnum.sustentabilidade, 'nma-sus-01')!;
+
+      expect(catalog.othersOf(single, 3), isEmpty);
+    });
   });
 
   test('os 6 mais recentes saem em ordem de data decrescente', () {

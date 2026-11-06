@@ -99,6 +99,9 @@ class AppTextStyles {
     letterSpacingEm: 0.08,
   );
 
+  TextStyle get chip =>
+      _body(size: _size(mobile: 14, tablet: 14, desktop: 14), weight: FontWeight.w600, height: 1.2);
+
   /// Código de referência (ex.: NMA_BH_03). O Flutter web não alcança fontes do sistema,
   /// então uma monoespaçada cairia numa proporcional; algarismos tabulares mantêm o alinhamento.
   TextStyle get code => _body(

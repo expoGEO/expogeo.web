@@ -237,17 +237,16 @@ UI Layer (Widgets)
 
 ```dart
 @observable
-ContentPaginationState state = ContentPaginationStateInitial();
+String query = '';
+
+@computed
+List<CatalogItem> get results { ... }
 
 @action
-void loadContentsBySubtheme(SubthemeEnum subtheme) { ... }
-
-@action
-Future<void> nextPage() { ... }
-
-@action
-Future<void> previousPage() { ... }
+void setQuery(String text) { ... }
 ```
+
+Os objetos vêm de um catálogo único, carregado uma vez por `collectionGroup('contents')`. Busca, filtros e "Carregar mais" do subtema rodam no navegador, sobre esse catálogo.
 
 ### Tratamento de Erros
 

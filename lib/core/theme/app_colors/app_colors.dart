@@ -69,6 +69,9 @@ class AppColors {
   /// Anel tracejado interno do anel dos temas, só decorativo.
   Color orbitDashed = const Color(0xFFD6CABB);
 
+  /// Tracejado da caixa de estado, só decorativo.
+  Color stateBoxBorder = const Color(0xFFD4CDC3);
+
   Color error = const Color(0xFFB3261E);
   Color errorSurface = const Color(0xFFFBE9E7);
   Color success = const Color(0xFF1C6B34);

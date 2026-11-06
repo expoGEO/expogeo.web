@@ -1,4 +1,5 @@
 import 'package:expogeo/core/components/card/object_card.dart';
+import 'package:expogeo/core/components/card/object_card_grid.dart';
 import 'package:expogeo/core/components/state/state_error_inline.dart';
 import 'package:expogeo/core/components/structure/page_content.dart';
 import 'package:expogeo/core/theme/app_theme.dart';
@@ -27,7 +28,7 @@ class HomeRecentSection extends StatelessWidget {
         final Widget content;
         switch (store.state) {
           case CatalogStateInitial() || CatalogStateLoading():
-            content = _Grid(children: List.filled(count, const ObjectCardSkeleton()));
+            content = ObjectCardGrid(children: List.filled(count, const ObjectCardSkeleton()));
           case CatalogStateError():
             content = StateErrorInline(
               message: 'Não conseguimos carregar os objetos recentes',
@@ -36,7 +37,7 @@ class HomeRecentSection extends StatelessWidget {
           case CatalogStateSuccess(:final catalog):
             final items = catalog.latest(count);
             if (items.isEmpty) return const SizedBox.shrink();
-            content = _Grid(
+            content = ObjectCardGrid(
               children: [
                 for (final item in items)
                   ObjectCard(
@@ -87,42 +88,6 @@ class _Section extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class _Grid extends StatelessWidget {
-  const _Grid({required this.children});
-
-  final List<Widget> children;
-
-  @override
-  Widget build(BuildContext context) {
-    final gap = AppTheme.dimensions.components.recentGridGap;
-    final columns = switch (ScreenUtils.breakpointOf(context)) {
-      Breakpoint.mobile => 1,
-      Breakpoint.tablet => 2,
-      Breakpoint.desktop => 3,
-    };
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        for (var start = 0; start < children.length; start += columns) ...[
-          if (start > 0) SizedBox(height: gap),
-          IntrinsicHeight(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                for (var i = start; i < start + columns; i++) ...[
-                  if (i > start) SizedBox(width: gap),
-                  Expanded(child: i < children.length ? children[i] : const SizedBox.shrink()),
-                ],
-              ],
-            ),
-          ),
-        ],
-      ],
     );
   }
 }

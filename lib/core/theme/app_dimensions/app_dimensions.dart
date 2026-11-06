@@ -297,6 +297,48 @@ class ComponentSizes {
   final double pageHeadPaddingBottomDesktop = 56.0;
   final double pageHeadTitleGap = 22.0;
   final double pageHeadLeadGap = 14.0;
+  final double pageHeadMedallion = 180.0;
+  final double pageHeadMedallionCompact = 96.0;
+  final double pageHeadColumnGap = 40.0;
+  final double pageHeadStackGap = 20.0;
+
+  final double themeStatsTop = 18.0;
+  final double themeStatsText = 15.0;
+  final double themeStatsGapH = 24.0;
+  final double themeStatsGapV = 8.0;
+  final double themeStatsSkeletonWidth = 28.0;
+
+  final double subthemeSectionTop = 40.0;
+  final double subthemeSectionHeadGap = 24.0;
+  final int subthemeColumnsMobile = 2;
+  final int subthemeColumnsTablet = 3;
+  final int subthemeColumnsDesktop = 4;
+  final double subthemeGridGap = 20.0;
+  final double subthemeGridGapMobile = 12.0;
+  final EdgeInsets subthemeCardPadding = const EdgeInsets.symmetric(vertical: 22, horizontal: 18);
+  final EdgeInsets subthemeCardPaddingMobile = const EdgeInsets.symmetric(
+    vertical: 16,
+    horizontal: 10,
+  );
+  final double subthemeCardGap = 10.0;
+  final double subthemeCardNameTop = 4.0;
+  final double subthemeCardMedallionDesktop = 140.0;
+  final double subthemeCardMedallionTablet = 120.0;
+  final double subthemeCardMedallionMobile = 104.0;
+  final double subthemeCardName = 18.4;
+  final double subthemeCardNameMobile = 16.0;
+  final double subthemeCardNameHeight = 1.2;
+  final double subthemeCardCountSkeletonWidth = 64.0;
+  final double subthemeCardHoverScale = 1.03;
+
+  final double otherThemesPaddingTop = 48.0;
+  final double otherThemesPaddingBottom = 72.0;
+  final double otherThemesLabelGap = 12.0;
+  final double otherThemesGap = 10.0;
+  final EdgeInsets themeChipPadding = const EdgeInsets.fromLTRB(8, 7, 14, 7);
+  final double themeChipMedallion = 22.0;
+  final double themeChipGap = 6.0;
+  final double themeChipText = 14.0;
 
   final double readingMaxWidth = 720.0;
   final double readingPaddingTop = 48.0;
@@ -364,4 +406,145 @@ class ComponentSizes {
 
   /// Parte da altura de cada linha de texto ocupada pela barra do esqueleto; o resto é o vão.
   final double objectCardSkeletonBarFill = 0.75;
+
+  final double pageHeadTopGap = 12.0;
+
+  /// Puxa o botão de voltar para o texto dele alinhar com a margem da página.
+  final double pageHeadBackShift = -10.0;
+  final double subthemeLeadSkeletonWidth = 320.0;
+
+  final double searchFieldHeight = 48.0;
+  final double searchFieldMaxWidth = 520.0;
+  final double searchFieldBorder = 1.5;
+  final double searchFieldFocusRing = 4.0;
+  final double searchFieldPaddingStart = 44.0;
+  final double searchFieldPaddingEnd = 84.0;
+  final double searchFieldPaddingEndEmpty = 14.0;
+  final double searchFieldIconInset = 14.0;
+  final double searchFieldClearInset = 8.0;
+  final double searchFieldClearPaddingH = 10.0;
+  final double searchFieldClearPaddingV = 6.0;
+
+  final double chipPaddingH = 14.0;
+  final double chipCountGap = 6.0;
+  final double chipGap = 8.0;
+
+  final double subjectChipMinHeight = 32.0;
+  final EdgeInsets subjectChipPadding = const EdgeInsets.symmetric(vertical: 6, horizontal: 11);
+  final double subjectChipText = 13.5;
+  final double subjectChipGap = 6.0;
+  final double subjectsLabelText = 13.0;
+  final double subjectsLabelGap = 6.0;
+  final double subjectsPaddingTop = 4.0;
+  final double subjectsPaddingBottom = 6.0;
+
+  final double toolbarPaddingTop = 24.0;
+  final double toolbarPaddingBottom = 8.0;
+  final double toolbarGap = 16.0;
+
+  final double resultCountText = 14.5;
+  final double resultCountPaddingTop = 4.0;
+  final double resultCountPaddingBottom = 20.0;
+
+  final double objectRowPadding = 20.0;
+
+  /// Quanto o fundo do hover passa da coluna de conteúdo de cada lado.
+  final double objectRowBleed = 16.0;
+  final double objectRowColumnGap = 18.0;
+  final double objectRowColumnGapCompact = 12.0;
+  final double objectRowTextGap = 4.0;
+  final double objectRowIconBox = 44.0;
+  final double objectRowIconBoxCompact = 36.0;
+  final double objectRowIconCompact = 16.0;
+  final double objectRowTitle = 18.56;
+  final double objectRowTitleHeight = 1.3;
+  final double objectRowDescription = 15.5;
+  final double objectRowMetaText = 14.0;
+  final double objectRowMetaGapH = 14.0;
+  final double objectRowMetaGapV = 2.0;
+  final double objectRowTagText = 12.5;
+  final EdgeInsets objectRowTagPadding = const EdgeInsets.symmetric(vertical: 2, horizontal: 8);
+  final double objectRowTagGap = 6.0;
+  final double objectRowTagsTop = 6.0;
+  final double objectRowActionsGap = 6.0;
+  final double objectRowActionsTop = 10.0;
+
+  final double loadMorePaddingTop = 28.0;
+  final double objectListPaddingBottom = 56.0;
+
+  final double stateBoxPaddingVertical = 40.0;
+  final double stateBoxPaddingHorizontal = 20.0;
+  final double stateBoxIcon = 52.0;
+  final double stateBoxIconGlyph = 24.0;
+  final double stateBoxTitle = 20.8;
+  final double stateBoxTextMaxWidth = 360.0;
+  final double stateBoxGap = 10.0;
+  final double stateBoxButtonGap = 6.0;
+  final double stateBoxMarginTop = 12.0;
+  final double stateBoxMarginBottom = 40.0;
+  final double stateBoxDashLength = 4.0;
+  final double stateBoxDashGap = 3.0;
+
+  /// Largura da coluna de leitura da página do objeto, sem as margens.
+  final double objectColumnMaxWidth = 856.0;
+  final double objectHeadPaddingTop = 28.0;
+  final double objectHeadTagGap = 24.0;
+  final double objectHeadTitleGap = 14.0;
+  final double objectHeadLeadGap = 14.0;
+  final double objectHeadActionsGap = 26.0;
+  final double objectHeadLeadMobile = 17.6;
+  final double objectHeadLeadTablet = 19.2;
+  final double objectHeadLeadDesktop = 22.4;
+  final double objectHeadLeadHeight = 1.45;
+  final double objectHeadSkeletonButton = 170.0;
+
+  final double objectActionsGap = 12.0;
+  final double objectAddressTop = 12.0;
+  final double objectAddressText = 14.0;
+  final Duration copyFeedbackDuration = const Duration(milliseconds: 1800);
+
+  final double objectNoteTop = 35.0;
+  final EdgeInsets objectNotePadding = const EdgeInsets.symmetric(vertical: 20, horizontal: 24);
+  final double objectNoteLabelText = 13.0;
+  final double objectNoteLabelIcon = 15.0;
+  final double objectNoteLabelGap = 8.0;
+  final double objectNoteLabelBottom = 6.0;
+  final double objectNoteText = 16.5;
+  final double objectNoteTextHeight = 1.65;
+
+  final double objectSheetTop = 32.0;
+  final double objectSheetBottom = 64.0;
+  final EdgeInsets objectSheetHeadPadding = const EdgeInsets.symmetric(
+    vertical: 14,
+    horizontal: 20,
+  );
+  final double objectSheetHeadText = 12.5;
+
+  /// Espaçamento entre letras do cabeçalho da ficha, em fração do tamanho da fonte.
+  final double objectSheetHeadLetterSpacing = 0.09;
+  final double objectSheetHeadGap = 12.0;
+  final double objectSheetGroupPadding = 20.0;
+  final double objectSheetGroupTitle = 170.0;
+  final double objectSheetGroupTitleText = 13.0;
+  final double objectSheetGroupTitleTop = 2.0;
+  final double objectSheetGroupGapV = 12.0;
+  final double objectSheetGroupGapH = 28.0;
+  final double objectSheetLabelText = 12.5;
+
+  /// Espaçamento entre letras dos rótulos da ficha, em fração do tamanho da fonte.
+  final double objectSheetLabelLetterSpacing = 0.07;
+  final double objectSheetLabelGap = 2.0;
+  final double objectSheetValueText = 16.0;
+  final double objectSheetPairGapV = 14.0;
+  final double objectSheetPairGapH = 28.0;
+  final double objectSheetTagsTop = 4.0;
+  final int objectSheetColumnsMobile = 1;
+  final int objectSheetColumnsTablet = 2;
+  final int objectSheetColumnsDesktop = 3;
+  final int objectSheetSkeletonGroups = 3;
+
+  final EdgeInsets referenceCodePadding = const EdgeInsets.symmetric(vertical: 2, horizontal: 8);
+
+  final double objectRelatedPadding = 48.0;
+  final double objectRelatedHeadGap = 16.0;
 }

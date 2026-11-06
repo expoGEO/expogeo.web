@@ -92,9 +92,9 @@ Uma spec por tela: 2.1 → 007-pagina-tema; 2.2 → 008-pagina-subtema; 2.3 → 
 
 | # | Tela | Notas técnicas | Depende de |
 |---|---|---|---|
-| 2.1 | Tema (T-02) | Cabeçalho com contagens e medalhão, grade de subtemas com "N objetos", "Outros temas" | 1.1 (medalhão), Q-04 |
-| 2.2 | Subtema (T-03) | Busca sem acento, chips de tipo, assuntos frequentes, linhas de objeto, "Carregar mais" de 6 em 6. Sai a paginação por cursor | Q-04 |
-| 2.3 | Objeto (T-04) | Rota nova `/:tema/:subtema/:codigo` que abre por link direto; ficha completa; "Outros objetos" | 1.4 (cartão), Q-01 |
+| 2.1 | Tema (T-02) → specs/007-pagina-tema (concluído com ressalvas) | Cabeçalho com contagens e medalhão, grade de subtemas com "N objetos", "Outros temas" | 1.1 (medalhão), Q-04 |
+| 2.2 | Subtema (T-03) → specs/008-pagina-subtema (concluído com ressalvas) | Busca sem acento, chips de tipo, assuntos frequentes, linhas de objeto, "Carregar mais" de 6 em 6. Sai a paginação por cursor | Q-04 |
+| 2.3 | Objeto (T-04) → specs/009-pagina-objeto (concluído com ressalvas) | Rota nova `/:tema/:subtema/:codigo` que abre por link direto; ficha completa; "Outros objetos" | 1.4 (cartão), Q-01 |
 
 **Aceite:** telas iguais ao protótipo nas três larguras, com carregando, vazio, erro e 404 para endereços inexistentes.
 
@@ -135,9 +135,9 @@ Uma spec: 5.1 e 5.2 → 016-limpeza-legado.
 | [004-hero-temas](../specs/004-hero-temas/spec.md) | 1.1–1.2 | verificada com ressalvas |
 | [005-como-explorar-recentes](../specs/005-como-explorar-recentes/spec.md) | 1.3–1.4 | verificada com ressalvas |
 | [006-sobre-apoio](../specs/006-sobre-apoio/spec.md) | 1.5–1.7 | verificada com ressalvas |
-| [007-pagina-tema](../specs/007-pagina-tema/spec.md) | 2.1 | aprovada |
-| [008-pagina-subtema](../specs/008-pagina-subtema/spec.md) | 2.2 | aprovada |
-| [009-pagina-objeto](../specs/009-pagina-objeto/spec.md) | 2.3 | aprovada |
+| [007-pagina-tema](../specs/007-pagina-tema/spec.md) | 2.1 | verificada com ressalvas |
+| [008-pagina-subtema](../specs/008-pagina-subtema/spec.md) | 2.2 | verificada com ressalvas |
+| [009-pagina-objeto](../specs/009-pagina-objeto/spec.md) | 2.3 | verificada com ressalvas |
 | [010-contato](../specs/010-contato/spec.md) | 3.1 | aprovada |
 | [011-estados-especiais](../specs/011-estados-especiais/spec.md) | 3.2 | aprovada |
 | [012-login](../specs/012-login/spec.md) | 4.1 | aprovada |
@@ -146,7 +146,7 @@ Uma spec: 5.1 e 5.2 → 016-limpeza-legado.
 | [015-editor-objeto](../specs/015-editor-objeto/spec.md) | 4.4 | aprovada |
 | [016-limpeza-legado](../specs/016-limpeza-legado/spec.md) | 5.1–5.2 | aprovada |
 
-Todas as perguntas foram respondidas e as 16 specs aprovadas em 2026-10-27. Fase 0 (001 a 003) e Fase 1 (004 a 006) concluídas em 2026-11-03; próximo passo: Fase 2 (`/sdd-fase Fase 2`), depois de publicar a regra de leitura por grupo de coleções no dev.
+Todas as perguntas foram respondidas e as 16 specs aprovadas em 2026-10-27. Fase 0 (001 a 003) e Fase 1 (004 a 006) concluídas em 2026-11-03; Fase 2 (007 a 009) concluída em 2026-11-05; próximo passo: Fase 3 (`/sdd-fase Fase 3`).
 
 ---
 

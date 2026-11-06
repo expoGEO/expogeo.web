@@ -30,6 +30,22 @@ void main() {
     expect(tester.getSemantics(find.byType(AppButton)), isNot(matchesSemantics(isEnabled: true)));
   });
 
+  testWidgets('sem fullWidth acompanha o texto; com ele, ocupa a largura do pai', (tester) async {
+    Future<double> widthOf({required bool fullWidth}) async {
+      await pump(
+        tester,
+        SizedBox(
+          width: 300,
+          child: AppButton.primary(text: 'Enviar', onPressed: () {}, fullWidth: fullWidth),
+        ),
+      );
+      return tester.getSize(find.byType(Material).last).width;
+    }
+
+    expect(await widthOf(fullWidth: false), lessThan(300));
+    expect(await widthOf(fullWidth: true), 300);
+  });
+
   testWidgets('ativo responde ao toque', (tester) async {
     var taps = 0;
     await pump(tester, AppButton.secondary(text: 'Enviar', onPressed: () => taps++));
@@ -45,6 +61,29 @@ void main() {
     );
 
     expect(find.bySemanticsLabel('Observatório, abre em nova aba'), findsOneWidget);
+  });
+
+  testWidgets('nome acessível próprio substitui o texto', (tester) async {
+    await pump(
+      tester,
+      AppButton.ghost(text: 'Biomas', semanticLabel: 'Voltar para Biomas', onPressed: () {}),
+    );
+
+    expect(find.bySemanticsLabel('Voltar para Biomas'), findsOneWidget);
+    expect(find.bySemanticsLabel('Biomas'), findsNothing);
+  });
+
+  testWidgets('nome acessível próprio mantém o aviso de nova aba', (tester) async {
+    await pump(
+      tester,
+      const AppButton.secondary(
+        text: 'Acessar',
+        semanticLabel: 'Acessar o mapa',
+        externalUrl: 'https://example.com',
+      ),
+    );
+
+    expect(find.bySemanticsLabel('Acessar o mapa, abre em nova aba'), findsOneWidget);
   });
 
   group('hover', () {

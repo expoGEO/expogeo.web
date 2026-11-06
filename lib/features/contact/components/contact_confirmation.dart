@@ -34,9 +34,8 @@ class _ContactConfirmationState extends State<ContactConfirmation> {
   @override
   void initState() {
     super.initState();
-    // O botão que abriu a confirmação saiu da tela, e o foco do teclado sairia com ele. A caixa é
-    // mais baixa que o formulário: sem a rolagem, o topo dela pode parar sob a navbar. O anúncio é
-    // explícito porque o motor web não aplica `liveRegion` a títulos.
+    // O botão que abriu a confirmação saiu da tela, levando o foco; sem a rolagem, o topo da caixa
+    // pode parar sob a navbar. O anúncio é explícito: o motor web ignora `liveRegion` em título.
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
       _titleFocus.requestFocus();
@@ -137,7 +136,9 @@ class _ContactConfirmationState extends State<ContactConfirmation> {
                   textAlign: TextAlign.center,
                   style: styles.regular.copyWith(color: colors.inkSecondary),
                 ),
-                SizedBox(height: components.mailConfirmationGap),
+                SizedBox(
+                  height: components.mailConfirmationGap + components.mailConfirmationTextBottom,
+                ),
                 Text.rich(
                   TextSpan(
                     style: styles.small.copyWith(color: colors.inkSecondary),
@@ -156,7 +157,7 @@ class _ContactConfirmationState extends State<ContactConfirmation> {
               ],
             ),
           ),
-          SizedBox(height: components.mailConfirmationGap + components.mailConfirmationButtonsTop),
+          SizedBox(height: components.mailConfirmationGap + components.mailConfirmationTextBottom),
           Wrap(
             alignment: WrapAlignment.center,
             spacing: components.mailConfirmationButtonsGap,

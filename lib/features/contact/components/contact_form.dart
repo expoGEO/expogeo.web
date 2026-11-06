@@ -81,9 +81,8 @@ class _ContactFormState extends State<ContactForm> {
     _focusField(_name);
   }
 
-  // Focar não rola a página: o campo poderia ficar acima da tela ou sob a navbar fixa. A rolagem vem
-  // antes do foco, cada um num quadro: o nó semântico de um campo fora da tela só nasce depois dela,
-  // e focá-lo antes deixa o leitor de tela sem receber o que se digita.
+  // Focar não rola a página, e o campo poderia ficar sob a navbar. A rolagem vem um quadro antes:
+  // o nó semântico de um campo fora da tela só nasce depois dela, e sem ele não se recebe texto.
   Future<void> _focusField(int index) async {
     await WidgetsBinding.instance.endOfFrame;
     final fieldContext = _fieldKeys[index].currentContext;

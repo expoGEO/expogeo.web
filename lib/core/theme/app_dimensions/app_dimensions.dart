@@ -569,7 +569,7 @@ class ComponentSizes {
   final double mailConfirmationIcon = 56.0;
   final double mailConfirmationIconGlyph = 26.0;
   final double mailConfirmationTextMaxWidth = 440.0;
-  final double mailConfirmationButtonsTop = 8.0;
+  final double mailConfirmationTextBottom = 8.0;
   final double mailConfirmationButtonsGap = 10.0;
 
   final double contactPaddingTop = 40.0;

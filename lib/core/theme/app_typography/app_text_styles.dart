@@ -102,6 +102,15 @@ class AppTextStyles {
   TextStyle get chip =>
       _body(size: _size(mobile: 14, tablet: 14, desktop: 14), weight: FontWeight.w600, height: 1.2);
 
+  TextStyle get formLabel =>
+      _body(size: _size(mobile: 15, tablet: 15, desktop: 15), weight: FontWeight.w600, height: 1.4);
+
+  TextStyle get formError => _body(
+    size: _size(mobile: 14, tablet: 14, desktop: 14),
+    weight: FontWeight.w500,
+    height: 1.45,
+  );
+
   /// Código de referência (ex.: NMA_BH_03). O Flutter web não alcança fontes do sistema,
   /// então uma monoespaçada cairia numa proporcional; algarismos tabulares mantêm o alinhamento.
   TextStyle get code => _body(

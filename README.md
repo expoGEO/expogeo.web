@@ -214,7 +214,7 @@ O redesign (em andamento, ver [planejamento](docs/redesign/planejamento.md)) usa
 - **Fontes:** Bricolage Grotesque (títulos) e Figtree (texto), embutidas em `assets/fonts/`.
 - **Clicável:** `#C94400`, com foco visível e contraste mínimo de 4,5:1.
 - **Estrutura das páginas públicas:** `SiteScaffold` (faixa do Observatório que rola, navbar fixa com menu Temas e rodapé escuro) em `lib/core/components/structure/`.
-- **Componentes:** `AppButton.primary/.secondary/.ghost` (`components/button/`) e `AppMedallion` (`components/image/`), para ilustrações de temas em 1:1 com placeholder.
+- **Componentes:** `AppButton.primary/.secondary/.ghost` e `InlineLink` (`components/button/`), `FormTextField` (`components/form/`), para formulários públicos, e `AppMedallion` (`components/image/`), para ilustrações de temas em 1:1 com placeholder.
 - **Imagens:** ilustrações e logos de apoio em WebP (`AppImages`), gerados pelos scripts de `tool/images/`; ícones e imagem de compartilhamento por `tool/web_icons/`.
 
 ---

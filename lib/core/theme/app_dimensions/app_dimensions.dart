@@ -547,4 +547,19 @@ class ComponentSizes {
 
   final double objectRelatedPadding = 48.0;
   final double objectRelatedHeadGap = 16.0;
+
+  final double formFieldHeight = 48.0;
+  final double formFieldBorder = 1.5;
+  final double formFieldFocusRing = 4.0;
+  final double formFieldPaddingH = 14.0;
+  final double formFieldPaddingV = 12.0;
+
+  /// Vertical do campo de uma linha, para ficar em [formFieldHeight] com a linha do texto.
+  final double formFieldPaddingVSingleLine = 11.5;
+  final double formFieldGap = 18.0;
+  final double formFieldLabelGap = 6.0;
+  final int formMessageMinLines = 6;
+  final int formMessageMaxLines = 12;
+  final double formHintTop = 12.0;
+  final double formHintMaxWidth = 480.0;
 }

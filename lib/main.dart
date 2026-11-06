@@ -32,6 +32,12 @@ class ExpoGeoApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'expoGEO · Curadoria digital do saber geográfico',
+      theme: ThemeData.light().copyWith(
+        textSelectionTheme: TextSelectionThemeData(
+          selectionColor: AppTheme.colors.textSelection,
+          selectionHandleColor: AppTheme.colors.accent,
+        ),
+      ),
       themeMode: ThemeMode.light,
       routerConfig: AppRouter.router,
       debugShowCheckedModeBanner: false,

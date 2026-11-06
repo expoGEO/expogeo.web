@@ -55,7 +55,7 @@ fvm dart format <arquivos .dart alterados>                     # antes de cada c
 fvm flutter build web --release
 ```
 
-Os arquivos gerados (`*.g.dart`, `*.freezed.dart`) ficam no repositório e não passam pelo `dart format`. Ainda não existe pasta `test/`.
+Os arquivos gerados (`*.g.dart`, `*.freezed.dart`) ficam no repositório e não passam pelo `dart format`. Os testes ficam em `test/` e rodam com `fvm flutter test`.
 
 ## Git
 - **Push na `main` publica o site em produção** (GitHub Actions, por FTP). Nunca faça push sem pedido explícito, e nunca direto na `main`.

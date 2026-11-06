@@ -1,6 +1,6 @@
 # 010. Contato
 
-- **Status:** implementada
+- **Status:** verificada com ressalvas
 - **Item do planejamento:** Fase 3, entrega 3.1 (tela T-06)
 - **Protótipo:** aba "Contato" (link em docs/specs/README.md)
 - **Criada em:** 2026-10-27
@@ -79,18 +79,18 @@ Ao lado do formulário, caixa em superfície com o título "Outros meios":
 - Rota `/contato` a partir da constante existente. As demais rotas, o painel, o `AppTextField` e o `Validators` não mudam.
 
 ## Critérios de aceite
-- [ ] `/contato` abre direto pelo endereço e ao recarregar, com navbar, cabeçalho (migalhas "Início › Contato", `h1` e texto de apoio), formulário, "Outros meios" e rodapé; o item "Contato" fica ativo; a navbar, o menu do celular e o rodapé levam à página.
-- [ ] O formulário tem os quatro campos com rótulo visível, o botão com envelope e o texto de apoio com **Enviar** em negrito; Enter passa de campo nas três linhas simples e quebra linha na mensagem; Nome e E-mail têm sugestão do navegador ligada.
-- [ ] Enviar vazio mostra as quatro mensagens com borda de erro, põe o foco no Nome, com ele visível, e nada é aberto; antes disso nenhum erro aparece.
-- [ ] E-mail sem "@" ou com espaço no meio mostra a mensagem de e-mail; campo só com espaços conta como vazio; e-mail com espaço nas pontas vale; corrigir faz a mensagem sumir enquanto se digita.
-- [ ] Com tudo válido, abre o programa de e-mail na mesma aba, com destinatário, assunto e corpo certos, inteiros, inclusive acentos, emoji, `&`, `?`, `#`, `%` e quebras de linha.
-- [ ] A confirmação substitui o formulário com ícone, título, os dois textos, o link `mailto:` e os dois botões; recebe o foco no título, aparece inteira na tela e é anunciada.
-- [ ] "Copiar mensagem" copia o texto no formato da spec e muda o rótulo por alguns segundos, com anúncio; com a cópia recusada, mostra "Erro ao copiar".
-- [ ] "Voltar ao formulário" volta com os campos preenchidos, sem erros e com o foco no Nome; um novo envio funciona.
-- [ ] "Outros meios" mostra e-mail (`mailto:`), o endereço igual ao do rodapé e o link do Observatório em aba nova, com foco visível e nome acessível.
-- [ ] Formulário e confirmação são usáveis só por teclado, na ordem de Tab da seção "Acessibilidade", com foco visível; campos lidos com rótulo e erro; contraste ≥ 4,5:1 nos textos e ≥ 3:1 na borda dos campos.
-- [ ] Em 390, 768 e 1280 px, conforme "Responsivo", com formulário vazio, com erros, com textos longos e na confirmação: sem rolagem horizontal nem `overflow`, em release e em debug; mudar a largura mantém o que foi digitado.
-- [ ] Código novo só com tokens do tema, sem `num_extension` nem `GestureDetector` solto; nenhum pacote novo; painel, `AppTextField`, `Validators` e demais rotas sem mudança; `analyze`, testes e build sem erro.
+- [x] `/contato` abre direto pelo endereço e ao recarregar, com navbar, cabeçalho (migalhas "Início › Contato", `h1` e texto de apoio), formulário, "Outros meios" e rodapé; o item "Contato" fica ativo; a navbar, o menu do celular e o rodapé levam à página.
+- [x] O formulário tem os quatro campos com rótulo visível, o botão com envelope e o texto de apoio com **Enviar** em negrito; Enter passa de campo nas três linhas simples e quebra linha na mensagem; Nome e E-mail têm sugestão do navegador ligada.
+- [x] Enviar vazio mostra as quatro mensagens com borda de erro, põe o foco no Nome, com ele visível, e nada é aberto; antes disso nenhum erro aparece.
+- [x] E-mail sem "@" ou com espaço no meio mostra a mensagem de e-mail; campo só com espaços conta como vazio; e-mail com espaço nas pontas vale; corrigir faz a mensagem sumir enquanto se digita.
+- [x] Com tudo válido, abre o programa de e-mail na mesma aba, com destinatário, assunto e corpo certos, inteiros, inclusive acentos, emoji, `&`, `?`, `#`, `%` e quebras de linha.
+- [x] A confirmação substitui o formulário com ícone, título, os dois textos, o link `mailto:` e os dois botões; recebe o foco no título, aparece inteira na tela e é anunciada.
+- [x] "Copiar mensagem" copia o texto no formato da spec e muda o rótulo por alguns segundos, com anúncio; com a cópia recusada, mostra "Erro ao copiar".
+- [x] "Voltar ao formulário" volta com os campos preenchidos, sem erros e com o foco no Nome; um novo envio funciona.
+- [x] "Outros meios" mostra e-mail (`mailto:`), o endereço igual ao do rodapé e o link do Observatório em aba nova, com foco visível e nome acessível.
+- [x] Formulário e confirmação são usáveis só por teclado, na ordem de Tab da seção "Acessibilidade", com foco visível; campos lidos com rótulo e erro; contraste ≥ 4,5:1 nos textos e ≥ 3:1 na borda dos campos.
+- [x] Em 390, 768 e 1280 px, conforme "Responsivo", com formulário vazio, com erros, com textos longos e na confirmação: sem rolagem horizontal nem `overflow`, em release e em debug; mudar a largura mantém o que foi digitado.
+- [x] Código novo só com tokens do tema, sem `num_extension` nem `GestureDetector` solto; nenhum pacote novo; painel, `AppTextField`, `Validators` e demais rotas sem mudança; `analyze`, testes e build sem erro.
 
 ## Fora do escopo
 - Enviar o e-mail pelo próprio site (exigiria serviço externo).
@@ -118,3 +118,4 @@ Ao lado do formulário, caixa em superfície com o título "Outros meios":
 - 2026-11-06: plano e tarefas criados (`plan.md`, `tasks.md`).
 - 2026-11-06 (implementação, modo autônomo): sem mudança de comportamento. O motor web do Flutter 3.35.5 não publica `hint` em campo de texto, então o erro "ligado ao campo" entra no nome acessível ("Nome. Escreva seu nome.") enquanto existir. Plano e tarefas ajustados.
 - 2026-11-06: implementada.
+- 2026-11-06: verificação. Os links de texto saem sem `linkUrl` na semântica, porque o `<a href>` do motor navegava a própria aba com leitor de tela; o comportamento pedido não muda. Rodapé do `SiteScaffold` sem altura intrínseca. Ressalvas em verificacao.md.

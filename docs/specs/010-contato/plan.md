@@ -48,7 +48,7 @@ Não mudam: `AppButton`, navbar, menu, rodapé, `PageHeader`, `SiteScaffold`, `A
 - **Retorno da cópia repetido, sem extrair da `ObjectActions`.** Lá a falha tem outro comportamento (seleciona o endereço). A lógica é curta, e extrair mexeria numa tela já verificada. Usa `copyFeedbackDuration` e volta ao rótulo inicial também depois de falhar.
 - **Largura do botão de copiar pode variar com o rótulo.** A spec daqui não pede largura fixa, e o `AppButton` não tem `reserveTexts`; acrescentar mudaria um componente compartilhado sem necessidade.
 - **`accentStrong` nos links:** `accent` dá 4,48:1 na superfície (achado da 018).
-- **`InlineLink` com `Semantics(container: true)`.** Dentro de `WidgetSpan`, sem nó próprio, o link se funde ao parágrafo e perde o endereço.
+- **`InlineLink` com `Semantics(container: true)`, sem `linkUrl`.** Dentro de `WidgetSpan`, sem nó próprio, o link se funde ao parágrafo. O `linkUrl` saiu na verificação: o motor cria um `<a href>` sem `target`, e com a semântica ligada o clique navegava a própria aba, além do `onTap`.
 - **`InlineLink` abre `mailto:` na mesma aba e `http(s)` em aba nova**, deduzido do esquema. O nome acessível do Observatório acrescenta ", abre em nova aba", como no `AppButton`.
 - **Domínio do Observatório por `UrlUtils.displayDomain(AppLinks.observatory)`**, para não repetir o endereço.
 

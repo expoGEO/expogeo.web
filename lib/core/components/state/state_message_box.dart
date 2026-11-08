@@ -138,7 +138,8 @@ class _StateMessageBoxState extends State<StateMessageBox> {
                   ],
                   if (action != null) ...[
                     SizedBox(height: components.stateBoxGap + components.stateBoxButtonGap),
-                    action,
+                    // Sem nó próprio, o botão se fundiria ao nó do alerta e perderia o papel de botão.
+                    Semantics(container: true, child: action),
                   ],
                 ],
               ),

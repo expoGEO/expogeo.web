@@ -1,3 +1,4 @@
+import 'package:expogeo/core/components/button/app_button.dart';
 import 'package:expogeo/core/components/state/state_message_box.dart';
 import 'package:expogeo/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -190,6 +191,26 @@ void main() {
     expect(find.byType(Icon), findsNothing);
     expect(find.text('404'), findsOneWidget);
     expect(find.bySemanticsLabel('404'), findsNothing);
+    handle.dispose();
+  });
+
+  testWidgets('a ação continua um botão próprio, fora do rótulo da caixa', (tester) async {
+    final handle = tester.ensureSemantics();
+    await pump(
+      tester,
+      StateMessageBox(
+        icon: Icons.error_outline,
+        title: 'Título',
+        tone: StateMessageTone.error,
+        action: AppButton.primary(text: 'Tentar de novo', onPressed: () {}),
+      ),
+    );
+
+    final box = tester.getSemantics(find.text('Título')).parent!.getSemanticsData();
+    expect(box.label, isNot(contains('Tentar de novo')));
+    expect(box.hasAction(SemanticsAction.tap), isFalse);
+    final button = tester.getSemantics(find.text('Tentar de novo')).getSemanticsData();
+    expect(button.flagsCollection.isButton, isTrue);
     handle.dispose();
   });
 }

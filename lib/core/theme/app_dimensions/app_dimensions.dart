@@ -485,6 +485,9 @@ class ComponentSizes {
   final double stateBoxDashLength = 4.0;
   final double stateBoxDashGap = 3.0;
 
+  final double notFoundPaddingTop = 40.0;
+  final double notFoundPaddingBottom = 72.0;
+
   /// Largura da coluna de leitura da página do objeto, sem as margens.
   final double objectColumnMaxWidth = 856.0;
   final double objectHeadPaddingTop = 28.0;

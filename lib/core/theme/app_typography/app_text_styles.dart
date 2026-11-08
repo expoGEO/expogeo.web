@@ -118,6 +118,14 @@ class AppTextStyles {
     letterSpacingEm: -0.02,
   );
 
+  /// Número grande no lugar do ícone da caixa de estado, como o "404".
+  TextStyle get stateCode => _display(
+    size: _size(mobile: 64, tablet: 88, desktop: 112),
+    weight: FontWeight.w800,
+    height: 1,
+    letterSpacingEm: -0.04,
+  );
+
   /// Código de referência (ex.: NMA_BH_03). O Flutter web não alcança fontes do sistema,
   /// então uma monoespaçada cairia numa proporcional; algarismos tabulares mantêm o alinhamento.
   TextStyle get code => _body(

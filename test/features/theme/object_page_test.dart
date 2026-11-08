@@ -168,6 +168,7 @@ void main() {
       repository.succeed(biomasRecords());
       await settle(tester);
       expect(find.byType(NotFoundPage), findsOneWidget);
+      expect(find.text('Este lugar não está no mapa'), findsOneWidget);
     });
   }
 

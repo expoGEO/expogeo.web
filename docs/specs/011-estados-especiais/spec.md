@@ -1,6 +1,6 @@
 # 011. Estados especiais: carregando, vazio, erro e 404
 
-- **Status:** implementada
+- **Status:** verificada
 - **Item do planejamento:** Fase 3, entrega 3.2 (tela T-07)
 - **Protótipo:** aba "Estados" (link em docs/specs/README.md)
 - **Criada em:** 2026-10-27
@@ -100,3 +100,4 @@ Caixa de estado com largura máxima de texto (~44 caracteres) em 390, 768 e 1280
 - 2026-11-08: plano e tarefas criados (modo autônomo): 12 critérios ligados a 15 tarefas.
 - 2026-11-08: ajustes da implementação (modo autônomo). Caixa neutra com papel de status e caixa de erro com papel de alerta, as duas com anúncio explícito do título ao aparecer (educado no neutro, urgente no erro), porque o Flutter não aceita região anunciada no mesmo nó de um papel e o motor web não lê `liveRegion` em título; a 404 não anuncia, porque a leitura da página já começa pelo `h1`. No objeto, "Carregando…" fica só na ficha-esqueleto e vale pelo grupo: o cabeçalho tem trilha e voltar reais, que continuam legíveis, e os blocos do título já ficam fora da leitura.
 - 2026-11-08: implementada.
+- 2026-11-08: verificada (modo autônomo), sem correções nem ressalvas; ver verificacao.md.

@@ -1,23 +1,59 @@
 import 'package:expogeo/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 
 enum StateMessageTone { neutral, error }
 
-class StateMessageBox extends StatelessWidget {
+class StateMessageBox extends StatefulWidget {
   const StateMessageBox({
     super.key,
-    required this.icon,
+    this.icon,
+    this.leading,
     required this.title,
     this.message,
     this.action,
     this.tone = StateMessageTone.neutral,
-  });
+    this.headingLevel,
+    this.announce = true,
+  }) : assert(icon != null || leading != null, 'A caixa precisa de um ícone ou de um topo.');
 
-  final IconData icon;
+  final IconData? icon;
+
+  /// Ocupa o lugar do ícone em círculo.
+  final Widget? leading;
+
   final String title;
   final String? message;
   final Widget? action;
   final StateMessageTone tone;
+
+  /// Faz do título um cabeçalho desse nível.
+  final int? headingLevel;
+
+  /// Lê o título ao aparecer. Uma página inteira dispensa, porque a leitura já começa pelo título.
+  final bool announce;
+
+  @override
+  State<StateMessageBox> createState() => _StateMessageBoxState();
+}
+
+class _StateMessageBoxState extends State<StateMessageBox> {
+  bool get _isError => widget.tone == StateMessageTone.error;
+
+  @override
+  void initState() {
+    super.initState();
+    if (!widget.announce) return;
+    // O motor web não lê a caixa só pelo papel de alerta ou de status quando ela entra na tela.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      SemanticsService.announce(
+        widget.title,
+        Directionality.of(context),
+        assertiveness: _isError ? Assertiveness.assertive : Assertiveness.polite,
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,12 +61,12 @@ class StateMessageBox extends StatelessWidget {
     final dimensions = AppTheme.dimensions;
     final components = dimensions.components;
     final styles = AppTheme.typography.of(context);
-    final message = this.message;
-    final action = this.action;
-    final (iconBackground, iconColor) = switch (tone) {
-      StateMessageTone.neutral => (colors.surface, colors.inkSecondary),
-      StateMessageTone.error => (colors.errorSurface, colors.error),
-    };
+    final message = widget.message;
+    final action = widget.action;
+    final headingLevel = widget.headingLevel;
+    final (iconBackground, iconColor) = _isError
+        ? (colors.errorSurface, colors.error)
+        : (colors.surface, colors.inkSecondary);
 
     return Padding(
       padding: EdgeInsets.only(
@@ -52,49 +88,60 @@ class StateMessageBox extends StatelessWidget {
           ),
           child: SizedBox(
             width: double.infinity,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ExcludeSemantics(
-                  child: Container(
-                    width: components.stateBoxIcon,
-                    height: components.stateBoxIcon,
-                    decoration: BoxDecoration(color: iconBackground, shape: BoxShape.circle),
-                    child: Icon(icon, size: components.stateBoxIconGlyph, color: iconColor),
+            child: Semantics(
+              container: true,
+              role: _isError ? SemanticsRole.alert : SemanticsRole.status,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ExcludeSemantics(
+                    child:
+                        widget.leading ??
+                        Container(
+                          width: components.stateBoxIcon,
+                          height: components.stateBoxIcon,
+                          decoration: BoxDecoration(color: iconBackground, shape: BoxShape.circle),
+                          child: Icon(
+                            widget.icon,
+                            size: components.stateBoxIconGlyph,
+                            color: iconColor,
+                          ),
+                        ),
                   ),
-                ),
-                SizedBox(height: components.stateBoxGap),
-                Semantics(
-                  container: true,
-                  liveRegion: true,
-                  child: Text(
-                    title,
-                    textAlign: TextAlign.center,
-                    style: styles.h3.copyWith(
-                      fontSize: components.stateBoxTitle,
-                      color: colors.ink,
-                    ),
-                  ),
-                ),
-                if (message != null) ...[
                   SizedBox(height: components.stateBoxGap),
-                  ConstrainedBox(
-                    constraints: BoxConstraints(maxWidth: components.stateBoxTextMaxWidth),
-                    child: Semantics(
-                      container: true,
-                      child: Text(
-                        message,
-                        textAlign: TextAlign.center,
-                        style: styles.regular.copyWith(color: colors.inkSecondary),
+                  Semantics(
+                    container: true,
+                    header: headingLevel != null,
+                    headingLevel: headingLevel,
+                    child: Text(
+                      widget.title,
+                      textAlign: TextAlign.center,
+                      style: styles.h3.copyWith(
+                        fontSize: components.stateBoxTitle,
+                        color: colors.ink,
                       ),
                     ),
                   ),
+                  if (message != null) ...[
+                    SizedBox(height: components.stateBoxGap),
+                    ConstrainedBox(
+                      constraints: BoxConstraints(maxWidth: components.stateBoxTextMaxWidth),
+                      child: Semantics(
+                        container: true,
+                        child: Text(
+                          message,
+                          textAlign: TextAlign.center,
+                          style: styles.regular.copyWith(color: colors.inkSecondary),
+                        ),
+                      ),
+                    ),
+                  ],
+                  if (action != null) ...[
+                    SizedBox(height: components.stateBoxGap + components.stateBoxButtonGap),
+                    action,
+                  ],
                 ],
-                if (action != null) ...[
-                  SizedBox(height: components.stateBoxGap + components.stateBoxButtonGap),
-                  action,
-                ],
-              ],
+              ),
             ),
           ),
         ),

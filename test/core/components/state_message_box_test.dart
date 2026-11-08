@@ -1,6 +1,8 @@
 import 'package:expogeo/core/components/state/state_message_box.dart';
 import 'package:expogeo/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -76,5 +78,118 @@ void main() {
     );
 
     expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('título vira cabeçalho do nível pedido', (tester) async {
+    final handle = tester.ensureSemantics();
+    await pump(
+      tester,
+      const StateMessageBox(icon: Icons.inbox_outlined, title: 'Título', headingLevel: 1),
+    );
+
+    final data = tester.getSemantics(find.text('Título')).getSemanticsData();
+    expect(data.flagsCollection.isHeader, isTrue);
+    expect(data.headingLevel, 1);
+    handle.dispose();
+  });
+
+  testWidgets('sem nível, o título não é cabeçalho', (tester) async {
+    final handle = tester.ensureSemantics();
+    await pump(tester, const StateMessageBox(icon: Icons.inbox_outlined, title: 'Título'));
+
+    expect(
+      tester.getSemantics(find.text('Título')).getSemanticsData().flagsCollection.isHeader,
+      isFalse,
+    );
+    handle.dispose();
+  });
+
+  SemanticsRole roleOf(WidgetTester tester) {
+    final node = tester.getSemantics(find.text('Título')).parent!;
+    return node.getSemanticsData().role;
+  }
+
+  testWidgets('erro tem papel de alerta e neutro, de status', (tester) async {
+    final handle = tester.ensureSemantics();
+    await pump(
+      tester,
+      const StateMessageBox(
+        icon: Icons.error_outline,
+        title: 'Título',
+        tone: StateMessageTone.error,
+      ),
+    );
+    expect(roleOf(tester), SemanticsRole.alert);
+
+    await pump(tester, const StateMessageBox(icon: Icons.inbox_outlined, title: 'Título'));
+    await tester.pump();
+    expect(roleOf(tester), SemanticsRole.status);
+    handle.dispose();
+  });
+
+  testWidgets('anuncia o título ao aparecer, com urgência no erro', (tester) async {
+    final announcements = <Map<Object?, Object?>>[];
+    tester.binding.defaultBinaryMessenger.setMockDecodedMessageHandler<Object?>(
+      SystemChannels.accessibility,
+      (message) async {
+        announcements.add(message! as Map<Object?, Object?>);
+        return null;
+      },
+    );
+    addTearDown(
+      () => tester.binding.defaultBinaryMessenger.setMockDecodedMessageHandler<Object?>(
+        SystemChannels.accessibility,
+        null,
+      ),
+    );
+
+    await pump(
+      tester,
+      const StateMessageBox(
+        icon: Icons.error_outline,
+        title: 'Falhou',
+        tone: StateMessageTone.error,
+      ),
+    );
+    await tester.pump();
+
+    final data = announcements.single['data']! as Map<Object?, Object?>;
+    expect(data['message'], 'Falhou');
+    expect(data['assertiveness'], Assertiveness.assertive.index);
+  });
+
+  testWidgets('sem anúncio quando pedido', (tester) async {
+    final announcements = <Object?>[];
+    tester.binding.defaultBinaryMessenger.setMockDecodedMessageHandler<Object?>(
+      SystemChannels.accessibility,
+      (message) async {
+        announcements.add(message);
+        return null;
+      },
+    );
+    addTearDown(
+      () => tester.binding.defaultBinaryMessenger.setMockDecodedMessageHandler<Object?>(
+        SystemChannels.accessibility,
+        null,
+      ),
+    );
+
+    await pump(
+      tester,
+      const StateMessageBox(icon: Icons.inbox_outlined, title: 'Página', announce: false),
+    );
+    await tester.pump();
+
+    expect(announcements, isEmpty);
+  });
+
+  testWidgets('topo substitui o ícone e fica fora da leitura', (tester) async {
+    final handle = tester.ensureSemantics();
+    await pump(tester, const StateMessageBox(leading: Text('404'), title: 'Título'));
+
+    expect(find.byType(Icon), findsNothing);
+    expect(find.text('404'), findsOneWidget);
+    expect(find.bySemanticsLabel('404'), findsNothing);
+    handle.dispose();
   });
 }

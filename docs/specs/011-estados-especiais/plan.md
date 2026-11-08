@@ -17,9 +17,9 @@ O painel, os botões antigos e `CircularLoading`, `ContentError` e `ContentEmpty
 ## Arquivos
 | Ação | Arquivo | Motivo |
 |---|---|---|
-| Alterar | `lib/core/theme/app_dimensions/app_dimensions.dart` | `stateCodeMobile` (64), `stateCodeTablet` (88), `stateCodeDesktop` (112), `stateCodeLetterSpacing` (-0,04), `notFoundPaddingTop`/`Bottom` (40/72) |
-| Alterar | `lib/core/theme/app_typography/app_text_styles.dart` | `stateCode`: Bricolage 800, altura 1, cor definida no uso |
-| Alterar | `lib/core/components/state/state_message_box.dart` | `leading` opcional no lugar de `icon`; `headingLevel`; `SemanticsRole.alert` no erro e `liveRegion` no neutro |
+| Alterar | `lib/core/theme/app_dimensions/app_dimensions.dart` | `notFoundPaddingTop`/`Bottom` (40/72) |
+| Alterar | `lib/core/theme/app_typography/app_text_styles.dart` | `stateCode`: Bricolage 800, 64/88/112 por faixa, espaçamento -0,04 em, altura 1, cor definida no uso (tamanhos no estilo, como os outros estilos por faixa) |
+| Alterar | `lib/core/components/state/state_message_box.dart` | `leading` opcional no lugar de `icon`; `headingLevel`; `SemanticsRole.alert` no erro e `SemanticsRole.status` no neutro, com anúncio do título ao aparecer (`announce`, desligável na 404) |
 | Criar | `lib/core/components/state/state_error_box.dart` | Erro de carregamento padrão (título + `onRetry`) |
 | Criar | `lib/core/components/skeleton/loading_region.dart` | Rótulo "Carregando…" para um grupo de esqueletos |
 | Alterar | `lib/core/components/structure/navbar/navbar_location.dart` | `NavbarLocationScope` e consulta a ele em `NavbarLocation.of` |

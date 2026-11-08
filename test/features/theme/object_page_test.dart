@@ -97,6 +97,17 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
+  testWidgets('carregando: cabeçalho e ficha lidos uma vez como "Carregando…"', (tester) async {
+    final handle = tester.ensureSemantics();
+    await pump(tester, routerAt(biomasObject));
+
+    expect(find.bySemanticsLabel('Carregando…'), findsOneWidget);
+    repository.succeed(biomasRecords());
+    await settle(tester);
+    expect(find.bySemanticsLabel('Carregando…'), findsNothing);
+    handle.dispose();
+  });
+
   testWidgets('erro: caixa com "Tentar de novo" primário, que volta ao esqueleto e repete', (
     tester,
   ) async {
@@ -113,6 +124,14 @@ void main() {
       find.ancestor(of: find.text('Tentar de novo'), matching: find.byType(AppButton)),
     );
     expect(retry.kind, AppButtonKind.primary);
+    expect(
+      tester
+          .widget<Icon>(
+            find.descendant(of: find.byType(StateMessageBox), matching: find.byType(Icon)),
+          )
+          .icon,
+      Icons.error_outline,
+    );
 
     await tester.tap(find.text('Tentar de novo'));
     await tester.pump();

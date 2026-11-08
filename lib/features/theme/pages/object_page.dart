@@ -1,5 +1,5 @@
-import 'package:expogeo/core/components/button/app_button.dart';
-import 'package:expogeo/core/components/state/state_message_box.dart';
+import 'package:expogeo/core/components/skeleton/loading_region.dart';
+import 'package:expogeo/core/components/state/state_error_box.dart';
 import 'package:expogeo/core/components/structure/page_content.dart';
 import 'package:expogeo/core/components/structure/site_scaffold.dart';
 import 'package:expogeo/core/models/subtheme_model.dart';
@@ -88,19 +88,14 @@ class _ObjectViewState extends State<_ObjectView> {
     return Observer(
       builder: (context) => switch (_catalog.state) {
         CatalogStateInitial() || CatalogStateLoading() => _page([
+          // Um só "Carregando…" para cabeçalho e ficha; a trilha do cabeçalho já vale e segue legível.
           ObjectHead(theme: widget.theme, subtheme: widget.subtheme),
-          const ObjectSheetSkeleton(),
+          const LoadingRegion(child: ObjectSheetSkeleton()),
         ]),
         CatalogStateError() => _page([
           ObjectHead(theme: widget.theme, subtheme: widget.subtheme, failed: true),
           SizedBox(height: AppTheme.dimensions.components.objectHeadTagGap),
-          StateMessageBox(
-            icon: Icons.cloud_off_outlined,
-            tone: StateMessageTone.error,
-            title: 'Não conseguimos carregar o objeto',
-            message: 'Confira sua conexão com a internet e tente de novo.',
-            action: AppButton.primary(text: 'Tentar de novo', onPressed: _catalog.ensureLoaded),
-          ),
+          StateErrorBox(title: 'Não conseguimos carregar o objeto', onRetry: _catalog.ensureLoaded),
         ]),
         CatalogStateSuccess(:final catalog) => _loaded(catalog),
       },

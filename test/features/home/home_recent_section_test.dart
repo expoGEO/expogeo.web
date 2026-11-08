@@ -58,6 +58,16 @@ void main() {
     expect(find.byType(ObjectCardSkeleton), findsNWidgets(6));
   });
 
+  testWidgets('esqueletos lidos uma vez como "Carregando…"', (tester) async {
+    final handle = tester.ensureSemantics();
+    store.ensureLoaded();
+    await pump(tester);
+
+    expect(find.bySemanticsLabel('Carregando…'), findsOneWidget);
+    expect(find.bySemanticsLabel('Adicionados recentemente'), findsOneWidget);
+    handle.dispose();
+  });
+
   testWidgets('mostra os 6 mais recentes em ordem', (tester) async {
     await load(_records(8));
     await pump(tester);

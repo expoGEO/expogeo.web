@@ -96,6 +96,20 @@ void main() {
     await tester.pump();
   });
 
+  testWidgets('esqueleto lido uma vez como "Carregando…"', (tester) async {
+    final handle = tester.ensureSemantics();
+    await pump(tester);
+    catalog.ensureLoaded();
+    await tester.pump();
+
+    expect(find.bySemanticsLabel('Carregando…'), findsOneWidget);
+    repository.succeed(seven());
+    await tester.pump();
+    await tester.pump();
+    expect(find.bySemanticsLabel('Carregando…'), findsNothing);
+    handle.dispose();
+  });
+
   testWidgets('erro e nova tentativa com sucesso', (tester) async {
     await pump(tester);
     catalog.ensureLoaded();
@@ -107,16 +121,23 @@ void main() {
     expect(find.text('Não conseguimos carregar os objetos'), findsOneWidget);
     expect(find.text('Confira sua conexão com a internet e tente de novo.'), findsOneWidget);
     expect(find.byType(TextField), findsNothing);
+    expect(tester.widget<Icon>(find.byType(Icon)).icon, Icons.error_outline);
+    final retry = tester.widget<AppButton>(
+      find.ancestor(of: find.text('Tentar de novo'), matching: find.byType(AppButton)),
+    );
+    expect(retry.kind, AppButtonKind.primary);
 
     await tester.tap(find.text('Tentar de novo'));
     await tester.pump();
     expect(find.byType(ObjectRowSkeleton), findsNWidgets(3));
+    expect(find.byType(StateMessageBox), findsNothing);
     expect(repository.calls, 2);
 
     repository.succeed(seven());
     await tester.pump();
     await tester.pump();
     expect(find.byType(ObjectRow), findsNWidgets(6));
+    expect(find.byType(StateMessageBox), findsNothing);
   });
 
   testWidgets('tentar de novo durante a carga não empilha consultas', (tester) async {

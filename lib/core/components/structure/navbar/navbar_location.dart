@@ -9,6 +9,8 @@ class NavbarLocation {
 
   /// Na página de erro não há `GoRouterState`, então usa o endereço do roteador.
   factory NavbarLocation.of(BuildContext context) {
+    final scoped = context.dependOnInheritedWidgetOfExactType<NavbarLocationScope>();
+    if (scoped != null) return scoped.location;
     try {
       return NavbarLocation.fromUri(GoRouterState.of(context).uri);
     } catch (_) {
@@ -35,4 +37,19 @@ class NavbarLocation {
   final NavbarSection? section;
 
   final ThemeEnum? theme;
+}
+
+/// Fixa a seção ativa da navbar abaixo dele, em vez de deduzi-la do endereço.
+class NavbarLocationScope extends InheritedWidget {
+  const NavbarLocationScope({super.key, required this.location, required super.child});
+
+  /// Nenhum item ativo, para páginas que não estão no menu mesmo sob um endereço de tema.
+  const NavbarLocationScope.none({super.key, required super.child})
+    : location = const NavbarLocation();
+
+  final NavbarLocation location;
+
+  @override
+  bool updateShouldNotify(NavbarLocationScope oldWidget) =>
+      oldWidget.location.section != location.section || oldWidget.location.theme != location.theme;
 }

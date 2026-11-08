@@ -52,4 +52,19 @@ void main() {
     await retry;
     expect(store.state, isA<CatalogStateSuccess>());
   });
+
+  test('depois de erro, várias novas tentativas seguidas fazem uma só consulta', () async {
+    final repository = FakeCatalogRepository();
+    final store = CatalogStore(repository);
+
+    final load = store.ensureLoaded();
+    repository.fail();
+    await load;
+
+    final retries = [store.ensureLoaded(), store.ensureLoaded(), store.ensureLoaded()];
+    expect(repository.calls, 2);
+    repository.succeed();
+    await Future.wait(retries);
+    expect(store.state, isA<CatalogStateSuccess>());
+  });
 }

@@ -7,11 +7,13 @@ part 'catalog_store.g.dart';
 
 class CatalogStore = CatalogStoreBase with _$CatalogStore;
 
-/// Acervo carregado uma vez por visita e compartilhado pelas telas.
+/// Acervo carregado uma vez por visita e compartilhado pelas telas; o painel recarrega com [refresh].
 abstract class CatalogStoreBase with Store {
   CatalogStoreBase(this._repository);
 
   final CatalogRepository _repository;
+
+  bool _refreshing = false;
 
   @observable
   CatalogState state = const CatalogStateInitial();
@@ -30,6 +32,19 @@ abstract class CatalogStoreBase with Store {
     state = const CatalogStateLoading();
     final result = await _repository.load();
     _apply(result.fold((failure) => CatalogStateError(failure.message), CatalogStateSuccess.new));
+  }
+
+  /// Busca de novo mantendo o catálogo atual à vista; só o troca se a busca der certo.
+  /// Sem catálogo, faz o mesmo que [ensureLoaded].
+  @action
+  Future<void> refresh() async {
+    if (state.isLoading || _refreshing) return;
+    if (!state.isSuccess) return ensureLoaded();
+
+    _refreshing = true;
+    final result = await _repository.load();
+    _refreshing = false;
+    result.fold((_) {}, (catalog) => _apply(CatalogStateSuccess(catalog)));
   }
 
   @action

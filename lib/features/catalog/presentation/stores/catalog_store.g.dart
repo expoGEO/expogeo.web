@@ -45,6 +45,16 @@ mixin _$CatalogStore on CatalogStoreBase, Store {
     return _$ensureLoadedAsyncAction.run(() => super.ensureLoaded());
   }
 
+  late final _$refreshAsyncAction = AsyncAction(
+    'CatalogStoreBase.refresh',
+    context: context,
+  );
+
+  @override
+  Future<void> refresh() {
+    return _$refreshAsyncAction.run(() => super.refresh());
+  }
+
   late final _$CatalogStoreBaseActionController = ActionController(
     name: 'CatalogStoreBase',
     context: context,

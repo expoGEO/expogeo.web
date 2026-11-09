@@ -1,4 +1,5 @@
 import 'package:expogeo/core/theme/app_theme.dart';
+import 'package:expogeo/core/utils/accessibility/announce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 
@@ -29,7 +30,7 @@ class _FormErrorAlertState extends State<FormErrorAlert> {
   void _announce() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
-      SemanticsService.announce(
+      announceToScreenReader(
         widget.message,
         Directionality.of(context),
         assertiveness: Assertiveness.assertive,

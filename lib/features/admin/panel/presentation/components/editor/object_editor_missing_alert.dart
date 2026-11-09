@@ -1,5 +1,6 @@
 import 'package:expogeo/core/components/focus/app_focus_ring.dart';
 import 'package:expogeo/core/theme/app_theme.dart';
+import 'package:expogeo/core/utils/accessibility/announce.dart';
 import 'package:expogeo/features/admin/panel/presentation/editor/object_editor_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
@@ -43,7 +44,7 @@ class _ObjectEditorMissingAlertState extends State<ObjectEditorMissingAlert> {
   void _announce() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
-      SemanticsService.announce(
+      announceToScreenReader(
         _message,
         Directionality.of(context),
         assertiveness: Assertiveness.assertive,

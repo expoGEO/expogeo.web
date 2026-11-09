@@ -1,3 +1,6 @@
+// ignore_for_file: deprecated_member_use
+// `containsSemantics` só ganha o substituto `isSemantics` em SDKs mais novos que o 3.35.5 fixado.
+
 import 'package:flutter_test/flutter_test.dart';
 
 /// Confere que o texto encontrado é um título do nível dado.

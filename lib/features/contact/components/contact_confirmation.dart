@@ -4,9 +4,9 @@ import 'package:expogeo/core/components/button/app_button.dart';
 import 'package:expogeo/core/components/button/inline_link.dart';
 import 'package:expogeo/core/components/form/marked_text.dart';
 import 'package:expogeo/core/theme/app_theme.dart';
+import 'package:expogeo/core/utils/accessibility/announce.dart';
 import 'package:expogeo/core/utils/url/mail_draft.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
 
 enum _CopyStatus { idle, copied, failed }
@@ -39,7 +39,7 @@ class _ContactConfirmationState extends State<ContactConfirmation> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
       _titleFocus.requestFocus();
-      SemanticsService.announce(_title, TextDirection.ltr);
+      announceToScreenReader(_title, TextDirection.ltr);
       Scrollable.ensureVisible(
         context,
         alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtStart,
@@ -65,10 +65,7 @@ class _ContactConfirmationState extends State<ContactConfirmation> {
     if (!mounted) return;
 
     setState(() => _copyStatus = status);
-    SemanticsService.announce(
-      status == _CopyStatus.copied ? _copied : _copyFailed,
-      TextDirection.ltr,
-    );
+    announceToScreenReader(status == _CopyStatus.copied ? _copied : _copyFailed, TextDirection.ltr);
     _copyTimer = Timer(AppTheme.dimensions.components.copyFeedbackDuration, () {
       if (mounted) setState(() => _copyStatus = _CopyStatus.idle);
     });

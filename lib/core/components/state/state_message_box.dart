@@ -1,4 +1,5 @@
 import 'package:expogeo/core/theme/app_theme.dart';
+import 'package:expogeo/core/utils/accessibility/announce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 
@@ -47,7 +48,7 @@ class _StateMessageBoxState extends State<StateMessageBox> {
     // O motor web não lê a caixa só pelo papel de alerta ou de status quando ela entra na tela.
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
-      SemanticsService.announce(
+      announceToScreenReader(
         widget.title,
         Directionality.of(context),
         assertiveness: _isError ? Assertiveness.assertive : Assertiveness.polite,

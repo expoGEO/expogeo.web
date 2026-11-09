@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:expogeo/core/theme/app_theme.dart';
+import 'package:expogeo/core/utils/accessibility/announce.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/semantics.dart';
 
 /// Aviso curto no rodapé da tela, um por vez, também anunciado a leitores de tela.
 class Messenger {
@@ -99,6 +99,6 @@ class Messenger {
     );
 
     // O SnackBar não é anunciado sozinho no navegador.
-    SemanticsService.announce(message, TextDirection.ltr);
+    announceToScreenReader(message, TextDirection.ltr);
   }
 }

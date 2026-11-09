@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:expogeo/core/components/button/app_button.dart';
 import 'package:expogeo/core/theme/app_theme.dart';
+import 'package:expogeo/core/utils/accessibility/announce.dart';
 import 'package:expogeo/core/utils/screen/screen_utils.dart';
 import 'package:expogeo/core/utils/url/url_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
 
 enum _CopyStatus { idle, copied, failed }
@@ -50,7 +50,7 @@ class _ObjectActionsState extends State<ObjectActions> {
     if (!mounted) return;
 
     setState(() => _status = status);
-    SemanticsService.announce(
+    announceToScreenReader(
       status == _CopyStatus.copied ? _copiedMessage : _failedMessage,
       TextDirection.ltr,
     );

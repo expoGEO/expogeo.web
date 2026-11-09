@@ -7,7 +7,7 @@
 |---|---|---|---|---|---|
 | 012-login | 4.1 | feita (10 critérios, 13 tarefas) | feita (2 commits) | feita (sem correções) | verificada |
 | 013-painel-estrutura | 4.2 | feita (10 critérios, 17 tarefas) | feita (3 commits) | feita (1 correção) | verificada |
-| 014-painel-objetos | 4.3 | feita (14 critérios, 17 tarefas) | pendente | pendente | |
+| 014-painel-objetos | 4.3 | feita (14 critérios, 17 tarefas) | feita (2 commits) | feita (1 correção) | verificada |
 | 015-editor-objeto | 4.4 | pendente | pendente | pendente | |
 
 ## Decisões tomadas sem a pessoa
@@ -19,6 +19,7 @@
 - (014) Até a 015, a lista nova abre o diálogo de criar/editar de hoje; a leitura dos dados gravados é corrigida na 014 (preservação pela chave `preservationAction`, tipo e formato pelo nome ou pelo rótulo), sem mudar o que é gravado — isso também afeta o site público (objetos criados pelo formulário deixam de aparecer como "Outro"); filtros `tipo` e `q` no endereço.
 
 ## Ressalvas
+- (014) nenhuma ressalva.
 - (013) nenhuma ressalva; fora do escopo, registrado para a 015: o formulário antigo grava tipo e formato pelo rótulo e lê pelo nome (objeto criado volta como "Outro"), não corrigido porque mexeria no modelo.
 
 ## Ocorrências

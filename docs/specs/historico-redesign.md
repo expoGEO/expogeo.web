@@ -8,6 +8,7 @@ Uma linha por fase executada. O detalhe de cada spec fica em `docs/specs/NNN-*/`
 | Fase 1: Home e Sobre | 2026-11-03 | 004-hero-temas, 005-como-explorar-recentes, 006-sobre-apoio (todas verificadas com ressalvas) | PR da branch `refactor/redesign-fase-1` para `develop` |
 | Fase 2: navegação de conteúdo | 2026-11-04 a 2026-11-05 | 007-pagina-tema, 008-pagina-subtema, 009-pagina-objeto (todas verificadas com ressalvas) | PR da branch `refactor/redesign-fase-2` para `develop` |
 | Fase 3: contato e estados | 2026-11-06 a 2026-11-08 | 010-contato (verificada com ressalvas), 011-estados-especiais (verificada) | PR da branch `refactor/redesign-fase-3` para `develop` |
+| Fase 4: painel | 2026-11-08 a 2026-11-09 | 012-login, 013-painel-estrutura, 014-painel-objetos (verificadas), 015-editor-objeto (verificada com ressalvas) | PR da branch `refactor/redesign-fase-4` para `refactor/redesign-fase-3` (passa para a `develop` quando o #13 entrar) |
 
 ## Pendências em aberto
 - **Regra do Firestore (004, 005):** os deploys publicam as regras desde o PR #10 e a leitura funciona no dev (190 objetos; 35, 74, 42, 39). Falta conferir na produção depois do merge na `main`.
@@ -25,6 +26,10 @@ Uma linha por fase executada. O detalhe de cada spec fica em `docs/specs/NNN-*/`
 - **Contato (010):** o e-mail não pode ser selecionado e "Copiar mensagem" não traz o destinatário; quem não tem programa de e-mail precisa digitá-lo.
 - **Componentes de estado antigos (011):** `CircularLoading`, `ContentError` e `ContentEmpty` seguem só para o painel e os botões antigos (Fases 4 e 5).
 - **Painel admin:** também não conferido na Fase 3; nenhum arquivo dele mudou.
+- **Editor (015):** o menu das listas (Tipo, Formato, Mês, Ano, Tema, Subtema) abre mais estreito que o campo; duas tentativas com `minimumSize` do `MenuStyle` não resolveram.
+- **Painel com Firestore real (012 a 015):** login, gravação, exclusão e a transação de criar/mover código só foram vistos com autenticação e repositório simulados; faltam credenciais de teste no dev. Conferir o formato do documento gravado (código como id, siglas de tema/subtema, tipo e formato pelo nome) também na produção.
+- **Leitura dos dados (014):** a leitura de tipo, formato e preservação mudou e vale também para o site público; conferir na produção depois do merge.
+- **Painel:** leitor de tela real, texto a 200% e aviso nativo ao fechar a aba do editor não foram conferidos.
 
 ## Lições
 - `fvm flutter analyze` e os testes só rodam numa cópia em caminho ASCII (o "ó" da pasta quebra a ferramenta).
@@ -42,3 +47,7 @@ Uma linha por fase executada. O detalhe de cada spec fica em `docs/specs/NNN-*/`
 - Flutter 3.35.5 no web: ignora `hint` em campo de texto, não aceita `liveRegion` num nó com papel nem em título; usar `announce`.
 - Simular falta de rede bloqueando o Firestore no Chrome sem janela (CDP) dispensou datasource falso para o estado de erro.
 - Retomar uma sessão de etapa parada pelo limite semanal com SendMessage funcionou.
+- Quando o formato gravado muda de leitura (014) e de escrita (015), comparar com os documentos reais por consulta só de leitura evita surpresa: a spec dizia id automático e o dev usa o código como id.
+- Dica de botão aberta por foco precisa checar se o botão ainda tem o foco ao abrir; segurar o Tab deixava dicas empilhadas.
+- Seletor recriado a cada escolha tira o foco do teclado do campo: recriar só quando a mudança vem de fora.
+- Limite de 5 horas interrompeu duas etapas (verificação da 013, implementação da 015); retomar com SendMessage continuou do ponto certo.

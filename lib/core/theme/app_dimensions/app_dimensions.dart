@@ -106,6 +106,10 @@ class ShadowStyle {
     BoxShadow(color: Color(0x141F1B18), blurRadius: 26, offset: Offset(0, 10)),
   ];
 
+  List<BoxShadow> get card => const [
+    BoxShadow(color: Color(0x0F1F1B18), blurRadius: 32, offset: Offset(0, 12)),
+  ];
+
   List<BoxShadow> get elevated => const [
     BoxShadow(color: Color(0x241F1B18), blurRadius: 36, offset: Offset(0, 14)),
   ];
@@ -597,4 +601,36 @@ class ComponentSizes {
   final double contactInfoListTop = 18.0;
   final double contactInfoLabelGap = 2.0;
   final double contactInfoItemGap = 14.0;
+
+  final int loginBrandFlex = 5;
+  final int loginFormFlex = 6;
+  double loginBrandPaddingH(Breakpoint breakpoint) => _byBreakpoint(breakpoint, 20, 20, 40);
+  double loginBrandPaddingV(Breakpoint breakpoint) => _byBreakpoint(breakpoint, 24, 24, 40);
+  double loginBrandGap(Breakpoint breakpoint) => _byBreakpoint(breakpoint, 18, 18, 40);
+  final double loginEyebrowGap = 12.0;
+  final double loginBrandLeadGap = 14.0;
+
+  /// Largura máxima do título da marca, em múltiplos do tamanho da fonte.
+  final double loginBrandTitleMaxWidthEm = 8.1;
+  final double loginBrandLeadMaxWidth = 340.0;
+  final double loginRingsStep = 31.0;
+  final double loginRingsStroke = 1.0;
+  final double loginRingsOpacity = 0.15;
+  double loginMainPaddingH(Breakpoint breakpoint) => _byBreakpoint(breakpoint, 16, 16, 32);
+  double loginMainPaddingTop(Breakpoint breakpoint) => _byBreakpoint(breakpoint, 28, 28, 48);
+  final double loginMainPaddingBottom = 48.0;
+  final double loginCardMaxWidth = 400.0;
+  double loginCardPaddingH(Breakpoint breakpoint) => _byBreakpoint(breakpoint, 20, 20, 32);
+  double loginCardPaddingV(Breakpoint breakpoint) => _byBreakpoint(breakpoint, 24, 24, 32);
+  final double loginCardSubtitleGap = 6.0;
+  final double loginCardFieldsTop = 24.0;
+  final double loginBackLinkTop = 20.0;
+
+  double _byBreakpoint(Breakpoint breakpoint, double mobile, double tablet, double desktop) {
+    return switch (breakpoint) {
+      Breakpoint.mobile => mobile,
+      Breakpoint.tablet => tablet,
+      Breakpoint.desktop => desktop,
+    };
+  }
 }

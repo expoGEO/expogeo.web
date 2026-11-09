@@ -11,6 +11,9 @@ abstract class FirebaseAuthDatasource {
   /// Obtém o usuário atual logado
   Future<User?> currentUser();
 
+  /// Usuário da sessão salva, depois de o Firebase terminar de recuperá-la
+  Future<User?> restoredUser();
+
   /// Obtém o stream de mudanças de autenticação
   Stream<User?> get authStateChanges;
 }
@@ -60,6 +63,10 @@ class FirebaseAuthDatasourceImpl implements FirebaseAuthDatasource {
       rethrow;
     }
   }
+
+  // No navegador, `currentUser` fica nulo até a sessão salva ser lida; o primeiro evento já a traz.
+  @override
+  Future<User?> restoredUser() => _firebaseAuth.authStateChanges().first;
 
   @override
   Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();

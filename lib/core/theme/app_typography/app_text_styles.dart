@@ -118,6 +118,26 @@ class AppTextStyles {
     letterSpacingEm: -0.02,
   );
 
+  TextStyle get loginBrandTitle => _display(
+    size: _size(mobile: 25.6, tablet: 25.6, desktop: 44.8),
+    weight: FontWeight.w800,
+    height: 1.12,
+    letterSpacingEm: -0.03,
+  );
+
+  TextStyle get loginCardTitle => _display(
+    size: _size(mobile: 28, tablet: 28, desktop: 28),
+    weight: FontWeight.w700,
+    height: 1.12,
+    letterSpacingEm: -0.02,
+  );
+
+  TextStyle get loginLead => _body(
+    size: _size(mobile: 15, tablet: 15, desktop: 15),
+    weight: FontWeight.w400,
+    height: 1.55,
+  );
+
   /// Número grande no lugar do ícone da caixa de estado, como o "404".
   TextStyle get stateCode => _display(
     size: _size(mobile: 64, tablet: 88, desktop: 112),

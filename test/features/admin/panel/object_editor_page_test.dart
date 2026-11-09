@@ -369,6 +369,20 @@ void main() {
       await waitToasts(tester);
     });
 
+    testWidgets('mudar de subtema com o código já ocupado avisa o código gravado', (tester) async {
+      final panel = await open(tester, '/admin/painel/objetos/nma-bh-03/editar');
+      panel.content.takenCodes.add('NMA_BIO_01');
+
+      await choose(tester, 'Subtema', 'Biomas');
+      await save(tester);
+      await tester.tap(find.text('Mudar e salvar'));
+      await tester.pumpAndSettle();
+
+      expect(panel.content.written.single.id, 'NMA_BIO_02');
+      expect(find.text('Alterações salvas. O objeto recebeu o código NMA_BIO_02'), findsOneWidget);
+      await waitToasts(tester);
+    });
+
     testWidgets('falha mantém o editor e o que foi digitado', (tester) async {
       final panel = await open(tester, '/admin/painel/objetos/nma-bh-03/editar');
       panel.content.failWrites = true;
@@ -468,6 +482,30 @@ void main() {
       await tester.tap(find.text('Voltar aos objetos'));
       await tester.pumpAndSettle();
       expect(panel.location, '/admin/painel/objetos');
+    });
+  });
+
+  group('teclado', () {
+    testWidgets('do último campo, o Tab leva ao tema e rola a lateral para a vista', (
+      tester,
+    ) async {
+      await open(
+        tester,
+        '/admin/painel/objetos/novo?tema=natureza-meio-ambiente&subtema=bacias-hidrograficas',
+        size: const Size(1280, 500),
+      );
+      await tester.ensureVisible(selectField('Ano').first);
+      await tester.pumpAndSettle();
+      final tema = selectField('Tema');
+      expect(tester.getTopLeft(tema).dy, lessThan(0));
+
+      tester.widget<InkWell>(selectField('Ano').first).focusNode!.requestFocus();
+      await tester.pump();
+      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.pumpAndSettle();
+
+      expect(Focus.of(tester.element(tema)).hasFocus, isTrue);
+      expect(tester.getTopLeft(tema).dy, greaterThan(0));
     });
   });
 

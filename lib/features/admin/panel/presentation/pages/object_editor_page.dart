@@ -167,6 +167,9 @@ class _ObjectEditorPageState extends State<ObjectEditorPage> {
       );
     }
     form.addListener(_onFormChanged);
+    for (final field in [EditorField.theme, EditorField.subtheme]) {
+      form.focusOf(field).addListener(() => _revealWhenFocused(form.focusOf(field)));
+    }
     _form = form;
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -176,6 +179,17 @@ class _ObjectEditorPageState extends State<ObjectEditorPage> {
           : form.focusOf(EditorField.title);
       first.requestFocus();
     });
+  }
+
+  // Pelo Tab, o foco chega à lateral depois do último campo, que fica acima na tela, e o Flutter
+  // não rola para trás nesse caso.
+  void _revealWhenFocused(FocusNode node) {
+    final context = node.context;
+    if (!node.hasFocus || context == null) return;
+    Scrollable.ensureVisible(
+      context,
+      alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtStart,
+    );
   }
 
   void _onFormChanged() {
@@ -282,6 +296,8 @@ class _ObjectEditorPageState extends State<ObjectEditorPage> {
           ? saved != null && saved != shownCode
                 ? 'Objeto cadastrado com o código $saved'
                 : 'Objeto cadastrado'
+          : moving && saved != null && saved != shownCode
+          ? 'Alterações salvas. O objeto recebeu o código $saved'
           : 'Alterações salvas',
     );
     GoRouter.of(context).go(_listMemory.location);

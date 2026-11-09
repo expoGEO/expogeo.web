@@ -1,6 +1,7 @@
 import 'package:expogeo/core/components/button/app_button.dart';
 import 'package:expogeo/core/components/button/primary_button.dart';
 import 'package:expogeo/core/models/theme_data_model.dart';
+import 'package:expogeo/features/admin/panel/presentation/components/theme_subtheme_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -55,5 +56,31 @@ void main() {
     await tester.pumpAndSettle();
     expect(panel.content.calls, contains('delete'));
     expect(panel.contentStore.savedCount, 1);
+  });
+
+  testWidgets('escolher no seletor mantém o seletor e o foco do teclado nele', (tester) async {
+    final panel = PanelHarness();
+    await panel.pump(tester, '/admin/painel/objetos');
+    await panel.loadCatalog(tester);
+
+    final before = tester.state(find.byType(ThemeSubthemeSelector));
+    Focus.of(tester.element(find.text('Selecione um tema'))).requestFocus();
+    await tester.pump();
+
+    await tester.tap(find.text('Selecione um tema'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Natureza e Meio Ambiente').last);
+    await tester.pumpAndSettle();
+
+    expect(panel.contentStore.selectedTheme, ThemeEnum.naturezaMeioAmbiente);
+    expect(tester.state(find.byType(ThemeSubthemeSelector)), same(before));
+    final themeField = find.byType(DropdownButtonFormField<String>).first;
+    final focusedInThemeField = find.descendant(
+      of: themeField,
+      matching: find.byWidgetPredicate(
+        (widget) => widget is Focus && (widget.focusNode?.hasPrimaryFocus ?? false),
+      ),
+    );
+    expect(focusedInThemeField, findsOneWidget);
   });
 }

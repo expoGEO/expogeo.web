@@ -2,6 +2,7 @@ import 'package:expogeo/core/components/button/primary_button.dart';
 import 'package:expogeo/core/components/card/rounded_card.dart';
 import 'package:expogeo/core/components/dialog/confirm_dialog.dart';
 import 'package:expogeo/core/components/loading/circular_loading.dart';
+import 'package:expogeo/core/models/theme_data_model.dart';
 import 'package:expogeo/core/theme/app_theme.dart';
 import 'package:expogeo/core/utils/messenger/messenger.dart';
 import 'package:expogeo/features/admin/panel/infra/models/content_response_model.dart';
@@ -30,6 +31,20 @@ class _LegacyObjectsAreaState extends State<LegacyObjectsArea> {
   ContentStore get _store => widget.contentStore;
 
   late final ReactionDisposer _errorReaction;
+
+  // O seletor guarda a própria escolha e só copia a inicial quando ela existe. Ele é recriado
+  // quando a escolha muda por fora (endereço ou menu); recriá-lo a cada escolha feita nele tiraria
+  // o foco do teclado do campo usado.
+  Key _selectorKey = UniqueKey();
+  (ThemeEnum?, SubthemeEnum?)? _selectorChoice;
+
+  Key _selectorKeyFor(ThemeEnum? theme, SubthemeEnum? subtheme) {
+    if (_selectorChoice != (theme, subtheme)) {
+      _selectorChoice = (theme, subtheme);
+      _selectorKey = UniqueKey();
+    }
+    return _selectorKey;
+  }
 
   @override
   void initState() {
@@ -82,13 +97,16 @@ class _LegacyObjectsAreaState extends State<LegacyObjectsArea> {
             final subtheme = _store.selectedSubtheme;
             return RoundedCard(
               padding: EdgeInsets.all(spacing.s24),
-              // O seletor só copia a escolha inicial quando ela existe; a chave o recria a cada
-              // escolha vinda de fora (endereço, menu ou "Limpar Filtro").
               child: ThemeSubthemeSelector(
-                key: ValueKey((theme, subtheme)),
-                onThemeSelected: (theme) => _store.loadContentsByTheme(theme: theme),
-                onSubthemeSelected: (theme, subtheme) =>
-                    _store.loadContentsBySubtheme(subtheme: subtheme),
+                key: _selectorKeyFor(theme, subtheme),
+                onThemeSelected: (theme) {
+                  _selectorChoice = (theme, null);
+                  _store.loadContentsByTheme(theme: theme);
+                },
+                onSubthemeSelected: (theme, subtheme) {
+                  _selectorChoice = (theme, subtheme);
+                  _store.loadContentsBySubtheme(subtheme: subtheme);
+                },
                 initialTheme: theme,
                 initialSubtheme: subtheme,
               ),

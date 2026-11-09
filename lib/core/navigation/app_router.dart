@@ -5,7 +5,10 @@ import 'package:expogeo/features/about/pages/about_page.dart';
 import 'package:expogeo/features/admin/admin_setup.dart';
 import 'package:expogeo/features/admin/login/infra/repositories/auth_repository.dart';
 import 'package:expogeo/features/admin/login/presentation/pages/signin_page.dart';
-import 'package:expogeo/features/admin/panel/presentation/pages/panel_page.dart';
+import 'package:expogeo/features/admin/panel/presentation/panel_address.dart';
+import 'package:expogeo/features/admin/panel/presentation/pages/panel_objects_view.dart';
+import 'package:expogeo/features/admin/panel/presentation/pages/panel_shell.dart';
+import 'package:expogeo/features/admin/panel/presentation/pages/panel_themes_view.dart';
 import 'package:expogeo/features/contact/pages/contact_page.dart';
 import 'package:expogeo/features/home/pages/home_page.dart';
 import 'package:expogeo/features/theme/pages/object_page.dart';
@@ -20,6 +23,8 @@ class AppRouter {
   static const String about = '/sobre';
   static const String admin = '/admin';
   static const String adminPanel = '/admin/painel';
+  static const String adminPanelObjects = '/admin/painel/objetos';
+  static const String adminPanelThemes = '/admin/painel/temas';
 
   static String representacoesEspaciais = ThemeEnum.representacoesEspaciais.value;
   static String meioAmbiente = ThemeEnum.naturezaMeioAmbiente.value;
@@ -37,7 +42,8 @@ class AppRouter {
       GoRoute(path: about, name: about, builder: (context, state) => const AboutPage()),
       GoRoute(path: contact, name: contact, builder: (context, state) => const ContactPage()),
 
-      // Rota do painel administrativo: o login, com o painel como subrota
+      // Rota do painel administrativo: o login, com o painel como subrota; o painel em si leva
+      // à primeira vista, dentro da moldura
       GoRoute(
         path: admin,
         builder: (context, state) => const SignInPage(),
@@ -45,7 +51,23 @@ class AppRouter {
           GoRoute(
             path: 'painel',
             name: 'admin-painel',
-            builder: (context, state) => const PanelPage(),
+            redirect: (context, state) => adminPanelObjects,
+          ),
+        ],
+      ),
+      ShellRoute(
+        builder: (context, state, child) => PanelShell(location: state.uri, child: child),
+        routes: [
+          GoRoute(
+            path: adminPanelObjects,
+            name: 'admin-painel-objetos',
+            builder: (context, state) =>
+                PanelObjectsView(selection: PanelSelection.fromQuery(state.uri.queryParameters)),
+          ),
+          GoRoute(
+            path: adminPanelThemes,
+            name: 'admin-painel-temas',
+            builder: (context, state) => const PanelThemesView(),
           ),
         ],
       ),
@@ -118,13 +140,15 @@ class AppRouter {
     ],
   );
 
-  /// Decide `/admin` e `/admin/painel` pela sessão já recuperada; as outras rotas não a consultam.
+  /// Decide `/admin` e o painel pela sessão já recuperada; as outras rotas não a consultam.
   static Future<String?> adminRedirect(String path, Future<User?> Function() restoredUser) async {
-    if (path != admin && path != adminPanel) return null;
+    final inPanel = path == adminPanel || path.startsWith('$adminPanel/');
+    if (path != admin && !inPanel) return null;
 
     final isLogged = await restoredUser() != null;
-    if (path == admin) return isLogged ? adminPanel : null;
-    return isLogged ? null : admin;
+    if (path == admin) return isLogged ? adminPanelObjects : null;
+    if (!isLogged) return admin;
+    return path == adminPanel ? adminPanelObjects : null;
   }
 
   static GoRoute _objectRoute(String themeId) => GoRoute(

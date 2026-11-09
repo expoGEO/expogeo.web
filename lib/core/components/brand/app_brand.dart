@@ -4,13 +4,26 @@ import 'package:expogeo/core/utils/enums/app_images.dart';
 import 'package:flutter/material.dart';
 
 class AppBrand extends StatelessWidget {
-  const AppBrand({super.key, this.tagline, this.onDark = false, this.onTap});
+  const AppBrand({
+    super.key,
+    this.tagline,
+    this.onDark = false,
+    this.onTap,
+    this.showName = true,
+    this.semanticLabel,
+  });
 
   final String? tagline;
   final bool onDark;
 
   /// Com ação, a marca vira link para a página inicial.
   final VoidCallback? onTap;
+
+  /// Sem o nome, fica só o símbolo, para barras estreitas.
+  final bool showName;
+
+  /// Nome acessível do link, quando ele não leva à página inicial.
+  final String? semanticLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -50,37 +63,39 @@ class AppBrand extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         mark,
-        SizedBox(width: spacing.s12),
-        Flexible(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text.rich(
-                TextSpan(
-                  text: 'expo',
-                  children: [
-                    TextSpan(
-                      text: 'GEO',
-                      style: TextStyle(color: onDark ? colors.footerHighlight : colors.accent),
-                    ),
-                  ],
-                ),
-                style: nameStyle,
-              ),
-              if (tagline != null)
-                Text(
-                  tagline,
-                  style: styles.small.copyWith(
-                    fontSize: components.brandTagline,
-                    fontWeight: FontWeight.w500,
-                    height: 1.3,
-                    color: onDark ? colors.footerSubtle : colors.inkSecondary,
+        if (showName) ...[
+          SizedBox(width: spacing.s12),
+          Flexible(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text.rich(
+                  TextSpan(
+                    text: 'expo',
+                    children: [
+                      TextSpan(
+                        text: 'GEO',
+                        style: TextStyle(color: onDark ? colors.footerHighlight : colors.accent),
+                      ),
+                    ],
                   ),
+                  style: nameStyle,
                 ),
-            ],
+                if (tagline != null)
+                  Text(
+                    tagline,
+                    style: styles.small.copyWith(
+                      fontSize: components.brandTagline,
+                      fontWeight: FontWeight.w500,
+                      height: 1.3,
+                      color: onDark ? colors.footerSubtle : colors.inkSecondary,
+                    ),
+                  ),
+              ],
+            ),
           ),
-        ),
+        ],
       ],
     );
 
@@ -96,7 +111,7 @@ class AppBrand extends StatelessWidget {
 
     return Semantics(
       link: true,
-      label: 'expoGEO, página inicial',
+      label: semanticLabel ?? 'expoGEO, página inicial',
       onTap: onTap,
       excludeSemantics: true,
       child: AppFocusRing(

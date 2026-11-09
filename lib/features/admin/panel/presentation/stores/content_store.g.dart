@@ -81,6 +81,36 @@ mixin _$ContentStore on ContentStoreBase, Store {
     });
   }
 
+  late final _$savedCountAtom = Atom(
+    name: 'ContentStoreBase.savedCount',
+    context: context,
+  );
+
+  @override
+  int get savedCount {
+    _$savedCountAtom.reportRead();
+    return super.savedCount;
+  }
+
+  @override
+  set savedCount(int value) {
+    _$savedCountAtom.reportWrite(value, super.savedCount, () {
+      super.savedCount = value;
+    });
+  }
+
+  late final _$selectFromAddressAsyncAction = AsyncAction(
+    'ContentStoreBase.selectFromAddress',
+    context: context,
+  );
+
+  @override
+  Future<void> selectFromAddress({ThemeEnum? theme, SubthemeEnum? subtheme}) {
+    return _$selectFromAddressAsyncAction.run(
+      () => super.selectFromAddress(theme: theme, subtheme: subtheme),
+    );
+  }
+
   late final _$loadContentsBySubthemeAsyncAction = AsyncAction(
     'ContentStoreBase.loadContentsBySubtheme',
     context: context,
@@ -188,7 +218,8 @@ mixin _$ContentStore on ContentStoreBase, Store {
 state: ${state},
 contents: ${contents},
 selectedTheme: ${selectedTheme},
-selectedSubtheme: ${selectedSubtheme}
+selectedSubtheme: ${selectedSubtheme},
+savedCount: ${savedCount}
     ''';
   }
 }

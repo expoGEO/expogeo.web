@@ -101,10 +101,10 @@ Proporcionar uma experiência de aprendizado dinâmica e visual sobre os princip
 
 ### 4. 🛠️ Painel Administrativo (`/admin`)
 
-- **Criar, editar e deletar temas**
-- **Gerenciar subtemas dinamicamente**
-- **Upload de conteúdos com suporte a imagens**
-- **Publicação e controle de visibilidade**
+- **Login** em `/admin`; com sessão, `/admin` e `/admin/painel` levam a `/admin/painel/objetos`
+- **Moldura do painel:** barra com "Ver site" e a pessoa conectada, menu lateral "Curadoria" com as contagens do catálogo (gaveta até 900 px)
+- **Objetos digitais** (`/admin/painel/objetos`, com `?tema=` e `&subtema=` do site): criar, editar e excluir conteúdos de cada subtema
+- **Temas e subtemas** (`/admin/painel/temas`): só consulta, com caminho no site e contagem de objetos; temas e subtemas vêm do código
 
 ---
 

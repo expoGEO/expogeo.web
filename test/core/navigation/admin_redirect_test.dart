@@ -26,15 +26,34 @@ void main() {
       AppRouter.admin,
       restoring(FakeUser(), delay: const Duration(milliseconds: 50)),
     );
-    expect(result, AppRouter.adminPanel);
+    expect(result, AppRouter.adminPanelObjects);
   });
 
   test('/admin/painel sem sessão volta ao login', () async {
     expect(await AppRouter.adminRedirect(AppRouter.adminPanel, restoring(null)), AppRouter.admin);
   });
 
-  test('/admin/painel com sessão fica', () async {
-    expect(await AppRouter.adminRedirect(AppRouter.adminPanel, restoring(FakeUser())), isNull);
+  test('/admin/painel com sessão leva a objetos', () async {
+    expect(
+      await AppRouter.adminRedirect(AppRouter.adminPanel, restoring(FakeUser())),
+      AppRouter.adminPanelObjects,
+    );
+  });
+
+  test('as vistas do painel sem sessão voltam ao login', () async {
+    for (final path in [
+      AppRouter.adminPanelThemes,
+      AppRouter.adminPanelObjects,
+      '/admin/painel/xyz',
+    ]) {
+      expect(await AppRouter.adminRedirect(path, restoring(null)), AppRouter.admin);
+    }
+  });
+
+  test('as vistas do painel com sessão ficam', () async {
+    for (final path in [AppRouter.adminPanelThemes, AppRouter.adminPanelObjects]) {
+      expect(await AppRouter.adminRedirect(path, restoring(FakeUser())), isNull);
+    }
   });
 
   test('outras rotas não consultam a sessão', () async {

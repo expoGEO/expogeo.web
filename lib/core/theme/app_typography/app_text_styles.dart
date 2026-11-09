@@ -150,6 +150,79 @@ class AppTextStyles {
     height: 1.35,
   );
 
+  TextStyle get panelGroupLabel => _body(
+    size: _size(mobile: 12, tablet: 12, desktop: 12),
+    weight: FontWeight.w700,
+    height: 1.4,
+    letterSpacingEm: 0.09,
+  );
+
+  TextStyle get panelNav =>
+      _body(size: _size(mobile: 15, tablet: 15, desktop: 15), weight: FontWeight.w600, height: 1.4);
+
+  TextStyle get panelNavSub =>
+      _body(size: _size(mobile: 14, tablet: 14, desktop: 14), weight: FontWeight.w500, height: 1.4);
+
+  TextStyle get panelCount => _body(
+    size: _size(mobile: 12.5, tablet: 12.5, desktop: 12.5),
+    weight: FontWeight.w600,
+    height: 1.4,
+    fontFeatures: const [FontFeature.tabularFigures()],
+  );
+
+  TextStyle get panelTitle => _display(
+    size: _size(mobile: 25.6, tablet: 28, desktop: 33.6),
+    weight: FontWeight.w800,
+    height: 1.12,
+    letterSpacingEm: -0.03,
+  );
+
+  TextStyle get panelSummary => _body(
+    size: _size(mobile: 14.5, tablet: 14.5, desktop: 14.5),
+    weight: FontWeight.w400,
+    height: 1.5,
+  );
+
+  TextStyle get panelUserName => _body(
+    size: _size(mobile: 14.5, tablet: 14.5, desktop: 14.5),
+    weight: FontWeight.w700,
+    height: 1.2,
+  );
+
+  TextStyle get panelAvatarInitials => _display(
+    size: _size(mobile: 13, tablet: 13, desktop: 13),
+    weight: FontWeight.w700,
+    height: 1,
+    letterSpacingEm: 0,
+  );
+
+  TextStyle get panelBlockTitle => _display(
+    size: _size(mobile: 20, tablet: 20, desktop: 20),
+    weight: FontWeight.w700,
+    height: 1.12,
+    letterSpacingEm: -0.02,
+  );
+
+  TextStyle get panelRowTitle => _display(
+    size: _size(mobile: 16.8, tablet: 16.8, desktop: 16.8),
+    weight: FontWeight.w600,
+    height: 1.3,
+    letterSpacingEm: -0.02,
+  );
+
+  TextStyle get panelMeta => _body(
+    size: _size(mobile: 13.5, tablet: 13.5, desktop: 13.5),
+    weight: FontWeight.w400,
+    height: 1.45,
+  );
+
+  TextStyle get panelBadge => _body(
+    size: _size(mobile: 12.5, tablet: 12.5, desktop: 12.5),
+    weight: FontWeight.w700,
+    height: 1.4,
+    fontFeatures: const [FontFeature.tabularFigures()],
+  );
+
   TextStyle get panelDialogTitle => _display(
     size: _size(mobile: 20.8, tablet: 20.8, desktop: 20.8),
     weight: FontWeight.w700,

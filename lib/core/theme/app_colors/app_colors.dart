@@ -79,6 +79,9 @@ class AppColors {
   /// Fundo escurecido atrás da gaveta e dos diálogos do painel.
   Color scrim = const Color(0x731C1917);
 
+  /// Fundo da linha de lista no hover.
+  Color rowHover = const Color(0xFFFCFBF9);
+
   /// Ícone do aviso curto sobre [ink].
   Color toastIcon = const Color(0xFF9FD8AE);
 

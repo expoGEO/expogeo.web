@@ -25,6 +25,25 @@ abstract class ContentStoreBase with Store {
   @observable
   SubthemeEnum? selectedSubtheme;
 
+  /// Sobe a cada criação, edição ou exclusão bem-sucedida, para quem depende das contagens.
+  @observable
+  int savedCount = 0;
+
+  /// Escolhe o tema e o subtema vindos do endereço e carrega a tabela deles; sem tema, limpa.
+  @action
+  Future<void> selectFromAddress({ThemeEnum? theme, SubthemeEnum? subtheme}) async {
+    if (theme == null) {
+      reset();
+      return;
+    }
+    if (subtheme == null) {
+      await loadContentsByTheme(theme: theme);
+      return;
+    }
+    selectedTheme = theme;
+    await loadContentsBySubtheme(subtheme: subtheme);
+  }
+
   @action
   Future<void> loadContentsBySubtheme({required SubthemeEnum subtheme}) async {
     state = ContentStateLoading();
@@ -102,6 +121,7 @@ abstract class ContentStoreBase with Store {
       },
       (docId) {
         state = ContentStateSuccess();
+        savedCount++;
         loadContentsBySubtheme(subtheme: subtheme);
       },
     );
@@ -127,6 +147,7 @@ abstract class ContentStoreBase with Store {
       },
       (_) {
         state = ContentStateSuccess();
+        savedCount++;
         loadContentsBySubtheme(subtheme: subtheme);
       },
     );
@@ -145,6 +166,7 @@ abstract class ContentStoreBase with Store {
       },
       (_) {
         state = ContentStateSuccess();
+        savedCount++;
         loadContentsBySubtheme(subtheme: subtheme);
       },
     );

@@ -6,6 +6,11 @@ import 'package:expogeo/features/admin/login/infra/repositories/auth_repository.
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FakeUser implements User {
+  FakeUser({this.email});
+
+  @override
+  final String? email;
+
   @override
   dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }
@@ -15,6 +20,12 @@ class FakeAuthRepository implements AuthRepository {
   final List<String> emails = [];
   final List<String> passwords = [];
   Completer<Either<AuthFailure, User>>? _pending;
+
+  /// Sessão que `currentUser` devolve; sem ela, não há usuário.
+  User? current;
+
+  /// Faz o `logout` falhar.
+  bool failLogout = false;
 
   int get loginCalls => emails.length;
 
@@ -31,10 +42,14 @@ class FakeAuthRepository implements AuthRepository {
   }
 
   @override
-  Future<Either<AuthFailure, void>> logout() async => const Right(null);
+  Future<Either<AuthFailure, void>> logout() async =>
+      failLogout ? const Left(ServerError()) : const Right(null);
 
   @override
-  Future<Either<AuthFailure, User>> currentUser() async => const Left(UserNotFound());
+  Future<Either<AuthFailure, User>> currentUser() async {
+    final user = current;
+    return user == null ? const Left(UserNotFound()) : Right(user);
+  }
 
   @override
   Future<User?> restoredUser() async => null;

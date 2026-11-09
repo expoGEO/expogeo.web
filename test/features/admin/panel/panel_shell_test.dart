@@ -37,6 +37,21 @@ void main() {
     expect(find.text(panelEmail), findsOneWidget);
   });
 
+  testWidgets('voltar do editor não recarrega o catálogo', (tester) async {
+    final panel = PanelHarness();
+    await panel.pump(tester, '/admin/painel/objetos');
+    await panel.loadCatalog(tester);
+    expect(panel.catalog.calls, 1);
+
+    panel.router.go('/admin/painel/objetos/novo');
+    await tester.pumpAndSettle();
+    panel.router.go(panel.listMemory.location);
+    await tester.pumpAndSettle();
+
+    expect(find.byType(PanelObjectsView), findsOneWidget);
+    expect(panel.catalog.calls, 1);
+  });
+
   testWidgets('a gaveta abre pelo botão e fecha ao tocar fora, com o foco de volta', (
     tester,
   ) async {

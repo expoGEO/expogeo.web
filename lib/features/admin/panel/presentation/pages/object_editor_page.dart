@@ -116,7 +116,10 @@ class _ObjectEditorPageState extends State<ObjectEditorPage> {
 
     _authStore.currentUser();
     _userReaction = reaction((_) => _authStore.user, (User? user) {
-      if (user == null) _leave(AppRouter.admin);
+      if (user == null) {
+        _listMemory.reset();
+        _leave(AppRouter.admin);
+      }
     });
     _catalogStore.ensureLoaded();
   }

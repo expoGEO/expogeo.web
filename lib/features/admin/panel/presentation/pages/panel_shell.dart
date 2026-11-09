@@ -11,6 +11,7 @@ import 'package:expogeo/features/admin/login/presentation/stores/auth_store.dart
 import 'package:expogeo/features/admin/panel/presentation/components/panel_sidebar.dart';
 import 'package:expogeo/features/admin/panel/presentation/components/panel_top_bar.dart';
 import 'package:expogeo/features/admin/panel/presentation/panel_address.dart';
+import 'package:expogeo/features/admin/panel/presentation/panel_list_memory.dart';
 import 'package:expogeo/features/admin/panel/presentation/stores/content_store.dart';
 import 'package:expogeo/features/catalog/presentation/stores/catalog_store.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -34,6 +35,7 @@ class _PanelShellState extends State<PanelShell> {
   late final _authStore = AdminSetup.getIt<AuthStore>();
   late final _contentStore = AdminSetup.getIt<ContentStore>();
   late final _catalogStore = AdminSetup.getIt<CatalogStore>();
+  late final _listMemory = AdminSetup.getIt<PanelListMemory>();
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final _menuButtonFocus = FocusNode();
@@ -47,12 +49,15 @@ class _PanelShellState extends State<PanelShell> {
     super.initState();
 
     _authStore.currentUser();
-    // Recarrega ao abrir para não mostrar contagens de antes do login.
-    _catalogStore.refresh();
+    // Recarrega ao entrar para não mostrar contagens de antes do login; voltar do editor não
+    // refaz a consulta, que o salvar e o excluir já refazem.
+    if (_listMemory.takeCatalogRefresh()) _catalogStore.refresh();
 
     _reactions = [
       reaction((_) => _authStore.user, (User? user) {
-        if (user == null && mounted) GoRouter.of(context).go(AppRouter.admin);
+        if (user != null) return;
+        _listMemory.reset();
+        if (mounted) GoRouter.of(context).go(AppRouter.admin);
       }),
       reaction((_) => _authStore.state.logoutState, (LogoutState logoutState) {
         if (logoutState is LogoutStateError && mounted) {

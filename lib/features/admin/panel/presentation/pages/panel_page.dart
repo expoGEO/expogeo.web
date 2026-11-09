@@ -94,6 +94,7 @@ class _PanelPageState extends State<PanelPage> {
             padding: EdgeInsets.symmetric(horizontal: AppTheme.dimensions.space.small.width),
             child: AppIconButton(
               icon: Icons.exit_to_app,
+              tooltip: 'Sair do painel',
               color: AppTheme.colors.white,
               size: 32,
               onPressed: _authStore.logout,

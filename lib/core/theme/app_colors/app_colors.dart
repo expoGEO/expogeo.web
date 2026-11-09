@@ -76,7 +76,16 @@ class AppColors {
   /// Tracejado da caixa de estado, só decorativo.
   Color stateBoxBorder = const Color(0xFFD4CDC3);
 
+  /// Fundo escurecido atrás da gaveta e dos diálogos do painel.
+  Color scrim = const Color(0x731C1917);
+
+  /// Ícone do aviso curto sobre [ink].
+  Color toastIcon = const Color(0xFF9FD8AE);
+
   Color error = const Color(0xFFB3261E);
+
+  /// Hover do botão de perigo.
+  Color errorStrong = const Color(0xFF8F1D17);
   Color errorSurface = const Color(0xFFFBE9E7);
   Color success = const Color(0xFF1C6B34);
   Color successSurface = const Color(0xFFE4F3E8);

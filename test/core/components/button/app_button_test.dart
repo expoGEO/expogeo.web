@@ -138,4 +138,15 @@ void main() {
       expect((await colorsOnHover(tester, button, hover: true)).$1, colors.accent);
     });
   });
+
+  testWidgets('perigo tem fundo de erro e texto branco', (tester) async {
+    await pump(tester, AppButton.danger(text: 'Excluir', onPressed: () {}));
+
+    final material = tester.widget<Material>(
+      find.ancestor(of: find.text('Excluir'), matching: find.byType(Material)).first,
+    );
+    expect(material.color, AppTheme.colors.error);
+    final text = tester.widget<Text>(find.text('Excluir'));
+    expect(text.style?.color, AppTheme.colors.white);
+  });
 }

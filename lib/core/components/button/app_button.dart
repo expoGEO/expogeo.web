@@ -3,7 +3,7 @@ import 'package:expogeo/core/theme/app_theme.dart';
 import 'package:expogeo/core/utils/url/url_utils.dart';
 import 'package:flutter/material.dart';
 
-enum AppButtonKind { primary, secondary, ghost }
+enum AppButtonKind { primary, secondary, ghost, danger }
 
 enum AppButtonSize { regular, small }
 
@@ -52,6 +52,22 @@ class AppButton extends StatefulWidget {
     this.fullWidth = false,
     this.isLoading = false,
   }) : kind = AppButtonKind.ghost;
+
+  /// Ação que apaga algo, como a confirmação de uma exclusão.
+  const AppButton.danger({
+    super.key,
+    required this.text,
+    this.onPressed,
+    this.size = AppButtonSize.regular,
+    this.leadingIcon,
+    this.trailingIcon,
+    this.isDisabled = false,
+    this.focusNode,
+    this.semanticLabel,
+    this.fullWidth = false,
+    this.isLoading = false,
+  }) : kind = AppButtonKind.danger,
+       externalUrl = null;
 
   final AppButtonKind kind;
   final String text;
@@ -126,6 +142,11 @@ class _AppButtonState extends State<AppButton> {
       AppButtonKind.ghost => (
         hovered ? colors.accentSoft : Colors.transparent,
         colors.accentStrong,
+        Colors.transparent,
+      ),
+      AppButtonKind.danger => (
+        hovered ? colors.errorStrong : colors.error,
+        colors.white,
         Colors.transparent,
       ),
     };

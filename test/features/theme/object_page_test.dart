@@ -14,6 +14,8 @@ import 'package:go_router/go_router.dart';
 
 import '../catalog/catalog_test_data.dart';
 
+import '../../support/semantics.dart';
+
 void main() {
   late FakeCatalogRepository repository;
   late CatalogStore store;
@@ -231,7 +233,7 @@ void main() {
     await settle(tester);
 
     final item = tester.getSemantics(find.bySemanticsLabel('Temas')).getSemanticsData();
-    expect(item.flagsCollection.isSelected, isTrue);
+    expect(isMarked(item), isTrue);
   });
 
   for (final width in [320.0, 390.0, 768.0, 1280.0]) {

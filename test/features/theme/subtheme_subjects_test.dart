@@ -9,6 +9,8 @@ import 'package:flutter_test/flutter_test.dart';
 
 import '../catalog/catalog_test_data.dart';
 
+import '../../support/semantics.dart';
+
 void main() {
   Future<SubthemeObjectsStore> storeWith(List<CatalogRecord> records) async {
     final repository = FakeCatalogRepository();
@@ -46,7 +48,7 @@ void main() {
     expect(find.bySemanticsLabel('Assuntos frequentes'), findsOneWidget);
     final data = tester.getSemantics(find.bySemanticsLabel('Cerrado')).getSemanticsData();
     expect(data.flagsCollection.isButton, isTrue);
-    expect(data.flagsCollection.isFocusable, isTrue);
+    expect(canFocus(data), isTrue);
   });
 
   testWidgets('tocar avisa o assunto', (tester) async {

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../support/semantics.dart';
+
 void main() {
   // O roteador do app consulta o Firebase no redirecionamento; aqui entra só a rota dele.
   GoRoute routeOf(String path) => AppRouter.router.configuration.routes
@@ -21,6 +23,6 @@ void main() {
     expect(find.byType(AboutPage), findsOneWidget);
     final item = tester.getSemantics(find.bySemanticsLabel('Sobre')).getSemanticsData();
     expect(item.flagsCollection.isLink, isTrue);
-    expect(item.flagsCollection.isSelected, isTrue);
+    expect(isMarked(item), isTrue);
   });
 }

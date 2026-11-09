@@ -6,6 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../support/failing_asset_bundle.dart';
+import '../../support/semantics.dart';
 
 void main() {
   final themes = ThemeDataModel.themes;
@@ -56,8 +57,7 @@ void main() {
     await pump(tester, 0);
 
     Finder link(String label) => find.bySemanticsLabel(label);
-    bool focused(String label) =>
-        tester.getSemantics(link(label)).getSemanticsData().flagsCollection.isFocused;
+    bool focused(String label) => hasFocus(tester.getSemantics(link(label)));
 
     await tester.sendKeyEvent(LogicalKeyboardKey.tab);
     await tester.pump();

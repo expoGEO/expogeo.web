@@ -8,6 +8,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../support/failing_asset_bundle.dart';
+import '../../support/semantics.dart';
 import '../catalog/catalog_test_data.dart';
 
 void main() {
@@ -110,8 +111,7 @@ void main() {
     await pump(tester, [natureza, cultura]);
     final cards = find.byType(ThemeOverviewCard);
 
-    bool focused(int index) =>
-        tester.getSemantics(cards.at(index)).getSemanticsData().flagsCollection.isFocused;
+    bool focused(int index) => hasFocus(tester.getSemantics(cards.at(index)));
 
     await tester.sendKeyEvent(LogicalKeyboardKey.tab);
     await tester.pump();
@@ -127,7 +127,7 @@ void main() {
 
     final card = tester.getSemantics(find.byType(ThemeOverviewCard)).getSemanticsData();
     expect(card.flagsCollection.isLink, isTrue);
-    expect(card.flagsCollection.isFocusable, isTrue);
+    expect(canFocus(card), isTrue);
 
     final title = tester.getSemantics(find.text(natureza.title)).getSemanticsData();
     expect(title.flagsCollection.isHeader, isTrue);

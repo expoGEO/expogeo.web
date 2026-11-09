@@ -8,6 +8,7 @@ import 'package:expogeo/features/catalog/presentation/stores/catalog_store.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../../support/semantics.dart';
 import '../../catalog/catalog_test_data.dart';
 
 void main() {
@@ -64,7 +65,7 @@ void main() {
 
       final data = tester.getSemantics(find.byType(PanelNavItem)).getSemanticsData();
       expect(data.label, 'Objetos digitais, 190');
-      expect(data.flagsCollection.isSelected, isTrue);
+      expect(isMarked(data), isTrue);
     });
 
     testWidgets('sem contagem, só o nome', (tester) async {
@@ -78,7 +79,7 @@ void main() {
 
       final data = tester.getSemantics(find.byType(PanelNavItem)).getSemanticsData();
       expect(data.label, 'Objetos digitais');
-      expect(data.flagsCollection.isSelected, isFalse);
+      expect(isMarked(data), isFalse);
     });
   });
 

@@ -2,6 +2,7 @@ import 'package:expogeo/core/components/field/app_filter_select.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import '../../../support/semantics.dart';
 
 void main() {
   const options = [
@@ -57,7 +58,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Vídeo'), findsNothing);
     final data = tester.getSemantics(find.bySemanticsLabel('Tipo')).getSemanticsData();
-    expect(data.flagsCollection.isFocused, isTrue);
+    expect(hasFocus(data), isTrue);
   });
 
   testWidgets('nome e valor lidos pelo leitor de tela', (tester) async {
@@ -77,12 +78,11 @@ void main() {
     expect(find.text('Vídeo'), findsNothing);
 
     final data = tester.getSemantics(find.bySemanticsLabel('Tipo')).getSemanticsData();
-    expect(data.flagsCollection.hasEnabledState, isTrue);
-    expect(data.flagsCollection.isEnabled, isFalse);
+    expect(isEnabledAs(data, false), isTrue);
 
     await tester.sendKeyEvent(LogicalKeyboardKey.tab);
     await tester.pump();
     final after = tester.getSemantics(find.bySemanticsLabel('Tipo')).getSemanticsData();
-    expect(after.flagsCollection.isFocused, isFalse);
+    expect(hasFocus(after), isFalse);
   });
 }

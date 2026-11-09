@@ -2,6 +2,7 @@ import 'package:expogeo/features/admin/login/presentation/components/password_vi
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import '../../../support/semantics.dart';
 
 void main() {
   Future<void> pump(WidgetTester tester, {required bool visible, VoidCallback? onPressed}) {
@@ -20,12 +21,11 @@ void main() {
     await pump(tester, visible: false);
     var data = tester.getSemantics(find.bySemanticsLabel('Mostrar senha')).getSemanticsData();
     expect(data.flagsCollection.isButton, isTrue);
-    expect(data.flagsCollection.hasToggledState, isTrue);
-    expect(data.flagsCollection.isToggled, isFalse);
+    expect(isToggledAs(data, false), isTrue);
 
     await pump(tester, visible: true);
     data = tester.getSemantics(find.bySemanticsLabel('Esconder senha')).getSemanticsData();
-    expect(data.flagsCollection.isToggled, isTrue);
+    expect(isToggledAs(data, true), isTrue);
   });
 
   testWidgets('clique, Enter e Espaço acionam', (tester) async {

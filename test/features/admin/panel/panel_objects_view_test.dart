@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../../support/semantics.dart' as semantics;
 import '../../catalog/catalog_test_data.dart';
 import 'panel_harness.dart';
 
@@ -54,7 +55,7 @@ void main() {
   Finder searchField() => find.byType(TextField);
 
   bool hasFocus(WidgetTester tester, Finder finder) =>
-      tester.getSemantics(finder).getSemanticsData().flagsCollection.isFocused;
+      semantics.hasFocus(tester.getSemantics(finder).getSemanticsData());
 
   bool selectHasFocus(WidgetTester tester, String label) =>
       hasFocus(tester, find.bySemanticsLabel(label));

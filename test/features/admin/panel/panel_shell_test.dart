@@ -12,6 +12,7 @@ import 'package:get_it/get_it.dart';
 
 import '../../../support/fake_content.dart';
 import 'panel_harness.dart';
+import '../../../support/semantics.dart';
 
 void main() {
   const mobile = Size(390, 800);
@@ -46,8 +47,7 @@ void main() {
 
     final closed = tester.getSemantics(menuButton()).getSemanticsData();
     expect(closed.label, 'Abrir menu do painel');
-    expect(closed.flagsCollection.hasExpandedState, isTrue);
-    expect(closed.flagsCollection.isExpanded, isFalse);
+    expect(isExpandedAs(closed, false), isTrue);
 
     await tester.tap(find.bySemanticsLabel('Abrir menu do painel'));
     await tester.pumpAndSettle();

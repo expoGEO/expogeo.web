@@ -10,12 +10,15 @@ enum ContentOutcomeKind { created, updated, deleted, saveFailed, deleteFailed }
 /// Resultado da última gravação ou exclusão. Cada operação cria um novo, para quem reage a ele
 /// ver também dois resultados iguais seguidos.
 class ContentOutcome {
-  ContentOutcome(this.kind, {this.docId});
+  ContentOutcome(this.kind, {this.docId, this.code});
 
   final ContentOutcomeKind kind;
 
   /// O objeto excluído, quando [kind] é [ContentOutcomeKind.deleted] ou `deleteFailed`.
   final String? docId;
+
+  /// O código gravado ao criar ou ao mudar de subtema, que pode ser outro que o mostrado na tela.
+  final String? code;
 }
 
 class ContentStore = ContentStoreBase with _$ContentStore;
@@ -36,22 +39,24 @@ abstract class ContentStoreBase with Store {
   @observable
   int savedCount = 0;
 
+  /// Cria com o próximo código livre do subtema, conferido na hora de gravar.
   @action
-  Future<void> createContent({
+  Future<ContentOutcome> createContent({
     required SubthemeEnum subtheme,
     required ContentResponseModel content,
   }) async {
     isBusy = true;
-    final result = await _repository.createContent(subtheme: subtheme, content: content);
-    _finish(
-      result.isRight()
-          ? ContentOutcome(ContentOutcomeKind.created)
-          : ContentOutcome(ContentOutcomeKind.saveFailed),
+    final result = await _repository.createWithCode(subtheme: subtheme, content: content);
+    return _finish(
+      result.fold(
+        (_) => ContentOutcome(ContentOutcomeKind.saveFailed),
+        (code) => ContentOutcome(ContentOutcomeKind.created, docId: code, code: code),
+      ),
     );
   }
 
   @action
-  Future<void> updateContent({
+  Future<ContentOutcome> updateContent({
     required SubthemeEnum subtheme,
     required String contentId,
     required ContentResponseModel content,
@@ -62,10 +67,33 @@ abstract class ContentStoreBase with Store {
       contentId: contentId,
       content: content,
     );
-    _finish(
+    return _finish(
       result.isRight()
           ? ContentOutcome(ContentOutcomeKind.updated, docId: contentId)
           : ContentOutcome(ContentOutcomeKind.saveFailed, docId: contentId),
+    );
+  }
+
+  /// Leva o objeto de [from] para [to], com um código novo de [to].
+  @action
+  Future<ContentOutcome> moveContent({
+    required SubthemeEnum from,
+    required String docId,
+    required SubthemeEnum to,
+    required ContentResponseModel content,
+  }) async {
+    isBusy = true;
+    final result = await _repository.moveContent(
+      from: from,
+      docId: docId,
+      to: to,
+      content: content,
+    );
+    return _finish(
+      result.fold(
+        (_) => ContentOutcome(ContentOutcomeKind.saveFailed, docId: docId),
+        (code) => ContentOutcome(ContentOutcomeKind.updated, docId: code, code: code),
+      ),
     );
   }
 
@@ -81,7 +109,7 @@ abstract class ContentStoreBase with Store {
   }
 
   @action
-  void _finish(ContentOutcome result) {
+  ContentOutcome _finish(ContentOutcome result) {
     isBusy = false;
     if (result.kind
         case ContentOutcomeKind.created ||
@@ -90,5 +118,6 @@ abstract class ContentStoreBase with Store {
       savedCount++;
     }
     outcome = result;
+    return result;
   }
 }

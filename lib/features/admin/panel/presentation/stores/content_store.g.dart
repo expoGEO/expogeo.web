@@ -69,7 +69,7 @@ mixin _$ContentStore on ContentStoreBase, Store {
   );
 
   @override
-  Future<void> createContent({
+  Future<ContentOutcome> createContent({
     required SubthemeEnum subtheme,
     required ContentResponseModel content,
   }) {
@@ -84,7 +84,7 @@ mixin _$ContentStore on ContentStoreBase, Store {
   );
 
   @override
-  Future<void> updateContent({
+  Future<ContentOutcome> updateContent({
     required SubthemeEnum subtheme,
     required String contentId,
     required ContentResponseModel content,
@@ -95,6 +95,24 @@ mixin _$ContentStore on ContentStoreBase, Store {
         contentId: contentId,
         content: content,
       ),
+    );
+  }
+
+  late final _$moveContentAsyncAction = AsyncAction(
+    'ContentStoreBase.moveContent',
+    context: context,
+  );
+
+  @override
+  Future<ContentOutcome> moveContent({
+    required SubthemeEnum from,
+    required String docId,
+    required SubthemeEnum to,
+    required ContentResponseModel content,
+  }) {
+    return _$moveContentAsyncAction.run(
+      () =>
+          super.moveContent(from: from, docId: docId, to: to, content: content),
     );
   }
 
@@ -119,7 +137,7 @@ mixin _$ContentStore on ContentStoreBase, Store {
   );
 
   @override
-  void _finish(ContentOutcome result) {
+  ContentOutcome _finish(ContentOutcome result) {
     final _$actionInfo = _$ContentStoreBaseActionController.startAction(
       name: 'ContentStoreBase._finish',
     );

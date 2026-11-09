@@ -34,4 +34,21 @@ void main() {
     expect(date.shortDate, '1 dez 2026');
     expect(date.monthYear, 'dez 2026');
   });
+
+  group('isoDay', () {
+    test('ano, mês e dia com zeros', () => expect(DateTime(2026, 3, 2).isoDay, '2026-03-02'));
+
+    test('ignora a hora', () => expect(DateTime(2024, 12, 5, 23, 59).isoDay, '2024-12-05'));
+
+    test('data em UTC mantém o dia gravado', () {
+      expect(DateTime.parse('2026-12-01T00:00:00.000Z').isoDay, '2026-12-01');
+    });
+  });
+
+  test('monthNames tem os 12 meses em ordem', () {
+    expect(monthNames, hasLength(12));
+    expect(monthNames.first, 'Janeiro');
+    expect(monthNames.last, 'Dezembro');
+    expect(DateTime(2025, 3).monthName, 'Março');
+  });
 }

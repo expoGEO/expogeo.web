@@ -39,11 +39,27 @@ class ContentResponseModel extends ContentModel {
     );
   }
 
-  /// Converte para JSON para salvar no Firestore
+  /// O mesmo objeto com [code] como código e como id do documento.
+  ContentResponseModel withCode(String code) => ContentResponseModel(
+    docId: code,
+    id: code,
+    theme: theme,
+    subtheme: subtheme,
+    intellectualIndicator: intellectualIndicator,
+    contentInfo: contentInfo,
+    originInfo: originInfo,
+    registrationInfo: registrationInfo,
+    rightsInfo: rightsInfo,
+    preservationAction: preservationAction,
+  );
+
+  /// Documento como os objetos já cadastrados: siglas no `themeId`/`subthemeId` e os nomes ao lado.
   Map<String, dynamic> toJson() => {
     'id': id,
-    'themeId': theme.value,
-    'subthemeId': subtheme.value,
+    'themeId': theme.id,
+    'themeTitle': theme.name,
+    'subthemeId': subtheme.id,
+    'subthemeTitle': subtheme.name,
     'intellectualIndicator': intellectualIndicator.toJson(),
     'contentInfo': contentInfo.toJson(),
     'originInfo': originInfo.toJson(),

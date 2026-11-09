@@ -147,6 +147,35 @@ void main() {
     });
   });
 
+  group('findByCode', () {
+    for (final code in ['nma-bio-03', 'NMA_BIO_03']) {
+      test('acha "$code" em qualquer subtema', () {
+        final catalog = CatalogModel.fromRecords([
+          ...biomasRecords(),
+          objectAt('NMA_BH', 'NMA_BH_03', date: DateTime(2025)),
+        ]);
+
+        expect(catalog.findByCode(code)?.subtheme, SubthemeEnum.biomas);
+        expect(catalog.findByCode(code)?.content.id, 'NMA_BIO_03');
+      });
+    }
+
+    test('código inexistente não acha', () {
+      expect(CatalogModel.fromRecords(biomasRecords()).findByCode('nma-bio-99'), isNull);
+    });
+  });
+
+  test('codesOf lista só os códigos do subtema', () {
+    final catalog = CatalogModel.fromRecords([
+      ...biomasRecords(),
+      objectAt('NMA_BH', 'NMA_BH_03', date: DateTime(2025)),
+    ]);
+
+    expect(catalog.codesOf(SubthemeEnum.baciasHidrograficas), ['NMA_BH_03']);
+    expect(catalog.codesOf(SubthemeEnum.biomas), hasLength(7));
+    expect(catalog.codesOf(SubthemeEnum.queimadas), isEmpty);
+  });
+
   group('othersOf', () {
     final catalog = CatalogModel.fromRecords([
       ...biomasRecords(),

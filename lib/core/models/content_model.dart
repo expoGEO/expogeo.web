@@ -1,5 +1,6 @@
 import 'package:expogeo/core/models/theme_data_model.dart';
 import 'package:expogeo/core/theme/app_theme.dart';
+import 'package:expogeo/core/utils/date/date.dart';
 import 'package:flutter/material.dart';
 
 /// Modelo que representa um conteúdo educacional com seus metadados completos
@@ -106,10 +107,10 @@ class OriginInfo {
   }
 
   Map<String, dynamic> toJson() => {
-    'insertionDate': insertionDate.toIso8601String(),
+    'insertionDate': insertionDate.isoDay,
     'language': language,
-    'type': type.value,
-    'format': format.value,
+    'type': type.name,
+    'format': format.name,
     if (requirements != null) 'requirements': requirements,
   };
 }
@@ -166,7 +167,7 @@ class PreservationAction {
 
   Map<String, dynamic> toJson() => {
     'operation': operation,
-    if (updateDate != null) 'updateDate': updateDate!.toIso8601String(),
+    if (updateDate != null) 'updateDate': updateDate!.isoDay,
   };
 }
 
@@ -200,7 +201,7 @@ enum ContentType {
     ContentType.outro => AppTheme.colors.mediumGray,
   };
 
-  /// Aceita o nome (`site`) ou o rótulo (`Site`), porque o formulário grava o rótulo.
+  /// Aceita o nome (`site`) ou o rótulo (`Site`), porque o formulário antigo gravava o rótulo.
   static ContentType fromString(String value) {
     for (final type in ContentType.values) {
       if (type.name == value) return type;
@@ -225,7 +226,7 @@ enum ContentFormat {
   final String value;
   const ContentFormat(this.value);
 
-  /// Aceita o nome (`html`) ou o rótulo (`HTML`), porque o formulário grava o rótulo.
+  /// Aceita o nome (`html`) ou o rótulo (`HTML`), porque o formulário antigo gravava o rótulo.
   static ContentFormat fromString(String value) {
     for (final format in ContentFormat.values) {
       if (format.name == value) return format;

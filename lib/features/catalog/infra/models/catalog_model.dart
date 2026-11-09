@@ -85,6 +85,23 @@ class CatalogModel {
     return found;
   }
 
+  /// Procura em todos os subtemas, com a mesma regra de [find].
+  CatalogItem? findByCode(String code) {
+    final slug = referenceCodeSlug(code);
+    CatalogItem? found;
+    for (final item in items) {
+      if (item.slug != slug) continue;
+      if (found == null || item.content.id.compareTo(found.content.id) < 0) found = item;
+    }
+    return found;
+  }
+
+  /// Códigos de referência dos objetos do subtema.
+  List<String> codesOf(SubthemeEnum subtheme) => [
+    for (final item in items)
+      if (item.subtheme == subtheme) item.content.id,
+  ];
+
   /// Até [count] objetos do mesmo subtema, sem [item], na ordem do código.
   List<CatalogItem> othersOf(CatalogItem item, int count) {
     final others = [

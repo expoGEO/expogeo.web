@@ -1,5 +1,6 @@
 import 'package:expogeo/core/components/skeleton/app_skeleton.dart';
 import 'package:expogeo/features/admin/panel/presentation/components/subtheme_row.dart';
+import 'package:expogeo/features/admin/panel/presentation/pages/panel_themes_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -80,6 +81,21 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(panel.location, '/admin/painel/objetos?tema=natureza-meio-ambiente&subtema=biomas');
+  });
+
+  testWidgets('trocar de vista não deixa a anterior aparecer enquanto a nova entra', (
+    tester,
+  ) async {
+    final panel = PanelHarness();
+    await panel.pump(tester, '/admin/painel/temas');
+    await panel.loadCatalog(tester);
+
+    await tester.ensureVisible(find.bySemanticsLabel('Ver objetos de Biomas'));
+    await tester.tap(find.bySemanticsLabel('Ver objetos de Biomas'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 50));
+
+    expect(find.byType(PanelThemesView), findsNothing);
   });
 
   testWidgets('em 390 as linhas empilham sem estourar', (tester) async {

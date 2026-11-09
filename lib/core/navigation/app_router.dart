@@ -66,13 +66,15 @@ class AppRouter {
           GoRoute(
             path: adminPanelObjects,
             name: 'admin-painel-objetos',
-            builder: (context, state) =>
-                PanelObjectsView(selection: PanelSelection.fromQuery(state.uri.queryParameters)),
+            pageBuilder: (context, state) => _panelViewPage(
+              state,
+              PanelObjectsView(selection: PanelSelection.fromQuery(state.uri.queryParameters)),
+            ),
           ),
           GoRoute(
             path: adminPanelThemes,
             name: 'admin-painel-temas',
-            builder: (context, state) => const PanelThemesView(),
+            pageBuilder: (context, state) => _panelViewPage(state, const PanelThemesView()),
           ),
         ],
       ),
@@ -185,6 +187,10 @@ class AppRouter {
   }
 
   // A mesma chave nas duas rotas do editor: trocar de endereço não empilha outra página.
+  // Sem animação: com a transição padrão, a vista anterior ainda aparece por um instante.
+  static Page<void> _panelViewPage(GoRouterState state, Widget child) =>
+      NoTransitionPage(key: state.pageKey, child: child);
+
   static Page<void> _editorPage(Widget child) =>
       MaterialPage(key: const ValueKey('object-editor'), child: child);
 

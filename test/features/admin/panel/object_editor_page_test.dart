@@ -6,6 +6,7 @@ import 'package:expogeo/features/admin/panel/presentation/components/editor/obje
 import 'package:expogeo/features/admin/panel/presentation/components/editor/object_editor_side.dart';
 import 'package:expogeo/features/admin/panel/presentation/components/editor/object_editor_skeleton.dart';
 import 'package:expogeo/features/catalog/infra/models/catalog_model.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -193,6 +194,20 @@ void main() {
       expect(find.text('NMA_BIO_01'), findsNWidgets(2));
       await choose(tester, 'Subtema', 'Bacias Hidrográficas');
       expect(find.text('NMA_BH_03'), findsNWidgets(2));
+    });
+
+    testWidgets('editar abre com o foco no título, sem o texto selecionado', (tester) async {
+      // No desktop e no navegador, o campo ganha o foco com o texto todo selecionado.
+      debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
+      try {
+        await open(tester, '/admin/painel/objetos/nma-bh-03/editar');
+
+        final field = tester.widget<TextField>(textField('Título'));
+        expect(field.focusNode!.hasFocus, isTrue);
+        expect(field.controller!.selection.isCollapsed, isTrue);
+      } finally {
+        debugDefaultTargetPlatformOverride = null;
+      }
     });
 
     testWidgets('o código original no endereço passa para a forma com hífen', (tester) async {

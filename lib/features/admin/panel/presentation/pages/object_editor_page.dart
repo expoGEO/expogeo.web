@@ -178,7 +178,25 @@ class _ObjectEditorPageState extends State<ObjectEditorPage> {
           ? form.focusOf(form.theme == null ? EditorField.theme : EditorField.subtheme)
           : form.focusOf(EditorField.title);
       first.requestFocus();
+      if (first == form.focusOf(EditorField.title)) _keepTitleUnselected(form);
     });
+  }
+
+  // No desktop e no navegador, o campo ganha o foco com o texto todo selecionado; ao abrir, o
+  // cursor fica no fim.
+  void _keepTitleUnselected(ObjectEditorForm form) {
+    final node = form.focusOf(EditorField.title);
+    void collapse() {
+      if (!node.hasFocus) return;
+      node.removeListener(collapse);
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+        form.title.selection = TextSelection.collapsed(offset: form.title.text.length);
+      });
+    }
+
+    if (node.hasFocus) return collapse();
+    node.addListener(collapse);
   }
 
   // Pelo Tab, o foco chega à lateral depois do último campo, que fica acima na tela, e o Flutter

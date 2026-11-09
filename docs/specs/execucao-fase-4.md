@@ -8,7 +8,7 @@
 | 012-login | 4.1 | feita (10 critérios, 13 tarefas) | feita (2 commits) | feita (sem correções) | verificada |
 | 013-painel-estrutura | 4.2 | feita (10 critérios, 17 tarefas) | feita (3 commits) | feita (1 correção) | verificada |
 | 014-painel-objetos | 4.3 | feita (14 critérios, 17 tarefas) | feita (2 commits) | feita (1 correção) | verificada |
-| 015-editor-objeto | 4.4 | pendente | pendente | pendente | |
+| 015-editor-objeto | 4.4 | feita (16 critérios, 18 tarefas) | pendente | pendente | |
 
 ## Decisões tomadas sem a pessoa
 - (fase) Base na branch da Fase 3, a pedido da pessoa, porque o PR #13 ainda não entrou na `develop`. O PR da Fase 4 aponta para `refactor/redesign-fase-3` para mostrar só o que é da fase; quando o #13 for integrado e a branch apagada, o GitHub o move para a `develop`. O CI só roda em PR para `develop`/`main`, então roda depois disso.
@@ -17,6 +17,7 @@
 - (012) Em 768 px o login fica como no celular; campos não são apagados após credenciais erradas; mensagens de erro escolhidas na tela sem mudar `auth_failure.dart`; nascem em `lib/core/` campo de senha, `FormErrorAlert` e estado carregando do botão; o roteador espera a sessão salva só em `/admin`, com tempo-limite.
 - (013) Até a 014, "Objetos digitais" mostra a área de objetos atual dentro da moldura nova, para criar/editar/excluir seguirem funcionando; `/admin/painel` leva a `/admin/painel/objetos` e "Ver objetos" passa `?tema=&subtema=`; gaveta abaixo de 900 px; erro nas contagens com "Tentar de novo" (o protótipo não tem); catálogo recarregado ao abrir o painel e após cada gravação.
 - (014) Até a 015, a lista nova abre o diálogo de criar/editar de hoje; a leitura dos dados gravados é corrigida na 014 (preservação pela chave `preservationAction`, tipo e formato pelo nome ou pelo rótulo), sem mudar o que é gravado — isso também afeta o site público (objetos criados pelo formulário deixam de aparecer como "Outro"); filtros `tipo` e `q` no endereço.
+- (015) O editor grava como os 190 objetos do dev (código como id do documento, siglas de tema/subtema, tipo e formato pelo nome, datas só com o dia); criar e trocar de subtema em transação, para não repetir código; editor fora da moldura do painel, como no protótipo; "Novo objeto" sempre abre o editor; o diálogo antigo sai aqui e os campos/botões antigos ficam para a 016. `themeTitle`/`subthemeTitle` saem com o nome do site, que difere da grafia do seed em alguns subtemas (nenhuma tela lê esses campos).
 
 ## Ressalvas
 - (014) nenhuma ressalva.

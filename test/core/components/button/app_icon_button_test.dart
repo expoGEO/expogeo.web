@@ -75,6 +75,38 @@ void main() {
     expect(outerEscapes, 1);
   }, semanticsEnabled: false);
 
+  testWidgets('com o Tab seguro, só fica aberta a dica do botão com foco', (tester) async {
+    await pump(
+      tester,
+      const Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          AppIconButton(
+            icon: Icons.edit_outlined,
+            color: Colors.black,
+            tooltip: 'Editar a ficha',
+            onPressed: _noop,
+          ),
+          AppIconButton(
+            icon: Icons.delete_outline,
+            color: Colors.black,
+            tooltip: 'Excluir o objeto',
+            onPressed: _noop,
+          ),
+        ],
+      ),
+    );
+
+    // Dois Tabs no mesmo quadro: o primeiro botão perde o foco antes de a dica dele abrir.
+    await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+    await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 200));
+
+    expect(find.text('Editar a ficha'), findsNothing);
+    expect(find.text('Excluir o objeto'), findsOneWidget);
+  }, semanticsEnabled: false);
+
   testWidgets('desativado continua focável e não age', (tester) async {
     var taps = 0;
     await pump(tester, button(disabled: true, onPressed: () => taps++));
@@ -90,3 +122,5 @@ void main() {
     expect(taps, 0);
   });
 }
+
+void _noop() {}

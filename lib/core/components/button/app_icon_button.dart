@@ -70,9 +70,10 @@ class _AppIconButtonState extends State<AppIconButton> {
     // navegador do botão.
     if (SemanticsBinding.instance.semanticsEnabled) return;
 
-    // Depois do quadro, para não ser fechada pelo botão que acabou de perder o foco.
+    // Depois do quadro, para não ser fechada pelo botão que acabou de perder o foco. Com o Tab
+    // seguro, o foco pode já ter saído até lá, e a dica ficaria aberta sem ninguém para fechá-la.
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) _tooltipKey.currentState?.ensureTooltipVisible();
+      if (mounted && _focusNode.hasFocus) _tooltipKey.currentState?.ensureTooltipVisible();
     });
   }
 

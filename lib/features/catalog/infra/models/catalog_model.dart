@@ -13,17 +13,13 @@ class CatalogRecord {
 }
 
 class CatalogItem {
-  const CatalogItem({
-    required this.theme,
-    required this.subtheme,
-    required this.content,
-    this.preservation,
-  });
+  const CatalogItem({required this.theme, required this.subtheme, required this.content});
 
   final ThemeEnum theme;
   final SubthemeEnum subtheme;
   final ContentResponseModel content;
-  final PreservationAction? preservation;
+
+  PreservationAction? get preservation => content.preservationAction;
 
   String get slug => referenceCodeSlug(content.id);
 
@@ -119,23 +115,7 @@ class CatalogModel {
 
     try {
       final content = ContentResponseModel.fromJson(record.data, record.id);
-      return CatalogItem(
-        theme: theme,
-        subtheme: subtheme,
-        content: content,
-        preservation: _preservationOf(record.data),
-      );
-    } catch (_) {
-      return null;
-    }
-  }
-
-  // O leitor do conteúdo procura a preservação em outra chave. Fica à parte para um valor ruim
-  // tirar só esses campos da ficha, e não o objeto do site.
-  static PreservationAction? _preservationOf(Map<String, dynamic> data) {
-    try {
-      final raw = data['preservationAction'];
-      return raw == null ? null : PreservationAction.fromJson(raw as Map<String, dynamic>);
+      return CatalogItem(theme: theme, subtheme: subtheme, content: content);
     } catch (_) {
       return null;
     }

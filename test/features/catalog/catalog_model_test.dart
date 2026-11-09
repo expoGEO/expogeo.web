@@ -77,12 +77,12 @@ void main() {
 
   group('preservação', () {
     Map<String, dynamic> withPreservation(Object? value) {
-      final data = validContentJson()..remove('preservationOperation');
+      final data = validContentJson();
       data['preservationAction'] = value;
       return data;
     }
 
-    test('vem de preservationAction, mesmo sem preservationOperation', () {
+    test('vem de preservationAction', () {
       final catalog = CatalogModel.fromRecords([
         recordAt(
           'RE_CG',

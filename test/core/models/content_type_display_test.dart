@@ -4,6 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  test('ordem dos tipos nos filtros', () {
+    expect(contentTypeOrder.map((type) => type.value), [
+      'Site',
+      'Vídeo',
+      'Documento',
+      'Aplicativo',
+      'Imagem',
+      'Outro',
+    ]);
+  });
+
   test('cada tipo tem o seu ícone', () {
     expect(ContentType.site.cardIcon, Icons.language);
     expect(ContentType.video.cardIcon, Icons.play_circle_outline);

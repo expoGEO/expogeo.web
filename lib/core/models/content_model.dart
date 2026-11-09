@@ -200,8 +200,15 @@ enum ContentType {
     ContentType.outro => AppTheme.colors.mediumGray,
   };
 
+  /// Aceita o nome (`site`) ou o rótulo (`Site`), porque o formulário grava o rótulo.
   static ContentType fromString(String value) {
-    return ContentType.values.firstWhere((e) => e.name == value, orElse: () => ContentType.outro);
+    for (final type in ContentType.values) {
+      if (type.name == value) return type;
+    }
+    for (final type in ContentType.values) {
+      if (type.value == value) return type;
+    }
+    return ContentType.outro;
   }
 }
 
@@ -218,10 +225,14 @@ enum ContentFormat {
   final String value;
   const ContentFormat(this.value);
 
+  /// Aceita o nome (`html`) ou o rótulo (`HTML`), porque o formulário grava o rótulo.
   static ContentFormat fromString(String value) {
-    return ContentFormat.values.firstWhere(
-      (e) => e.name == value,
-      orElse: () => ContentFormat.outro,
-    );
+    for (final format in ContentFormat.values) {
+      if (format.name == value) return format;
+    }
+    for (final format in ContentFormat.values) {
+      if (format.value == value) return format;
+    }
+    return ContentFormat.outro;
   }
 }

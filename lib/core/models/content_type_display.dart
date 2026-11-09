@@ -1,6 +1,16 @@
 import 'package:expogeo/core/models/content_model.dart';
 import 'package:flutter/material.dart';
 
+// A ordem do enum `ContentType` põe Imagem antes de Documento.
+const List<ContentType> contentTypeOrder = [
+  ContentType.site,
+  ContentType.video,
+  ContentType.documento,
+  ContentType.aplicativo,
+  ContentType.imagem,
+  ContentType.outro,
+];
+
 extension ContentTypeDisplay on ContentType {
   IconData get cardIcon => switch (this) {
     ContentType.site => Icons.language,

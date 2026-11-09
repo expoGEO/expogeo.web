@@ -77,13 +77,21 @@ class ContentResponseModel extends ContentModel {
           json['registrationInfo'] as Map<String, dynamic>,
         ),
         rightsInfo: RightsInfo.fromJson(json['rightsInfo'] as Map<String, dynamic>),
-        preservationAction: json['preservationOperation'] != null
-            ? PreservationAction.fromJson(json['preservationAction'] as Map<String, dynamic>)
-            : null,
+        preservationAction: _preservationOf(json['preservationAction']),
       );
     } catch (e) {
       rethrow;
     }
+  }
+}
+
+/// Um valor ruim na preservação tira só esses campos, e não o objeto do site.
+PreservationAction? _preservationOf(Object? raw) {
+  if (raw is! Map<String, dynamic>) return null;
+  try {
+    return PreservationAction.fromJson(raw);
+  } catch (_) {
+    return null;
   }
 }
 

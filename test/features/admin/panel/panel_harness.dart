@@ -2,6 +2,7 @@ import 'package:expogeo/core/navigation/app_router.dart';
 import 'package:expogeo/core/pages/not_found_page.dart';
 import 'package:expogeo/features/admin/login/presentation/stores/auth_store.dart';
 import 'package:expogeo/features/admin/panel/presentation/stores/content_store.dart';
+import 'package:expogeo/features/catalog/infra/models/catalog_model.dart';
 import 'package:expogeo/features/catalog/presentation/stores/catalog_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -62,8 +63,8 @@ class PanelHarness {
   }
 
   /// Responde à carga do catálogo que a casca pediu ao abrir.
-  Future<void> loadCatalog(WidgetTester tester) async {
-    catalog.succeed();
+  Future<void> loadCatalog(WidgetTester tester, [List<CatalogRecord>? records]) async {
+    catalog.succeed(records);
     await tester.pump();
     await tester.pump();
   }

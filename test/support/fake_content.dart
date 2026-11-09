@@ -46,7 +46,7 @@ class FakeContentRepository implements ContentRepository {
     required ContentResponseModel content,
     ThemeEnum? theme,
   }) async {
-    calls.add('create');
+    calls.add('create:${subtheme.value}');
     if (failWrites) return Left(CreateFailure());
     return const Right('novo');
   }
@@ -58,7 +58,7 @@ class FakeContentRepository implements ContentRepository {
     required ContentResponseModel content,
     ThemeEnum? theme,
   }) async {
-    calls.add('update');
+    calls.add('update:${subtheme.value}:$contentId');
     if (failWrites) return Left(UpdateFailure());
     return const Right(null);
   }
@@ -69,7 +69,7 @@ class FakeContentRepository implements ContentRepository {
     required String contentId,
     ThemeEnum? theme,
   }) async {
-    calls.add('delete');
+    calls.add('delete:${subtheme.value}:$contentId');
     if (failWrites) return Left(FetchFailure());
     return const Right(null);
   }

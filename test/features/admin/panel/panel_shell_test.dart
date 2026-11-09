@@ -4,6 +4,7 @@ import 'package:expogeo/core/pages/not_found_page.dart';
 import 'package:expogeo/features/admin/panel/presentation/components/panel_sidebar.dart';
 import 'package:expogeo/features/admin/panel/presentation/components/panel_top_bar.dart';
 import 'package:expogeo/features/admin/panel/presentation/pages/panel_shell.dart';
+import 'package:expogeo/features/admin/panel/presentation/pages/panel_objects_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -136,8 +137,8 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(panel.location, '/admin/painel/objetos?tema=cultura-politica');
-    expect(panel.contentStore.selectedTheme, ThemeEnum.culturaPolitica);
-    expect(panel.content.calls.last, 'theme:cultura-politica');
+    final view = tester.widget<PanelObjectsView>(find.byType(PanelObjectsView));
+    expect(view.selection.theme, ThemeEnum.culturaPolitica);
   });
 
   testWidgets('sem sessão, as vistas voltam ao login', (tester) async {

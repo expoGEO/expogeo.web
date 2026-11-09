@@ -1,129 +1,52 @@
 import 'package:expogeo/core/models/theme_data_model.dart';
 import 'package:expogeo/features/admin/panel/infra/models/content_response_model.dart';
 import 'package:expogeo/features/admin/panel/infra/repositories/content_repository.dart';
-import 'package:expogeo/features/admin/panel/presentation/stores/content_state.dart';
 import 'package:mobx/mobx.dart';
 
 part 'content_store.g.dart';
 
+enum ContentOutcomeKind { created, updated, deleted, saveFailed, deleteFailed }
+
+/// Resultado da última gravação ou exclusão. Cada operação cria um novo, para quem reage a ele
+/// ver também dois resultados iguais seguidos.
+class ContentOutcome {
+  ContentOutcome(this.kind, {this.docId});
+
+  final ContentOutcomeKind kind;
+
+  /// O objeto excluído, quando [kind] é [ContentOutcomeKind.deleted] ou `deleteFailed`.
+  final String? docId;
+}
+
 class ContentStore = ContentStoreBase with _$ContentStore;
 
+/// Cria, edita e exclui objetos no subtema de cada um.
 abstract class ContentStoreBase with Store {
-  final ContentRepository _repository;
-
   ContentStoreBase(this._repository);
 
-  @observable
-  ContentState state = ContentStateInitial();
+  final ContentRepository _repository;
 
   @observable
-  List<ContentResponseModel> contents = [];
+  bool isBusy = false;
 
   @observable
-  ThemeEnum? selectedTheme;
-
-  @observable
-  SubthemeEnum? selectedSubtheme;
+  ContentOutcome? outcome;
 
   /// Sobe a cada criação, edição ou exclusão bem-sucedida, para quem depende das contagens.
   @observable
   int savedCount = 0;
-
-  /// Escolhe o tema e o subtema vindos do endereço e carrega a tabela deles; sem tema, limpa.
-  @action
-  Future<void> selectFromAddress({ThemeEnum? theme, SubthemeEnum? subtheme}) async {
-    if (theme == null) {
-      reset();
-      return;
-    }
-    if (subtheme == null) {
-      await loadContentsByTheme(theme: theme);
-      return;
-    }
-    selectedTheme = theme;
-    await loadContentsBySubtheme(subtheme: subtheme);
-  }
-
-  @action
-  Future<void> loadContentsBySubtheme({required SubthemeEnum subtheme}) async {
-    state = ContentStateLoading();
-
-    selectedSubtheme = subtheme;
-
-    final result = await _repository.getContentsBySubtheme(subtheme: subtheme);
-
-    result.fold(
-      (failure) {
-        contents = [];
-        state = ContentStateError(failure.message);
-      },
-      (loadedContents) {
-        contents = loadedContents;
-        state = ContentStateSuccess();
-      },
-    );
-  }
-
-  @action
-  Future<void> loadContentsByTheme({required ThemeEnum theme}) async {
-    state = ContentStateLoading();
-
-    selectedTheme = theme;
-    selectedSubtheme = null;
-
-    final result = await _repository.getContentsByTheme(theme: theme);
-
-    result.fold(
-      (failure) {
-        contents = [];
-        state = ContentStateError(failure.message);
-      },
-      (loadedContents) {
-        contents = loadedContents;
-        state = ContentStateSuccess();
-      },
-    );
-  }
-
-  @action
-  Future<void> loadAllContents() async {
-    state = ContentStateLoading();
-
-    selectedTheme = null;
-    selectedSubtheme = null;
-
-    final result = await _repository.getAllContents();
-
-    result.fold(
-      (failure) {
-        contents = [];
-        state = ContentStateError(failure.message);
-      },
-      (loadedContents) {
-        contents = loadedContents;
-        state = ContentStateSuccess();
-      },
-    );
-  }
 
   @action
   Future<void> createContent({
     required SubthemeEnum subtheme,
     required ContentResponseModel content,
   }) async {
-    state = ContentStateLoading();
-
+    isBusy = true;
     final result = await _repository.createContent(subtheme: subtheme, content: content);
-
-    result.fold(
-      (failure) {
-        state = ContentStateError(failure.message);
-      },
-      (docId) {
-        state = ContentStateSuccess();
-        savedCount++;
-        loadContentsBySubtheme(subtheme: subtheme);
-      },
+    _finish(
+      result.isRight()
+          ? ContentOutcome(ContentOutcomeKind.created)
+          : ContentOutcome(ContentOutcomeKind.saveFailed),
     );
   }
 
@@ -133,50 +56,39 @@ abstract class ContentStoreBase with Store {
     required String contentId,
     required ContentResponseModel content,
   }) async {
-    state = ContentStateLoading();
-
+    isBusy = true;
     final result = await _repository.updateContent(
       subtheme: subtheme,
       contentId: contentId,
       content: content,
     );
-
-    result.fold(
-      (failure) {
-        state = ContentStateError(failure.message);
-      },
-      (_) {
-        state = ContentStateSuccess();
-        savedCount++;
-        loadContentsBySubtheme(subtheme: subtheme);
-      },
+    _finish(
+      result.isRight()
+          ? ContentOutcome(ContentOutcomeKind.updated, docId: contentId)
+          : ContentOutcome(ContentOutcomeKind.saveFailed, docId: contentId),
     );
   }
 
   @action
   Future<void> deleteContent({required SubthemeEnum subtheme, required String contentId}) async {
-    subtheme = selectedSubtheme ?? subtheme;
-    state = ContentStateLoading();
-
+    isBusy = true;
     final result = await _repository.deleteContent(subtheme: subtheme, contentId: contentId);
-
-    result.fold(
-      (failure) {
-        state = ContentStateError(failure.message);
-      },
-      (_) {
-        state = ContentStateSuccess();
-        savedCount++;
-        loadContentsBySubtheme(subtheme: subtheme);
-      },
+    _finish(
+      result.isRight()
+          ? ContentOutcome(ContentOutcomeKind.deleted, docId: contentId)
+          : ContentOutcome(ContentOutcomeKind.deleteFailed, docId: contentId),
     );
   }
 
   @action
-  void reset() {
-    state = ContentStateInitial();
-    contents = [];
-    selectedTheme = null;
-    selectedSubtheme = null;
+  void _finish(ContentOutcome result) {
+    isBusy = false;
+    if (result.kind
+        case ContentOutcomeKind.created ||
+            ContentOutcomeKind.updated ||
+            ContentOutcomeKind.deleted) {
+      savedCount++;
+    }
+    outcome = result;
   }
 }

@@ -82,13 +82,7 @@ class _PanelShellState extends State<PanelShell> {
       _scaffoldKey.currentState?.closeDrawer();
     }
 
-    // Voltar ao mesmo endereço não refaz a vista; a escolha do seletor volta à do endereço.
-    if (location == widget.location.toString()) {
-      if (_view == PanelView.objects) {
-        _contentStore.selectFromAddress(theme: _selection.theme, subtheme: _selection.subtheme);
-      }
-      return;
-    }
+    if (location == widget.location.toString()) return;
     GoRouter.of(context).go(location);
   }
 

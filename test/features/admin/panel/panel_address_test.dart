@@ -1,3 +1,4 @@
+import 'package:expogeo/core/models/content_model.dart';
 import 'package:expogeo/core/models/theme_data_model.dart';
 import 'package:expogeo/features/admin/panel/presentation/panel_address.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -11,6 +12,32 @@ void main() {
       });
       expect(selection.theme, ThemeEnum.naturezaMeioAmbiente);
       expect(selection.subtheme, SubthemeEnum.biomas);
+    });
+
+    test('tipo e busca', () {
+      final selection = PanelSelection.fromQuery({
+        'tema': 'natureza-meio-ambiente',
+        'subtema': 'biomas',
+        'tipo': 'video',
+        'q': '  Cerrado  ',
+      });
+      expect(selection.type, ContentType.video);
+      expect(selection.query, 'Cerrado');
+      expect(selection.hasNarrowingFilter, isTrue);
+    });
+
+    test('tipo desconhecido ou pelo rótulo é ignorado; busca em branco vira nula', () {
+      expect(PanelSelection.fromQuery({'tipo': 'xyz'}), const PanelSelection());
+      expect(PanelSelection.fromQuery({'tipo': 'Vídeo'}), const PanelSelection());
+      expect(PanelSelection.fromQuery({'q': '   '}), const PanelSelection());
+      expect(const PanelSelection(theme: ThemeEnum.culturaPolitica).hasNarrowingFilter, isFalse);
+    });
+
+    test('tema desconhecido não leva junto o tipo e a busca', () {
+      expect(
+        PanelSelection.fromQuery({'tema': 'xyz', 'tipo': 'site', 'q': 'mapa'}),
+        const PanelSelection(type: ContentType.site, query: 'mapa'),
+      );
     });
 
     test('tema desconhecido é ignorado, com ou sem subtema', () {
@@ -51,6 +78,25 @@ void main() {
       '/admin/painel/objetos?tema=natureza-meio-ambiente&subtema=biomas',
     );
     expect(PanelAddress.of(PanelView.themes), '/admin/painel/temas');
+  });
+
+  test('montagem com tipo e busca, ida e volta', () {
+    const selection = PanelSelection(
+      theme: ThemeEnum.naturezaMeioAmbiente,
+      subtheme: SubthemeEnum.baciasHidrograficas,
+      type: ContentType.documento,
+      query: 'São Paulo',
+    );
+    final address = PanelAddress.objectsWith(selection);
+
+    expect(
+      address,
+      '/admin/painel/objetos?tema=natureza-meio-ambiente&subtema=bacias-hidrograficas'
+      '&tipo=documento&q=S%C3%A3o+Paulo',
+    );
+    expect(PanelSelection.fromQuery(Uri.parse(address).queryParameters), selection);
+    expect(PanelAddress.objectsOf(query: '  '), '/admin/painel/objetos');
+    expect(PanelAddress.objectsOf(type: ContentType.site), '/admin/painel/objetos?tipo=site');
   });
 
   group('iniciais', () {

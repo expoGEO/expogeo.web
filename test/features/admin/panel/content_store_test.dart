@@ -5,49 +5,62 @@ import 'package:flutter_test/flutter_test.dart';
 import '../../../support/fake_content.dart';
 
 void main() {
-  group('selectFromAddress', () {
-    test('com tema e subtema guarda os dois e carrega o subtema', () async {
-      final repository = FakeContentRepository();
-      final store = ContentStore(repository);
+  group('resultado', () {
+    test('cada operação bem-sucedida publica o seu', () async {
+      final store = ContentStore(FakeContentRepository());
 
-      await store.selectFromAddress(
-        theme: ThemeEnum.naturezaMeioAmbiente,
+      await store.createContent(subtheme: SubthemeEnum.biomas, content: sampleContent());
+      expect(store.outcome?.kind, ContentOutcomeKind.created);
+
+      await store.updateContent(
         subtheme: SubthemeEnum.biomas,
+        contentId: 'doc_1',
+        content: sampleContent(),
       );
+      expect(store.outcome?.kind, ContentOutcomeKind.updated);
 
-      expect(store.selectedTheme, ThemeEnum.naturezaMeioAmbiente);
-      expect(store.selectedSubtheme, SubthemeEnum.biomas);
-      expect(repository.calls, ['subtheme:biomas']);
-      expect(store.contents, hasLength(1));
-      expect(store.state.isSuccess, isTrue);
+      await store.deleteContent(subtheme: SubthemeEnum.biomas, contentId: 'doc_1');
+      expect(store.outcome?.kind, ContentOutcomeKind.deleted);
+      expect(store.outcome?.docId, 'doc_1');
+      expect(store.isBusy, isFalse);
     });
 
-    test('só com tema carrega o tema', () async {
-      final repository = FakeContentRepository();
-      final store = ContentStore(repository);
+    test('falhas publicam a falha de salvar ou de excluir', () async {
+      final store = ContentStore(FakeContentRepository()..failWrites = true);
 
-      await store.selectFromAddress(theme: ThemeEnum.culturaPolitica);
+      await store.createContent(subtheme: SubthemeEnum.biomas, content: sampleContent());
+      expect(store.outcome?.kind, ContentOutcomeKind.saveFailed);
 
-      expect(store.selectedTheme, ThemeEnum.culturaPolitica);
-      expect(store.selectedSubtheme, isNull);
-      expect(repository.calls, ['theme:cultura-politica']);
-    });
-
-    test('sem tema limpa a escolha e a lista', () async {
-      final repository = FakeContentRepository();
-      final store = ContentStore(repository);
-      await store.selectFromAddress(
-        theme: ThemeEnum.naturezaMeioAmbiente,
+      await store.updateContent(
         subtheme: SubthemeEnum.biomas,
+        contentId: 'doc_1',
+        content: sampleContent(),
       );
+      expect(store.outcome?.kind, ContentOutcomeKind.saveFailed);
 
-      await store.selectFromAddress();
-
-      expect(store.selectedTheme, isNull);
-      expect(store.selectedSubtheme, isNull);
-      expect(store.contents, isEmpty);
-      expect(store.state.isInitial, isTrue);
+      await store.deleteContent(subtheme: SubthemeEnum.biomas, contentId: 'doc_1');
+      expect(store.outcome?.kind, ContentOutcomeKind.deleteFailed);
+      expect(store.outcome?.docId, 'doc_1');
     });
+
+    test('dois resultados iguais seguidos são objetos diferentes', () async {
+      final store = ContentStore(FakeContentRepository());
+
+      await store.createContent(subtheme: SubthemeEnum.biomas, content: sampleContent());
+      final first = store.outcome;
+      await store.createContent(subtheme: SubthemeEnum.biomas, content: sampleContent());
+
+      expect(identical(store.outcome, first), isFalse);
+    });
+  });
+
+  test('a exclusão usa o subtema recebido', () async {
+    final repository = FakeContentRepository();
+    final store = ContentStore(repository);
+
+    await store.deleteContent(subtheme: SubthemeEnum.queimadas, contentId: 'doc_9');
+
+    expect(repository.calls, ['delete:queimadas:doc_9']);
   });
 
   group('savedCount', () {
@@ -65,17 +78,11 @@ void main() {
       expect(store.savedCount, 3);
     });
 
-    test('não sobe em falha nem em leitura', () async {
-      final repository = FakeContentRepository()..failWrites = true;
-      final store = ContentStore(repository);
+    test('não sobe em falha', () async {
+      final store = ContentStore(FakeContentRepository()..failWrites = true);
 
       await store.createContent(subtheme: SubthemeEnum.biomas, content: sampleContent());
       await store.deleteContent(subtheme: SubthemeEnum.biomas, contentId: 'doc_1');
-      await store.loadContentsByTheme(theme: ThemeEnum.culturaPolitica);
-      await store.selectFromAddress(
-        theme: ThemeEnum.naturezaMeioAmbiente,
-        subtheme: SubthemeEnum.biomas,
-      );
 
       expect(store.savedCount, 0);
     });

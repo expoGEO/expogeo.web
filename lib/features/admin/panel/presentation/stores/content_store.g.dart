@@ -9,75 +9,39 @@ part of 'content_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$ContentStore on ContentStoreBase, Store {
-  late final _$stateAtom = Atom(
-    name: 'ContentStoreBase.state',
+  late final _$isBusyAtom = Atom(
+    name: 'ContentStoreBase.isBusy',
     context: context,
   );
 
   @override
-  ContentState get state {
-    _$stateAtom.reportRead();
-    return super.state;
+  bool get isBusy {
+    _$isBusyAtom.reportRead();
+    return super.isBusy;
   }
 
   @override
-  set state(ContentState value) {
-    _$stateAtom.reportWrite(value, super.state, () {
-      super.state = value;
+  set isBusy(bool value) {
+    _$isBusyAtom.reportWrite(value, super.isBusy, () {
+      super.isBusy = value;
     });
   }
 
-  late final _$contentsAtom = Atom(
-    name: 'ContentStoreBase.contents',
+  late final _$outcomeAtom = Atom(
+    name: 'ContentStoreBase.outcome',
     context: context,
   );
 
   @override
-  List<ContentResponseModel> get contents {
-    _$contentsAtom.reportRead();
-    return super.contents;
+  ContentOutcome? get outcome {
+    _$outcomeAtom.reportRead();
+    return super.outcome;
   }
 
   @override
-  set contents(List<ContentResponseModel> value) {
-    _$contentsAtom.reportWrite(value, super.contents, () {
-      super.contents = value;
-    });
-  }
-
-  late final _$selectedThemeAtom = Atom(
-    name: 'ContentStoreBase.selectedTheme',
-    context: context,
-  );
-
-  @override
-  ThemeEnum? get selectedTheme {
-    _$selectedThemeAtom.reportRead();
-    return super.selectedTheme;
-  }
-
-  @override
-  set selectedTheme(ThemeEnum? value) {
-    _$selectedThemeAtom.reportWrite(value, super.selectedTheme, () {
-      super.selectedTheme = value;
-    });
-  }
-
-  late final _$selectedSubthemeAtom = Atom(
-    name: 'ContentStoreBase.selectedSubtheme',
-    context: context,
-  );
-
-  @override
-  SubthemeEnum? get selectedSubtheme {
-    _$selectedSubthemeAtom.reportRead();
-    return super.selectedSubtheme;
-  }
-
-  @override
-  set selectedSubtheme(SubthemeEnum? value) {
-    _$selectedSubthemeAtom.reportWrite(value, super.selectedSubtheme, () {
-      super.selectedSubtheme = value;
+  set outcome(ContentOutcome? value) {
+    _$outcomeAtom.reportWrite(value, super.outcome, () {
+      super.outcome = value;
     });
   }
 
@@ -97,52 +61,6 @@ mixin _$ContentStore on ContentStoreBase, Store {
     _$savedCountAtom.reportWrite(value, super.savedCount, () {
       super.savedCount = value;
     });
-  }
-
-  late final _$selectFromAddressAsyncAction = AsyncAction(
-    'ContentStoreBase.selectFromAddress',
-    context: context,
-  );
-
-  @override
-  Future<void> selectFromAddress({ThemeEnum? theme, SubthemeEnum? subtheme}) {
-    return _$selectFromAddressAsyncAction.run(
-      () => super.selectFromAddress(theme: theme, subtheme: subtheme),
-    );
-  }
-
-  late final _$loadContentsBySubthemeAsyncAction = AsyncAction(
-    'ContentStoreBase.loadContentsBySubtheme',
-    context: context,
-  );
-
-  @override
-  Future<void> loadContentsBySubtheme({required SubthemeEnum subtheme}) {
-    return _$loadContentsBySubthemeAsyncAction.run(
-      () => super.loadContentsBySubtheme(subtheme: subtheme),
-    );
-  }
-
-  late final _$loadContentsByThemeAsyncAction = AsyncAction(
-    'ContentStoreBase.loadContentsByTheme',
-    context: context,
-  );
-
-  @override
-  Future<void> loadContentsByTheme({required ThemeEnum theme}) {
-    return _$loadContentsByThemeAsyncAction.run(
-      () => super.loadContentsByTheme(theme: theme),
-    );
-  }
-
-  late final _$loadAllContentsAsyncAction = AsyncAction(
-    'ContentStoreBase.loadAllContents',
-    context: context,
-  );
-
-  @override
-  Future<void> loadAllContents() {
-    return _$loadAllContentsAsyncAction.run(() => super.loadAllContents());
   }
 
   late final _$createContentAsyncAction = AsyncAction(
@@ -201,12 +119,12 @@ mixin _$ContentStore on ContentStoreBase, Store {
   );
 
   @override
-  void reset() {
+  void _finish(ContentOutcome result) {
     final _$actionInfo = _$ContentStoreBaseActionController.startAction(
-      name: 'ContentStoreBase.reset',
+      name: 'ContentStoreBase._finish',
     );
     try {
-      return super.reset();
+      return super._finish(result);
     } finally {
       _$ContentStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -215,10 +133,8 @@ mixin _$ContentStore on ContentStoreBase, Store {
   @override
   String toString() {
     return '''
-state: ${state},
-contents: ${contents},
-selectedTheme: ${selectedTheme},
-selectedSubtheme: ${selectedSubtheme},
+isBusy: ${isBusy},
+outcome: ${outcome},
 savedCount: ${savedCount}
     ''';
   }

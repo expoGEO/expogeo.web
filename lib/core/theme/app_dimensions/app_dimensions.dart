@@ -692,6 +692,50 @@ class ComponentSizes {
   final double panelBadgeSkeletonWidth = 72.0;
   final double panelBadgeSkeletonHeight = 22.0;
   final double panelActionIcon = 20.0;
+  final double panelHeadActionGap = 16.0;
+  final double panelRowActionsGap = 2.0;
+  final double panelRowActionsTop = 6.0;
+  final double panelRowDash = 4.0;
+  final double panelRowDashGap = 4.0;
+  final double panelMetaGap = 6.0;
+  final double panelTypeBadgeIcon = 14.0;
+  final double panelTypeBadgeGap = 5.0;
+
+  final double panelFilterPadding = 12.0;
+  final double panelFilterGap = 10.0;
+  final double panelFilterMarginBottom = 16.0;
+  final double panelFilterHeight = 42.0;
+  final double panelFilterSearchMinWidth = 220.0;
+
+  /// Largura máxima de cada seletor na faixa de uma linha só; o nome escolhido corta com reticências.
+  final double panelFilterSelectMaxWidth = 220.0;
+
+  /// Abaixo disto por seletor, os três não cabem lado a lado e a faixa vira grade de 2 colunas.
+  final double panelFilterSelectMinWidth = 150.0;
+
+  final double panelListFootPaddingV = 10.0;
+  final double panelListFootPaddingH = 16.0;
+  final double panelListFootMinHeight = 52.0;
+  final double panelListFootGap = 12.0;
+
+  final int panelSkeletonRows = 4;
+  final double panelSkeletonTitleWidth = 0.6;
+  final double panelSkeletonMetaWidth = 0.4;
+  final double panelSkeletonTitleHeight = 16.0;
+  final double panelSkeletonMetaHeight = 12.0;
+  final double panelSkeletonGap = 8.0;
+
+  final double filterSelectPaddingStart = 14.0;
+  final double filterSelectPaddingEnd = 12.0;
+  final double filterSelectBorder = 1.5;
+  final double filterSelectIcon = 16.0;
+  final double filterSelectIconGap = 8.0;
+  final double filterSelectMenuOffset = 6.0;
+  final double filterSelectMenuPadding = 6.0;
+  final double filterSelectMenuItemPaddingV = 8.0;
+  final double filterSelectMenuItemPaddingH = 10.0;
+  final double filterSelectMenuMaxHeight = 400.0;
+  final double filterSelectMenuElevation = 8.0;
 
   final double toastMaxWidth = 560.0;
   final double toastMargin = 16.0;

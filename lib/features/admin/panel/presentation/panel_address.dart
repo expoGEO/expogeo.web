@@ -1,32 +1,48 @@
+import 'package:expogeo/core/models/content_model.dart';
 import 'package:expogeo/core/models/theme_data_model.dart';
 import 'package:expogeo/core/navigation/app_router.dart';
 
 enum PanelView { objects, themes }
 
-/// Tema e subtema escolhidos pelo endereço de "Objetos digitais".
+/// Filtros de "Objetos digitais" lidos do endereço.
 class PanelSelection {
-  const PanelSelection({this.theme, this.subtheme});
+  const PanelSelection({this.theme, this.subtheme, this.type, this.query});
 
   final ThemeEnum? theme;
   final SubthemeEnum? subtheme;
+  final ContentType? type;
+  final String? query;
 
-  /// Tema desconhecido é ignorado; subtema desconhecido, fora da lista do site ou de outro tema
-  /// também, ficando só o tema.
+  /// Cada valor desconhecido é ignorado sozinho. Subtema fora da lista do site, de outro tema ou
+  /// sem tema também; tipo só pelo nome (`video`, não `Vídeo`); busca em branco vira nula.
   factory PanelSelection.fromQuery(Map<String, String> query) {
     final theme = _themeByValue[query[PanelAddress.themeParam]];
-    if (theme == null) return const PanelSelection();
-
     final subtheme = _listedSubthemeByValue[query[PanelAddress.subthemeParam]];
-    if (subtheme == null || subtheme.theme != theme) return PanelSelection(theme: theme);
-    return PanelSelection(theme: theme, subtheme: subtheme);
+    final text = query[PanelAddress.queryParam]?.trim();
+    return PanelSelection(
+      theme: theme,
+      subtheme: theme != null && subtheme?.theme == theme ? subtheme : null,
+      type: _typeByName[query[PanelAddress.typeParam]],
+      query: text == null || text.isEmpty ? null : text,
+    );
   }
+
+  bool get hasNarrowingFilter => subtheme != null || type != null || query != null;
 
   @override
   bool operator ==(Object other) =>
-      other is PanelSelection && other.theme == theme && other.subtheme == subtheme;
+      other is PanelSelection &&
+      other.theme == theme &&
+      other.subtheme == subtheme &&
+      other.type == type &&
+      other.query == query;
 
   @override
-  int get hashCode => Object.hash(theme, subtheme);
+  int get hashCode => Object.hash(theme, subtheme, type, query);
+
+  static final Map<String, ContentType> _typeByName = {
+    for (final type in ContentType.values) type.name: type,
+  };
 
   static final Map<String, ThemeEnum> _themeByValue = {
     for (final theme in ThemeEnum.values) theme.value: theme,
@@ -44,16 +60,33 @@ class PanelAddress {
   static const String themeParam = 'tema';
   static const String subthemeParam = 'subtema';
 
-  static String objectsOf({ThemeEnum? theme, SubthemeEnum? subtheme}) {
-    if (theme == null) return AppRouter.adminPanelObjects;
-    return Uri(
-      path: AppRouter.adminPanelObjects,
-      queryParameters: {
-        themeParam: theme.value,
-        if (subtheme != null && subtheme.theme == theme) subthemeParam: subtheme.value,
-      },
-    ).toString();
+  static const String typeParam = 'tipo';
+  static const String queryParam = 'q';
+
+  static String objectsOf({
+    ThemeEnum? theme,
+    SubthemeEnum? subtheme,
+    ContentType? type,
+    String? query,
+  }) {
+    final text = query?.trim() ?? '';
+    final parameters = {
+      if (theme != null) themeParam: theme.value,
+      if (theme != null && subtheme != null && subtheme.theme == theme)
+        subthemeParam: subtheme.value,
+      if (type != null) typeParam: type.name,
+      if (text.isNotEmpty) queryParam: text,
+    };
+    if (parameters.isEmpty) return AppRouter.adminPanelObjects;
+    return Uri(path: AppRouter.adminPanelObjects, queryParameters: parameters).toString();
   }
+
+  static String objectsWith(PanelSelection selection) => objectsOf(
+    theme: selection.theme,
+    subtheme: selection.subtheme,
+    type: selection.type,
+    query: selection.query,
+  );
 
   static PanelView? viewOf(String path) => switch (path) {
     AppRouter.adminPanelObjects => PanelView.objects,

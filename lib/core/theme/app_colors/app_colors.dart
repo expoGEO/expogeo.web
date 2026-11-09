@@ -48,6 +48,9 @@ class AppColors {
   Color inkSecondary = const Color(0xFF5E5852);
   Color line = const Color(0xFFE6E1DA);
 
+  /// Contorno de seletor no hover e com o menu aberto.
+  Color lineStrong = const Color(0xFFCFC8BE);
+
   /// Contorno de campo de formulário, que não tem outro limite visível: 3,8:1 sobre [page].
   Color fieldBorder = const Color(0xFF8A8178);
 

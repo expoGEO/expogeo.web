@@ -11,6 +11,8 @@ class AppSearchField extends StatefulWidget {
     required this.onChanged,
     required this.onClear,
     this.focusNode,
+    this.height,
+    this.radius,
   });
 
   final TextEditingController controller;
@@ -19,6 +21,10 @@ class AppSearchField extends StatefulWidget {
   final ValueChanged<String> onChanged;
   final VoidCallback onClear;
   final FocusNode? focusNode;
+
+  /// Sem valor, a altura e o raio do campo de busca do site.
+  final double? height;
+  final double? radius;
 
   @override
   State<AppSearchField> createState() => _AppSearchFieldState();
@@ -75,13 +81,13 @@ class _AppSearchFieldState extends State<AppSearchField> {
     final colors = AppTheme.colors;
     final components = AppTheme.dimensions.components;
     final styles = AppTheme.typography.of(context);
-    final radius = BorderRadius.circular(AppTheme.dimensions.radii.r12);
+    final radius = BorderRadius.circular(widget.radius ?? AppTheme.dimensions.radii.r12);
     final hasText = widget.controller.text.isNotEmpty;
 
     // A borda fica no contêiner: o InputDecorator não estica até a altura pedida.
     return AnimatedContainer(
       duration: components.menuAnimation,
-      constraints: BoxConstraints(minHeight: components.searchFieldHeight),
+      constraints: BoxConstraints(minHeight: widget.height ?? components.searchFieldHeight),
       decoration: BoxDecoration(
         color: colors.page,
         borderRadius: radius,

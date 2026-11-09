@@ -223,6 +223,25 @@ class AppTextStyles {
     fontFeatures: const [FontFeature.tabularFigures()],
   );
 
+  TextStyle get panelListFoot => _body(
+    size: _size(mobile: 14, tablet: 14, desktop: 14),
+    weight: FontWeight.w400,
+    height: 1.45,
+    fontFeatures: const [FontFeature.tabularFigures()],
+  );
+
+  TextStyle get filterSelect => _body(
+    size: _size(mobile: 14.5, tablet: 14.5, desktop: 14.5),
+    weight: FontWeight.w600,
+    height: 1.3,
+  );
+
+  TextStyle get filterOption => _body(
+    size: _size(mobile: 14.5, tablet: 14.5, desktop: 14.5),
+    weight: FontWeight.w500,
+    height: 1.3,
+  );
+
   TextStyle get panelDialogTitle => _display(
     size: _size(mobile: 20.8, tablet: 20.8, desktop: 20.8),
     weight: FontWeight.w700,

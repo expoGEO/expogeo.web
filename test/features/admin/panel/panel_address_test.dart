@@ -1,6 +1,7 @@
 import 'package:expogeo/core/models/content_model.dart';
 import 'package:expogeo/core/models/theme_data_model.dart';
 import 'package:expogeo/features/admin/panel/presentation/panel_address.dart';
+import 'package:expogeo/features/admin/panel/presentation/panel_list_memory.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -114,5 +115,55 @@ void main() {
       expect(initialsOf(''), '');
       expect(initialsOf('@x.com'), '');
     });
+  });
+
+  group('editor', () {
+    test('novo objeto sem filtros, só com tema e com tema e subtema', () {
+      expect(PanelAddress.newObject(), '/admin/painel/objetos/novo');
+      expect(
+        PanelAddress.newObject(theme: ThemeEnum.naturezaMeioAmbiente),
+        '/admin/painel/objetos/novo?tema=natureza-meio-ambiente',
+      );
+      expect(
+        PanelAddress.newObject(
+          theme: ThemeEnum.naturezaMeioAmbiente,
+          subtheme: SubthemeEnum.baciasHidrograficas,
+        ),
+        '/admin/painel/objetos/novo?tema=natureza-meio-ambiente&subtema=bacias-hidrograficas',
+      );
+    });
+
+    test('subtema de outro tema não entra no endereço do novo', () {
+      expect(
+        PanelAddress.newObject(theme: ThemeEnum.culturaPolitica, subtheme: SubthemeEnum.biomas),
+        '/admin/painel/objetos/novo?tema=cultura-politica',
+      );
+    });
+
+    test('ida e volta do novo pelo endereço; valores desconhecidos são ignorados', () {
+      final uri = Uri.parse(
+        PanelAddress.newObject(theme: ThemeEnum.culturaPolitica, subtheme: SubthemeEnum.populacao),
+      );
+      final selection = PanelSelection.fromQuery(uri.queryParameters);
+      expect(selection.theme, ThemeEnum.culturaPolitica);
+      expect(selection.subtheme, SubthemeEnum.populacao);
+
+      final unknown = PanelSelection.fromQuery({'tema': 'xyz', 'subtema': 'biomas'});
+      expect(unknown.theme, isNull);
+      expect(unknown.subtheme, isNull);
+    });
+
+    test('editar leva o código em minúsculas e hífen', () {
+      expect(PanelAddress.editObject('NMA_BH_03'), '/admin/painel/objetos/nma-bh-03/editar');
+      expect(PanelAddress.editObject('nma-bh-03'), '/admin/painel/objetos/nma-bh-03/editar');
+    });
+  });
+
+  test('a memória da lista começa na lista sem filtros e guarda o último endereço', () {
+    final memory = PanelListMemory();
+    expect(memory.location, '/admin/painel/objetos');
+
+    memory.remember('/admin/painel/objetos?tema=cultura-politica&q=censo');
+    expect(memory.location, '/admin/painel/objetos?tema=cultura-politica&q=censo');
   });
 }

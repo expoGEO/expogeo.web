@@ -11,13 +11,13 @@ import 'package:expogeo/core/theme/app_theme.dart';
 import 'package:expogeo/core/utils/messenger/messenger.dart';
 import 'package:expogeo/core/utils/screen/screen_utils.dart';
 import 'package:expogeo/features/admin/admin_setup.dart';
-import 'package:expogeo/features/admin/panel/presentation/components/content_form_dialog.dart';
 import 'package:expogeo/features/admin/panel/presentation/components/panel_filter_bar.dart';
 import 'package:expogeo/features/admin/panel/presentation/components/panel_object_row.dart';
 import 'package:expogeo/features/admin/panel/presentation/components/panel_objects_list.dart';
 import 'package:expogeo/features/admin/panel/presentation/components/panel_section_header.dart';
 import 'package:expogeo/features/admin/panel/presentation/pages/panel_view_scroll.dart';
 import 'package:expogeo/features/admin/panel/presentation/panel_address.dart';
+import 'package:expogeo/features/admin/panel/presentation/panel_list_memory.dart';
 import 'package:expogeo/features/admin/panel/presentation/stores/content_store.dart';
 import 'package:expogeo/features/admin/panel/presentation/stores/panel_objects_store.dart';
 import 'package:expogeo/features/catalog/infra/models/catalog_model.dart';
@@ -41,11 +41,10 @@ class _PanelObjectsViewState extends State<PanelObjectsView> {
   late final _contentStore = AdminSetup.getIt<ContentStore>();
   late final _catalogStore = AdminSetup.getIt<CatalogStore>();
   late final _store = PanelObjectsStore(_catalogStore);
+  late final _listMemory = AdminSetup.getIt<PanelListMemory>();
 
   final _searchController = TextEditingController();
   final _searchFocus = FocusNode();
-  final _themeFocus = FocusNode();
-  final _subthemeFocus = FocusNode();
   final Map<String, FocusNode> _titleFocus = {};
 
   // Buscas que a própria vista mandou para o endereço: quando voltam, o campo já tem o texto.
@@ -61,6 +60,7 @@ class _PanelObjectsViewState extends State<PanelObjectsView> {
   void initState() {
     super.initState();
     _store.applySelection(widget.selection);
+    _listMemory.remember(PanelAddress.objectsWith(widget.selection));
     _searchController.text = widget.selection.query ?? '';
     _outcomeReaction = reaction((_) => _contentStore.outcome, _handleOutcome);
   }
@@ -72,6 +72,7 @@ class _PanelObjectsViewState extends State<PanelObjectsView> {
     if (oldWidget.selection == selection) return;
 
     _store.applySelection(selection);
+    _listMemory.remember(PanelAddress.objectsWith(selection));
 
     final ownIndex = _sentQueries.indexOf(selection.query);
     if (ownIndex >= 0) {
@@ -90,8 +91,6 @@ class _PanelObjectsViewState extends State<PanelObjectsView> {
     _outcomeReaction();
     _searchController.dispose();
     _searchFocus.dispose();
-    _themeFocus.dispose();
-    _subthemeFocus.dispose();
     for (final node in _titleFocus.values) {
       node.dispose();
     }
@@ -173,34 +172,12 @@ class _PanelObjectsViewState extends State<PanelObjectsView> {
 
   void _newObject() {
     final selection = widget.selection;
-    final theme = selection.theme;
-    final subtheme = selection.subtheme;
-    if (theme == null || subtheme == null) {
-      Messenger.showInfo(
-        context,
-        'Escolha o tema e o subtema nos filtros para cadastrar um objeto.',
-      );
-      (theme == null ? _themeFocus : _subthemeFocus).requestFocus();
-      return;
-    }
-    showDialog<void>(
-      context: context,
-      builder: (context) =>
-          ContentFormDialog(contentStore: _contentStore, theme: theme, subtheme: subtheme),
-    );
+    GoRouter.of(
+      context,
+    ).go(PanelAddress.newObject(theme: selection.theme, subtheme: selection.subtheme));
   }
 
-  void _edit(CatalogItem item) {
-    showDialog<void>(
-      context: context,
-      builder: (context) => ContentFormDialog(
-        contentStore: _contentStore,
-        theme: item.theme,
-        subtheme: item.subtheme,
-        content: item.content,
-      ),
-    );
-  }
+  void _edit(CatalogItem item) => GoRouter.of(context).go(PanelAddress.editObject(item.content.id));
 
   Future<void> _delete(CatalogItem item) async {
     final confirmed = await showConfirmDialog(
@@ -217,12 +194,11 @@ class _PanelObjectsViewState extends State<PanelObjectsView> {
   void _handleOutcome(ContentOutcome? outcome) {
     if (outcome == null || !mounted) return;
     switch (outcome.kind) {
-      case ContentOutcomeKind.created:
-        Messenger.showSuccess(context, 'Objeto cadastrado');
-      case ContentOutcomeKind.updated:
-        Messenger.showSuccess(context, 'Alterações salvas');
-      case ContentOutcomeKind.saveFailed:
-        Messenger.showError(context, 'Não deu para salvar. Confira a conexão e tente de novo.');
+      // Salvar acontece no editor, que mostra o próprio aviso.
+      case ContentOutcomeKind.created ||
+          ContentOutcomeKind.updated ||
+          ContentOutcomeKind.saveFailed:
+        return;
       case ContentOutcomeKind.deleted:
         final docId = outcome.docId;
         if (docId != null) _store.hide(docId);
@@ -262,7 +238,6 @@ class _PanelObjectsViewState extends State<PanelObjectsView> {
       ),
       theme: (expand) => AppFilterSelect<ThemeEnum?>(
         semanticLabel: 'Tema',
-        focusNode: _themeFocus,
         expand: expand,
         value: theme,
         options: [
@@ -273,7 +248,6 @@ class _PanelObjectsViewState extends State<PanelObjectsView> {
       ),
       subtheme: (expand) => AppFilterSelect<SubthemeEnum?>(
         semanticLabel: 'Subtema',
-        focusNode: _subthemeFocus,
         expand: expand,
         isDisabled: theme == null,
         value: selection.subtheme,

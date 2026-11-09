@@ -1,7 +1,6 @@
 import 'package:expogeo/core/components/button/app_button.dart';
 import 'package:expogeo/core/components/field/app_filter_select.dart';
 import 'package:expogeo/core/models/theme_data_model.dart';
-import 'package:expogeo/features/admin/panel/presentation/components/content_form_dialog.dart';
 import 'package:expogeo/features/admin/panel/presentation/components/panel_object_row.dart';
 import 'package:expogeo/features/admin/panel/presentation/components/panel_objects_list.dart';
 import 'package:expogeo/features/admin/panel/presentation/components/panel_section_header.dart';
@@ -248,97 +247,71 @@ void main() {
   });
 
   group('criar e editar', () {
-    testWidgets('"Novo objeto" sem tema avisa e leva o foco ao Tema', (tester) async {
-      await open(tester, '/admin/painel/objetos');
-
-      await tester.tap(find.widgetWithText(AppButton, 'Novo objeto'));
-      await tester.pump();
-
-      expect(
-        find.text('Escolha o tema e o subtema nos filtros para cadastrar um objeto.'),
-        findsOneWidget,
-      );
-      expect(find.byType(ContentFormDialog), findsNothing);
-      expect(selectHasFocus(tester, 'Tema'), isTrue);
-      await waitToasts(tester);
-    });
-
-    testWidgets('"Novo objeto" só com tema leva o foco ao Subtema', (tester) async {
-      await open(tester, '/admin/painel/objetos?tema=natureza-meio-ambiente');
-
-      await tester.tap(find.widgetWithText(AppButton, 'Novo objeto'));
-      await tester.pump();
-
-      expect(selectHasFocus(tester, 'Subtema'), isTrue);
-      await waitToasts(tester);
-    });
-
-    testWidgets('"Novo objeto" com subtema abre o formulário nesse subtema', (tester) async {
-      await open(tester, '/admin/painel/objetos?tema=natureza-meio-ambiente&subtema=biomas');
+    testWidgets('"Novo objeto" sem filtros abre o editor vazio', (tester) async {
+      final panel = await open(tester, '/admin/painel/objetos');
 
       await tester.tap(find.widgetWithText(AppButton, 'Novo objeto'));
       await tester.pumpAndSettle();
 
-      final dialog = tester.widget<ContentFormDialog>(find.byType(ContentFormDialog));
-      expect(dialog.theme, ThemeEnum.naturezaMeioAmbiente);
-      expect(dialog.subtheme, SubthemeEnum.biomas);
-      expect(dialog.content, isNull);
+      expect(panel.location, '/admin/painel/objetos/novo');
+      expect(find.text('Novo objeto'), findsOneWidget);
+      expect(find.byType(PanelSidebar), findsNothing);
     });
 
-    testWidgets('"Editar" abre o formulário com a preservação gravada', (tester) async {
-      await open(tester, '/admin/painel/objetos?q=nma-bh-03');
+    testWidgets('"Novo objeto" leva o tema e o subtema dos filtros', (tester) async {
+      final panel = await open(
+        tester,
+        '/admin/painel/objetos?tema=natureza-meio-ambiente&subtema=biomas&q=cerrado',
+      );
+
+      await tester.tap(find.widgetWithText(AppButton, 'Novo objeto'));
+      await tester.pumpAndSettle();
+
+      expect(
+        panel.location,
+        '/admin/painel/objetos/novo?tema=natureza-meio-ambiente&subtema=biomas',
+      );
+    });
+
+    testWidgets('"Editar" e o título da linha abrem o editor do objeto', (tester) async {
+      final panel = await open(tester, '/admin/painel/objetos?q=nma-bh-03');
 
       await tester.tap(find.byIcon(Icons.edit_outlined));
       await tester.pumpAndSettle();
-
-      final dialog = tester.widget<ContentFormDialog>(find.byType(ContentFormDialog));
-      expect(dialog.subtheme, SubthemeEnum.baciasHidrograficas);
-      expect(dialog.content?.id, 'NMA_BH_03');
+      expect(panel.location, '/admin/painel/objetos/nma-bh-03/editar');
+      expect(find.text('Editar objeto'), findsOneWidget);
       expect(find.text('Revisar o link a cada ano'), findsOneWidget);
+
+      panel.router.go('/admin/painel/objetos?q=nma-bh-03');
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Rio São Francisco'));
+      await tester.pumpAndSettle();
+      expect(panel.location, '/admin/painel/objetos/nma-bh-03/editar');
     });
 
-    testWidgets('avisos depois de salvar; filtros mantidos; objeto novo com o tipo certo', (
-      tester,
-    ) async {
+    testWidgets('a lista guarda o próprio endereço para o editor voltar a ele', (tester) async {
+      final panel = await open(tester, '/admin/painel/objetos?tema=cultura-politica&q=censo');
+
+      expect(panel.listMemory.location, '/admin/painel/objetos?tema=cultura-politica&q=censo');
+
+      await tester.tap(select('Tipo'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Vídeo').last);
+      await tester.pumpAndSettle();
+      expect(panel.listMemory.location, panel.location);
+    });
+
+    testWidgets('salvar não mostra aviso na lista: o editor mostra o dele', (tester) async {
       final panel = await open(tester, '/admin/painel/objetos?q=censo');
-      final content = panel.content.contents.first;
 
       await panel.contentStore.createContent(
         subtheme: SubthemeEnum.censoDemografico,
-        content: content,
+        content: panel.content.contents.first,
       );
-      await tester.pump();
-      expect(find.text('Objeto cadastrado'), findsOneWidget);
+      await tester.pumpAndSettle();
+
+      expect(find.text('Objeto cadastrado'), findsNothing);
       expect(panel.location, '/admin/painel/objetos?q=censo');
-
-      // A casca recarrega o catálogo depois de salvar; o novo foi gravado com o rótulo.
-      panel.catalog.succeed([
-        ...sample(),
-        dated('CP_CD', 'CP_CD_02', day: 24, title: 'Censo novo', type: 'Site'),
-      ]);
-      await tester.pumpAndSettle();
-      expect(find.text('Censo novo'), findsOneWidget);
-      final row = find.ancestor(of: find.text('Censo novo'), matching: find.byType(PanelObjectRow));
-      expect(find.descendant(of: row, matching: find.text('Site')), findsOneWidget);
-      await waitToasts(tester);
-
-      await panel.contentStore.updateContent(
-        subtheme: SubthemeEnum.censoDemografico,
-        contentId: 'doc_CP_CD_01',
-        content: content,
-      );
-      await tester.pumpAndSettle();
-      expect(find.text('Alterações salvas'), findsOneWidget);
-      await waitToasts(tester);
-
-      panel.content.failWrites = true;
-      await panel.contentStore.createContent(
-        subtheme: SubthemeEnum.censoDemografico,
-        content: content,
-      );
-      await tester.pumpAndSettle();
-      expect(find.text('Não deu para salvar. Confira a conexão e tente de novo.'), findsOneWidget);
-      await waitToasts(tester);
     });
   });
 

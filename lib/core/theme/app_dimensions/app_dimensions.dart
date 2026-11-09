@@ -759,6 +759,26 @@ class ComponentSizes {
   final double confirmDialogActionsTop = 20.0;
   final double confirmDialogActionsGap = 10.0;
 
+  double editorBarPaddingH(Breakpoint breakpoint) => _byBreakpoint(breakpoint, 16, 16, 24);
+  final double editorBarPaddingV = 10.0;
+  final double editorBarGapH = 14.0;
+  final double editorBarGapV = 8.0;
+  final double editorBarTitleGap = 10.0;
+  final double editorBarActionsGap = 8.0;
+  double editorPadding(Breakpoint breakpoint) => _byBreakpoint(breakpoint, 16, 16, 24);
+  final double editorMaxWidth = 1180.0;
+  final double editorSideWidth = 340.0;
+  final double editorColumnsGap = 20.0;
+  final double editorCardsGap = 16.0;
+  final double editorCardPadding = 20.0;
+  final double editorCardTitleGap = 14.0;
+  final double editorFieldsGap = 16.0;
+  final double editorCodeGap = 6.0;
+  final int editorTextMinLines = 3;
+  final double editorSkeletonLineHeight = 14.0;
+  final double editorSkeletonFieldHeight = 48.0;
+  final double editorSkeletonSideHeight = 120.0;
+
   double _byBreakpoint(Breakpoint breakpoint, double mobile, double tablet, double desktop) {
     return switch (breakpoint) {
       Breakpoint.mobile => mobile,

@@ -1,6 +1,6 @@
 # 015. Editor de objeto em página própria
 
-- **Status:** aprovada
+- **Status:** implementada
 - **Item do planejamento:** Fase 4, entrega 4.4 (tela T-10, rotas novas)
 - **Protótipo:** aba "Editor" (link em docs/specs/README.md); referência no Observatório: o editor de publicações em `lib/app/features/admin/panel/presentation/pages/post_editor_page.dart` e `components/editor/` (`post_editor_bar.dart`, `post_editor_card.dart`, `post_editor_layout.dart`, `post_editor_missing_alert.dart`, `post_editor_side.dart`, `post_editor_skeleton.dart`) e o aviso de saída em `lib/app/core/utils/browser/leave_guard*.dart`. O Observatório não guarda specs no repositório.
 - **Criada em:** 2026-10-27

@@ -1,6 +1,7 @@
 import 'package:expogeo/core/models/content_model.dart';
 import 'package:expogeo/core/models/theme_data_model.dart';
 import 'package:expogeo/core/navigation/app_router.dart';
+import 'package:expogeo/core/utils/string/string_utils.dart';
 
 enum PanelView { objects, themes }
 
@@ -87,6 +88,21 @@ class PanelAddress {
     type: selection.type,
     query: selection.query,
   );
+
+  /// Editor de objeto novo, já com o tema e o subtema quando houver.
+  static String newObject({ThemeEnum? theme, SubthemeEnum? subtheme}) {
+    final parameters = {
+      if (theme != null) themeParam: theme.value,
+      if (theme != null && subtheme != null && subtheme.theme == theme)
+        subthemeParam: subtheme.value,
+    };
+    if (parameters.isEmpty) return AppRouter.adminObjectNew;
+    return Uri(path: AppRouter.adminObjectNew, queryParameters: parameters).toString();
+  }
+
+  /// Editor do objeto, com o código em minúsculas e hífen, como no site.
+  static String editObject(String code) =>
+      AppRouter.adminObjectEdit.replaceFirst(':${AppRouter.codeParam}', referenceCodeSlug(code));
 
   static PanelView? viewOf(String path) => switch (path) {
     AppRouter.adminPanelObjects => PanelView.objects,

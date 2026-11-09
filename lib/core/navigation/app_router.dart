@@ -6,6 +6,7 @@ import 'package:expogeo/features/admin/admin_setup.dart';
 import 'package:expogeo/features/admin/login/infra/repositories/auth_repository.dart';
 import 'package:expogeo/features/admin/login/presentation/pages/signin_page.dart';
 import 'package:expogeo/features/admin/panel/presentation/panel_address.dart';
+import 'package:expogeo/features/admin/panel/presentation/pages/object_editor_page.dart';
 import 'package:expogeo/features/admin/panel/presentation/pages/panel_objects_view.dart';
 import 'package:expogeo/features/admin/panel/presentation/pages/panel_shell.dart';
 import 'package:expogeo/features/admin/panel/presentation/pages/panel_themes_view.dart';
@@ -15,6 +16,7 @@ import 'package:expogeo/features/theme/pages/object_page.dart';
 import 'package:expogeo/features/theme/pages/subtheme_page.dart';
 import 'package:expogeo/features/theme/pages/theme_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRouter {
@@ -25,6 +27,9 @@ class AppRouter {
   static const String adminPanel = '/admin/painel';
   static const String adminPanelObjects = '/admin/painel/objetos';
   static const String adminPanelThemes = '/admin/painel/temas';
+  static const String codeParam = 'codigo';
+  static const String adminObjectNew = '/admin/painel/objetos/novo';
+  static const String adminObjectEdit = '/admin/painel/objetos/:$codeParam/editar';
 
   static String representacoesEspaciais = ThemeEnum.representacoesEspaciais.value;
   static String meioAmbiente = ThemeEnum.naturezaMeioAmbiente.value;
@@ -70,6 +75,34 @@ class AppRouter {
             builder: (context, state) => const PanelThemesView(),
           ),
         ],
+      ),
+
+      // Editor de objeto: página inteira, fora da moldura do painel
+      GoRoute(
+        path: adminObjectNew,
+        name: 'admin-painel-objeto-novo',
+        onExit: (context, state) => ObjectEditorPage.confirmLeave(context),
+        pageBuilder: (context, state) => _editorPage(
+          ObjectEditorPage.create(
+            key: ValueKey(state.uri.toString()),
+            selection: PanelSelection.fromQuery(state.uri.queryParameters),
+          ),
+        ),
+      ),
+      GoRoute(
+        path: adminObjectEdit,
+        name: 'admin-painel-objeto-editar',
+        redirect: (context, state) {
+          final code = state.pathParameters[codeParam]!;
+          final slug = referenceCodeSlug(code);
+          if (slug == code) return null;
+          return PanelAddress.editObject(slug);
+        },
+        onExit: (context, state) => ObjectEditorPage.confirmLeave(context),
+        pageBuilder: (context, state) {
+          final code = state.pathParameters[codeParam]!;
+          return _editorPage(ObjectEditorPage.edit(key: ValueKey(code), code: code));
+        },
       ),
 
       // Rotas dos temas principais
@@ -150,6 +183,10 @@ class AppRouter {
     if (!isLogged) return admin;
     return path == adminPanel ? adminPanelObjects : null;
   }
+
+  // A mesma chave nas duas rotas do editor: trocar de endereço não empilha outra página.
+  static Page<void> _editorPage(Widget child) =>
+      MaterialPage(key: const ValueKey('object-editor'), child: child);
 
   static GoRoute _objectRoute(String themeId) => GoRoute(
     path: '/$themeId/:subthemeId/:code',

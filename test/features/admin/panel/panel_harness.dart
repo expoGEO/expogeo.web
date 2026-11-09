@@ -1,6 +1,7 @@
 import 'package:expogeo/core/navigation/app_router.dart';
 import 'package:expogeo/core/pages/not_found_page.dart';
 import 'package:expogeo/features/admin/login/presentation/stores/auth_store.dart';
+import 'package:expogeo/features/admin/panel/presentation/panel_list_memory.dart';
 import 'package:expogeo/features/admin/panel/presentation/stores/content_store.dart';
 import 'package:expogeo/features/catalog/infra/models/catalog_model.dart';
 import 'package:expogeo/features/catalog/presentation/stores/catalog_store.dart';
@@ -25,13 +26,15 @@ class PanelHarness {
     GetIt.I
       ..registerSingleton<AuthStore>(authStore)
       ..registerSingleton<ContentStore>(contentStore)
-      ..registerSingleton<CatalogStore>(catalogStore);
+      ..registerSingleton<CatalogStore>(catalogStore)
+      ..registerSingleton<PanelListMemory>(listMemory);
     addTearDown(GetIt.I.reset);
   }
 
   final auth = FakeAuthRepository();
   final content = FakeContentRepository();
   final catalog = FakeCatalogRepository();
+  final listMemory = PanelListMemory();
   late final AuthStore authStore;
   late final ContentStore contentStore;
   late final CatalogStore catalogStore;

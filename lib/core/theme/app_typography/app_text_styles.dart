@@ -116,6 +116,21 @@ class AppTextStyles {
     height: 1.45,
   );
 
+  TextStyle get editorBarTitle => _display(
+    size: _size(mobile: 18.4, tablet: 18.4, desktop: 18.4),
+    weight: FontWeight.w700,
+    height: 1.25,
+    letterSpacingEm: -0.02,
+  );
+
+  /// Título de grupo do editor, em maiúsculas.
+  TextStyle get editorCardTitle => _body(
+    size: _size(mobile: 12.5, tablet: 12.5, desktop: 12.5),
+    weight: FontWeight.w700,
+    height: 1.4,
+    letterSpacingEm: 0.09,
+  );
+
   /// Campo de título em destaque, como o título de um editor.
   TextStyle get editorTitleField => _display(
     size: _size(mobile: 22, tablet: 25.6, desktop: 25.6),

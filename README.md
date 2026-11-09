@@ -104,6 +104,7 @@ Proporcionar uma experiência de aprendizado dinâmica e visual sobre os princip
 - **Login** em `/admin`; com sessão, `/admin` e `/admin/painel` levam a `/admin/painel/objetos`
 - **Moldura do painel:** barra com "Ver site" e a pessoa conectada, menu lateral "Curadoria" com as contagens do catálogo (gaveta até 900 px)
 - **Objetos digitais** (`/admin/painel/objetos`): lista de todos os objetos do catálogo, do mais recente, com busca por código, título, autor ou assunto e filtros de tema, subtema e tipo guardados no endereço (`?tema=`, `&subtema=` com os valores do site, `&tipo=` pelo nome, como `video`, e `&q=` com a busca); abrir o recurso, editar e excluir cada objeto
+- **Editor de objeto** (`/admin/painel/objetos/novo` e `/admin/painel/objetos/:codigo/editar`): página própria fora da moldura, com resumo do que falta ao salvar, código gerado e prévia do cartão; grava no mesmo formato dos objetos já cadastrados (código como id do documento)
 - **Temas e subtemas** (`/admin/painel/temas`): só consulta, com caminho no site e contagem de objetos; temas e subtemas vêm do código
 
 ---

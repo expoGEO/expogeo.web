@@ -485,6 +485,9 @@ class ComponentSizes {
   final double stateBoxDashLength = 4.0;
   final double stateBoxDashGap = 3.0;
 
+  final double notFoundPaddingTop = 40.0;
+  final double notFoundPaddingBottom = 72.0;
+
   /// Largura da coluna de leitura da página do objeto, sem as margens.
   final double objectColumnMaxWidth = 856.0;
   final double objectHeadPaddingTop = 28.0;
@@ -547,4 +550,42 @@ class ComponentSizes {
 
   final double objectRelatedPadding = 48.0;
   final double objectRelatedHeadGap = 16.0;
+
+  final double formFieldHeight = 48.0;
+  final double formFieldBorder = 1.5;
+  final double formFieldFocusRing = 4.0;
+  final double formFieldPaddingH = 14.0;
+  final double formFieldPaddingV = 12.0;
+
+  /// Vertical do campo de uma linha, para ficar em [formFieldHeight] com a linha do texto.
+  final double formFieldPaddingVSingleLine = 11.5;
+  final double formFieldGap = 18.0;
+  final double formFieldLabelGap = 6.0;
+  final int formMessageMinLines = 6;
+  final int formMessageMaxLines = 12;
+  final double formHintTop = 12.0;
+  final double formHintMaxWidth = 480.0;
+
+  final double mailConfirmationPaddingV = 48.0;
+  final double mailConfirmationPaddingH = 24.0;
+  final double mailConfirmationGap = 10.0;
+  final double mailConfirmationIcon = 56.0;
+  final double mailConfirmationIconGlyph = 26.0;
+  final double mailConfirmationTextMaxWidth = 440.0;
+  final double mailConfirmationTextBottom = 8.0;
+  final double mailConfirmationButtonsGap = 10.0;
+
+  final double contactPaddingTop = 40.0;
+  final double contactPaddingBottom = 72.0;
+  final double contactColumnsGapMobile = 28.0;
+  final double contactColumnsGapTablet = 48.0;
+  final double contactColumnsGapDesktop = 72.0;
+  final int contactFormFlex = 3;
+  final int contactInfoFlex = 2;
+  final double contactInfoPaddingMobile = 20.0;
+  final double contactInfoPaddingTablet = 24.0;
+  final double contactInfoPaddingDesktop = 28.0;
+  final double contactInfoListTop = 18.0;
+  final double contactInfoLabelGap = 2.0;
+  final double contactInfoItemGap = 14.0;
 }

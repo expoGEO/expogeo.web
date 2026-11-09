@@ -1,4 +1,6 @@
 import 'package:expogeo/core/components/button/app_button.dart';
+import 'package:expogeo/core/components/skeleton/loading_region.dart';
+import 'package:expogeo/core/components/state/state_error_box.dart';
 import 'package:expogeo/core/components/state/state_message_box.dart';
 import 'package:expogeo/core/components/structure/page_content.dart';
 import 'package:expogeo/core/models/theme_model.dart';
@@ -85,13 +87,7 @@ class _SubthemeObjectsSectionState extends State<SubthemeObjectsSection> {
         builder: (context) => switch (_store.catalogState) {
           CatalogStateInitial() || CatalogStateLoading() => _skeleton(),
           CatalogStateError() => _withTop(
-            StateMessageBox(
-              icon: Icons.cloud_off_outlined,
-              tone: StateMessageTone.error,
-              title: 'Não conseguimos carregar os objetos',
-              message: 'Confira sua conexão com a internet e tente de novo.',
-              action: AppButton.secondary(text: 'Tentar de novo', onPressed: _store.retry),
-            ),
+            StateErrorBox(title: 'Não conseguimos carregar os objetos', onRetry: _store.retry),
           ),
           CatalogStateSuccess() when _store.items.isEmpty => _withTop(
             StateMessageBox(
@@ -122,12 +118,14 @@ class _SubthemeObjectsSectionState extends State<SubthemeObjectsSection> {
         top: components.toolbarPaddingTop,
         bottom: components.objectListPaddingBottom,
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          for (var i = 0; i < SubthemeObjectsSection.skeletonRows; i++) const ObjectRowSkeleton(),
-        ],
+      child: LoadingRegion(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            for (var i = 0; i < SubthemeObjectsSection.skeletonRows; i++) const ObjectRowSkeleton(),
+          ],
+        ),
       ),
     );
   }

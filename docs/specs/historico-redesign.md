@@ -7,6 +7,7 @@ Uma linha por fase executada. O detalhe de cada spec fica em `docs/specs/NNN-*/`
 | Fase 0: ambiente, fundação e casco | 2026-10-27 a 2026-11-03 | 001-fundacao, 002-botoes-navbar-rodape, 003-index-ilustracoes (todas verificadas) | PR da branch `refactor/redesign-fase-0` para `develop` |
 | Fase 1: Home e Sobre | 2026-11-03 | 004-hero-temas, 005-como-explorar-recentes, 006-sobre-apoio (todas verificadas com ressalvas) | PR da branch `refactor/redesign-fase-1` para `develop` |
 | Fase 2: navegação de conteúdo | 2026-11-04 a 2026-11-05 | 007-pagina-tema, 008-pagina-subtema, 009-pagina-objeto (todas verificadas com ressalvas) | PR da branch `refactor/redesign-fase-2` para `develop` |
+| Fase 3: contato e estados | 2026-11-06 a 2026-11-08 | 010-contato (verificada com ressalvas), 011-estados-especiais (verificada) | PR da branch `refactor/redesign-fase-3` para `develop` |
 
 ## Pendências em aberto
 - **Regra do Firestore (004, 005):** os deploys publicam as regras desde o PR #10 e a leitura funciona no dev (190 objetos; 35, 74, 42, 39). Falta conferir na produção depois do merge na `main`.
@@ -20,6 +21,10 @@ Uma linha por fase executada. O detalhe de cada spec fica em `docs/specs/NNN-*/`
 - **014:** fala em fonte monoespaçada para o código de referência; a 001 decidiu usar Figtree 600 com algarismos tabulares (a 009 já foi corrigida).
 - **Painel admin:** também não conferido nas Fases 1 e 2; nenhum arquivo dele mudou.
 - **016:** PNGs das ilustrações e botões antigos (`PrimaryButton`/`SecondaryButton`, ainda no painel) saem na limpeza.
+- **Links de texto (010):** sem `href`, para não navegar a própria aba com a semântica ligada; o leitor de tela não os lê como link. O `partner_logo.dart` (apoio, na Home e no Sobre) usa o mesmo `linkUrl` externo e provavelmente tem o defeito da aba; não foi conferido.
+- **Contato (010):** o e-mail não pode ser selecionado e "Copiar mensagem" não traz o destinatário; quem não tem programa de e-mail precisa digitá-lo.
+- **Componentes de estado antigos (011):** `CircularLoading`, `ContentError` e `ContentEmpty` seguem só para o painel e os botões antigos (Fases 4 e 5).
+- **Painel admin:** também não conferido na Fase 3; nenhum arquivo dele mudou.
 
 ## Lições
 - `fvm flutter analyze` e os testes só rodam numa cópia em caminho ASCII (o "ó" da pasta quebra a ferramenta).
@@ -32,3 +37,8 @@ Uma linha por fase executada. O detalhe de cada spec fica em `docs/specs/NNN-*/`
 - No web, `toggled` da semântica sai como `aria-checked`; o motor 3.35.5 não emite `aria-pressed`.
 - `SelectionArea` cria uma visão de plataforma que vira parada invisível de Tab: envolver em `ExcludeFocusTraversal` onde for aninhado.
 - Uma consulta só de leitura ao Firestore do dev confere contagens e fichas contra a tela: a 009 comparou os 190 objetos.
+- Rodapé e `SiteScaffold`: o teste com fonte Ahem acusou um estouro real, que só aparece no navegador com texto a 125%. Vale levar a sério aviso de teste de widget mesmo quando a tela parece certa.
+- `InlineLink` com `linkUrl` externo: com a semântica ligada, o motor navega a própria aba além de abrir a nova.
+- Flutter 3.35.5 no web: ignora `hint` em campo de texto, não aceita `liveRegion` num nó com papel nem em título; usar `announce`.
+- Simular falta de rede bloqueando o Firestore no Chrome sem janela (CDP) dispensou datasource falso para o estado de erro.
+- Retomar uma sessão de etapa parada pelo limite semanal com SendMessage funcionou.

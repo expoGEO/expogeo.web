@@ -1,5 +1,6 @@
 import 'package:expogeo/core/components/card/object_card.dart';
 import 'package:expogeo/core/components/card/object_card_grid.dart';
+import 'package:expogeo/core/components/skeleton/loading_region.dart';
 import 'package:expogeo/core/components/state/state_error_inline.dart';
 import 'package:expogeo/core/components/structure/page_content.dart';
 import 'package:expogeo/core/theme/app_theme.dart';
@@ -28,7 +29,9 @@ class HomeRecentSection extends StatelessWidget {
         final Widget content;
         switch (store.state) {
           case CatalogStateInitial() || CatalogStateLoading():
-            content = ObjectCardGrid(children: List.filled(count, const ObjectCardSkeleton()));
+            content = LoadingRegion(
+              child: ObjectCardGrid(children: List.filled(count, const ObjectCardSkeleton())),
+            );
           case CatalogStateError():
             content = StateErrorInline(
               message: 'Não conseguimos carregar os objetos recentes',

@@ -14,6 +14,8 @@ import 'package:go_router/go_router.dart';
 
 import '../catalog/catalog_test_data.dart';
 
+import '../../support/semantics.dart';
+
 void main() {
   late FakeCatalogRepository repository;
   late CatalogStore store;
@@ -97,6 +99,17 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
+  testWidgets('carregando: cabeçalho e ficha lidos uma vez como "Carregando…"', (tester) async {
+    final handle = tester.ensureSemantics();
+    await pump(tester, routerAt(biomasObject));
+
+    expect(find.bySemanticsLabel('Carregando…'), findsOneWidget);
+    repository.succeed(biomasRecords());
+    await settle(tester);
+    expect(find.bySemanticsLabel('Carregando…'), findsNothing);
+    handle.dispose();
+  });
+
   testWidgets('erro: caixa com "Tentar de novo" primário, que volta ao esqueleto e repete', (
     tester,
   ) async {
@@ -113,6 +126,14 @@ void main() {
       find.ancestor(of: find.text('Tentar de novo'), matching: find.byType(AppButton)),
     );
     expect(retry.kind, AppButtonKind.primary);
+    expect(
+      tester
+          .widget<Icon>(
+            find.descendant(of: find.byType(StateMessageBox), matching: find.byType(Icon)),
+          )
+          .icon,
+      Icons.error_outline,
+    );
 
     await tester.tap(find.text('Tentar de novo'));
     await tester.pump();
@@ -149,6 +170,7 @@ void main() {
       repository.succeed(biomasRecords());
       await settle(tester);
       expect(find.byType(NotFoundPage), findsOneWidget);
+      expect(find.text('Este lugar não está no mapa'), findsOneWidget);
     });
   }
 
@@ -211,7 +233,7 @@ void main() {
     await settle(tester);
 
     final item = tester.getSemantics(find.bySemanticsLabel('Temas')).getSemanticsData();
-    expect(item.flagsCollection.isSelected, isTrue);
+    expect(isMarked(item), isTrue);
   });
 
   for (final width in [320.0, 390.0, 768.0, 1280.0]) {

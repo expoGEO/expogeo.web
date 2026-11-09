@@ -102,6 +102,30 @@ class AppTextStyles {
   TextStyle get chip =>
       _body(size: _size(mobile: 14, tablet: 14, desktop: 14), weight: FontWeight.w600, height: 1.2);
 
+  TextStyle get formLabel =>
+      _body(size: _size(mobile: 15, tablet: 15, desktop: 15), weight: FontWeight.w600, height: 1.4);
+
+  TextStyle get formError => _body(
+    size: _size(mobile: 14, tablet: 14, desktop: 14),
+    weight: FontWeight.w500,
+    height: 1.45,
+  );
+
+  TextStyle get confirmationTitle => _display(
+    size: _size(mobile: 22.4, tablet: 25.6, desktop: 25.6),
+    weight: FontWeight.w700,
+    height: 1.12,
+    letterSpacingEm: -0.02,
+  );
+
+  /// Número grande no lugar do ícone da caixa de estado, como o "404".
+  TextStyle get stateCode => _display(
+    size: _size(mobile: 64, tablet: 88, desktop: 112),
+    weight: FontWeight.w800,
+    height: 1,
+    letterSpacingEm: -0.04,
+  );
+
   /// Código de referência (ex.: NMA_BH_03). O Flutter web não alcança fontes do sistema,
   /// então uma monoespaçada cairia numa proporcional; algarismos tabulares mantêm o alinhamento.
   TextStyle get code => _body(

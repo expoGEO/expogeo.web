@@ -48,6 +48,9 @@ class AppColors {
   Color inkSecondary = const Color(0xFF5E5852);
   Color line = const Color(0xFFE6E1DA);
 
+  /// Contorno de campo de formulário, que não tem outro limite visível: 3,8:1 sobre [page].
+  Color fieldBorder = const Color(0xFF8A8178);
+
   /// Cor de tudo que é clicável.
   Color accent = const Color(0xFFC94400);
   Color textSelection = const Color(0x40C94400);

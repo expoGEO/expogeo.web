@@ -6,6 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../support/failing_asset_bundle.dart';
+import '../../support/semantics.dart';
 
 void main() {
   Future<void> pump(WidgetTester tester, {AssetBundle? bundle}) {
@@ -67,7 +68,7 @@ void main() {
       await tester.pump();
       for (final theme in ThemeDataModel.themes) {
         final data = tester.getSemantics(find.bySemanticsLabel(theme.title)).getSemanticsData();
-        if (data.flagsCollection.isFocused) focused.add(theme.title);
+        if (hasFocus(data)) focused.add(theme.title);
       }
     }
 

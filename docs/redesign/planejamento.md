@@ -103,8 +103,8 @@ Duas specs: 3.1 → 010-contato; 3.2 → 011-estados-especiais.
 
 | # | Entrega | Notas técnicas | Depende de |
 |---|---|---|---|
-| 3.1 | Contato (T-06) | `/contato` com `mailto:` preenchido, validação, confirmação e "Copiar mensagem", como no Observatório | 0.x |
-| 3.2 | Estados (T-07) | Caixa de estado e esqueletos compartilhados, 404 "Este lugar não está no mapa", remoção dos componentes de estado antigos | Fases 1 e 2 |
+| 3.1 | Contato (T-06) → specs/010-contato (concluído com ressalvas) | `/contato` com `mailto:` preenchido, validação, confirmação e "Copiar mensagem", como no Observatório | 0.x |
+| 3.2 | Estados (T-07) → specs/011-estados-especiais (concluído) | Caixa de estado e esqueletos compartilhados, 404 "Este lugar não está no mapa", remoção dos componentes de estado antigos | Fases 1 e 2 |
 
 ### Fase 4: Painel
 Quatro specs: 4.1 → 012-login; 4.2 → 013-painel-estrutura; 4.3 → 014-painel-objetos; 4.4 → 015-editor-objeto.
@@ -138,15 +138,15 @@ Uma spec: 5.1 e 5.2 → 016-limpeza-legado.
 | [007-pagina-tema](../specs/007-pagina-tema/spec.md) | 2.1 | verificada com ressalvas |
 | [008-pagina-subtema](../specs/008-pagina-subtema/spec.md) | 2.2 | verificada com ressalvas |
 | [009-pagina-objeto](../specs/009-pagina-objeto/spec.md) | 2.3 | verificada com ressalvas |
-| [010-contato](../specs/010-contato/spec.md) | 3.1 | aprovada |
-| [011-estados-especiais](../specs/011-estados-especiais/spec.md) | 3.2 | aprovada |
+| [010-contato](../specs/010-contato/spec.md) | 3.1 | verificada com ressalvas |
+| [011-estados-especiais](../specs/011-estados-especiais/spec.md) | 3.2 | verificada |
 | [012-login](../specs/012-login/spec.md) | 4.1 | aprovada |
 | [013-painel-estrutura](../specs/013-painel-estrutura/spec.md) | 4.2 | aprovada |
 | [014-painel-objetos](../specs/014-painel-objetos/spec.md) | 4.3 | aprovada |
 | [015-editor-objeto](../specs/015-editor-objeto/spec.md) | 4.4 | aprovada |
 | [016-limpeza-legado](../specs/016-limpeza-legado/spec.md) | 5.1–5.2 | aprovada |
 
-Todas as perguntas foram respondidas e as 16 specs aprovadas em 2026-10-27. Fase 0 (001 a 003) e Fase 1 (004 a 006) concluídas em 2026-11-03; Fase 2 (007 a 009) concluída em 2026-11-05; próximo passo: Fase 3 (`/sdd-fase Fase 3`).
+Todas as perguntas foram respondidas e as 16 specs aprovadas em 2026-10-27. Fase 0 (001 a 003) e Fase 1 (004 a 006) concluídas em 2026-11-03; Fase 2 (007 a 009) concluída em 2026-11-05; Fase 3 (010 e 011) concluída em 2026-11-08; próximo passo: Fase 4 (`/sdd-fase Fase 4`).
 
 ---
 

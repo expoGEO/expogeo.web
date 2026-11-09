@@ -15,6 +15,8 @@ class CatalogRepository {
     try {
       final records = await _datasource.fetchAll();
       return Right(CatalogModel.fromRecords(records));
+    } on CatalogOfflineException {
+      return const Left(CatalogFetchFailure('Sem conexão para consultar o acervo.'));
     } on TimeoutException {
       return const Left(CatalogTimeoutFailure('A consulta ao acervo demorou demais.'));
     } on FirebaseException catch (e) {

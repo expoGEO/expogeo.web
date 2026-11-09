@@ -8,7 +8,7 @@
 | 012-login | 4.1 | feita (10 critérios, 13 tarefas) | feita (2 commits) | feita (sem correções) | verificada |
 | 013-painel-estrutura | 4.2 | feita (10 critérios, 17 tarefas) | feita (3 commits) | feita (1 correção) | verificada |
 | 014-painel-objetos | 4.3 | feita (14 critérios, 17 tarefas) | feita (2 commits) | feita (1 correção) | verificada |
-| 015-editor-objeto | 4.4 | feita (16 critérios, 18 tarefas) | pendente | pendente | |
+| 015-editor-objeto | 4.4 | feita (16 critérios, 18 tarefas) | feita (4 commits) | feita (2 correções, 1 ressalva) | verificada com ressalvas |
 
 ## Decisões tomadas sem a pessoa
 - (fase) Base na branch da Fase 3, a pedido da pessoa, porque o PR #13 ainda não entrou na `develop`. O PR da Fase 4 aponta para `refactor/redesign-fase-3` para mostrar só o que é da fase; quando o #13 for integrado e a branch apagada, o GitHub o move para a `develop`. O CI só roda em PR para `develop`/`main`, então roda depois disso.
@@ -20,9 +20,11 @@
 - (015) O editor grava como os 190 objetos do dev (código como id do documento, siglas de tema/subtema, tipo e formato pelo nome, datas só com o dia); criar e trocar de subtema em transação, para não repetir código; editor fora da moldura do painel, como no protótipo; "Novo objeto" sempre abre o editor; o diálogo antigo sai aqui e os campos/botões antigos ficam para a 016. `themeTitle`/`subthemeTitle` saem com o nome do site, que difere da grafia do seed em alguns subtemas (nenhuma tela lê esses campos).
 
 ## Ressalvas
+- (015) o menu das listas do editor (Tipo, Formato, Mês, Ano, Tema, Subtema) abre mais estreito que o campo; tentado `minimumSize` do `MenuStyle` com a largura medida por `LayoutBuilder` e ao abrir, e o item do menu seguiu com 121 px, então desfeito para não mexer nos filtros da lista.
 - (014) nenhuma ressalva.
 - (013) nenhuma ressalva; fora do escopo, registrado para a 015: o formulário antigo grava tipo e formato pelo rótulo e lê pelo nome (objeto criado volta como "Outro"), não corrigido porque mexeria no modelo.
 
 ## Ocorrências
 - Alterações soltas na pasta original (testes de `test/` e `pubspec.lock`, na `refactor/redesign-fase-3`) ficaram lá, fora do worktree.
 - 2026-11-08: o limite de 5 horas interrompeu a verificação da 013; retomada com SendMessage em 2026-11-09.
+- 2026-11-09: o limite de 5 horas interrompeu a implementação da 015 na tarefa C4; retomada com SendMessage.

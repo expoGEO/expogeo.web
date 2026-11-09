@@ -6,7 +6,7 @@
 | Spec | Itens | Spec+plano | Implementação | Verificação | Resultado |
 |---|---|---|---|---|---|
 | 012-login | 4.1 | feita (10 critérios, 13 tarefas) | feita (2 commits) | feita (sem correções) | verificada |
-| 013-painel-estrutura | 4.2 | pendente | pendente | pendente | |
+| 013-painel-estrutura | 4.2 | feita (10 critérios, 17 tarefas) | pendente | pendente | |
 | 014-painel-objetos | 4.3 | pendente | pendente | pendente | |
 | 015-editor-objeto | 4.4 | pendente | pendente | pendente | |
 
@@ -15,6 +15,7 @@
 - (fase) As specs 012 a 015 já existiam, aprovadas em 2026-10-27. A etapa de spec revisa cada uma contra o código atual (lição da Fase 0) em vez de reescrever.
 - (fase) Sem credenciais de teste do painel: as telas com sessão são conferidas na cópia ASCII do scratchpad com autenticação e datasource simulados, nunca commitados e sem gravar no Firestore.
 - (012) Em 768 px o login fica como no celular; campos não são apagados após credenciais erradas; mensagens de erro escolhidas na tela sem mudar `auth_failure.dart`; nascem em `lib/core/` campo de senha, `FormErrorAlert` e estado carregando do botão; o roteador espera a sessão salva só em `/admin`, com tempo-limite.
+- (013) Até a 014, "Objetos digitais" mostra a área de objetos atual dentro da moldura nova, para criar/editar/excluir seguirem funcionando; `/admin/painel` leva a `/admin/painel/objetos` e "Ver objetos" passa `?tema=&subtema=`; gaveta abaixo de 900 px; erro nas contagens com "Tentar de novo" (o protótipo não tem); catálogo recarregado ao abrir o painel e após cada gravação.
 
 ## Ressalvas
 

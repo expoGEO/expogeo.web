@@ -2,6 +2,7 @@ import 'package:expogeo/core/theme/app_theme.dart';
 import 'package:expogeo/core/utils/validators/form_validators.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
+import 'package:flutter/services.dart';
 
 class FormTextField extends StatefulWidget {
   const FormTextField({
@@ -11,6 +12,7 @@ class FormTextField extends StatefulWidget {
     required this.focusNode,
     this.validator,
     this.multiline = false,
+    this.minLines,
     this.keyboardType,
     this.autofillHints,
     this.textInputAction,
@@ -18,6 +20,11 @@ class FormTextField extends StatefulWidget {
     this.obscureText = false,
     this.suffix,
     this.hintText,
+    this.helperText,
+    this.optional = false,
+    this.inputFormatters,
+    this.maxLength,
+    this.prominent = false,
   });
 
   final String label;
@@ -27,6 +34,9 @@ class FormTextField extends StatefulWidget {
 
   /// Enter quebra linha, e a altura cresce com o texto até o limite do tema.
   final bool multiline;
+
+  /// Linhas visíveis no campo vazio de [multiline], no lugar do mínimo do tema.
+  final int? minLines;
 
   final TextInputType? keyboardType;
   final Iterable<String>? autofillHints;
@@ -41,6 +51,23 @@ class FormTextField extends StatefulWidget {
 
   /// Exemplo dentro do campo vazio; não substitui o rótulo.
   final String? hintText;
+
+  /// Dica visível abaixo do campo, lida junto com o rótulo.
+  final String? helperText;
+
+  /// Mostra "opcional" ao lado do rótulo, e o nome acessível o inclui.
+  final bool optional;
+
+  final List<TextInputFormatter>? inputFormatters;
+
+  /// Limite de caracteres, sem contador visível.
+  final int? maxLength;
+
+  /// Texto maior, como o título de um editor.
+  final bool prominent;
+
+  /// Nome acessível do campo: o rótulo, mais "opcional" quando for o caso.
+  String get accessibleLabel => optional ? '$label, opcional' : label;
 
   @override
   State<FormTextField> createState() => _FormTextFieldState();
@@ -85,6 +112,16 @@ class _FormTextFieldState extends State<FormTextField> {
     final spacing = AppTheme.dimensions.spacing;
     final multiline = widget.multiline;
     final suffix = widget.suffix;
+    final helper = widget.helperText;
+    final maxLength = widget.maxLength;
+    final inputFormatters = [
+      ...?widget.inputFormatters,
+      if (maxLength != null) LengthLimitingTextInputFormatter(maxLength),
+    ];
+    final textStyle = widget.prominent ? styles.editorTitleField : styles.regular;
+    final paddingV = multiline || widget.prominent
+        ? components.formFieldPaddingV
+        : components.formFieldPaddingVSingleLine;
 
     return FormField<String>(
       initialValue: widget.controller.text,
@@ -105,7 +142,19 @@ class _FormTextFieldState extends State<FormTextField> {
           mainAxisSize: MainAxisSize.min,
           children: [
             ExcludeSemantics(
-              child: Text(widget.label, style: styles.formLabel.copyWith(color: colors.ink)),
+              child: Text.rich(
+                TextSpan(
+                  text: widget.label,
+                  children: [
+                    if (widget.optional)
+                      TextSpan(
+                        text: '  opcional',
+                        style: styles.formOptional.copyWith(color: colors.inkSecondary),
+                      ),
+                  ],
+                ),
+                style: styles.formLabel.copyWith(color: colors.ink),
+              ),
             ),
             SizedBox(height: components.formFieldLabelGap),
             AnimatedContainer(
@@ -129,8 +178,9 @@ class _FormTextFieldState extends State<FormTextField> {
                 children: [
                   Expanded(
                     child: Semantics(
-                      // O motor web ignora `hint` em campo de texto; no rótulo, o erro é lido com ele.
-                      label: hasError ? '${widget.label}. $error' : widget.label,
+                      // O motor web ignora `hint` em campo de texto; no rótulo, dica e erro são
+                      // lidos com ele.
+                      label: joinSentences([widget.accessibleLabel, ?helper, ?error]),
                       validationResult: hasError
                           ? SemanticsValidationResult.invalid
                           : SemanticsValidationResult.none,
@@ -147,22 +197,19 @@ class _FormTextFieldState extends State<FormTextField> {
                             ? TextInputAction.newline
                             : widget.textInputAction,
                         autofillHints: widget.autofillHints,
-                        minLines: multiline ? components.formMessageMinLines : 1,
+                        inputFormatters: inputFormatters.isEmpty ? null : inputFormatters,
+                        minLines: multiline ? widget.minLines ?? components.formMessageMinLines : 1,
                         maxLines: multiline ? components.formMessageMaxLines : 1,
-                        style: styles.regular.copyWith(color: colors.ink),
+                        style: textStyle.copyWith(color: colors.ink),
                         cursorColor: colors.accent,
                         decoration: InputDecoration(
                           isCollapsed: true,
                           border: InputBorder.none,
                           hintText: widget.hintText,
-                          hintStyle: styles.regular.copyWith(color: colors.inkSecondary),
+                          hintStyle: textStyle.copyWith(color: colors.inkSecondary),
                           contentPadding: EdgeInsets.symmetric(
                             horizontal: components.formFieldPaddingH - components.formFieldBorder,
-                            vertical:
-                                (multiline
-                                    ? components.formFieldPaddingV
-                                    : components.formFieldPaddingVSingleLine) -
-                                components.formFieldBorder,
+                            vertical: paddingV - components.formFieldBorder,
                           ),
                         ),
                       ),
@@ -176,6 +223,12 @@ class _FormTextFieldState extends State<FormTextField> {
                 ],
               ),
             ),
+            if (helper != null) ...[
+              SizedBox(height: components.formFieldLabelGap),
+              ExcludeSemantics(
+                child: Text(helper, style: styles.formHelper.copyWith(color: colors.inkSecondary)),
+              ),
+            ],
             if (hasError) ...[
               SizedBox(height: components.formFieldLabelGap),
               ExcludeSemantics(
@@ -187,4 +240,15 @@ class _FormTextFieldState extends State<FormTextField> {
       },
     );
   }
+}
+
+/// Junta partes de um nome acessível em frases, sem ponto dobrado quando uma já termina em ponto.
+String joinSentences(List<String> parts) {
+  final buffer = StringBuffer();
+  for (final (index, part) in parts.indexed) {
+    if (index > 0) buffer.write(' ');
+    final isLast = index == parts.length - 1;
+    buffer.write(isLast || part.endsWith('.') ? part : '$part.');
+  }
+  return buffer.toString();
 }

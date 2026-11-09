@@ -105,6 +105,25 @@ class AppTextStyles {
   TextStyle get formLabel =>
       _body(size: _size(mobile: 15, tablet: 15, desktop: 15), weight: FontWeight.w600, height: 1.4);
 
+  /// "opcional" ao lado do rótulo do campo.
+  TextStyle get formOptional =>
+      _body(size: _size(mobile: 13, tablet: 13, desktop: 13), weight: FontWeight.w500, height: 1.4);
+
+  /// Dica visível abaixo do campo.
+  TextStyle get formHelper => _body(
+    size: _size(mobile: 13.5, tablet: 13.5, desktop: 13.5),
+    weight: FontWeight.w400,
+    height: 1.45,
+  );
+
+  /// Campo de título em destaque, como o título de um editor.
+  TextStyle get editorTitleField => _display(
+    size: _size(mobile: 22, tablet: 25.6, desktop: 25.6),
+    weight: FontWeight.w700,
+    height: 1.25,
+    letterSpacingEm: -0.02,
+  );
+
   TextStyle get formError => _body(
     size: _size(mobile: 14, tablet: 14, desktop: 14),
     weight: FontWeight.w500,

@@ -22,6 +22,8 @@ class AppFilterSelect<T> extends StatefulWidget {
     this.isDisabled = false,
     this.expand = false,
     this.focusNode,
+    this.formField = false,
+    this.invalid = false,
   });
 
   final String semanticLabel;
@@ -35,6 +37,12 @@ class AppFilterSelect<T> extends StatefulWidget {
   /// Ocupa toda a largura recebida, com a seta encostada à direita.
   final bool expand;
   final FocusNode? focusNode;
+
+  /// Altura, contorno e cantos de campo de formulário, para ficar ao lado dos campos de texto.
+  final bool formField;
+
+  /// Contorno de erro, para lista obrigatória sem escolha.
+  final bool invalid;
 
   @override
   State<AppFilterSelect<T>> createState() => _AppFilterSelectState<T>();
@@ -142,6 +150,8 @@ class _AppFilterSelectState<T> extends State<AppFilterSelect<T>> {
         expanded: controller.isOpen,
         isDisabled: widget.isDisabled,
         expand: widget.expand,
+        formField: widget.formField,
+        invalid: widget.invalid,
         onPressed: _toggle,
       ),
     );
@@ -211,6 +221,8 @@ class _FilterButton extends StatefulWidget {
     required this.expanded,
     required this.isDisabled,
     required this.expand,
+    required this.formField,
+    required this.invalid,
     required this.onPressed,
   });
 
@@ -220,6 +232,8 @@ class _FilterButton extends StatefulWidget {
   final bool expanded;
   final bool isDisabled;
   final bool expand;
+  final bool formField;
+  final bool invalid;
   final VoidCallback onPressed;
 
   @override
@@ -234,10 +248,17 @@ class _FilterButtonState extends State<_FilterButton> {
     final colors = AppTheme.colors;
     final components = AppTheme.dimensions.components;
     final styles = AppTheme.typography.of(context);
-    final radius = BorderRadius.circular(AppTheme.dimensions.radii.r10);
+    final formField = widget.formField;
+    final radius = BorderRadius.circular(
+      formField ? AppTheme.dimensions.radii.r12 : AppTheme.dimensions.radii.r10,
+    );
     final disabled = widget.isDisabled;
 
-    final borderColor = !disabled && (_hovered || widget.expanded)
+    final borderColor = widget.invalid
+        ? colors.error
+        : formField
+        ? (!disabled && widget.expanded ? colors.accent : colors.fieldBorder)
+        : !disabled && (_hovered || widget.expanded)
         ? colors.lineStrong
         : colors.line;
 
@@ -259,7 +280,10 @@ class _FilterButtonState extends State<_FilterButton> {
           color: disabled ? colors.surface : colors.page,
           shape: RoundedRectangleBorder(
             borderRadius: radius,
-            side: BorderSide(color: borderColor, width: components.filterSelectBorder),
+            side: BorderSide(
+              color: borderColor,
+              width: formField ? components.formFieldBorder : components.filterSelectBorder,
+            ),
           ),
           child: InkWell(
             focusNode: widget.focusNode,
@@ -272,7 +296,9 @@ class _FilterButtonState extends State<_FilterButton> {
             splashFactory: NoSplash.splashFactory,
             overlayColor: const WidgetStatePropertyAll(Colors.transparent),
             child: ConstrainedBox(
-              constraints: BoxConstraints(minHeight: components.panelFilterHeight),
+              constraints: BoxConstraints(
+                minHeight: formField ? components.formFieldHeight : components.panelFilterHeight,
+              ),
               child: Padding(
                 padding: EdgeInsetsDirectional.only(
                   start: components.filterSelectPaddingStart,
@@ -287,7 +313,7 @@ class _FilterButtonState extends State<_FilterButton> {
                         widget.label,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: styles.filterSelect.copyWith(
+                        style: (formField ? styles.regular : styles.filterSelect).copyWith(
                           color: disabled ? colors.inkSecondary : colors.ink,
                         ),
                       ),

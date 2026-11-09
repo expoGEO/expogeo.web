@@ -566,6 +566,15 @@ class ComponentSizes {
   final double formHintTop = 12.0;
   final double formHintMaxWidth = 480.0;
 
+  final double formAlertPaddingH = 14.0;
+  final double formAlertPaddingV = 12.0;
+  final double formAlertIcon = 20.0;
+  final double formAlertGap = 10.0;
+
+  final double buttonSpinner = 16.0;
+  final double buttonSpinnerStroke = 2.0;
+  final double buttonSpinnerTrackOpacity = 0.4;
+
   final double mailConfirmationPaddingV = 48.0;
   final double mailConfirmationPaddingH = 24.0;
   final double mailConfirmationGap = 10.0;

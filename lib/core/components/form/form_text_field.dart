@@ -15,6 +15,9 @@ class FormTextField extends StatefulWidget {
     this.autofillHints,
     this.textInputAction,
     this.onSubmitted,
+    this.obscureText = false,
+    this.suffix,
+    this.hintText,
   });
 
   final String label;
@@ -29,6 +32,15 @@ class FormTextField extends StatefulWidget {
   final Iterable<String>? autofillHints;
   final TextInputAction? textInputAction;
   final ValueChanged<String>? onSubmitted;
+
+  /// Esconde o texto digitado e desliga sugestões e autocorreção.
+  final bool obscureText;
+
+  /// Fica dentro da caixa, à direita do texto, e recebe o foco depois do campo.
+  final Widget? suffix;
+
+  /// Exemplo dentro do campo vazio; não substitui o rótulo.
+  final String? hintText;
 
   @override
   State<FormTextField> createState() => _FormTextFieldState();
@@ -70,7 +82,9 @@ class _FormTextFieldState extends State<FormTextField> {
     final components = AppTheme.dimensions.components;
     final styles = AppTheme.typography.of(context);
     final radius = BorderRadius.circular(AppTheme.dimensions.radii.r12);
+    final spacing = AppTheme.dimensions.spacing;
     final multiline = widget.multiline;
+    final suffix = widget.suffix;
 
     return FormField<String>(
       initialValue: widget.controller.text,
@@ -111,37 +125,55 @@ class _FormTextFieldState extends State<FormTextField> {
                   ),
                 ],
               ),
-              child: Semantics(
-                // O motor web ignora `hint` em campo de texto; no rótulo, o erro é lido com ele.
-                label: hasError ? '${widget.label}. $error' : widget.label,
-                validationResult: hasError
-                    ? SemanticsValidationResult.invalid
-                    : SemanticsValidationResult.none,
-                child: TextField(
-                  controller: widget.controller,
-                  focusNode: widget.focusNode,
-                  onChanged: field.didChange,
-                  onSubmitted: widget.onSubmitted,
-                  keyboardType: multiline ? TextInputType.multiline : widget.keyboardType,
-                  textInputAction: multiline ? TextInputAction.newline : widget.textInputAction,
-                  autofillHints: widget.autofillHints,
-                  minLines: multiline ? components.formMessageMinLines : 1,
-                  maxLines: multiline ? components.formMessageMaxLines : 1,
-                  style: styles.regular.copyWith(color: colors.ink),
-                  cursorColor: colors.accent,
-                  decoration: InputDecoration(
-                    isCollapsed: true,
-                    border: InputBorder.none,
-                    contentPadding: EdgeInsets.symmetric(
-                      horizontal: components.formFieldPaddingH - components.formFieldBorder,
-                      vertical:
-                          (multiline
-                              ? components.formFieldPaddingV
-                              : components.formFieldPaddingVSingleLine) -
-                          components.formFieldBorder,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Semantics(
+                      // O motor web ignora `hint` em campo de texto; no rótulo, o erro é lido com ele.
+                      label: hasError ? '${widget.label}. $error' : widget.label,
+                      validationResult: hasError
+                          ? SemanticsValidationResult.invalid
+                          : SemanticsValidationResult.none,
+                      child: TextField(
+                        controller: widget.controller,
+                        focusNode: widget.focusNode,
+                        onChanged: field.didChange,
+                        onSubmitted: widget.onSubmitted,
+                        obscureText: widget.obscureText,
+                        enableSuggestions: !widget.obscureText,
+                        autocorrect: !widget.obscureText,
+                        keyboardType: multiline ? TextInputType.multiline : widget.keyboardType,
+                        textInputAction: multiline
+                            ? TextInputAction.newline
+                            : widget.textInputAction,
+                        autofillHints: widget.autofillHints,
+                        minLines: multiline ? components.formMessageMinLines : 1,
+                        maxLines: multiline ? components.formMessageMaxLines : 1,
+                        style: styles.regular.copyWith(color: colors.ink),
+                        cursorColor: colors.accent,
+                        decoration: InputDecoration(
+                          isCollapsed: true,
+                          border: InputBorder.none,
+                          hintText: widget.hintText,
+                          hintStyle: styles.regular.copyWith(color: colors.inkSecondary),
+                          contentPadding: EdgeInsets.symmetric(
+                            horizontal: components.formFieldPaddingH - components.formFieldBorder,
+                            vertical:
+                                (multiline
+                                    ? components.formFieldPaddingV
+                                    : components.formFieldPaddingVSingleLine) -
+                                components.formFieldBorder,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                  if (suffix != null)
+                    Padding(
+                      padding: EdgeInsets.only(right: spacing.s4 - components.formFieldBorder),
+                      child: suffix,
+                    ),
+                ],
               ),
             ),
             if (hasError) ...[

@@ -45,7 +45,14 @@ void main() {
       addTearDown(focusNode.dispose);
     });
 
-    Future<void> pump(WidgetTester tester, {bool multiline = false, double width = 1280}) async {
+    Future<void> pump(
+      WidgetTester tester, {
+      bool multiline = false,
+      double width = 1280,
+      bool obscureText = false,
+      Widget? suffix,
+      String? hintText,
+    }) async {
       tester.view.physicalSize = Size(width, 900);
       tester.view.devicePixelRatio = 1;
       addTearDown(tester.view.reset);
@@ -59,6 +66,9 @@ void main() {
                 controller: controller,
                 focusNode: focusNode,
                 multiline: multiline,
+                obscureText: obscureText,
+                suffix: suffix,
+                hintText: hintText,
                 validator: (value) => (value ?? '').isEmpty ? 'Escreva seu nome.' : null,
               ),
             ),
@@ -148,6 +158,67 @@ void main() {
 
     testWidgets('sem overflow em 320 com texto e erro longos', (tester) async {
       await pump(tester, width: 320);
+      controller.text = 'x' * 400;
+      await tester.pump();
+      formKey.currentState!.validate();
+      await tester.pumpAndSettle();
+
+      expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('senha fica oculta e sem sugestões nem autocorreção', (tester) async {
+      await pump(tester, obscureText: true);
+
+      final field = tester.widget<TextField>(find.byType(TextField));
+      expect(field.obscureText, isTrue);
+      expect(field.enableSuggestions, isFalse);
+      expect(field.autocorrect, isFalse);
+    });
+
+    testWidgets('sufixo fica dentro da caixa, à direita, e recebe o foco depois do campo', (
+      tester,
+    ) async {
+      final suffixFocus = FocusNode();
+      addTearDown(suffixFocus.dispose);
+      await pump(
+        tester,
+        suffix: Focus(
+          focusNode: suffixFocus,
+          child: const SizedBox.square(key: Key('sufixo'), dimension: 44),
+        ),
+      );
+
+      final box = tester.getRect(find.byType(AnimatedContainer));
+      final suffix = tester.getRect(find.byKey(const Key('sufixo')));
+      expect(box.contains(suffix.center), isTrue);
+      expect(suffix.left, greaterThan(tester.getRect(find.byType(TextField)).right - 1));
+      expect(tester.getSize(find.byType(AnimatedContainer)).height, 48);
+
+      focusNode.requestFocus();
+      await tester.pump();
+      focusNode.nextFocus();
+      await tester.pump();
+      expect(suffixFocus.hasFocus, isTrue);
+    });
+
+    testWidgets('dica aparece dentro do campo vazio', (tester) async {
+      await pump(tester, hintText: 'nome@exemplo.com');
+
+      final hint = find.text('nome@exemplo.com');
+      expect(hint, findsOneWidget);
+      expect(
+        tester.getRect(find.byType(AnimatedContainer)).contains(tester.getCenter(hint)),
+        isTrue,
+      );
+      expect(tester.widget<Text>(hint).style?.color, AppTheme.colors.inkSecondary);
+    });
+
+    testWidgets('sem overflow em 320 com sufixo, texto e erro longos', (tester) async {
+      await pump(
+        tester,
+        width: 320,
+        suffix: IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
+      );
       controller.text = 'x' * 400;
       await tester.pump();
       formKey.currentState!.validate();

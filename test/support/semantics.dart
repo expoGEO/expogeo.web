@@ -6,3 +6,15 @@ void expectHeading(WidgetTester tester, Finder finder, int level) {
   expect(data.flagsCollection.isHeader, isTrue);
   expect(data.headingLevel, level);
 }
+
+// Em versões novas do Flutter, `isFocused` e `isSelected` de `flagsCollection` viram `Tristate`
+// e `isFocusable` sai; o matcher tem a mesma forma em todas.
+
+/// Diz se o nó (ou seus dados) de semântica está com o foco.
+bool hasFocus(Object semantics) => containsSemantics(isFocused: true).matches(semantics, {});
+
+/// Diz se o nó (ou seus dados) de semântica pode receber foco.
+bool canFocus(Object semantics) => containsSemantics(isFocusable: true).matches(semantics, {});
+
+/// Diz se o nó (ou seus dados) de semântica está marcado como selecionado.
+bool isMarked(Object semantics) => containsSemantics(isSelected: true).matches(semantics, {});

@@ -128,11 +128,11 @@ void main() {
     expectHeading(tester, find.text('Mapa dos biomas'), 3);
     final link = tester.getSemantics(find.bySemanticsLabel('Mapa dos biomas').first);
     expect(link.getSemanticsData().flagsCollection.isLink, isTrue);
-    expect(link.getSemanticsData().flagsCollection.isFocusable, isTrue);
+    expect(canFocus(link), isTrue);
 
     node.requestFocus();
     await tester.pump();
-    expect(link.getSemanticsData().flagsCollection.isFocused, isTrue);
+    expect(hasFocus(link), isTrue);
     final others = tester.widgetList<InkWell>(find.byType(InkWell));
     expect(others.where((ink) => identical(ink.focusNode, node)), hasLength(1));
   });

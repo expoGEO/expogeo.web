@@ -170,8 +170,7 @@ void main() {
     await pump(tester, [relevo, biomas]);
     final cards = find.byType(SubthemeOverviewCard);
 
-    bool focused(int index) =>
-        tester.getSemantics(cards.at(index)).getSemanticsData().flagsCollection.isFocused;
+    bool focused(int index) => hasFocus(tester.getSemantics(cards.at(index)));
 
     await tester.sendKeyEvent(LogicalKeyboardKey.tab);
     await tester.pump();
@@ -187,7 +186,7 @@ void main() {
 
     final card = tester.getSemantics(find.byType(SubthemeOverviewCard)).getSemanticsData();
     expect(card.flagsCollection.isLink, isTrue);
-    expect(card.flagsCollection.isFocusable, isTrue);
+    expect(canFocus(card), isTrue);
     expectHeading(tester, find.text(biomas.type.name), 3);
 
     expect(

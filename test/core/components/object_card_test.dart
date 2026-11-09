@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../support/failing_asset_bundle.dart';
+import '../../support/semantics.dart';
 
 ContentModel _content({
   String title = 'aVoar Cerrado',
@@ -115,8 +116,7 @@ void main() {
     await pump(tester, count: 2);
     final cards = find.byType(ObjectCard);
 
-    bool focused(int index) =>
-        tester.getSemantics(cards.at(index)).getSemanticsData().flagsCollection.isFocused;
+    bool focused(int index) => hasFocus(tester.getSemantics(cards.at(index)));
 
     await tester.sendKeyEvent(LogicalKeyboardKey.tab);
     await tester.pump();
@@ -136,7 +136,7 @@ void main() {
 
     final card = tester.getSemantics(find.byType(ObjectCard)).getSemanticsData();
     expect(card.flagsCollection.isLink, isTrue);
-    expect(card.flagsCollection.isFocusable, isTrue);
+    expect(canFocus(card), isTrue);
     expect(card.label, 'aVoar Cerrado');
 
     final title = tester.getSemantics(find.text('aVoar Cerrado')).getSemanticsData();

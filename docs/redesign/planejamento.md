@@ -112,7 +112,7 @@ Quatro specs: 4.1 → 012-login; 4.2 → 013-painel-estrutura; 4.3 → 014-paine
 | # | Entrega | Notas técnicas | Depende de |
 |---|---|---|---|
 | 4.1 | Login (T-08) → specs/012-login (concluído) | Duas colunas, erro único de credenciais, "Entrando…" | 0.x |
-| 4.2 | Moldura do painel e "Temas e subtemas" (T-09) | Barra, menu lateral com contagens, gaveta, endereços por vista, toast, dica e diálogo compartilhados | 4.1, Q-04 |
+| 4.2 | Moldura do painel e "Temas e subtemas" (T-09) → specs/013-painel-estrutura (concluído) | Barra, menu lateral com contagens, gaveta, endereços por vista, toast, dica e diálogo compartilhados | 4.1, Q-04 |
 | 4.3 | Lista de objetos (T-09) | Linhas no lugar da `DataTable`, busca e filtros no endereço, ações com dica, exclusão com confirmação | 4.2 |
 | 4.4 | Editor (T-10) | Página própria em `/admin/painel/objetos/novo` e `/:codigo/editar`, resumo de pendências, prévia, código gerado | 4.3, Q-01, Q-05 |
 
@@ -141,7 +141,7 @@ Uma spec: 5.1 e 5.2 → 016-limpeza-legado.
 | [010-contato](../specs/010-contato/spec.md) | 3.1 | verificada com ressalvas |
 | [011-estados-especiais](../specs/011-estados-especiais/spec.md) | 3.2 | verificada |
 | [012-login](../specs/012-login/spec.md) | 4.1 | verificada |
-| [013-painel-estrutura](../specs/013-painel-estrutura/spec.md) | 4.2 | aprovada |
+| [013-painel-estrutura](../specs/013-painel-estrutura/spec.md) | 4.2 | verificada |
 | [014-painel-objetos](../specs/014-painel-objetos/spec.md) | 4.3 | aprovada |
 | [015-editor-objeto](../specs/015-editor-objeto/spec.md) | 4.4 | aprovada |
 | [016-limpeza-legado](../specs/016-limpeza-legado/spec.md) | 5.1–5.2 | aprovada |

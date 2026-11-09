@@ -6,7 +6,7 @@
 | Spec | Itens | Spec+plano | Implementação | Verificação | Resultado |
 |---|---|---|---|---|---|
 | 012-login | 4.1 | feita (10 critérios, 13 tarefas) | feita (2 commits) | feita (sem correções) | verificada |
-| 013-painel-estrutura | 4.2 | feita (10 critérios, 17 tarefas) | pendente | pendente | |
+| 013-painel-estrutura | 4.2 | feita (10 critérios, 17 tarefas) | feita (3 commits) | feita (1 correção) | verificada |
 | 014-painel-objetos | 4.3 | pendente | pendente | pendente | |
 | 015-editor-objeto | 4.4 | pendente | pendente | pendente | |
 
@@ -18,6 +18,8 @@
 - (013) Até a 014, "Objetos digitais" mostra a área de objetos atual dentro da moldura nova, para criar/editar/excluir seguirem funcionando; `/admin/painel` leva a `/admin/painel/objetos` e "Ver objetos" passa `?tema=&subtema=`; gaveta abaixo de 900 px; erro nas contagens com "Tentar de novo" (o protótipo não tem); catálogo recarregado ao abrir o painel e após cada gravação.
 
 ## Ressalvas
+- (013) nenhuma ressalva; fora do escopo, registrado para a 015: o formulário antigo grava tipo e formato pelo rótulo e lê pelo nome (objeto criado volta como "Outro"), não corrigido porque mexeria no modelo.
 
 ## Ocorrências
 - Alterações soltas na pasta original (testes de `test/` e `pubspec.lock`, na `refactor/redesign-fase-3`) ficaram lá, fora do worktree.
+- 2026-11-08: o limite de 5 horas interrompeu a verificação da 013; retomada com SendMessage em 2026-11-09.

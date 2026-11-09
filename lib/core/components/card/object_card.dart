@@ -19,7 +19,9 @@ class ObjectCard extends StatefulWidget {
   });
 
   final ContentModel content;
-  final SubthemeEnum subtheme;
+
+  /// Sem subtema, o rodapé fica só com o criador e o medalhão vazio.
+  final SubthemeEnum? subtheme;
   final VoidCallback onOpen;
 
   @override
@@ -112,7 +114,7 @@ class _CardBody extends StatelessWidget {
   const _CardBody({required this.content, required this.subtheme, required this.hovered});
 
   final ContentModel content;
-  final SubthemeEnum subtheme;
+  final SubthemeEnum? subtheme;
   final bool hovered;
 
   @override
@@ -215,7 +217,7 @@ class _CardFooter extends StatelessWidget {
   const _CardFooter({required this.content, required this.subtheme});
 
   final ContentModel content;
-  final SubthemeEnum subtheme;
+  final SubthemeEnum? subtheme;
 
   @override
   Widget build(BuildContext context) {
@@ -223,7 +225,7 @@ class _CardFooter extends StatelessWidget {
     final dimensions = AppTheme.dimensions;
     final components = dimensions.components;
     final creator = content.intellectualIndicator.creator.trim();
-    final where = creator.isEmpty ? subtheme.name : '${subtheme.name} · $creator';
+    final where = [?subtheme?.name, if (creator.isNotEmpty) creator].join(' · ');
 
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -235,7 +237,7 @@ class _CardFooter extends StatelessWidget {
         padding: EdgeInsets.only(top: components.objectCardFooterPaddingTop),
         child: Row(
           children: [
-            AppMedallion(size: components.objectCardMedallion, image: subtheme.illustration),
+            AppMedallion(size: components.objectCardMedallion, image: subtheme?.illustration),
             SizedBox(width: components.objectCardFooterGap),
             Expanded(
               child: Semantics(

@@ -5,7 +5,7 @@
 
 | Spec | Itens | Spec+plano | Implementação | Verificação | Resultado |
 |---|---|---|---|---|---|
-| 012-login | 4.1 | feita (10 critérios, 13 tarefas) | pendente | pendente | |
+| 012-login | 4.1 | feita (10 critérios, 13 tarefas) | feita (2 commits) | feita (sem correções) | verificada |
 | 013-painel-estrutura | 4.2 | pendente | pendente | pendente | |
 | 014-painel-objetos | 4.3 | pendente | pendente | pendente | |
 | 015-editor-objeto | 4.4 | pendente | pendente | pendente | |

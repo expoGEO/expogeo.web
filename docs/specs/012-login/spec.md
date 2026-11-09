@@ -1,6 +1,6 @@
 # 012. Login do painel
 
-- **Status:** implementada
+- **Status:** verificada
 - **Item do planejamento:** Fase 4, entrega 4.1 (tela T-08)
 - **Protótipo:** aba "Login" (link em docs/specs/README.md); referência no Observatório: o login de `lib/app/features/admin/login/` (o Observatório não guarda specs no repositório)
 - **Criada em:** 2026-10-27
@@ -92,3 +92,4 @@ Quem cuida da curadoria entra no painel por uma tela com a marca da expoGEO, men
 - 2026-11-08: revisada contra o código das Fases 0–3 e a aba "Login" do protótipo, antes do plano (modo autônomo, sem mudar o status). Mudanças: caminho completo da página e situação atual detalhada (regra de senha forte, aviso flutuante, sessão lida antes de o Firebase recuperá-la); referência do Observatório trocada pelo código, já que lá não há `docs/specs/029`; campos no desenho do Contato (010); marca como a do rodapé; regras de validação explícitas (sem regra de senha, espaços aparados, mensagens só depois da primeira tentativa); "e-mail inválido" do Firebase entra no aviso único; aviso antigo não reaparece; estado do botão de senha como ligado/desligado, porque o motor web 3.35.5 não emite `aria-pressed` (lição da 009); faixa de ambiente é a global da 001; critérios de foco, contraste, Enter e código acrescentados; fora do escopo inclui a moldura do painel e a cor da faixa.
 - 2026-11-08 (decisões sem a pessoa): 768 continua como o celular, como na versão aprovada, embora o Observatório use duas colunas a partir de 600; os campos do login não são apagados depois de credenciais erradas, como no protótipo (o Observatório apaga a senha).
 - 2026-11-08 (implementação, modo autônomo): ao entrar, a senha é apagada do formulário. O painel é subrota de `/admin`, então o login continua montado por baixo dele; sem isso, depois de "Sair" o login reaparecia com a senha ainda preenchida. O caso de credenciais erradas segue mantendo os campos.
+- 2026-11-08: verificada (modo autônomo), sem ressalvas; ver `verificacao.md`. Nenhuma correção foi necessária.

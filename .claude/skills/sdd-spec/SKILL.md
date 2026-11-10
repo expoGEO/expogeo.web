@@ -1,18 +1,18 @@
 ---
 name: sdd-spec
-description: Cria a especificação (spec.md) de uma feature do redesign a partir de um item de docs/redesign/planejamento.md. Use quando a pessoa pedir para especificar, detalhar ou "começar" uma fase, seção ou tela (por exemplo "spec da Fase 0" ou "/sdd-spec 1.2"). Não escreve código.
-argument-hint: "<item do planejamento, ex.: Fase 0, 1.2, T-04>"
+description: Cria a especificação (spec.md) de uma feature do redesign a partir de um pedido da pessoa ou de uma ideia de docs/redesign-history.md. Use quando a pessoa pedir para especificar, detalhar ou "começar" uma feature ou tela (por exemplo "spec da busca geral" ou "/sdd-spec copiar citação"). Não escreve código.
+argument-hint: "<pedido ou ideia, ex.: busca geral do site>"
 ---
 
 # sdd-spec
 
-Transforma um item do planejamento numa especificação clara e conferível. **Não escreve código** e **não cria plano técnico**.
+Transforma um pedido (ou uma ideia futura do histórico) numa especificação clara e conferível. **Não escreve código** e **não cria plano técnico**.
 
 ## Antes de começar
-1. Leia `docs/specs/README.md` (regras, comandos e referências do projeto) e `docs/redesign/planejamento.md`.
-2. Identifique o item pedido em `$ARGUMENTS`. Se for ambíguo, pergunte qual.
-3. Veja `docs/specs/` para achar o próximo número (`NNN`) e conferir se já existe spec para o item. Se existir, pergunte se é para atualizar.
-4. Abra o **protótipo** (link em `docs/specs/README.md`, aba correspondente) e leia o código atual dos arquivos citados no item, para descrever o que muda em relação ao que existe. Se a tela tiver equivalente no Observatório (`../observatorio_geo_hist`), veja a spec dele em `docs/specs/` como referência.
+1. Leia `docs/specs/README.md` (fluxo e regras das specs), `docs/architecture.md` (design system, rotas, convenções e comandos) e `docs/redesign-history.md` (decisões já tomadas e ideias futuras).
+2. Identifique o pedido em `$ARGUMENTS`; a origem é o pedido da pessoa ou uma ideia da seção "Fora do escopo e ideias futuras" de `docs/redesign-history.md`. Se for ambíguo, pergunte qual.
+3. Veja `docs/specs/` para achar o próximo número (`NNN`) e conferir se já existe spec para o pedido. Se existir, pergunte se é para atualizar.
+4. Se houver tela equivalente no protótipo (link em `docs/redesign-history.md`), use-o como referência opcional, e leia o código atual dos arquivos citados no item, para descrever o que muda em relação ao que existe. Se a tela tiver equivalente no Observatório (`../observatorio_geo_hist`), veja a documentação dele em `docs/` como referência.
 
 ## O que fazer
 1. Crie `docs/specs/NNN-nome-curto/spec.md` com o modelo abaixo. Escreva para quem vai revisar: frases curtas, sem jargão de implementação.
@@ -27,8 +27,8 @@ Transforma um item do planejamento numa especificação clara e conferível. **N
 # NNN. Título da feature
 
 - **Status:** rascunho
-- **Item do planejamento:** ex. Fase 1, seção 1.2
-- **Protótipo:** aba "Home" (link em docs/specs/README.md)
+- **Origem:** pedido da pessoa ou ideia futura (ex.: busca geral do site)
+- **Protótipo:** aba correspondente (link em docs/redesign-history.md) ou "não se aplica"
 - **Criada em:** AAAA-MM-DD
 
 ## Objetivo
@@ -72,6 +72,6 @@ O que fica de fora de propósito.
 
 ## Regras
 - Uma spec cobre uma entrega que a pessoa consiga revisar de uma vez. Se o item for grande (uma fase inteira), proponha dividir em várias specs e pergunte.
-- Não copie o planejamento inteiro: referencie o item e detalhe só o necessário.
-- Siga as regras de design do `docs/specs/README.md` nos critérios de aceite (tokens, contraste, estados obrigatórios).
-- Atualize o item no `docs/redesign/planejamento.md` com a referência `→ specs/NNN-nome` só depois de a spec ser aprovada.
+- Não copie documentos inteiros: referencie a origem e detalhe só o necessário.
+- Siga as regras de design do `docs/architecture.md` nos critérios de aceite (tokens, contraste, estados obrigatórios).
+- Se a spec vem de uma ideia futura, remova o item de `docs/redesign-history.md` só depois de a feature ser verificada.

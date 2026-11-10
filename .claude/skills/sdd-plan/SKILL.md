@@ -1,7 +1,7 @@
 ---
 name: sdd-plan
-description: Cria o plano técnico (plan.md) e a lista de tarefas (tasks.md) de uma spec aprovada em docs/specs. Use quando a pessoa pedir para planejar a implementação de uma spec (por exemplo "/sdd-plan 001" ou "plano da spec da Fase 0"). Não escreve código de produção.
-argument-hint: "<número da spec, ex.: 001>"
+description: Cria o plano técnico (plan.md) e a lista de tarefas (tasks.md) de uma spec aprovada em docs/specs. Use quando a pessoa pedir para planejar a implementação de uma spec (por exemplo "/sdd-plan 019" ou "plano da spec da busca geral"). Não escreve código de produção.
+argument-hint: "<número da spec, ex.: 019>"
 ---
 
 # sdd-plan
@@ -9,7 +9,7 @@ argument-hint: "<número da spec, ex.: 001>"
 Converte uma spec **aprovada** em plano técnico e tarefas ordenadas. **Não implementa.**
 
 ## Antes de começar
-1. Leia `docs/specs/README.md`, a seção "Arquitetura de Código" do `README.md` e a spec em `docs/specs/$ARGUMENTS-*/spec.md`.
+1. Leia `docs/specs/README.md`, `docs/architecture.md` (camadas, design system, rotas, convenções) e, se a spec tocar o painel, `docs/admin-panel.md`; depois a spec em `docs/specs/$ARGUMENTS-*/spec.md`.
 2. Confirme que o status é `aprovada` e que **não há perguntas em aberto**. Se não for o caso, pare e diga o que falta (sugira `/sdd-spec`).
 3. Explore o código que será tocado: leia os arquivos reais, não presuma. Veja como componentes parecidos já foram feitos e reaproveite, aqui ou no redesign do Observatório (`../observatorio_geo_hist/lib/app/`), que é a base visual.
 
@@ -70,6 +70,6 @@ Legenda: `- [ ]` a fazer, `- [x]` feita.
 ```
 
 ## Regras
-- Respeite as convenções do `docs/specs/README.md` (tokens do tema, estados obrigatórios).
+- Respeite as convenções do `docs/architecture.md` (tokens do tema, estados obrigatórios, comentários).
 - Componentes compartilhados (navbar, rodapé, botões etc.) mudam várias telas: inclua uma tarefa de conferir as outras telas que os usam.
 - Nada de tarefas vagas ("melhorar", "ajustar"). Cada uma deve ter um resultado verificável.

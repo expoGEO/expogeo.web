@@ -1,6 +1,6 @@
 # 018. Enxugar a documentação
 
-- **Status:** aprovada
+- **Status:** implementada
 - **Item do planejamento:** Fase 5, item 5.4
 - **Protótipo:** não se aplica
 - **Criada em:** 2026-11-09
@@ -102,3 +102,4 @@ Nenhum código, dado, rota ou workflow muda. As regras do Firestore e dos deploy
 ## Histórico de mudanças
 - 2026-11-09: criada.
 - 2026-11-09: aprovada (modo autônomo).
+- 2026-11-10: implementada. Ideias futuras ficaram no histórico; a pendência do `.htaccess` do dev e a proteção de branches entraram como não conferidas.

@@ -1,16 +1,8 @@
 #!/usr/bin/env python3
-"""
-Upload para o Firestore do projeto escolhido (dev ou produção)
+"""Grava no Firestore do projeto escolhido os objetos de bin/content_seed_data.json.
 
-Requisitos:
-  pip install firebase-admin
-
-Autenticação (escolha UMA):
-  Opção 1: gcloud auth application-default login (mais fácil)
-  Opção 2: export GOOGLE_APPLICATION_CREDENTIALS=firebase-credentials.json
-
-Execução (prefira ./run_seed.sh <dev|prod>, que confirma antes de gravar em produção):
-  python3 bin/seed_firestore.py --project expogeo-dev
+Prefira ./run_seed.sh <dev|prod>, que confirma antes de gravar em produção. Usa as credenciais
+de `gcloud auth application-default login` ou de GOOGLE_APPLICATION_CREDENTIALS.
 """
 
 import argparse
@@ -32,16 +24,12 @@ JSON_FILE = Path("bin/content_seed_data.json")
 
 
 def init_firebase(project_id):
-    """Inicializar Firebase (automático com credenciais do sistema)"""
-    # Verificar se app já está inicializado
     try:
         return firebase_admin.get_app()
     except ValueError:
-        # App não inicializado, continuar com o processo
         pass
 
     try:
-        # Tentar credenciais padrão do gcloud
         cred = credentials.ApplicationDefault()
     except Exception as e:
         print(f"❌ Erro ao obter credenciais: {e}")
@@ -55,7 +43,6 @@ def init_firebase(project_id):
 
 
 def load_content_data():
-    """Carregar dados do JSON"""
     if not JSON_FILE.exists():
         print(f"❌ Arquivo {JSON_FILE} não encontrado!")
         print("Execute primeiro: python3 bin/extract_content_to_json_v2.py")
@@ -68,7 +55,6 @@ def load_content_data():
 
 
 def upload_content(db, content):
-    """Upload de um único conteúdo para Firestore"""
     theme_id = content["themeId"]
     subtheme_id = content["subthemeId"]
     content_id = content["id"]
@@ -76,11 +62,9 @@ def upload_content(db, content):
     theme_title = content["themeTitle"]
     subtheme_title = content["subthemeTitle"]
 
-    # 1. Criar documento pai do tema com campo "name"
     theme_ref = db.collection("themes").document(theme_id)
     theme_ref.set({"name": theme_title}, merge=True)
 
-    # 2. Criar documento pai do subtema com campo "name"
     subtheme_ref = (
         db.collection("themes")
         .document(theme_id)
@@ -89,10 +73,8 @@ def upload_content(db, content):
     )
     subtheme_ref.set({"name": subtheme_title}, merge=True)
 
-    # 3. Criar documento de conteúdo
     content_ref = subtheme_ref.collection("contents").document(content_id)
 
-    # Converter para formato compatível com Firestore
     data = {
         "id": content["id"],
         "themeId": theme_id,
@@ -106,11 +88,9 @@ def upload_content(db, content):
         "rightsInfo": content["rightsInfo"],
     }
 
-    # Adicionar preservationAction se existir
     if content.get("preservationAction") and content["preservationAction"].get("operation"):
         data["preservationAction"] = content["preservationAction"]
 
-    # Upload
     content_ref.set(data)
 
 
@@ -124,7 +104,6 @@ def main():
     print(f"   Host: firestore.googleapis.com")
     print()
 
-    # 1. Inicializar Firebase
     print("🔐 Inicializando Firebase...")
     try:
         app = init_firebase(project_id)
@@ -136,7 +115,6 @@ def main():
 
     print()
 
-    # 2. Carregar dados
     print("📂 Carregando dados...")
     try:
         contents = load_content_data()
@@ -149,7 +127,6 @@ def main():
     print("📤 Iniciando upload para Firestore...")
     print()
 
-    # 3. Upload em lotes
     uploaded_count = 0
     error_count = 0
     errors = []
@@ -160,7 +137,6 @@ def main():
                 upload_content(db, content)
                 uploaded_count += 1
 
-                # Feedback a cada 10 itens
                 if (uploaded_count) % 10 == 0:
                     print(f"   ✓ {uploaded_count}/{len(contents)} conteúdos enviados")
 
@@ -188,7 +164,6 @@ def main():
         for err in errors:
             print(f"   - {err}")
 
-    # 4. Verificação final
     print()
     print("🔍 Verificando estrutura criada...")
     print()
@@ -198,8 +173,6 @@ def main():
         theme_count = 0
         total_content_count = 0
 
-        # Deixei de fazer a verificação completa aqui porque ficaria longo
-        # mas basicamente estamos iterando por temas, contando subthemes e conteúdos
 
         print("   Estrutura criada (verificação simplificada):")
         print("   - Execute no Firebase Console para ver a estrutura completa:")

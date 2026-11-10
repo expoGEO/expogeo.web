@@ -6,7 +6,7 @@
 | Spec | Itens | Spec+plano | Implementação | Verificação | Resultado |
 |---|---|---|---|---|---|
 | 016-limpeza-legado | 5.1-5.2 | concluída | concluída | concluída | verificada com ressalvas |
-| 017-limpeza-comentarios | 5.3 | concluída | pendente | pendente | |
+| 017-limpeza-comentarios | 5.3 | concluída | concluída | concluída | verificada com ressalvas |
 | 018-enxugar-docs | 5.4 | concluída | pendente | pendente | |
 
 ## Decisões tomadas sem a pessoa
@@ -27,3 +27,4 @@
 ## Ressalvas
 - 016: `AppImages.movimentosTerra` sem uso (subtema sem conteúdo); mantida a entrada e o WebP. Painel logado não conferido (sem credenciais).
 - 016: build/web de 49384 KB para 33992 KB. O erro de service worker no navegador embutido já existe na develop.
+- 017: `analysis_options.yaml` e `web/index.html` perderam os comentários padrão (aceito); debug e telas em 390/768 não conferidos (nada visível muda).

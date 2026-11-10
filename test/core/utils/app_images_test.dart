@@ -4,7 +4,7 @@ import 'package:expogeo/core/utils/enums/app_images.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  const pngImages = {AppImages.logo, AppImages.logoSimple, AppImages.observatorio};
+  const pngImages = {AppImages.logoSimple};
 
   group('AppImages.path', () {
     for (final image in AppImages.values) {
@@ -17,7 +17,7 @@ void main() {
       });
     }
 
-    test('ilustrações e logos de apoio usam WebP; marca e Observatório, PNG; símbolo, SVG', () {
+    test('ilustrações e logos de apoio usam WebP; marca, PNG; símbolo, SVG', () {
       for (final image in AppImages.values) {
         final extension = switch (image) {
           AppImages.observatorioSimbolo => '.svg',

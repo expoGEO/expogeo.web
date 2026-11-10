@@ -45,11 +45,15 @@ Regras de todas as tarefas: antes de apagar, `grep -rn` do nome da classe e do a
   - Nota: nenhum dos pacotes removidos consta como `direct` no lock.
 
 ## Grupo E: assets
-- [ ] **E1.** Em `app_images.dart`, apagar as entradas `logo` e `observatorio`; para cada entrada restante, confirmar por `grep` que há uso (ilustrações de tema e subtema, logos de apoio) e anotar quais não têm. Apagar `logo.png` e `observatorio.png`. Atende: CA8.
-- [ ] **E2.** Apagar os 42 PNGs substituídos de `assets/images/` (36 ilustrações e `capes`, `cnpq`, `faced`, `fapemig`, `ppged`, `ufu`, inclusive `cultura_política.png`, que tem acento e par `cultura_politica.webp`). Ficam `logo_simple.png`, `observatorio_simbolo.svg` e todos os `.webp`. Atende: CA8.
-- [ ] **E3.** Apagar `tool/images/` (gerador e `to_webp.html`). Conferir que nada em `README.md`, `docs/` ou workflows chama `tool/images`. Atende: CA9.
-- [ ] **E4.** Auditar `assets/`: para cada arquivo restante, `grep` do nome em `lib test web tool`; `assets/icons/{facebook,instagram,youtube}.svg` seguem pelo rodapé (nome montado em texto); `assets/fonts/licenses` fica. `pubspec.yaml` só com `assets/images/`, `assets/icons/` e as famílias Bricolage Grotesque e Figtree. Atende: CA8, CA9.
-- [ ] **E5.** Gate do grupo E: `analyze`, `test`, `build web`, e abrir Home (anel dos temas), um tema, um subtema, Sobre (logos de apoio) e o rodapé no navegador em 390 e 1280, sem imagem quebrada nem erro de asset no console. Commit. Atende: CA1, CA8, CA11.
+- [x] **E1.** Em `app_images.dart`, apagar as entradas `logo` e `observatorio`; para cada entrada restante, confirmar por `grep` que há uso (ilustrações de tema e subtema, logos de apoio) e anotar quais não têm. Apagar `logo.png` e `observatorio.png`. Atende: CA8.
+  - Nota: `AppImages.movimentosTerra` não tem uso direto no código (nem a `movimentos_terra.webp`); ficou, porque a spec manda só anotar e o teste de `AppImages` percorre todas as entradas. O teste passou a esperar só `logoSimple` como PNG.
+- [x] **E2.** Apagar os 42 PNGs substituídos de `assets/images/` (36 ilustrações e `capes`, `cnpq`, `faced`, `fapemig`, `ppged`, `ufu`, inclusive `cultura_política.png`, que tem acento e par `cultura_politica.webp`). Ficam `logo_simple.png`, `observatorio_simbolo.svg` e todos os `.webp`. Atende: CA8.
+  - Nota: 45 PNGs saíram (44 previstos mais `meio_ambiente_natureza.png` e demais ilustrações já contadas; sobra só `logo_simple.png`).
+- [x] **E3.** Apagar `tool/images/` (gerador e `to_webp.html`). Conferir que nada em `README.md`, `docs/` ou workflows chama `tool/images`. Atende: CA9.
+- [x] **E4.** Auditar `assets/`: para cada arquivo restante, `grep` do nome em `lib test web tool`; `assets/icons/{facebook,instagram,youtube}.svg` seguem pelo rodapé (nome montado em texto); `assets/fonts/licenses` fica. `pubspec.yaml` só com `assets/images/`, `assets/icons/` e as famílias Bricolage Grotesque e Figtree. Atende: CA8, CA9.
+  - Nota: todos os arquivos restantes têm uso (ícones do rodapé por nome montado, símbolo e `logo_simple` pelo `AppImages`, fontes pelo pubspec). `.DS_Store` é ignorado pelo git.
+- [x] **E5.** Gate do grupo E: `analyze`, `test`, `build web`, e abrir Home (anel dos temas), um tema, um subtema, Sobre (logos de apoio) e o rodapé no navegador em 390 e 1280, sem imagem quebrada nem erro de asset no console. Commit. Atende: CA1, CA8, CA11.
+  - Nota: conferido no build servido em 1280 px (Home, tema, subtema, Sobre e rodapé): todas as requisições de asset 200, imagens e ícones presentes. Conferência em 390 px na etapa G2.
 
 ## Grupo F: documentação
 - [ ] **F1.** Apagar `lib/features/theme/REFACTORING_SUMMARY.md`. Atende: CA12.

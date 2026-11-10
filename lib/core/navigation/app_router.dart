@@ -191,8 +191,27 @@ class AppRouter {
   static Page<void> _panelViewPage(GoRouterState state, Widget child) =>
       NoTransitionPage(key: state.pageKey, child: child);
 
-  static Page<void> _editorPage(Widget child) =>
-      MaterialPage(key: const ValueKey('object-editor'), child: child);
+  // Entra e sai com um fundido curto e uma subida leve, no lugar da transição padrão de página.
+  static Page<void> _editorPage(Widget child) => CustomTransitionPage(
+    key: const ValueKey('object-editor'),
+    child: child,
+    transitionDuration: const Duration(milliseconds: 260),
+    reverseTransitionDuration: const Duration(milliseconds: 180),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      final curved = CurvedAnimation(
+        parent: animation,
+        curve: Curves.easeOutCubic,
+        reverseCurve: Curves.easeInCubic,
+      );
+      return FadeTransition(
+        opacity: curved,
+        child: SlideTransition(
+          position: Tween(begin: const Offset(0, 0.02), end: Offset.zero).animate(curved),
+          child: child,
+        ),
+      );
+    },
+  );
 
   static GoRoute _objectRoute(String themeId) => GoRoute(
     path: '/$themeId/:subthemeId/:code',

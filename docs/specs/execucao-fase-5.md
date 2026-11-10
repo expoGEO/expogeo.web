@@ -16,6 +16,7 @@
 - (spec, ponto, o que foi tentado)
 
 ## Ocorrências
+- Tag `redesign-specs` (local, sem push) deve apontar para `94f3f7e5ce0f91b6dd6b4a2361fcf72747854ed4`, último commit com as specs 001 a 017, `docs/redesign/` e `docs/cicd/`. A orquestradora cria a tag no encerramento.
 - Base: `origin/develop` (já contém as Fases 3 e 4, conteúdo idêntico ao da branch da Fase 4).
 - 018 apaga as pastas de spec 001 a 017 e reorganiza a documentação; a própria pasta 018 e este arquivo saem no encerramento.
 

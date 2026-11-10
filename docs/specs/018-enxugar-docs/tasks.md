@@ -29,10 +29,10 @@ Regras: nada é apagado antes do grupo D; texto em português, atemporal, sem em
   - Nota: Workflows, `firebase.json`, `.firebaserc`, `firestore.rules`, índices e `lib/features/admin/` lidos; diferença do plano antigo: o CI não roda testes e o filtro de docs do CI fica no job `mudancas`. A `main` ainda não tem o redesign (registrado como pendência).
 
 ## Grupo D: remover
-- [ ] **D1.** Com os documentos novos já commitados no branch, anotar o SHA com `git rev-parse HEAD` e escrever o valor em `docs/specs/execucao-fase-5.md`, na seção Ocorrências: "Tag `redesign-specs` (local, sem push) deve apontar para `<SHA>`, último commit com as specs 001 a 017, `docs/redesign/` e `docs/cicd/`". A orquestradora cria a tag no encerramento. **Não criar a tag aqui.** Atende: CA11.
-- [ ] **D2.** `git rm -r` de `docs/specs/001-*` … `017-*`. Atende: CA2.
-- [ ] **D3.** `git rm -r docs/redesign docs/cicd docs/specs/historico-redesign.md`; se existir, `git rm lib/features/theme/REFACTORING_SUMMARY.md`. **Manter** `docs/specs/018-enxugar-docs/` e `docs/specs/execucao-fase-5.md`. Atende: CA2.
-- [ ] **D4.** `find docs -type f | sort` mostra só: `docs/architecture.md`, `docs/admin-panel.md`, `docs/deployment.md`, `docs/redesign-history.md`, `docs/specs/README.md`, `docs/specs/018-enxugar-docs/*` e `docs/specs/execucao-fase-5.md`. Atende: CA2, CA10.
+- [x] **D1.** Com os documentos novos já commitados no branch, anotar o SHA com `git rev-parse HEAD` e escrever o valor em `docs/specs/execucao-fase-5.md`, na seção Ocorrências: "Tag `redesign-specs` (local, sem push) deve apontar para `<SHA>`, último commit com as specs 001 a 017, `docs/redesign/` e `docs/cicd/`". A orquestradora cria a tag no encerramento. **Não criar a tag aqui.** Atende: CA11.
+- [x] **D2.** `git rm -r` de `docs/specs/001-*` … `017-*`. Atende: CA2.
+- [x] **D3.** `git rm -r docs/redesign docs/cicd docs/specs/historico-redesign.md`; se existir, `git rm lib/features/theme/REFACTORING_SUMMARY.md`. **Manter** `docs/specs/018-enxugar-docs/` e `docs/specs/execucao-fase-5.md`. Atende: CA2.
+- [x] **D4.** `find docs -type f | sort` mostra só: `docs/architecture.md`, `docs/admin-panel.md`, `docs/deployment.md`, `docs/redesign-history.md`, `docs/specs/README.md`, `docs/specs/018-enxugar-docs/*` e `docs/specs/execucao-fase-5.md`. Atende: CA2, CA10.
 
 ## Grupo E: links e skills
 - [ ] **E1.** `sdd-spec/SKILL.md`: trocar `docs/redesign/planejamento.md` por `docs/architecture.md` e pelo pedido da pessoa; "item do planejamento" vira "origem" (pedido ou ideia futura do histórico); remover o passo de atualizar o item no planejamento; manter o protótipo apenas como referência opcional. Atende: CA9.

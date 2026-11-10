@@ -7,7 +7,7 @@ import 'package:expogeo/core/utils/screen/screen_utils.dart';
 import 'package:expogeo/features/admin/panel/presentation/components/panel_user_badge.dart';
 import 'package:flutter/material.dart';
 
-/// Endereço absoluto da Home, para abrir numa aba nova a partir do painel.
+/// Endereço absoluto da Home, para abrir em outra aba a partir do painel.
 String get siteHomeUrl => Uri.base.resolve(AppRouter.home).toString();
 
 class PanelTopBar extends StatelessWidget {

@@ -132,9 +132,8 @@ class _ObjectActionsState extends State<ObjectActions> {
           if (address.isNotEmpty)
             Padding(
               padding: EdgeInsets.only(top: components.objectAddressTop),
-              // Área própria, separada da seleção da página: assim selecionar tudo pega só o
-              // endereço. No web ela traz uma visão de plataforma, que seria uma parada invisível
-              // do Tab; o foco por código continua valendo.
+              // Seleção própria, para selecionar tudo pegar só o endereço; no web ela traz uma
+              // parada invisível no Tab, por isso fica fora da travessia (o foco por código vale).
               child: ExcludeFocusTraversal(
                 child: SelectionContainer.disabled(
                   child: SelectionArea(

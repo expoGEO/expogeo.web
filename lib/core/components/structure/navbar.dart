@@ -72,7 +72,7 @@ class _NavbarState extends State<Navbar> {
     final location = NavbarLocation.of(context);
     final isWide = MediaQuery.sizeOf(context).width > components.navbarCollapseWidth;
 
-    // Opaca e sem desfoque: o desfoque da barra fixa era refeito a cada quadro da rolagem e travava a página.
+    // Opaca e sem desfoque: o desfoque de uma barra fixa é refeito a cada quadro da rolagem e trava a página.
     return DecoratedBox(
       decoration: BoxDecoration(
         color: colors.page,

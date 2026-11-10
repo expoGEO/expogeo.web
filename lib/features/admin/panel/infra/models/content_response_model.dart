@@ -1,10 +1,7 @@
 import 'package:expogeo/core/models/content_model.dart';
 import 'package:expogeo/core/models/theme_data_model.dart';
 
-/// Modelo de resposta para conteúdo do Firestore
-/// Estende ContentModel adicionando o ID do documento
 class ContentResponseModel extends ContentModel {
-  /// ID do documento no Firestore
   final String docId;
 
   const ContentResponseModel({
@@ -20,7 +17,6 @@ class ContentResponseModel extends ContentModel {
     super.preservationAction,
   });
 
-  /// Converte ContentModel para ContentResponseModel
   factory ContentResponseModel.fromContentModel({
     required ContentModel content,
     required String docId,
@@ -68,11 +64,9 @@ class ContentResponseModel extends ContentModel {
     if (preservationAction != null) 'preservationAction': preservationAction!.toJson(),
   };
 
-  /// Factory para criar a partir do JSON do Firestore
-  /// Suporta tanto valores de enum quanto IDs Firestore
+  /// Aceita no `themeId` e no `subthemeId` tanto o valor do enum quanto a sigla do Firestore.
   factory ContentResponseModel.fromJson(Map<String, dynamic> json, String docId) {
     try {
-      // Converte string em enum - suporta tanto valor enum quanto ID Firestore
       final themeValue = json['themeId'] as String;
       final subthemeValue = json['subthemeId'] as String;
 
@@ -111,13 +105,11 @@ PreservationAction? _preservationOf(Object? raw) {
   }
 }
 
-/// Converte um valor string (valor de enum ou ID Firestore) para ThemeEnum
 ThemeEnum _themeFromStringOrId(String value) {
-  // Tenta primeiro como valor de enum (ex: "cultura-politica")
   try {
     return ThemeEnum.values.firstWhere((e) => e.value == value);
   } catch (_) {
-    // Se não encontrar, tenta como ID Firestore (ex: "CP", "EUR", "NMA", "RE")
+    // Senão, a sigla gravada no Firestore (ex: "CP", "EUR").
     final mapping = {
       'CP': ThemeEnum.culturaPolitica,
       'EUR': ThemeEnum.espacosUrbanosRurais,
@@ -128,30 +120,24 @@ ThemeEnum _themeFromStringOrId(String value) {
   }
 }
 
-/// Converte um valor string (valor de enum ou ID Firestore) para SubthemeEnum
 SubthemeEnum _subthemeFromStringOrId(String value) {
-  // Tenta primeiro como valor de enum (ex: "censo-demografico")
   try {
     return SubthemeEnum.values.firstWhere((e) => e.value == value);
   } catch (_) {
-    // Se não encontrar, tenta como ID Firestore (ex: "CP_CD", "EUR_IND")
-    // Mapeamento baseado nos dados reais uploadados ao Firestore
+    // Senão, a sigla gravada no Firestore (ex: "CP_CD").
     final mapping = {
-      // Cultura e Política (CP)
       'CP_CD': SubthemeEnum.censoDemografico,
       'CP_GP': SubthemeEnum.geopolitica,
       'CP_IC': SubthemeEnum.identidadesCulturais,
       'CP_POP': SubthemeEnum.populacao,
       'CP_PO': SubthemeEnum.povosOriginarios,
       'CP_RA': SubthemeEnum.regioesAdministrativas,
-      // Espaços Urbanos e Rurais (EUR)
       'EUR_CT': SubthemeEnum.conflitosTerra,
       'EUR_EUB': SubthemeEnum.espacoUrbanoBrasileiro,
       'EUR_ERB': SubthemeEnum.espacoRuralBrasileiro,
       'EUR_GM': SubthemeEnum.globalizacaoMobilidade,
       'EUR_IT': SubthemeEnum.industriaTransformacao,
       'EUR_MA': SubthemeEnum.mercadoAgropecuario,
-      // Natureza e Meio Ambiente (NMA)
       'NMA_BH': SubthemeEnum.baciasHidrograficas,
       'NMA_BIO': SubthemeEnum.biomas,
       'NMA_DES': SubthemeEnum.desmatamento,
@@ -164,7 +150,6 @@ SubthemeEnum _subthemeFromStringOrId(String value) {
       'NMA_TC': SubthemeEnum.tempoClima,
       'NMA_TPCL': SubthemeEnum.tiposClimaticos,
       'NMA_UA': SubthemeEnum.usoAgua,
-      // Representações Espaciais (RE)
       'RE_CM': SubthemeEnum.compositorMapas,
       'RE_CG': SubthemeEnum.coordenadasGeograficas,
       'RE_FH': SubthemeEnum.fusoHorario,

@@ -65,7 +65,7 @@ class _ThemeOverviewCardState extends State<ThemeOverviewCard> {
     );
     final store = widget.store ?? GetIt.I<CatalogStore>();
 
-    // No celular, com o medalhão ao lado, o texto ficava numa coluna estreita e o cartão alto demais.
+    // No celular, com o medalhão ao lado, o texto fica numa coluna estreita e o cartão alto demais.
     final body = Padding(
       padding: compact ? components.themeCardPaddingCompact : components.themeCardPadding,
       child: compact

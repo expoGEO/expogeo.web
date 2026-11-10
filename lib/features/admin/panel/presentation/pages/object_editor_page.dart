@@ -36,10 +36,10 @@ class ObjectEditorPage extends StatefulWidget {
   const ObjectEditorPage.edit({required String this.code, super.key})
     : selection = const PanelSelection();
 
-  /// Tema e subtema que o novo objeto já traz.
+  /// Tema e subtema que o objeto em criação já traz.
   final PanelSelection selection;
 
-  /// O objeto a editar; nulo no novo.
+  /// O objeto a editar; nulo ao criar.
   final String? code;
 
   static const String saveFailedMessage = 'Não deu para salvar. Confira a conexão e tente de novo.';

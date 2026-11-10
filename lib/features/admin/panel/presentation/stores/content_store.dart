@@ -7,8 +7,8 @@ part 'content_store.g.dart';
 
 enum ContentOutcomeKind { created, updated, deleted, saveFailed, deleteFailed }
 
-/// Resultado da última gravação ou exclusão. Cada operação cria um novo, para quem reage a ele
-/// ver também dois resultados iguais seguidos.
+/// Resultado da última gravação ou exclusão. Cada operação cria uma instância, para quem reage
+/// a ele ver também dois resultados iguais seguidos.
 class ContentOutcome {
   ContentOutcome(this.kind, {this.docId, this.code});
 
@@ -74,7 +74,7 @@ abstract class ContentStoreBase with Store {
     );
   }
 
-  /// Leva o objeto de [from] para [to], com um código novo de [to].
+  /// Leva o objeto de [from] para [to], com outro código de [to].
   @action
   Future<ContentOutcome> moveContent({
     required SubthemeEnum from,

@@ -2,10 +2,8 @@ library;
 
 import 'dart:math' as math;
 
-import 'package:expogeo/core/utils/extensions/num_extension.dart';
 import 'package:expogeo/core/utils/screen/screen_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 part 'app_colors/app_colors.dart';
 part 'app_dimensions/app_dimensions.dart';

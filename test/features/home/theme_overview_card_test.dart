@@ -79,7 +79,6 @@ void main() {
       title: base.title,
       description: base.description,
       imagePath: base.imagePath,
-      color: base.color,
       icon: base.icon,
       subthemes: base.subthemes.take(3).toList(),
     );
@@ -164,7 +163,6 @@ void main() {
       title: natureza.title,
       description: natureza.description,
       imagePath: natureza.imagePath,
-      color: natureza.color,
       icon: natureza.icon,
       subthemes: [...natureza.subthemes]
         ..sort((a, b) => b.type.name.length.compareTo(a.type.name.length)),

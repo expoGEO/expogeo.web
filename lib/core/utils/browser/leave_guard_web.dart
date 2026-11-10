@@ -22,7 +22,7 @@ void setLeaveWarning(bool enabled) {
   _listener = added;
 }
 
-/// Caminho e busca do endereço que o navegador mostra agora.
+/// Caminho e busca do endereço que o navegador mostra.
 String? browserLocation() {
   final location = globalContext.getProperty<JSObject>('location'.toJS);
   final path = location.getProperty<JSString>('pathname'.toJS).toDart;

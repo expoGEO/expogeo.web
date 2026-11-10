@@ -1,9 +1,7 @@
 import 'package:expogeo/core/models/theme_data_model.dart';
-import 'package:expogeo/core/theme/app_theme.dart';
 import 'package:expogeo/core/utils/date/date.dart';
 import 'package:flutter/material.dart';
 
-/// Modelo que representa um conteúdo educacional com seus metadados completos
 class ContentModel {
   final String id;
   final ThemeEnum theme;
@@ -28,7 +26,6 @@ class ContentModel {
   });
 }
 
-/// Indicativo Intelectual do Objeto Digital
 class IntellectualIndicator {
   final String creator;
   final String? collaborator;
@@ -48,13 +45,11 @@ class IntellectualIndicator {
   };
 }
 
-/// Conteúdo do Objeto Digital
 class ContentInfo {
   final String title;
   final String description;
-  final List<String>
-  subjects; // Lista de assuntos (ex: ["Coordenadas geográficas", "Longitude", "Latitude"])
-  final String? contentNote; // Nota de Conteúdo
+  final List<String> subjects;
+  final String? contentNote;
 
   const ContentInfo({
     required this.title,
@@ -80,13 +75,12 @@ class ContentInfo {
   };
 }
 
-/// Informação de Origem do Objeto Digital
 class OriginInfo {
-  final DateTime insertionDate; // Data de inserção
+  final DateTime insertionDate;
   final String language;
   final ContentType type;
   final ContentFormat format;
-  final String? requirements; // Requisitos necessários
+  final String? requirements;
 
   const OriginInfo({
     required this.insertionDate,
@@ -115,11 +109,10 @@ class OriginInfo {
   };
 }
 
-/// Informação de Registro do Objeto Digital
 class RegistrationInfo {
   final String location; // URL do recurso
-  final int? issueYear; // Data de emissão
-  final String? registrationRules; // Regras de registro
+  final int? issueYear; // Ano de emissão
+  final String? registrationRules;
 
   const RegistrationInfo({required this.location, this.issueYear, this.registrationRules});
 
@@ -138,9 +131,8 @@ class RegistrationInfo {
   };
 }
 
-/// Direitos do Objeto Digital
 class RightsInfo {
-  final String rights; // Descrição dos direitos (ex: "Objeto digital em domínio público")
+  final String rights;
 
   const RightsInfo({required this.rights});
 
@@ -151,10 +143,9 @@ class RightsInfo {
   Map<String, dynamic> toJson() => {'rights': rights};
 }
 
-/// Ações de Preservação para o Objeto Digital
 class PreservationAction {
-  final String operation; // Operação (ex: "Atualização do link ao longo do tempo")
-  final DateTime? updateDate; // Data de atualização
+  final String operation;
+  final DateTime? updateDate;
 
   const PreservationAction({required this.operation, this.updateDate});
 
@@ -171,7 +162,6 @@ class PreservationAction {
   };
 }
 
-/// Tipos de conteúdo disponíveis
 enum ContentType {
   site('Site'),
   video('Vídeo'),
@@ -192,16 +182,7 @@ enum ContentType {
     ContentType.outro => Icons.info_outline,
   };
 
-  Color get color => switch (this) {
-    ContentType.site => AppTheme.colors.primaryBlue,
-    ContentType.video => AppTheme.colors.primaryRed,
-    ContentType.imagem => AppTheme.colors.primaryGreen,
-    ContentType.documento => AppTheme.colors.primaryOrange,
-    ContentType.aplicativo => AppTheme.colors.secondaryBlue,
-    ContentType.outro => AppTheme.colors.mediumGray,
-  };
-
-  /// Aceita o nome (`site`) ou o rótulo (`Site`), porque o formulário antigo gravava o rótulo.
+  /// Aceita o nome (`site`) ou o rótulo (`Site`), porque há objetos gravados dos dois jeitos.
   static ContentType fromString(String value) {
     for (final type in ContentType.values) {
       if (type.name == value) return type;
@@ -213,7 +194,6 @@ enum ContentType {
   }
 }
 
-/// Formatos de conteúdo disponíveis
 enum ContentFormat {
   texto('Texto'),
   html('HTML'),
@@ -226,7 +206,7 @@ enum ContentFormat {
   final String value;
   const ContentFormat(this.value);
 
-  /// Aceita o nome (`html`) ou o rótulo (`HTML`), porque o formulário antigo gravava o rótulo.
+  /// Aceita o nome (`html`) ou o rótulo (`HTML`), porque há objetos gravados dos dois jeitos.
   static ContentFormat fromString(String value) {
     for (final format in ContentFormat.values) {
       if (format.name == value) return format;

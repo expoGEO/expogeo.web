@@ -1,7 +1,7 @@
 ---
 name: sdd-fase
-description: Conduz uma fase inteira do redesign (ou um intervalo de itens) do começo ao fim, sem paradas, passando por spec, plano, implementação, verificação com correções, commits e push na branch de trabalho. Cada etapa roda numa sessão separada (subagente) para poupar contexto. Use só quando a pessoa pedir explicitamente, por exemplo "/sdd-fase Fase 1" ou "/sdd-fase 1.1-1.4".
-argument-hint: "<fase ou itens do planejamento, ex.: Fase 1, 1.1-1.3>"
+description: Conduz uma fase de trabalho inteira (um pedido dividido em specs) do começo ao fim, sem paradas, passando por spec, plano, implementação, verificação com correções, commits e push na branch de trabalho. Cada etapa roda numa sessão separada (subagente) para poupar contexto. Use só quando a pessoa pedir explicitamente, por exemplo "/sdd-fase busca geral e filtros".
+argument-hint: "<pedido ou nome da fase, ex.: busca geral>"
 disable-model-invocation: true
 ---
 
@@ -10,12 +10,12 @@ disable-model-invocation: true
 Modo **autônomo** do fluxo SDD (`docs/specs/README.md`). A pessoa não vai acompanhar: não pergunte nada, decida seguindo os padrões do projeto e registre cada decisão. Esta sessão é a **orquestradora**: ela divide o trabalho, dispara as sessões de cada etapa, faz os commits de documentação, o push e o resumo final. Ela **não** escreve código nem lê arquivos grandes; quem faz isso são as sessões de etapa.
 
 ## 0. Preparação (orquestradora)
-1. Leia `docs/specs/README.md`, a seção da fase em `docs/redesign/planejamento.md` e a lista de perguntas (Q-xx). Não leia código.
+1. Leia `docs/specs/README.md`, `docs/architecture.md` e o pedido da pessoa (e, se for o caso, as ideias futuras de `docs/redesign-history.md`). Não leia código.
 2. Confira o git. Push na `main` publica o site em produção, então **nunca** faça commit ou push direto nela (nem na `develop`, quando existir). A **base** da fase é `develop` se ela existir no remoto (`git ls-remote --heads origin develop`); senão, `main`.
    - `git status` limpo. Se houver alterações soltas, não as misture: registre no resumo e siga só se não tocarem os arquivos da fase; senão, pare e explique.
    - Crie a branch da fase a partir da base atualizada: `git fetch origin && git switch -c refactor/redesign-<fase> origin/<base>` (ex.: `refactor/redesign-fase-1`). Se ela já existir (retomada), apenas troque para ela.
 3. **Retomada:** se existir `docs/specs/execucao-<fase>.md`, continue de onde parou (etapa e spec marcadas como pendentes) em vez de recomeçar.
-4. Divida a fase em specs. Regra: cada item do planejamento que é "entregue e revisado isoladamente" vira uma spec; itens pequenos e vizinhos que mexem nos mesmos arquivos (ex.: dois blocos simples da Home) podem ir juntos. Alvo: meio dia a um dia de trabalho por spec. Números seguem o próximo `NNN` livre em `docs/specs/`. Respeite a coluna "Depende de": o que depende de outro item vem depois dele.
+4. Divida a fase em specs. **Não há planejamento da fase: a divisão em specs parte do pedido da pessoa.** Regra: cada parte do pedido que é "entregue e revisada isoladamente" vira uma spec; itens pequenos e vizinhos que mexem nos mesmos arquivos (ex.: dois blocos simples da Home) podem ir juntos. Alvo: meio dia a um dia de trabalho por spec. Números seguem o próximo `NNN` livre em `docs/specs/`. Respeite as dependências: o que depende de outra parte vem depois dela.
 5. Crie `docs/specs/execucao-<fase>.md` (ex.: `execucao-fase-1.md`) com a tabela abaixo. Esse arquivo é o **estado** da execução e permite retomar em outra conversa se o limite de uso acabar. Ele entra no primeiro commit de documentação da fase (não precisa de commit próprio).
 
 ```markdown
@@ -46,7 +46,7 @@ O histórico deve contar a história da fase: cada commit é uma entrega que dá
 | `docs: spec e plano da NNN` | spec, plano, tarefas (e o arquivo de execução atualizado) |
 | `feat:`/`refactor:` (1 a 3) | um por parte **visível ou coerente** da entrega (ex.: "componente do cartão de tema", "seção de temas na Home com estados"). Tokens novos do tema entram junto do primeiro uso. Mudança em componente compartilhado que afeta outras telas vai em commit próprio |
 | `fix:` | correções da verificação. Agrupe as pequenas num só; separe só a que for relevante por si |
-| `docs: verificação da NNN` | `verificacao.md`, status, planejamento e arquivo de execução |
+| `docs: verificação da NNN` | `verificacao.md`, status da spec e arquivo de execução |
 
 Antes de cada commit, `fvm dart format` nos `.dart` alterados (não nos gerados). Mensagens `tipo: descrição` em português, dizendo o que muda para quem usa o site. Corpo curto quando o título não basta. Terminar com a linha de coautoria definida pelo ambiente. Nunca `git add -A` às cegas: adicione os arquivos da entrega.
 
@@ -55,7 +55,7 @@ Specs da mesma fase costumam mexer na mesma página: **não rode em paralelo**. 
 
 ### 1a. Sessão de spec + plano
 - Invocar `/sdd-spec <itens>` e, na mesma sessão, `/sdd-plan <NNN>`.
-- Onde as skills mandam "pare para aprovação" ou "pergunte": decidir pela recomendação mais alinhada ao protótipo, ao planejamento e às decisões já registradas (perguntas Q-xx, specs anteriores), registrar em "Perguntas em aberto" como respondida ("Decidido no modo autônomo: ... porque ...") e marcar a spec como `aprovada`.
+- Onde as skills mandam "pare para aprovação" ou "pergunte": decidir pela recomendação mais alinhada ao pedido, ao `docs/architecture.md` e às decisões já registradas em `docs/redesign-history.md` e nas specs anteriores, registrar em "Perguntas em aberto" como respondida ("Decidido no modo autônomo: ... porque ...") e marcar a spec como `aprovada`.
 - Ao fim, o plano deve ligar cada critério de aceite a uma tarefa e ter uma tarefa final de conferência rodando o app.
 - **Não faz commit.** Devolve: caminho da spec, número de critérios e de tarefas, decisões tomadas, riscos.
 - A orquestradora atualiza o arquivo de execução e faz o commit `docs: spec e plano da <NNN>`.
@@ -75,7 +75,7 @@ Specs da mesma fase costumam mexer na mesma página: **não rode em paralelo**. 
   4. resolveu: seguir para o próximo (o commit vem no fim);
   5. não resolveu depois de 2 tentativas: desfazer a tentativa se ela piorou algo, registrar em `verificacao.md` como ressalva (o que é, o que foi tentado, por que parou) e seguir.
 - Ao fim das correções: um commit `fix:` com as correções pequenas e, se houver, um commit próprio para cada correção relevante por si.
-- Status final: `verificada` (sem ressalvas) ou `verificada com ressalvas`. Marcar o item no planejamento com `→ specs/NNN-nome`.
+- Status final: `verificada` (sem ressalvas) ou `verificada com ressalvas`. Atualizar o status da spec.
 - Commit `docs: verificação da <NNN>` (inclui o arquivo de execução, que a orquestradora pode completar antes).
 - Devolve: situação por critério, correções (resolvidas ou não), ressalvas, commits.
 
@@ -87,13 +87,13 @@ Specs da mesma fase costumam mexer na mesma página: **não rode em paralelo**. 
 ## Regras do modo autônomo (copiar em todo prompt de etapa)
 ```
 MODO AUTÔNOMO: a pessoa está ausente e pré-aprovou o fluxo. Não use AskUserQuestion e não pare para aprovação; onde as skills sdd-* mandam parar ou perguntar, decida pela opção recomendada, registre a decisão no documento da spec e siga.
-Leia docs/specs/README.md antes de tudo e siga suas regras de design, idioma, comentários e git. A base visual é o redesign do Observatório em ../observatorio_geo_hist: reaproveite tokens e componentes de lá.
+Leia docs/specs/README.md e docs/architecture.md antes de tudo e siga as regras de design, idioma, comentários e git. A base visual é o redesign do Observatório em ../observatorio_geo_hist: reaproveite tokens e componentes de lá.
 Git: trabalhe na branch atual (refactor/redesign-<fase>); nunca push; nunca commit na main nem na develop (push na main publica o site); nunca --force, reset --hard ou apagar branch.
 Limites do que você pode decidir sozinha: não altere modelos de dados, regras/coleções do Firebase, rotas existentes, o painel admin (salvo na fase que o redesenha) nem nada em "Fora do escopo"; não adicione pacotes sem que o plano preveja; não apague conteúdo real. Se a tarefa exigir isso, registre como ressalva e pule só aquele ponto.
 Ambiente:
 - `fvm flutter analyze` quebra na pasta original por causa do "ó" no caminho. Rode-o numa cópia em caminho ASCII no scratchpad (rsync sem build/ e .dart_tool/, depois `fvm flutter pub get`). Symlink não resolve.
 - Para ver a tela: `fvm flutter build web --release`, servir build/web com um servidor Python próprio em background (com fallback de SPA para index.html) e abrir no navegador embutido (mcp__Claude_Browser__*). Conferir 390, 768 e 1280 px e voltar o navegador ao preset desktop no fim. Abrir ao menos uma vez em modo debug (`fvm flutter run -d web-server --web-port <porta>` na cópia ASCII), que mostra asserções de layout escondidas no release. Parar os servidores ao terminar.
-- Protótipo: link em docs/specs/README.md; ler com a ferramenta Artifact (action read), não com WebFetch.
+- Protótipo: link em docs/redesign-history.md; ler com a ferramenta Artifact (action read), não com WebFetch.
 - Painel admin: só entrar se a tarefa exigir e se houver credenciais de teste neste prompt; senão marcar como não conferido.
 Resposta final: no máximo ~300 palavras, em tópicos, só o pedido. Não cole diffs nem conteúdo de arquivos.
 ```
@@ -102,9 +102,9 @@ Se a pessoa tiver informado credenciais de teste na conversa, a orquestradora as
 
 ## 2. Encerramento (orquestradora)
 1. Conferir `git status` limpo e `git log` com os commits da fase.
-2. Atualizar a memória do projeto (estado do redesign) e, se preciso, a seção de arquitetura do `README.md` com o que a fase introduziu de padrão novo, de forma breve.
-3. Levar a fase para `docs/specs/historico-redesign.md` (crie se não existir, com uma tabela Fase | Período | Specs | PR; linha na tabela, ressalvas que seguem em aberto e lições novas, de forma breve) e apagar `execucao-<fase>.md`, que fica no git. Fazer commit (`docs: encerramento da <fase>`) e push. Use o conteúdo do `execucao` lido antes de apagar para montar o PR.
-4. **Abrir PR para a base** com `gh pr create --base <base> --head refactor/redesign-<fase>`. Formato: título `feat: redesign <fase> — <resumo>`; corpo com "Resumo" (links para planejamento e protótipo), uma seção por spec com links para spec e verificação e os pontos principais, "Decisões tomadas no modo autônomo", "Ressalvas", "Como testar" e a linha de atribuição definida pelo ambiente. Se já existir PR aberto da branch, só atualize a descrição.
+2. Atualizar a memória do projeto (estado do redesign) e, se preciso, o `docs/architecture.md` ou o `docs/admin-panel.md` com o que a fase introduziu de padrão novo, de forma breve.
+3. Levar a fase para `docs/redesign-history.md` (crie se não existir, com uma tabela Fase | Período | Specs | PR; linha na tabela, ressalvas que seguem em aberto e lições novas, de forma breve) e apagar `execucao-<fase>.md`, que fica no git. Fazer commit (`docs: encerramento da <fase>`) e push. Use o conteúdo do `execucao` lido antes de apagar para montar o PR.
+4. **Abrir PR para a base** com `gh pr create --base <base> --head refactor/redesign-<fase>`. Formato: título `feat: redesign <fase> — <resumo>`; corpo com "Resumo" (links para o pedido, a documentação em `docs/` e o protótipo, se houver), uma seção por spec com links para spec e verificação e os pontos principais, "Decisões tomadas no modo autônomo", "Ressalvas", "Como testar" e a linha de atribuição definida pelo ambiente. Se já existir PR aberto da branch, só atualize a descrição.
    - Se o repositório tiver CI em PR, acompanhe com as ferramentas `ccd_pr` (ou `gh pr checks`). Se falhar por causa da fase, corrija com a mesma regra de 2 tentativas, commit `fix:` e push. **Não faça merge** nem ative auto-merge: o merge publica o site (na `main`, em produção) e fica com a pessoa.
 5. Responder à pessoa com o **resumo final**:
    - link do PR e situação do CI;
@@ -118,6 +118,6 @@ Se a pessoa tiver informado credenciais de teste na conversa, a orquestradora as
 Pare **entre** etapas, nunca no meio de uma: garanta commits feitos, `execucao-<fase>.md` atualizado com a etapa seguinte como `pendente`, push, e um resumo dizendo como retomar (`/sdd-fase <mesma fase>`).
 
 ## Economia de contexto
-- A orquestradora só lê o planejamento, o arquivo de execução e os relatórios curtos das sessões. Para conferir algo pontual, use `git log --stat` ou `grep`, não leia arquivos inteiros.
+- A orquestradora só lê o pedido, os docs de `docs/`, o arquivo de execução e os relatórios curtos das sessões. Para conferir algo pontual, use `git log --stat` ou `grep`, não leia arquivos inteiros.
 - Cada etapa começa numa sessão nova: a spec, o plano e o `tasks.md` são a memória entre elas.
 - Se uma sessão de etapa voltar sem terminar (limite ou erro), dispare outra para a mesma etapa pedindo para continuar a partir do `tasks.md`/`verificacao.md`, em vez de refazer.

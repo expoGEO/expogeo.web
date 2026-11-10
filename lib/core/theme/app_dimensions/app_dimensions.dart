@@ -4,28 +4,6 @@ class AppDimensions {
   AppDimensions._();
   static AppDimensions get instance => AppDimensions._();
 
-  DimensionStyle space = const DimensionStyle._(
-    mini: 4.0,
-    small: 8.0,
-    medium: 16.0,
-    large: 24.0,
-    huge: 32.0,
-    massive: 48.0,
-    immense: 64.0,
-    gigantic: 96.0,
-  );
-
-  DimensionStyle radius = const DimensionStyle._(
-    mini: 2.0,
-    small: 4.0,
-    medium: 8.0,
-    large: 12.0,
-    huge: 24.0,
-    massive: 48.0,
-    immense: 64.0,
-    gigantic: double.infinity,
-  );
-
   DimensionStyle stroke = const DimensionStyle._(
     mini: 0.5,
     small: 1.0,

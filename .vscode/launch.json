@@ -10,7 +10,6 @@
         "-d",
         "chrome",
         "--dart-define=APP_ENV=dev"
-        // "--web-experimental-hot-reload",
       ]
     },
     {
@@ -22,7 +21,6 @@
         "-d",
         "chrome",
         "--dart-define=APP_ENV=prod"
-        // "--web-experimental-hot-reload",
       ]
     }
   ]

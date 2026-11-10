@@ -331,7 +331,7 @@ class ObjectEditorForm extends ChangeNotifier {
     );
   }
 
-  /// O que a prévia do cartão mostra agora, com textos de exemplo nos campos vazios. O cartão
+  /// O que a prévia do cartão mostra, com textos de exemplo nos campos vazios. O cartão
   /// recebe o subtema à parte; o daqui só preenche o modelo enquanto não há escolha.
   ContentModel preview({required String code}) {
     final subtheme = _subtheme ?? SubthemeEnum.values.first;

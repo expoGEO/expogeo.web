@@ -13,9 +13,8 @@ ReferenceCodeParts? parseCode(String code) {
 
 String formatCode(String prefix, int number) => '${prefix}_${number.toString().padLeft(2, '0')}';
 
-/// Próximo código do subtema a partir dos já usados nele: o prefixo que eles usam (alguns
-/// subtemas não seguem a sigla da lista, como `NMA_PAG`) e o maior número + 1, sem reaproveitar
-/// números de objetos excluídos. Sem códigos, começa em `{sigla}_01`.
+/// Próximo código do subtema: o prefixo já usado nele (alguns fogem da sigla, como `NMA_PAG`) e o
+/// maior número + 1, sem reaproveitar os excluídos. Sem códigos, começa em `{sigla}_01`.
 String nextCode(Iterable<String> codes, SubthemeEnum subtheme) {
   final uses = <String, int>{};
   final highest = <String, int>{};

@@ -2,12 +2,10 @@ import "package:expogeo/core/utils/string/string_utils.dart";
 
 enum AppImages {
   logoSimple(ImageFormat.png),
-  logo(ImageFormat.png),
   capes,
   cnpq,
   faced,
   fapemig,
-  observatorio(ImageFormat.png),
   observatorioSimbolo(ImageFormat.svg),
   ppged,
   ufu,

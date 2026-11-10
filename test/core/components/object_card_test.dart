@@ -43,6 +43,7 @@ void main() {
     double width = 1280,
     AssetBundle? bundle,
     int count = 1,
+    SubthemeEnum? subtheme = SubthemeEnum.biomas,
   }) {
     tester.view.physicalSize = Size(width, 1600);
     tester.view.devicePixelRatio = 1;
@@ -57,7 +58,7 @@ void main() {
               for (var i = 0; i < count; i++)
                 ObjectCard(
                   content: content ?? _content(),
-                  subtheme: SubthemeEnum.biomas,
+                  subtheme: subtheme,
                   onOpen: () => opened++,
                 ),
             ],
@@ -79,6 +80,13 @@ void main() {
     expect(find.text('aVoar Cerrado'), findsOneWidget);
     expect(find.text('Biomas · Universidade de Brasília'), findsOneWidget);
     expect(find.byIcon(Icons.language), findsOneWidget);
+  });
+
+  testWidgets('sem subtema, rodapé só com o criador e medalhão vazio', (tester) async {
+    await pump(tester, subtheme: null);
+
+    expect(find.text('Universidade de Brasília'), findsOneWidget);
+    expect(find.byIcon(Icons.map_outlined), findsOneWidget);
   });
 
   testWidgets('formato igual ao tipo aparece uma vez só', (tester) async {

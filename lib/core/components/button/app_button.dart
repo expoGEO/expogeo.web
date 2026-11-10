@@ -3,7 +3,7 @@ import 'package:expogeo/core/theme/app_theme.dart';
 import 'package:expogeo/core/utils/url/url_utils.dart';
 import 'package:flutter/material.dart';
 
-enum AppButtonKind { primary, secondary, ghost }
+enum AppButtonKind { primary, secondary, ghost, danger }
 
 enum AppButtonSize { regular, small }
 
@@ -20,6 +20,7 @@ class AppButton extends StatefulWidget {
     this.focusNode,
     this.semanticLabel,
     this.fullWidth = false,
+    this.isLoading = false,
   }) : kind = AppButtonKind.primary;
 
   const AppButton.secondary({
@@ -34,6 +35,7 @@ class AppButton extends StatefulWidget {
     this.focusNode,
     this.semanticLabel,
     this.fullWidth = false,
+    this.isLoading = false,
   }) : kind = AppButtonKind.secondary;
 
   const AppButton.ghost({
@@ -48,7 +50,24 @@ class AppButton extends StatefulWidget {
     this.focusNode,
     this.semanticLabel,
     this.fullWidth = false,
+    this.isLoading = false,
   }) : kind = AppButtonKind.ghost;
+
+  /// Ação que apaga algo, como a confirmação de uma exclusão.
+  const AppButton.danger({
+    super.key,
+    required this.text,
+    this.onPressed,
+    this.size = AppButtonSize.regular,
+    this.leadingIcon,
+    this.trailingIcon,
+    this.isDisabled = false,
+    this.focusNode,
+    this.semanticLabel,
+    this.fullWidth = false,
+    this.isLoading = false,
+  }) : kind = AppButtonKind.danger,
+       externalUrl = null;
 
   final AppButtonKind kind;
   final String text;
@@ -68,6 +87,9 @@ class AppButton extends StatefulWidget {
 
   /// Ocupa a largura imposta pelo pai, em vez de acompanhar o texto.
   final bool fullWidth;
+
+  /// Mostra um indicador girando antes do texto e ignora toques, sem esmaecer o botão.
+  final bool isLoading;
 
   @override
   State<AppButton> createState() => _AppButtonState();
@@ -99,7 +121,10 @@ class _AppButtonState extends State<AppButton> {
     final components = AppTheme.dimensions.components;
     final radius = BorderRadius.circular(AppTheme.dimensions.radii.r10);
     final isExternal = widget.externalUrl != null;
-    final inactive = widget.isDisabled || (widget.onPressed == null && !isExternal);
+    final isLoading = widget.isLoading;
+    final inactive = widget.isDisabled || isLoading || (widget.onPressed == null && !isExternal);
+    // Carregando, o botão continua com o foco, para quem usa teclado não perdê-lo no meio da ação.
+    final focusable = !inactive || (isLoading && !widget.isDisabled);
     final hovered = _hovered && !inactive;
 
     final (background, foreground, border) = switch (widget.kind) {
@@ -117,6 +142,11 @@ class _AppButtonState extends State<AppButton> {
       AppButtonKind.ghost => (
         hovered ? colors.accentSoft : Colors.transparent,
         colors.accentStrong,
+        Colors.transparent,
+      ),
+      AppButtonKind.danger => (
+        hovered ? colors.errorStrong : colors.error,
+        colors.white,
         Colors.transparent,
       ),
     };
@@ -147,7 +177,17 @@ class _AppButtonState extends State<AppButton> {
     final content = Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        if (widget.leadingIcon != null) ...[
+        if (isLoading) ...[
+          SizedBox.square(
+            dimension: components.buttonSpinner,
+            child: CircularProgressIndicator(
+              strokeWidth: components.buttonSpinnerStroke,
+              color: foreground,
+              backgroundColor: foreground.withValues(alpha: components.buttonSpinnerTrackOpacity),
+            ),
+          ),
+          SizedBox(width: spacing.s8),
+        ] else if (widget.leadingIcon != null) ...[
           Icon(widget.leadingIcon, size: iconSize, color: foreground),
           SizedBox(width: spacing.s8),
         ],
@@ -168,9 +208,9 @@ class _AppButtonState extends State<AppButton> {
       label: isExternal ? '$name, abre em nova aba' : name,
       onTap: inactive ? null : _handleTap,
       // Sem o nó do InkWell, o foco precisa estar neste; senão o leitor de tela perde o foco.
-      focusable: !inactive,
+      focusable: focusable,
       focused: _focused,
-      onFocus: inactive ? null : _focusNode.requestFocus,
+      onFocus: focusable ? _focusNode.requestFocus : null,
       excludeSemantics: true,
       child: Opacity(
         opacity: widget.isDisabled ? components.disabledOpacity : 1,
@@ -186,14 +226,18 @@ class _AppButtonState extends State<AppButton> {
             child: SelectionContainer.disabled(
               child: InkWell(
                 focusNode: _focusNode,
-                canRequestFocus: !inactive,
+                canRequestFocus: focusable,
                 onFocusChange: (value) => setState(() => _focused = value),
                 customBorder: RoundedRectangleBorder(borderRadius: radius),
                 onTap: inactive ? null : _handleTap,
                 onHover: (value) => setState(() => _hovered = value),
                 hoverColor: Colors.transparent,
                 focusColor: Colors.transparent,
-                mouseCursor: inactive ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
+                mouseCursor: isLoading
+                    ? SystemMouseCursors.progress
+                    : inactive
+                    ? SystemMouseCursors.forbidden
+                    : SystemMouseCursors.click,
                 child: ConstrainedBox(
                   constraints: BoxConstraints(minHeight: minHeight),
                   child: Padding(

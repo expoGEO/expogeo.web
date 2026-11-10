@@ -3,6 +3,7 @@ import 'package:expogeo/core/components/form/marked_text.dart';
 import 'package:expogeo/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -45,7 +46,20 @@ void main() {
       addTearDown(focusNode.dispose);
     });
 
-    Future<void> pump(WidgetTester tester, {bool multiline = false, double width = 1280}) async {
+    Future<void> pump(
+      WidgetTester tester, {
+      bool multiline = false,
+      int? minLines,
+      double width = 1280,
+      bool obscureText = false,
+      Widget? suffix,
+      String? hintText,
+      String? helperText,
+      bool optional = false,
+      List<TextInputFormatter>? inputFormatters,
+      int? maxLength,
+      bool prominent = false,
+    }) async {
       tester.view.physicalSize = Size(width, 900);
       tester.view.devicePixelRatio = 1;
       addTearDown(tester.view.reset);
@@ -59,6 +73,15 @@ void main() {
                 controller: controller,
                 focusNode: focusNode,
                 multiline: multiline,
+                minLines: minLines,
+                obscureText: obscureText,
+                suffix: suffix,
+                hintText: hintText,
+                helperText: helperText,
+                optional: optional,
+                inputFormatters: inputFormatters,
+                maxLength: maxLength,
+                prominent: prominent,
                 validator: (value) => (value ?? '').isEmpty ? 'Escreva seu nome.' : null,
               ),
             ),
@@ -154,6 +177,121 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('senha fica oculta e sem sugestões nem autocorreção', (tester) async {
+      await pump(tester, obscureText: true);
+
+      final field = tester.widget<TextField>(find.byType(TextField));
+      expect(field.obscureText, isTrue);
+      expect(field.enableSuggestions, isFalse);
+      expect(field.autocorrect, isFalse);
+    });
+
+    testWidgets('sufixo fica dentro da caixa, à direita, e recebe o foco depois do campo', (
+      tester,
+    ) async {
+      final suffixFocus = FocusNode();
+      addTearDown(suffixFocus.dispose);
+      await pump(
+        tester,
+        suffix: Focus(
+          focusNode: suffixFocus,
+          child: const SizedBox.square(key: Key('sufixo'), dimension: 44),
+        ),
+      );
+
+      final box = tester.getRect(find.byType(AnimatedContainer));
+      final suffix = tester.getRect(find.byKey(const Key('sufixo')));
+      expect(box.contains(suffix.center), isTrue);
+      expect(suffix.left, greaterThan(tester.getRect(find.byType(TextField)).right - 1));
+      expect(tester.getSize(find.byType(AnimatedContainer)).height, 48);
+
+      focusNode.requestFocus();
+      await tester.pump();
+      focusNode.nextFocus();
+      await tester.pump();
+      expect(suffixFocus.hasFocus, isTrue);
+    });
+
+    testWidgets('dica aparece dentro do campo vazio', (tester) async {
+      await pump(tester, hintText: 'nome@exemplo.com');
+
+      final hint = find.text('nome@exemplo.com');
+      expect(hint, findsOneWidget);
+      expect(
+        tester.getRect(find.byType(AnimatedContainer)).contains(tester.getCenter(hint)),
+        isTrue,
+      );
+      expect(tester.widget<Text>(hint).style?.color, AppTheme.colors.inkSecondary);
+    });
+
+    testWidgets('sem overflow em 320 com sufixo, texto e erro longos', (tester) async {
+      await pump(
+        tester,
+        width: 320,
+        suffix: IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
+      );
+      controller.text = 'x' * 400;
+      await tester.pump();
+      formKey.currentState!.validate();
+      await tester.pumpAndSettle();
+
+      expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('dica visível abaixo do campo e lida com o rótulo', (tester) async {
+      await pump(tester, helperText: 'Separe por vírgula.');
+
+      final helper = find.text('Separe por vírgula.');
+      expect(helper, findsOneWidget);
+      expect(tester.widget<Text>(helper).style?.color, AppTheme.colors.inkSecondary);
+      expect(
+        tester.getTopLeft(helper).dy,
+        greaterThan(tester.getBottomLeft(find.byType(AnimatedContainer)).dy),
+      );
+      final data = tester.getSemantics(find.byType(TextField)).getSemanticsData();
+      expect(data.label, 'Nome. Separe por vírgula.');
+
+      formKey.currentState!.validate();
+      await tester.pumpAndSettle();
+      expect(
+        tester.getSemantics(find.byType(TextField)).getSemanticsData().label,
+        'Nome. Separe por vírgula. Escreva seu nome.',
+      );
+    });
+
+    testWidgets('"opcional" ao lado do rótulo e no nome acessível', (tester) async {
+      await pump(tester, optional: true);
+
+      expect(find.text('Nome  opcional', findRichText: true), findsOneWidget);
+      final data = tester.getSemantics(find.byType(TextField)).getSemanticsData();
+      expect(data.label, 'Nome, opcional');
+    });
+
+    testWidgets('formatador só de algarismos e limite sem contador', (tester) async {
+      await pump(tester, inputFormatters: [FilteringTextInputFormatter.digitsOnly], maxLength: 4);
+
+      await tester.enterText(find.byType(TextField), '2a02b45');
+      await tester.pump();
+      expect(controller.text, '2024');
+      expect(find.textContaining('/4'), findsNothing);
+    });
+
+    testWidgets('em destaque, o texto usa o estilo de título do editor', (tester) async {
+      await pump(tester, prominent: true);
+
+      final field = tester.widget<TextField>(find.byType(TextField));
+      final styles = AppTheme.typography.of(tester.element(find.byType(TextField)));
+      expect(field.style?.fontSize, styles.editorTitleField.fontSize);
+    });
+
+    testWidgets('mínimo de linhas próprio fica mais baixo que o padrão', (tester) async {
+      await pump(tester, multiline: true, minLines: 3);
+      final three = fieldHeight(tester);
+
+      await pump(tester, multiline: true);
+      expect(three, lessThan(fieldHeight(tester)));
     });
   });
 }

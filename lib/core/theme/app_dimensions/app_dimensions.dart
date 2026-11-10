@@ -106,6 +106,10 @@ class ShadowStyle {
     BoxShadow(color: Color(0x141F1B18), blurRadius: 26, offset: Offset(0, 10)),
   ];
 
+  List<BoxShadow> get card => const [
+    BoxShadow(color: Color(0x0F1F1B18), blurRadius: 32, offset: Offset(0, 12)),
+  ];
+
   List<BoxShadow> get elevated => const [
     BoxShadow(color: Color(0x241F1B18), blurRadius: 36, offset: Offset(0, 14)),
   ];
@@ -566,6 +570,15 @@ class ComponentSizes {
   final double formHintTop = 12.0;
   final double formHintMaxWidth = 480.0;
 
+  final double formAlertPaddingH = 14.0;
+  final double formAlertPaddingV = 12.0;
+  final double formAlertIcon = 20.0;
+  final double formAlertGap = 10.0;
+
+  final double buttonSpinner = 16.0;
+  final double buttonSpinnerStroke = 2.0;
+  final double buttonSpinnerTrackOpacity = 0.4;
+
   final double mailConfirmationPaddingV = 48.0;
   final double mailConfirmationPaddingH = 24.0;
   final double mailConfirmationGap = 10.0;
@@ -588,4 +601,189 @@ class ComponentSizes {
   final double contactInfoListTop = 18.0;
   final double contactInfoLabelGap = 2.0;
   final double contactInfoItemGap = 14.0;
+
+  final int loginBrandFlex = 5;
+  final int loginFormFlex = 6;
+  double loginBrandPaddingH(Breakpoint breakpoint) => _byBreakpoint(breakpoint, 20, 20, 40);
+  double loginBrandPaddingV(Breakpoint breakpoint) => _byBreakpoint(breakpoint, 24, 24, 40);
+  double loginBrandGap(Breakpoint breakpoint) => _byBreakpoint(breakpoint, 18, 18, 40);
+  final double loginEyebrowGap = 12.0;
+  final double loginBrandLeadGap = 14.0;
+
+  /// Largura máxima do título da marca, em múltiplos do tamanho da fonte.
+  final double loginBrandTitleMaxWidthEm = 8.1;
+  final double loginBrandLeadMaxWidth = 340.0;
+  final double loginRingsStep = 31.0;
+  final double loginRingsStroke = 1.0;
+  final double loginRingsOpacity = 0.15;
+  double loginMainPaddingH(Breakpoint breakpoint) => _byBreakpoint(breakpoint, 16, 16, 32);
+  double loginMainPaddingTop(Breakpoint breakpoint) => _byBreakpoint(breakpoint, 28, 28, 48);
+  final double loginMainPaddingBottom = 48.0;
+  final double loginCardMaxWidth = 400.0;
+  double loginCardPaddingH(Breakpoint breakpoint) => _byBreakpoint(breakpoint, 20, 20, 32);
+  double loginCardPaddingV(Breakpoint breakpoint) => _byBreakpoint(breakpoint, 24, 24, 32);
+  final double loginCardSubtitleGap = 6.0;
+  final double loginCardFieldsTop = 24.0;
+  final double loginBackLinkTop = 20.0;
+
+  final double panelTopBarHeight = 64.0;
+  double panelTopBarPaddingStart(Breakpoint breakpoint) => _byBreakpoint(breakpoint, 8, 20, 20);
+  double panelTopBarPaddingEnd(Breakpoint breakpoint) => _byBreakpoint(breakpoint, 12, 20, 20);
+  double panelTopBarGap(Breakpoint breakpoint) => _byBreakpoint(breakpoint, 6, 12, 12);
+  final double panelTopBarActionsGap = 10.0;
+
+  final double panelUserGap = 10.0;
+  final double panelUserDividerGap = 14.0;
+  final double panelAvatar = 36.0;
+
+  /// Abaixo dessa largura o menu lateral do painel vira gaveta, como a navbar do site.
+  final double panelCollapseWidth = 900.0;
+  final double panelSidebarWidth = 248.0;
+  final double panelSidebarPaddingV = 16.0;
+  final double panelSidebarPaddingH = 12.0;
+  final double panelNavItemPaddingV = 9.0;
+  final double panelNavItemPaddingH = 12.0;
+  final double panelNavSubItemPaddingV = 6.0;
+  final double panelNavSubItemPaddingH = 10.0;
+  final double panelNavItemGap = 10.0;
+  final double panelNavItemSpacing = 2.0;
+  final double panelNavSubItemSpacing = 1.0;
+  final double panelNavIcon = 18.0;
+  final double panelNavCountGap = 8.0;
+  final double panelNavCountSkeletonWidth = 22.0;
+  final double panelNavCountSkeletonHeight = 12.0;
+
+  /// O recuo alinha a linha do submenu com o centro do ícone de "Objetos digitais".
+  final double panelNavSubIndent = 21.0;
+  final double panelNavSubPaddingStart = 10.0;
+  final double panelNavSubPaddingTop = 2.0;
+  final double panelNavSubPaddingBottom = 6.0;
+  final double panelGroupLabelPaddingTop = 4.0;
+  final double panelGroupLabelPaddingBottom = 6.0;
+
+  final double panelDrawerMaxWidth = 300.0;
+  final double panelDrawerWidthFactor = 0.86;
+
+  double panelMainPaddingH(Breakpoint breakpoint) => _byBreakpoint(breakpoint, 16, 16, 32);
+  double panelMainPaddingTop(Breakpoint breakpoint) => _byBreakpoint(breakpoint, 20, 20, 28);
+  double panelMainPaddingBottom(Breakpoint breakpoint) => _byBreakpoint(breakpoint, 48, 48, 56);
+
+  final double panelHeadTitleGap = 4.0;
+  final double panelHeadSummaryGap = 4.0;
+  final double panelHeadMarginBottom = 20.0;
+
+  final double panelBlockGap = 24.0;
+  final double panelBlockHeadPaddingTop = 8.0;
+  final double panelBlockHeadPaddingBottom = 6.0;
+  final double panelBlockHeadGapH = 10.0;
+  final double panelBlockHeadGapV = 2.0;
+  final double panelListRadius = 14.0;
+
+  final double panelRowPaddingV = 14.0;
+  final double panelRowPaddingH = 16.0;
+  final double panelRowPaddingMobile = 14.0;
+  final double panelRowGap = 16.0;
+  final double panelRowGapMobileV = 8.0;
+  final double panelRowGapMobileH = 12.0;
+  final double panelRowMetaGap = 3.0;
+  final int panelRowTitleMaxLines = 2;
+  final double panelSubthemeMedallion = 48.0;
+  final EdgeInsets panelBadgePadding = const EdgeInsets.symmetric(vertical: 3, horizontal: 10);
+  final double panelBadgeSkeletonWidth = 72.0;
+  final double panelBadgeSkeletonHeight = 22.0;
+  final double panelActionIcon = 20.0;
+  final double panelHeadActionGap = 16.0;
+  final double panelRowActionsGap = 2.0;
+  final double panelRowActionsTop = 6.0;
+  final double panelRowDash = 4.0;
+  final double panelRowDashGap = 4.0;
+  final double panelMetaGap = 6.0;
+  final double panelTypeBadgeIcon = 14.0;
+  final double panelTypeBadgeGap = 5.0;
+
+  final double panelFilterPadding = 12.0;
+  final double panelFilterGap = 10.0;
+  final double panelFilterMarginBottom = 16.0;
+  final double panelFilterHeight = 42.0;
+  final double panelFilterSearchMinWidth = 220.0;
+
+  /// Largura máxima de cada seletor na faixa de uma linha só; o nome escolhido corta com reticências.
+  final double panelFilterSelectMaxWidth = 220.0;
+
+  /// Abaixo disto por seletor, os três não cabem lado a lado e a faixa vira grade de 2 colunas.
+  final double panelFilterSelectMinWidth = 150.0;
+
+  final double panelListFootPaddingV = 10.0;
+  final double panelListFootPaddingH = 16.0;
+  final double panelListFootMinHeight = 52.0;
+  final double panelListFootGap = 12.0;
+
+  final int panelSkeletonRows = 4;
+  final double panelSkeletonTitleWidth = 0.6;
+  final double panelSkeletonMetaWidth = 0.4;
+  final double panelSkeletonTitleHeight = 16.0;
+  final double panelSkeletonMetaHeight = 12.0;
+  final double panelSkeletonGap = 8.0;
+
+  final double filterSelectPaddingStart = 14.0;
+  final double filterSelectPaddingEnd = 12.0;
+  final double filterSelectBorder = 1.5;
+  final double filterSelectIcon = 16.0;
+  final double filterSelectIconGap = 8.0;
+  final double filterSelectMenuOffset = 6.0;
+  final double filterSelectMenuPadding = 6.0;
+  final double filterSelectMenuItemPaddingV = 8.0;
+  final double filterSelectMenuItemPaddingH = 10.0;
+  final double filterSelectMenuMaxHeight = 400.0;
+  final double filterSelectMenuElevation = 8.0;
+
+  final double toastMaxWidth = 560.0;
+  final double toastMargin = 16.0;
+  final double toastPaddingV = 12.0;
+  final double toastPaddingH = 18.0;
+  final double toastIcon = 18.0;
+  final double toastIconGap = 10.0;
+  final Duration toastDuration = const Duration(seconds: 3);
+
+  /// Erros ficam mais tempo porque o texto é maior e precisa ser lido até o fim.
+  final Duration toastErrorDuration = const Duration(seconds: 6);
+
+  final double tooltipMaxWidth = 260.0;
+  final double tooltipPaddingV = 7.0;
+  final double tooltipPaddingH = 10.0;
+  final double tooltipOffset = 8.0;
+
+  final double confirmDialogWidth = 420.0;
+  final double confirmDialogPadding = 24.0;
+  final double confirmDialogTextGap = 8.0;
+  final double confirmDialogActionsTop = 20.0;
+  final double confirmDialogActionsGap = 10.0;
+
+  double editorBarPaddingH(Breakpoint breakpoint) => _byBreakpoint(breakpoint, 16, 16, 24);
+  final double editorBarPaddingV = 10.0;
+  final double editorBarGapH = 14.0;
+  final double editorBarGapV = 8.0;
+  final double editorBarTitleGap = 10.0;
+  final double editorBarActionsGap = 8.0;
+  double editorPadding(Breakpoint breakpoint) => _byBreakpoint(breakpoint, 16, 16, 24);
+  final double editorMaxWidth = 1180.0;
+  final double editorSideWidth = 340.0;
+  final double editorColumnsGap = 20.0;
+  final double editorCardsGap = 16.0;
+  final double editorCardPadding = 20.0;
+  final double editorCardTitleGap = 14.0;
+  final double editorFieldsGap = 16.0;
+  final double editorCodeGap = 6.0;
+  final int editorTextMinLines = 3;
+  final double editorSkeletonLineHeight = 14.0;
+  final double editorSkeletonFieldHeight = 48.0;
+  final double editorSkeletonSideHeight = 120.0;
+
+  double _byBreakpoint(Breakpoint breakpoint, double mobile, double tablet, double desktop) {
+    return switch (breakpoint) {
+      Breakpoint.mobile => mobile,
+      Breakpoint.tablet => tablet,
+      Breakpoint.desktop => desktop,
+    };
+  }
 }

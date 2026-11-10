@@ -1,22 +1,21 @@
-extension DateTimeFormatting on DateTime {
-  String get monthName {
-    const months = [
-      'Janeiro',
-      'Fevereiro',
-      'Março',
-      'Abril',
-      'Maio',
-      'Junho',
-      'Julho',
-      'Agosto',
-      'Setembro',
-      'Outubro',
-      'Novembro',
-      'Dezembro',
-    ];
+/// Nomes dos meses, de janeiro a dezembro.
+const List<String> monthNames = [
+  'Janeiro',
+  'Fevereiro',
+  'Março',
+  'Abril',
+  'Maio',
+  'Junho',
+  'Julho',
+  'Agosto',
+  'Setembro',
+  'Outubro',
+  'Novembro',
+  'Dezembro',
+];
 
-    return months[month - 1];
-  }
+extension DateTimeFormatting on DateTime {
+  String get monthName => monthNames[month - 1];
 
   String get formattedDate => '$day de $monthName de $year';
 
@@ -44,4 +43,9 @@ extension DateTimeFormatting on DateTime {
 
   /// "dez 2026", com os campos como gravados, sem conversão de fuso.
   String get monthYear => '$_shortMonthName $year';
+
+  /// "2026-12-01", com os campos como estão, sem conversão de fuso: é como as datas são gravadas.
+  String get isoDay =>
+      '${year.toString().padLeft(4, '0')}-${month.toString().padLeft(2, '0')}-'
+      '${day.toString().padLeft(2, '0')}';
 }

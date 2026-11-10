@@ -39,11 +39,27 @@ class ContentResponseModel extends ContentModel {
     );
   }
 
-  /// Converte para JSON para salvar no Firestore
+  /// O mesmo objeto com [code] como código e como id do documento.
+  ContentResponseModel withCode(String code) => ContentResponseModel(
+    docId: code,
+    id: code,
+    theme: theme,
+    subtheme: subtheme,
+    intellectualIndicator: intellectualIndicator,
+    contentInfo: contentInfo,
+    originInfo: originInfo,
+    registrationInfo: registrationInfo,
+    rightsInfo: rightsInfo,
+    preservationAction: preservationAction,
+  );
+
+  /// Documento como os objetos já cadastrados: siglas no `themeId`/`subthemeId` e os nomes ao lado.
   Map<String, dynamic> toJson() => {
     'id': id,
-    'themeId': theme.value,
-    'subthemeId': subtheme.value,
+    'themeId': theme.id,
+    'themeTitle': theme.name,
+    'subthemeId': subtheme.id,
+    'subthemeTitle': subtheme.name,
     'intellectualIndicator': intellectualIndicator.toJson(),
     'contentInfo': contentInfo.toJson(),
     'originInfo': originInfo.toJson(),
@@ -77,13 +93,21 @@ class ContentResponseModel extends ContentModel {
           json['registrationInfo'] as Map<String, dynamic>,
         ),
         rightsInfo: RightsInfo.fromJson(json['rightsInfo'] as Map<String, dynamic>),
-        preservationAction: json['preservationOperation'] != null
-            ? PreservationAction.fromJson(json['preservationAction'] as Map<String, dynamic>)
-            : null,
+        preservationAction: _preservationOf(json['preservationAction']),
       );
     } catch (e) {
       rethrow;
     }
+  }
+}
+
+/// Um valor ruim na preservação tira só esses campos, e não o objeto do site.
+PreservationAction? _preservationOf(Object? raw) {
+  if (raw is! Map<String, dynamic>) return null;
+  try {
+    return PreservationAction.fromJson(raw);
+  } catch (_) {
+    return null;
   }
 }
 

@@ -14,6 +14,9 @@ abstract class AuthRepository {
   /// Obtém o usuário atualmente logado
   Future<Either<AuthFailure, User>> currentUser();
 
+  /// Usuário da sessão salva, ou nulo sem sessão ou se o Firebase não responder a tempo
+  Future<User?> restoredUser();
+
   /// Stream de mudanças no estado de autenticação
   Stream<User?> get authStateChanges;
 }
@@ -22,7 +25,10 @@ abstract class AuthRepository {
 class AuthRepositoryImpl implements AuthRepository {
   final FirebaseAuthDatasource _datasource;
 
-  AuthRepositoryImpl(this._datasource);
+  /// Sem resposta do Firebase (rede bloqueada), o login abre em vez de a página ficar parada.
+  final Duration restoreTimeout;
+
+  AuthRepositoryImpl(this._datasource, {this.restoreTimeout = const Duration(seconds: 3)});
 
   @override
   Future<Either<AuthFailure, User>> login(String email, String password) async {
@@ -62,6 +68,15 @@ class AuthRepositoryImpl implements AuthRepository {
       return Left(AuthFailure.fromException(error));
     } catch (_) {
       return const Left(UserNotFound());
+    }
+  }
+
+  @override
+  Future<User?> restoredUser() async {
+    try {
+      return await _datasource.restoredUser().timeout(restoreTimeout);
+    } catch (_) {
+      return null;
     }
   }
 

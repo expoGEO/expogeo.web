@@ -1,4 +1,5 @@
 import 'package:expogeo/core/models/content_model.dart';
+import 'package:expogeo/core/models/content_type_display.dart';
 import 'package:expogeo/core/models/theme_data_model.dart';
 import 'package:expogeo/core/utils/string/string_utils.dart';
 import 'package:expogeo/features/catalog/infra/models/catalog_model.dart';
@@ -16,16 +17,6 @@ abstract class SubthemeObjectsStoreBase with Store {
 
   static const int pageSize = 6;
   static const int maxSubjects = 8;
-
-  // A ordem do enum `ContentType` põe Imagem antes de Documento.
-  static const List<ContentType> _typeOrder = [
-    ContentType.site,
-    ContentType.video,
-    ContentType.documento,
-    ContentType.aplicativo,
-    ContentType.imagem,
-    ContentType.outro,
-  ];
 
   final SubthemeEnum subtheme;
   final CatalogStore _catalog;
@@ -79,7 +70,7 @@ abstract class SubthemeObjectsStoreBase with Store {
   }
 
   @computed
-  List<ContentType> get chipTypes => _typeOrder.where(typeCounts.containsKey).toList();
+  List<ContentType> get chipTypes => contentTypeOrder.where(typeCounts.containsKey).toList();
 
   @computed
   List<CatalogItem> get results {

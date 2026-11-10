@@ -39,12 +39,14 @@ abstract class AuthStoreBase with Store {
     result.fold((failure) => user = null, (user) => this.user = user);
   }
 
-  /// Faz login com email e senha
+  /// Faz login com email e senha; ignora a chamada enquanto outra tentativa está em andamento
   @action
   Future<void> login(String email, String password) async {
+    if (state.loginState is LoginStateLoading) return;
+
     state = state.copyWith(loginState: const LoginState.loading());
 
-    final result = await _authRepository.login(email, password);
+    final result = await _authRepository.login(email.trim(), password);
 
     result.fold((failure) => state = state.copyWith(loginState: LoginState.error(failure)), (user) {
       this.user = user;

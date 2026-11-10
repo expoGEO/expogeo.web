@@ -48,6 +48,9 @@ class AppColors {
   Color inkSecondary = const Color(0xFF5E5852);
   Color line = const Color(0xFFE6E1DA);
 
+  /// Contorno de seletor no hover e com o menu aberto.
+  Color lineStrong = const Color(0xFFCFC8BE);
+
   /// Contorno de campo de formulário, que não tem outro limite visível: 3,8:1 sobre [page].
   Color fieldBorder = const Color(0xFF8A8178);
 
@@ -76,7 +79,19 @@ class AppColors {
   /// Tracejado da caixa de estado, só decorativo.
   Color stateBoxBorder = const Color(0xFFD4CDC3);
 
+  /// Fundo escurecido atrás da gaveta e dos diálogos do painel.
+  Color scrim = const Color(0x731C1917);
+
+  /// Fundo da linha de lista no hover.
+  Color rowHover = const Color(0xFFFCFBF9);
+
+  /// Ícone do aviso curto sobre [ink].
+  Color toastIcon = const Color(0xFF9FD8AE);
+
   Color error = const Color(0xFFB3261E);
+
+  /// Hover do botão de perigo.
+  Color errorStrong = const Color(0xFF8F1D17);
   Color errorSurface = const Color(0xFFFBE9E7);
   Color success = const Color(0xFF1C6B34);
   Color successSurface = const Color(0xFFE4F3E8);

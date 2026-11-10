@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:expogeo/features/admin/panel/infra/datasources/content_datasource.dart';
 import 'package:expogeo/features/admin/panel/infra/repositories/content_repository.dart';
+import 'package:expogeo/features/admin/panel/presentation/panel_list_memory.dart';
 import 'package:expogeo/features/admin/panel/presentation/stores/content_store.dart';
 import 'package:get_it/get_it.dart';
 
@@ -22,5 +23,7 @@ class PanelSetup {
 
     // Registra o store de conteúdo
     getIt.registerSingleton<ContentStore>(ContentStore(getIt<ContentRepository>()));
+
+    getIt.registerSingleton<PanelListMemory>(PanelListMemory());
   }
 }

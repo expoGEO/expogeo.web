@@ -111,10 +111,10 @@ Quatro specs: 4.1 → 012-login; 4.2 → 013-painel-estrutura; 4.3 → 014-paine
 
 | # | Entrega | Notas técnicas | Depende de |
 |---|---|---|---|
-| 4.1 | Login (T-08) | Duas colunas, erro único de credenciais, "Entrando…" | 0.x |
-| 4.2 | Moldura do painel e "Temas e subtemas" (T-09) | Barra, menu lateral com contagens, gaveta, endereços por vista, toast, dica e diálogo compartilhados | 4.1, Q-04 |
-| 4.3 | Lista de objetos (T-09) | Linhas no lugar da `DataTable`, busca e filtros no endereço, ações com dica, exclusão com confirmação | 4.2 |
-| 4.4 | Editor (T-10) | Página própria em `/admin/painel/objetos/novo` e `/:codigo/editar`, resumo de pendências, prévia, código gerado | 4.3, Q-01, Q-05 |
+| 4.1 | Login (T-08) → specs/012-login (concluído) | Duas colunas, erro único de credenciais, "Entrando…" | 0.x |
+| 4.2 | Moldura do painel e "Temas e subtemas" (T-09) → specs/013-painel-estrutura (concluído) | Barra, menu lateral com contagens, gaveta, endereços por vista, toast, dica e diálogo compartilhados | 4.1, Q-04 |
+| 4.3 | Lista de objetos (T-09) → specs/014-painel-objetos (concluído) | Linhas no lugar da `DataTable`, busca e filtros no endereço, ações com dica, exclusão com confirmação | 4.2 |
+| 4.4 | Editor (T-10) → specs/015-editor-objeto (concluído com ressalvas) | Página própria em `/admin/painel/objetos/novo` e `/:codigo/editar`, resumo de pendências, prévia, código gerado | 4.3, Q-01, Q-05 |
 
 **Aceite das Fases 2 a 4:** telas iguais ao protótipo nas três larguras, com estados de carregando, vazio e erro. No painel, entrar, listar, filtrar, criar, editar e excluir funcionam como antes. Todo botão só de ícone tem dica e nome acessível. O que exige login precisa de credenciais de teste no dev.
 
@@ -140,13 +140,13 @@ Uma spec: 5.1 e 5.2 → 016-limpeza-legado.
 | [009-pagina-objeto](../specs/009-pagina-objeto/spec.md) | 2.3 | verificada com ressalvas |
 | [010-contato](../specs/010-contato/spec.md) | 3.1 | verificada com ressalvas |
 | [011-estados-especiais](../specs/011-estados-especiais/spec.md) | 3.2 | verificada |
-| [012-login](../specs/012-login/spec.md) | 4.1 | aprovada |
-| [013-painel-estrutura](../specs/013-painel-estrutura/spec.md) | 4.2 | aprovada |
-| [014-painel-objetos](../specs/014-painel-objetos/spec.md) | 4.3 | aprovada |
-| [015-editor-objeto](../specs/015-editor-objeto/spec.md) | 4.4 | aprovada |
+| [012-login](../specs/012-login/spec.md) | 4.1 | verificada |
+| [013-painel-estrutura](../specs/013-painel-estrutura/spec.md) | 4.2 | verificada |
+| [014-painel-objetos](../specs/014-painel-objetos/spec.md) | 4.3 | verificada |
+| [015-editor-objeto](../specs/015-editor-objeto/spec.md) | 4.4 | verificada com ressalvas |
 | [016-limpeza-legado](../specs/016-limpeza-legado/spec.md) | 5.1–5.2 | aprovada |
 
-Todas as perguntas foram respondidas e as 16 specs aprovadas em 2026-10-27. Fase 0 (001 a 003) e Fase 1 (004 a 006) concluídas em 2026-11-03; Fase 2 (007 a 009) concluída em 2026-11-05; Fase 3 (010 e 011) concluída em 2026-11-08; próximo passo: Fase 4 (`/sdd-fase Fase 4`).
+Todas as perguntas foram respondidas e as 16 specs aprovadas em 2026-10-27. Fase 0 (001 a 003) e Fase 1 (004 a 006) concluídas em 2026-11-03; Fase 2 (007 a 009) concluída em 2026-11-05; Fase 3 (010 e 011) concluída em 2026-11-08; Fase 4 (012 a 015) concluída em 2026-11-09; próximo passo: Fase 5 (016).
 
 ---
 

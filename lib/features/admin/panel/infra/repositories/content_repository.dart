@@ -10,19 +10,31 @@ class ContentRepository {
 
   ContentRepository(this._datasource);
 
-  /// Cria um novo conteúdo com enum
-  Future<Either<ContentFailure, String>> createContent({
+  /// Cria o objeto com o próximo código livre do subtema; devolve o código gravado.
+  Future<Either<ContentFailure, String>> createWithCode({
     required SubthemeEnum subtheme,
     required ContentResponseModel content,
-    ThemeEnum? theme,
   }) async {
     try {
-      final docId = await _datasource.createContent(
-        content: content,
-        subtheme: subtheme,
-        theme: theme,
+      return Right(await _datasource.createWithCode(content: content, subtheme: subtheme));
+    } on ContentFailure catch (e) {
+      return Left(e);
+    } catch (e) {
+      return Left(GenericFailure('Erro inesperado: ${e.toString()}'));
+    }
+  }
+
+  /// Leva o objeto para [to] com um código novo; devolve o código gravado.
+  Future<Either<ContentFailure, String>> moveContent({
+    required SubthemeEnum from,
+    required String docId,
+    required SubthemeEnum to,
+    required ContentResponseModel content,
+  }) async {
+    try {
+      return Right(
+        await _datasource.moveContent(from: from, docId: docId, to: to, content: content),
       );
-      return Right(docId);
     } on ContentFailure catch (e) {
       return Left(e);
     } catch (e) {

@@ -1,6 +1,6 @@
 # 018. Enxugar a documentação
 
-- **Status:** implementada
+- **Status:** verificada
 - **Item do planejamento:** Fase 5, item 5.4
 - **Protótipo:** não se aplica
 - **Criada em:** 2026-11-09

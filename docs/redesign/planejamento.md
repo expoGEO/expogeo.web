@@ -119,12 +119,14 @@ Quatro specs: 4.1 → 012-login; 4.2 → 013-painel-estrutura; 4.3 → 014-paine
 **Aceite das Fases 2 a 4:** telas iguais ao protótipo nas três larguras, com estados de carregando, vazio e erro. No painel, entrar, listar, filtrar, criar, editar e excluir funcionam como antes. Todo botão só de ícone tem dica e nome acessível. O que exige login precisa de credenciais de teste no dev.
 
 ### Fase 5: Limpeza
-Uma spec: 5.1 e 5.2 → 016-limpeza-legado.
+Três specs: 5.1 e 5.2 → 016-limpeza-legado; 5.3 → 017-limpeza-comentarios; 5.4 → 018-enxugar-docs.
 
 | # | Entrega | Notas técnicas |
 |---|---|---|
 | 5.1 | Código, tokens, Aleo, `google_fonts`, `num_extension` e pacotes sem uso | Só o que nenhuma tela usa; README atualizado |
 | 5.2 | Assets sem uso | PNGs substituídos pelos WebP e arquivos sem referência |
+| 5.3 | Comentários do repositório | Só comentários breves e de real importância (o porquê), sem redundância, sem citar spec, fase, tarefa ou protótipo; genéricos, pois as specs somem |
+| 5.4 | Enxugar a documentação | Reduzir os `.md` (specs, planos, tarefas, verificações, planejamento) ao mínimo que registre fundação, arquitetura, estrutura, painel e deploy, no estilo de `../observatorio_geo_hist/docs/` (`architecture.md`, `admin-panel.md`, `deployment.md`, `redesign-history.md`, `specs/README.md`); manter só o histórico condensado |
 
 ### Mapa das specs
 | Spec | Itens | Status |

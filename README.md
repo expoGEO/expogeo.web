@@ -80,7 +80,7 @@ Proporcionar uma experiência de aprendizado dinâmica e visual sobre os princip
 ### 1. 🏠 Página Inicial
 
 - **Banner com logo e descrição**
-- **Carrossel de temas** com autoplay ao hover
+- **Anel dos temas** em volta da marca
 - **Cards responsivos** (1 mobile, 2 tablet, 3 desktop)
 - **Navegação intuitiva**
 
@@ -93,9 +93,7 @@ Proporcionar uma experiência de aprendizado dinâmica e visual sobre os princip
 
 ### 3. 🔍 Conteúdos por Subtema
 
-- **Paginação cursor-based** com Firestore
-- **Navegação anterior/próxima** com rastreamento de histórico
-- **Page history tracking** para navegação bidirecional
+- **Busca, filtros e "Carregar mais"** no navegador, sobre o catálogo único
 - **Estados reativos** (loading, error, success)
 - **Tratamento de erros** com mensagens descritivas
 
@@ -200,7 +198,6 @@ Faixas em `ScreenUtils` (`lib/core/utils/screen/`). Os componentes novos usam ta
 
 ### Adaptações por Device
 
-- **Carrossel**: Ajusta quantidade de cards visíveis
 - **Navegação**: Botões ocultos em mobile
 - **Padding/Margins**: Dinâmicos conforme viewport
 - **Tipografia**: Escalas proporcionais
@@ -209,14 +206,14 @@ Faixas em `ScreenUtils` (`lib/core/utils/screen/`). Os componentes novos usam ta
 
 ## 🎨 Design System
 
-O redesign (em andamento, ver [planejamento](docs/redesign/planejamento.md)) usa a base visual do Observatório. Tokens novos convivem com os antigos até a limpeza final.
+O redesign (em andamento, ver [planejamento](docs/redesign/planejamento.md)) usa a base visual do Observatório.
 
 - **Tokens:** `AppTheme.colors` (`page`, `ink`, `accent`...), `.dimensions` (`spacing`, `radii`, `shadows`, `focus`), `AppGradients.brand` (degradê decorativo, nunca sob texto pequeno ou botões) e `AppTheme.typography.of(context)`, com tamanhos por faixa de largura.
 - **Fontes:** Bricolage Grotesque (títulos) e Figtree (texto), embutidas em `assets/fonts/`.
 - **Clicável:** `#C94400`, com foco visível e contraste mínimo de 4,5:1.
 - **Estrutura das páginas públicas:** `SiteScaffold` (faixa do Observatório que rola, navbar fixa com menu Temas e rodapé escuro) em `lib/core/components/structure/`.
 - **Componentes:** `AppButton.primary/.secondary/.ghost/.danger` (com `isLoading`, que mostra o indicador e ignora toques durante uma ação; `danger` para a ação que apaga), `AppIconButton` (botão só de ícone, com dica obrigatória no hover e no foco do teclado e nome acessível) e `InlineLink` (`components/button/`), `AppFilterSelect` (`components/field/`), seletor de filtro com menu, nome acessível e estado desativado lido como indisponível, `showConfirmDialog` (`components/dialog/`), confirmação com foco inicial em "Cancelar" que devolve `true` só quando a pessoa confirma, `FormTextField` (com senha, sufixo dentro da caixa e dica) e `FormErrorAlert` (`components/form/`), para formulários do site e do painel, o segundo como aviso único acima dos campos, `AppMedallion` (`components/image/`), para ilustrações de temas em 1:1 com placeholder, `StateMessageBox`, `StateErrorBox` e `StateErrorInline` (`components/state/`), para vazio, busca sem resultado, erro de página e erro de seção, e `AppSkeleton` e `LoadingRegion` (`components/skeleton/`), para o carregando, lido uma vez como "Carregando…". Avisos curtos pelo `Messenger` (`utils/messenger/`): caixa no rodapé em fundo escuro (vermelho no erro), um por vez e anunciada a leitores de tela.
-- **Imagens:** ilustrações e logos de apoio em WebP (`AppImages`), gerados pelos scripts de `tool/images/`; ícones e imagem de compartilhamento por `tool/web_icons/`.
+- **Imagens:** ilustrações e logos de apoio em WebP (`AppImages`), convertidos fora do projeto; ícones e imagem de compartilhamento por `tool/web_icons/`.
 
 ---
 
@@ -251,12 +248,7 @@ Os objetos vêm de um catálogo único, carregado uma vez por `collectionGroup('
 
 ### Tratamento de Erros
 
-```dart
-result.fold(
-  (failure) => state = ContentPaginationStateError(failure.message),
-  (data) => state = ContentPaginationStateSuccess(data),
-);
-```
+Os repositórios devolvem `Either<Failure, T>` (dartz). A store trata os dois lados com `fold` e guarda a mensagem do erro para a tela mostrar o estado de erro.
 
 ---
 
@@ -271,7 +263,7 @@ result.fold(
 
 ### 🔤 Nomenclatura
 
-- **Classes**: PascalCase (`ContentThemeDatasource`)
+- **Classes**: PascalCase (`ContentDatasource`)
 - **Métodos/Variáveis**: camelCase (`getContentsBySubtheme`)
 - **Constantes**: camelCase (`defaultPageSize`)
 - **Arquivos**: snake_case (`content_theme_datasource.dart`)

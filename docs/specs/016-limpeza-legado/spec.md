@@ -1,6 +1,6 @@
 # 016. Limpeza: código, tokens, fontes, pacotes e assets sem uso
 
-- **Status:** aprovada
+- **Status:** implementada
 - **Item do planejamento:** Fase 5, itens 5.1 e 5.2
 - **Protótipo:** não se aplica
 - **Criada em:** 2026-10-27

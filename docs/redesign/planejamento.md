@@ -123,8 +123,8 @@ Três specs: 5.1 e 5.2 → 016-limpeza-legado; 5.3 → 017-limpeza-comentarios; 
 
 | # | Entrega | Notas técnicas |
 |---|---|---|
-| 5.1 | Código, tokens, Aleo, `google_fonts`, `num_extension` e pacotes sem uso | Só o que nenhuma tela usa; README atualizado |
-| 5.2 | Assets sem uso | PNGs substituídos pelos WebP e arquivos sem referência |
+| 5.1 | Código, tokens, Aleo, `google_fonts`, `num_extension` e pacotes sem uso → specs/016-limpeza-legado (concluído) | Só o que nenhuma tela usa; README atualizado |
+| 5.2 | Assets sem uso → specs/016-limpeza-legado (concluído) | PNGs substituídos pelos WebP e arquivos sem referência |
 | 5.3 | Comentários do repositório | Só comentários breves e de real importância (o porquê), sem redundância, sem citar spec, fase, tarefa ou protótipo; genéricos, pois as specs somem |
 | 5.4 | Enxugar a documentação | Reduzir os `.md` (specs, planos, tarefas, verificações, planejamento) ao mínimo que registre fundação, arquitetura, estrutura, painel e deploy, no estilo de `../observatorio_geo_hist/docs/` (`architecture.md`, `admin-panel.md`, `deployment.md`, `redesign-history.md`, `specs/README.md`); manter só o histórico condensado |
 

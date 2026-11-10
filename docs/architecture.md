@@ -2,7 +2,7 @@
 
 Flutter Web organizado em **features**, com camadas inspiradas em Clean Architecture. Backend Firebase (Firestore e Auth), **MobX** para estado, **GetIt** para injeção, **GoRouter** para rotas e **dartz** (`Either`) para erros.
 
-A expoGEO é uma sub-marca do Observatório e reaproveita a base visual do projeto vizinho `observatorio_geo_hist` (tokens, fontes, botões, navbar, rodapé, estados). O painel administrativo tem documento próprio: [admin-panel.md](admin-panel.md). O deploy está em [deployment.md](deployment.md).
+A expoGEO é uma sub-marca do Observatório e reaproveita a base visual do projeto vizinho `observatorio_geo_hist` (tokens, fontes, botões, navbar, rodapé, estados); antes de criar um componente, procure o equivalente lá e no `core`. O painel administrativo tem documento próprio: [admin-panel.md](admin-panel.md). O deploy está em [deployment.md](deployment.md).
 
 ## Pilha
 
@@ -99,7 +99,7 @@ Todas as telas leem o mesmo **catálogo**: `lib/features/catalog/` faz uma consu
 ## Acessibilidade
 
 - Toda área clicável tem foco visível por teclado e nome acessível (`Semantics`/dica); preferir `InkWell` e os botões do Material a `GestureDetector` solto. Cartão inteiro como link usa um clique numa camada fora da árvore de acessibilidade, para não criar um segundo ponto de foco que engula o título.
-- Estados de carregamento, sucesso e erro são anunciados por `announce` (`SemanticsService.announce`) ou `LoadingRegion`.
+- Estados de carregamento, sucesso e erro são anunciados por `announceToScreenReader` (`SemanticsService.announce`) ou `LoadingRegion`.
 - Limites do Flutter 3.35.5 no web: `toggled` sai como `aria-checked` (não há `aria-pressed`); `hint` de campo de texto é ignorado; `liveRegion` não vale num nó com papel nem em título; `InlineLink` com `linkUrl` externo faz o motor navegar a própria aba além de abrir a nova, por isso links de texto externos não levam `href`.
 - O `SelectionArea` cria uma visão de plataforma que vira parada invisível de Tab; envolver em `ExcludeFocusTraversal` onde ele for aninhado.
 - Dica de botão aberta por foco deve conferir se o botão ainda tem o foco ao abrir; seletor recriado a cada escolha tira o foco do campo, então só é recriado quando a mudança vem de fora.
@@ -116,7 +116,7 @@ Todas as telas leem o mesmo **catálogo**: `lib/features/catalog/` faz uma consu
 
 - Interface, documentação, comentários e commits em **português do Brasil**; nomes de código em inglês. Classes em PascalCase, métodos e variáveis em camelCase, arquivos em snake_case.
 - Comentários são exceção: só o porquê que o código não mostra, em uma ou duas linhas; sem referência a spec, fase ou protótipo; descrevem a regra de hoje, sem "antigo", "novo" ou "agora". `///` só quando traz o que o nome e o tipo não dizem.
-- Commits `tipo: descrição` (`feat`, `fix`, `refactor`, `docs`, `chore`), só quando pedidos. Push na `main` publica a produção; o fluxo está em [deployment.md](deployment.md).
+- Commits `tipo: descrição` (`feat`, `fix`, `refactor`, `docs`, `chore`), só quando pedidos; push só com pedido explícito. Push na `main` publica a produção e nunca é direto; o fluxo está em [deployment.md](deployment.md).
 - Comandos com FVM: `fvm flutter pub get`, `fvm flutter run -d chrome`, `fvm flutter analyze`, `fvm dart run build_runner build --delete-conflicting-outputs` (após mudar stores MobX ou modelos Freezed; os `*.g.dart` ficam no repositório e não passam pelo format), `fvm dart format` (largura 100, conferida no CI), `fvm flutter build web --release`, `fvm flutter test`.
 - Testes em `test/`, espelhando `lib/`, com apoios em `test/support/` (`fake_auth`, `fake_content`, `fake_url_launcher`, `semantics`). Numa pasta com acento no caminho, `analyze`, `test` e `format` falham ou perdem o `analysis_options.yaml`: rode numa cópia em caminho ASCII.
 - O ambiente vem de `--dart-define=APP_ENV=dev|prod` (padrão dev; ver [deployment.md](deployment.md)).

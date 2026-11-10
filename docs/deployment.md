@@ -48,7 +48,7 @@ Cada deploy usa um *Environment* do GitHub (`DEV` e `PROD`) com:
 - `FTP_HOST`, `FTP_USER` e `FTP_PASSWORD`. Cada usuário FTP é restrito à pasta do próprio ambiente, então o dev não alcança a produção.
 - `FIREBASE_SERVICE_ACCOUNT`: JSON de conta de serviço do projeto correspondente, com os papéis *Cloud Datastore Index Admin*, *Firebase Rules Admin* e *Service Usage Consumer*, para publicar índices e regras.
 
-Chaves de serviço nunca entram no repositório (`*-credentials.json` e `bin/venv/` estão no `.gitignore`).
+Chaves de serviço nunca entram no repositório (`*-credentials.json` e `bin/venv/` estão no `.gitignore`). Uma chave de administrador da produção já esteve no repositório: foi revogada, mas continua no histórico do Git, então nenhuma chave antiga vale como credencial.
 
 ## Diferenças entre dev e produção
 

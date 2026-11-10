@@ -40,7 +40,7 @@ A lista, as contagens e a busca vêm do catálogo único (`lib/features/catalog/
 
 ## 3. Login
 
-Duas colunas (marca sobre fundo escuro com anéis e formulário); abaixo de 1024 px a faixa da marca vem acima do formulário. Sem navbar nem rodapé do site. O erro é único para credenciais erradas (`invalid-credential`, `user-not-found`, `wrong-password`, `invalid-email`), com mensagem própria para falha de rede; o texto é mapeado na apresentação, não nas `AuthFailure`. Validação só depois da primeira tentativa; "Entrando…" no `AppButton` com o botão inativo (sem a opacidade de desativado, para manter o contraste); proteção contra envio repetido na página e na store; aviso anunciado por `announce`; botão de senha com `toggled`. O aviso só aparece se veio desta tela. "Voltar ao site" é um `AppButton.ghost` com seta.
+Duas colunas (marca sobre fundo escuro com anéis e formulário); abaixo de 1024 px a faixa da marca vem acima do formulário. Sem navbar nem rodapé do site. O erro é único para credenciais erradas (`invalid-credential`, `user-not-found`, `wrong-password`, `invalid-email`), com mensagem própria para falha de rede; o texto é mapeado na apresentação, não nas `AuthFailure`. Validação só depois da primeira tentativa; "Entrando…" no `AppButton` com o botão inativo (sem a opacidade de desativado, para manter o contraste); proteção contra envio repetido na página e na store; aviso anunciado por `announceToScreenReader`; botão de senha com `toggled`. O aviso só aparece se veio desta tela. "Voltar ao site" é um `AppButton.ghost` com seta.
 
 ## 4. Moldura
 

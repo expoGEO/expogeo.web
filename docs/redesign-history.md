@@ -9,7 +9,7 @@ git ls-tree -r --name-only redesign-specs docs/specs
 
 A tag é criada localmente no encerramento da fase de limpeza, sem `git push` de tag; até lá, o mesmo material está no último commit antes da remoção (`git log --diff-filter=D --name-only -- docs/specs`). Não há `future-ideas.md`: as ideias futuras estão no fim deste documento.
 
-- **Protótipo navegável (todas as telas, inclusive login, painel e editor):** https://claude.ai/artifact/6tQuscgpFQk87MU2JZPNNs. Continua sendo a referência visual.
+- **Protótipo navegável (todas as telas, inclusive login, painel e editor):** https://claude.ai/artifact/6tQuscgpFQk87MU2JZPNNs. Continua sendo a referência visual; leia-o com a ferramenta Artifact (`action: read`), não com WebFetch.
 - **Base visual e de código:** o redesign do Observatório (`../observatorio_geo_hist`, protótipo em https://claude.ai/artifact/PimRbbQyUDbqrapiv8HseH). Tokens, fontes, botões, navbar, rodapé, estados e componentes do painel foram copiados e adaptados, não redesenhados.
 - **Princípios:** reaproveitar o Observatório; componentes compartilhados primeiro; tamanhos fixos por faixa de largura; aceite em 390, 768 e 1280 px, sem rolagem horizontal nem `overflow`, com contraste mínimo de 4,5:1 e navegação por teclado.
 

@@ -1,3 +1,4 @@
+// Utilitário de terminal: imprime o resultado e deixa variáveis só para inspeção.
 // ignore_for_file: avoid_print, unused_local_variable
 
 /// Funções de validação e depuração dos dados antes do seed.

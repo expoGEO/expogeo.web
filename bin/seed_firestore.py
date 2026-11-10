@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
 """Grava no Firestore do projeto escolhido os objetos de bin/content_seed_data.json.
-
-Prefira ./run_seed.sh <dev|prod>, que confirma antes de gravar em produção. Usa as credenciais
-de `gcloud auth application-default login` ou de GOOGLE_APPLICATION_CREDENTIALS.
-"""
+Prefira ./run_seed.sh <dev|prod>, que confirma antes de gravar em produção."""
 
 import argparse
 import json

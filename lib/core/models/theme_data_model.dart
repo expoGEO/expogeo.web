@@ -43,7 +43,6 @@ enum ThemeEnum {
 }
 
 enum SubthemeEnum {
-  // Representações Espaciais
   coordenadasGeograficas('coordenadas-geograficas', 'Coordenadas Geográficas'),
   compositorMapas('compositor-mapas', 'Compositor de Mapas'),
   fusoHorario('fuso-horario', 'Fuso Horário'),
@@ -53,7 +52,6 @@ enum SubthemeEnum {
   movimentosTerra('movimentos-terra', 'Movimentos da Terra'),
   pontosCardeais('pontos-cardeais', 'Pontos Cardeais'),
 
-  // Natureza e Meio Ambiente
   poluicaoAgua('poluicao-agua', 'Poluição da Água'),
   poluicaoAr('poluicao-ar', 'Poluição do Ar'),
   desmatamento('desmatamento', 'Desmatamento'),
@@ -67,7 +65,6 @@ enum SubthemeEnum {
   baciasHidrograficas('bacias-hidrograficas', 'Bacias Hidrográficas'),
   usoAgua('uso-agua', 'Uso da Água'),
 
-  // Espaços Urbanos e Rurais
   espacoUrbanoBrasileiro('espaco-urbano-brasileiro', 'Espaço Urbano Brasileiro'),
   globalizacaoMobilidade('globalizacao-mobilidade', 'Globalização e Mobilidade'),
   industriaTransformacao('industria-transformacao', 'Indústria e Transformação'),
@@ -75,7 +72,6 @@ enum SubthemeEnum {
   conflitosTerra('conflitos-terra', 'Conflitos pela Terra'),
   mercadoAgropecuario('mercado-agropecuario', 'Mercado Agropecuário'),
 
-  // Cultura e Política
   geopolitica('geopolitica', 'Geopolítica'),
   censoDemografico('censo-demografico', 'Censo Demográfico'),
   regioesAdministrativas('regioes-administrativas', 'Regiões Administrativas'),

@@ -1,6 +1,6 @@
 # Tarefas da 017. Limpeza dos comentários do repositório
 
-Legenda: `- [x]` a fazer, `- [x]` feita.
+Legenda: `- [ ]` a fazer, `- [x]` feita.
 
 Critérios de aceite da spec, na ordem: CA1 sem termos de spec/fase/tarefa/protótipo/redesign/Q-xx/número; CA2 termos temporais só com justificativa; CA3 nenhum bloco de 3 linhas ou mais; CA4 sem inglês; CA5 sem código comentado; CA6 sem `///` redundante; CA7 todas as áreas revisadas por inteiro; CA8 nenhuma mudança de comportamento; CA9 analyze, testes, format e build; CA10 `ignore` com motivo; CA11 regra do `docs/specs/README.md` alinhada.
 

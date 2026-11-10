@@ -1,6 +1,6 @@
 # 017. Limpeza dos comentários do repositório
 
-- **Status:** implementada
+- **Status:** verificada com ressalvas
 - **Item do planejamento:** Fase 5, item 5.3
 - **Protótipo:** não se aplica
 - **Criada em:** 2026-11-09
@@ -91,3 +91,4 @@ Nenhuma linha que não seja comentário muda. Nada de renomear, reformatar além
 - 2026-11-09: criada.
 - 2026-11-09: aprovada (modo autônomo).
 - 2026-11-10: implementada. `analysis_options.yaml` perdeu o texto padrão do modelo (critérios 3 e 5 prevalecem sobre a decisão de mantê-lo).
+- 2026-11-10: verificada com ressalvas (`verificacao.md`).

@@ -66,8 +66,21 @@ jobs:
       run: |
         printf 'User-agent: *\nDisallow: /\n' > build/web/robots.txt
 
-    # O .htaccess do dev (senha, reescrita de rotas e cache) fica só no servidor e
-    # não é enviado por aqui: o deploy só apaga arquivos que ele mesmo enviou.
+    # O web/.htaccess (reescrita de rotas, compressão e cache) vai junto com o build. Aqui ele
+    # ganha a senha do dev. O arquivo de senhas (.htpasswd) fica fora da pasta pública e é
+    # criado uma vez no cPanel (Privacidade de Diretório); só o caminho dele vem da variável
+    # HTPASSWD_PATH do ambiente DEV. Sem ela o deploy falha, em vez de publicar o dev aberto.
+    - name: Proteger o dev com senha
+      env:
+        HTPASSWD_PATH: ${{ vars.HTPASSWD_PATH }}
+      run: |
+        test -n "$HTPASSWD_PATH" || { echo '::error::Defina a variável HTPASSWD_PATH no ambiente DEV'; exit 1; }
+        # O "Require all granted" do arquivo comum liberaria JS, imagens e fontes sem senha.
+        sed -i '/^<FilesMatch /,/^<\/FilesMatch>/d' build/web/.htaccess
+        ! grep -q 'Require all granted' build/web/.htaccess
+        printf '\nAuthType Basic\nAuthName "ExpoGeo | Ambiente de Testes"\nAuthUserFile "%s"\nRequire valid-user\n' "$HTPASSWD_PATH" >> build/web/.htaccess
+        grep -q '^Require valid-user' build/web/.htaccess
+
     - name: Sync build/web to HostGator (dev)
       uses: SamKirkland/FTP-Deploy-Action@4.3.0
       with:

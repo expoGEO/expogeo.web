@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
-# Gera os ícones e a imagem de compartilhamento em web/ a partir das páginas
-# desta pasta, "fotografadas" pelo Google Chrome sem janela.
-#
-# Uso: tool/web_icons/generate.sh [pasta_de_saida]
-# Sem argumento, grava direto em web/. Só precisa rodar de novo se a marca
-# (assets/images/logo_simple.png) mudar.
+# Gera os ícones e a imagem de compartilhamento a partir das páginas desta pasta, fotografadas
+# pelo Chrome sem janela. Uso: tool/web_icons/generate.sh [pasta_de_saida] (padrão: web/).
 set -euo pipefail
 
 CHROME="${CHROME:-/Applications/Google Chrome.app/Contents/MacOS/Google Chrome}"

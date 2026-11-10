@@ -29,9 +29,8 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    # Antes do site, para o código novo não chegar sem as regras e os índices de que depende.
-    # As regras do repositório substituem as do projeto; edições feitas no console se perdem.
-    # Índices só são criados e atualizados: sem --force, os que existam só no projeto ficam.
+    # Antes do site, porque o código depende das regras e dos índices. As regras do repositório
+    # substituem as do projeto; os índices só são criados e atualizados (sem --force).
     - name: Publicar regras e índices do Firestore
       env:
         FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}

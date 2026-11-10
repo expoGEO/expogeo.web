@@ -36,19 +36,15 @@ dependencies:
   flutter_svg: ^2.2.2
   url_launcher: ^6.3.1
 
-  # Firebase
   firebase_core: ^3.0.0
   cloud_firestore: ^5.0.0
   firebase_auth: ^5.0.0
 
-  # State Management
   mobx: ^2.4.0
   flutter_mobx: ^2.1.0
 
-  # Dependency Injection
   get_it: ^7.6.0
 
-  # Utilities
   dartz: ^0.10.1
   freezed_annotation: ^2.4.1
 
@@ -58,7 +54,6 @@ dev_dependencies:
 
   flutter_lints: ^5.0.0
 
-  # Code Generation
   build_runner: ^2.4.12
   mobx_codegen: ^2.5.0
   freezed: ^2.4.5

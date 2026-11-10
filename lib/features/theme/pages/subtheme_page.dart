@@ -2,6 +2,7 @@ import 'package:expogeo/core/components/button/app_button.dart';
 import 'package:expogeo/core/components/image/app_medallion.dart';
 import 'package:expogeo/core/components/reading/breadcrumbs.dart';
 import 'package:expogeo/core/components/reading/page_header.dart';
+import 'package:expogeo/core/components/structure/page_meta_scope.dart';
 import 'package:expogeo/core/components/structure/site_scaffold.dart';
 import 'package:expogeo/core/models/subtheme_model.dart';
 import 'package:expogeo/core/models/theme_data_model.dart';
@@ -9,6 +10,7 @@ import 'package:expogeo/core/models/theme_model.dart';
 import 'package:expogeo/core/navigation/app_router.dart';
 import 'package:expogeo/core/pages/not_found_page.dart';
 import 'package:expogeo/core/theme/app_theme.dart';
+import 'package:expogeo/core/utils/browser/page_meta.dart';
 import 'package:expogeo/core/utils/screen/screen_utils.dart';
 import 'package:expogeo/features/catalog/presentation/stores/catalog_store.dart';
 import 'package:expogeo/features/theme/components/subtheme_lead.dart';
@@ -86,42 +88,51 @@ class _SubthemeViewState extends State<_SubthemeView> {
         ? components.pageHeadMedallion
         : components.pageHeadMedallionCompact;
 
-    return SiteScaffold(
-      slivers: [
-        SliverToBoxAdapter(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              PageHeader(
-                topAction: Transform.translate(
-                  offset: Offset(components.pageHeadBackShift, 0),
-                  child: AppButton.ghost(
-                    text: theme.title,
-                    semanticLabel: 'Voltar para ${theme.title}',
-                    size: AppButtonSize.small,
-                    leadingIcon: Icons.arrow_back,
-                    onPressed: () => context.go(theme.type.route),
+    return PageMetaScope(
+      meta: PageMeta.titled(
+        title: '${subtheme.type.name} · ${theme.title}',
+        description:
+            'Conteúdos digitais sobre ${subtheme.type.name.toLowerCase()} em ${theme.title}: '
+            'sites, vídeos, mapas e aplicativos escolhidos para a sala de aula.',
+        path: subtheme.type.route,
+      ),
+      child: SiteScaffold(
+        slivers: [
+          SliverToBoxAdapter(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                PageHeader(
+                  topAction: Transform.translate(
+                    offset: Offset(components.pageHeadBackShift, 0),
+                    child: AppButton.ghost(
+                      text: theme.title,
+                      semanticLabel: 'Voltar para ${theme.title}',
+                      size: AppButtonSize.small,
+                      leadingIcon: Icons.arrow_back,
+                      onPressed: () => context.go(theme.type.route),
+                    ),
                   ),
+                  breadcrumbs: [
+                    const BreadcrumbItem('Início', route: AppRouter.home),
+                    BreadcrumbItem(theme.title, route: theme.type.route),
+                    BreadcrumbItem(subtheme.type.name),
+                  ],
+                  title: subtheme.type.name,
+                  details: SubthemeLead(subtheme: subtheme.type, store: _catalog),
+                  trailing: AppMedallion(size: medallion, image: subtheme.image),
                 ),
-                breadcrumbs: [
-                  const BreadcrumbItem('Início', route: AppRouter.home),
-                  BreadcrumbItem(theme.title, route: theme.type.route),
-                  BreadcrumbItem(subtheme.type.name),
-                ],
-                title: subtheme.type.name,
-                details: SubthemeLead(subtheme: subtheme.type, store: _catalog),
-                trailing: AppMedallion(size: medallion, image: subtheme.image),
-              ),
-              SubthemeObjectsSection(
-                theme: theme,
-                store: _objects,
-                controller: _searchController,
-                searchFocusNode: _searchFocusNode,
-              ),
-            ],
+                SubthemeObjectsSection(
+                  theme: theme,
+                  store: _objects,
+                  controller: _searchController,
+                  searchFocusNode: _searchFocusNode,
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

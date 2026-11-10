@@ -7,14 +7,15 @@ Critérios de aceite da spec, na ordem: CA1 analyze e testes; CA2 build e tamanh
 Regras de todas as tarefas: antes de apagar, `grep -rn` do nome da classe e do arquivo em `lib/ test/ bin/ tool/`; depois de apagar, `fvm flutter analyze` e `fvm flutter test` na cópia ASCII do scratchpad (sincronizar com `rsync`, ver plano) sem avisos; um commit por grupo, sem push.
 
 ## Grupo 0: base de comparação
-- [ ] **0.1.** Na cópia ASCII do commit atual: `pub get`, `analyze`, `test` verdes; `fvm flutter build web --release`; anotar `du -sk build/web` (**antes**) e o número de testes. Guardar os números para o `verificacao.md`. Atende: CA1, CA2.
+- [x] **0.1.** Na cópia ASCII do commit atual: `pub get`, `analyze`, `test` verdes; `fvm flutter build web --release`; anotar `du -sk build/web` (**antes**) e o número de testes. Guardar os números para o `verificacao.md`. Atende: CA1, CA2.
+  - Nota: build/web antes = 49384 KB (`du -sk`), 1002 testes passando.
 
 ## Grupo A: componentes e utilitários antigos
-- [ ] **A1.** Apagar `primary_button.dart`, `secondary_button.dart`, `rounded_icon_button.dart`, `back_to_button.dart`, `checkbox_button.dart` e `circular_loading.dart` (nessa ordem: consumidores antes do consumido). Conferir que `app_button.dart`, `app_icon_button.dart` e `inline_link.dart` não importam nenhum. Atende: CA4.
-- [ ] **A2.** Apagar `app_text_field.dart` e `app_dropdown_field.dart`. Conferir que `form_text_field.dart`, `form_select_field.dart`, `app_filter_select.dart` e `app_search_field.dart` seguem sem dependência deles. Atende: CA4.
-- [ ] **A3.** Apagar `app_network_image.dart`, `app_asset_image.dart`, `rounded_card.dart`, `lib/core/utils/validators/validators.dart` (mantém `form_validators.dart`). Atende: CA4.
-- [ ] **A4.** Apagar `app_icon.dart`, `rounded_app_icon.dart` e `lib/core/utils/enums/app_icons.dart`; apagar pastas que ficarem vazias (`icon/`, `loading/`). Conferir que o rodapé e o cartão do Observatório continuam com `flutter_svg` direto. Atende: CA4.
-- [ ] **A5.** Gate do grupo A: `analyze`, `test`, `build web` e um `grep -rnE "PrimaryButton|SecondaryButton|RoundedIconButton|BackToButton|CheckboxButton|CircularLoading|AppTextField|AppDropdownField|AppNetworkImage|AppAssetImage|RoundedCard|AppIcon\b|RoundedAppIcon|AppIcons|\bValidators\b" lib test` sem resultado. Commit do grupo. Atende: CA1, CA4.
+- [x] **A1.** Apagar `primary_button.dart`, `secondary_button.dart`, `rounded_icon_button.dart`, `back_to_button.dart`, `checkbox_button.dart` e `circular_loading.dart` (nessa ordem: consumidores antes do consumido). Conferir que `app_button.dart`, `app_icon_button.dart` e `inline_link.dart` não importam nenhum. Atende: CA4.
+- [x] **A2.** Apagar `app_text_field.dart` e `app_dropdown_field.dart`. Conferir que `form_text_field.dart`, `form_select_field.dart`, `app_filter_select.dart` e `app_search_field.dart` seguem sem dependência deles. Atende: CA4.
+- [x] **A3.** Apagar `app_network_image.dart`, `app_asset_image.dart`, `rounded_card.dart`, `lib/core/utils/validators/validators.dart` (mantém `form_validators.dart`). Atende: CA4.
+- [x] **A4.** Apagar `app_icon.dart`, `rounded_app_icon.dart` e `lib/core/utils/enums/app_icons.dart`; apagar pastas que ficarem vazias (`icon/`, `loading/`). Conferir que o rodapé e o cartão do Observatório continuam com `flutter_svg` direto. Atende: CA4.
+- [x] **A5.** Gate do grupo A: `analyze`, `test`, `build web` e um `grep -rnE "PrimaryButton|SecondaryButton|RoundedIconButton|BackToButton|CheckboxButton|CircularLoading|AppTextField|AppDropdownField|AppNetworkImage|AppAssetImage|RoundedCard|AppIcon\b|RoundedAppIcon|AppIcons|\bValidators\b" lib test` sem resultado. Commit do grupo. Atende: CA1, CA4.
 
 ## Grupo B: tipografia, Aleo e `num_extension`
 - [ ] **B1.** `EnvironmentBanner` passa a usar um estilo de `AppTheme.typography.of(context)` com mesmo peso e tamanho aproximados do `label` médio antigo, e a cor de fundo vira o token novo `AppColors.environmentBanner` (`0xFFFDE047`). Comparar visualmente a faixa antes e depois com o app sem `APP_ENV` (padrão dev) em 390 e 1280. Arquivos: `environment_banner.dart`, `app_colors.dart`, teste da faixa se existir. Atende: CA7.

@@ -42,13 +42,11 @@ class AppRouter {
     redirect: (context, state) =>
         adminRedirect(state.uri.path, () => AdminSetup.getIt<AuthRepository>().restoredUser()),
     routes: [
-      // Rota principal
       GoRoute(path: home, name: home, builder: (context, state) => const HomePage()),
       GoRoute(path: about, name: about, builder: (context, state) => const AboutPage()),
       GoRoute(path: contact, name: contact, builder: (context, state) => const ContactPage()),
 
-      // Rota do painel administrativo: o login, com o painel como subrota; o painel em si leva
-      // à primeira vista, dentro da moldura
+      // O login é a rota raiz do admin; as vistas do painel ficam dentro da moldura (ShellRoute).
       GoRoute(
         path: admin,
         builder: (context, state) => const SignInPage(),
@@ -107,7 +105,6 @@ class AppRouter {
         },
       ),
 
-      // Rotas dos temas principais
       GoRoute(
         path: '/$representacoesEspaciais',
         name: representacoesEspaciais,
@@ -133,7 +130,6 @@ class AppRouter {
             ThemePage(themeId: culturaPolitica, themeTitle: 'Cultura e Política'),
       ),
 
-      // Rotas dos subtemas
       GoRoute(
         path: '/$representacoesEspaciais/:subthemeId',
         name: '$representacoesEspaciais-subtheme',
@@ -186,12 +182,11 @@ class AppRouter {
     return path == adminPanel ? adminPanelObjects : null;
   }
 
-  // A mesma chave nas duas rotas do editor: trocar de endereço não empilha outra página.
   // Sem animação: com a transição padrão, a vista anterior ainda aparece por um instante.
   static Page<void> _panelViewPage(GoRouterState state, Widget child) =>
       NoTransitionPage(key: state.pageKey, child: child);
 
-  // Entra e sai com um fundido curto e uma subida leve, no lugar da transição padrão de página.
+  // A mesma chave nas duas rotas do editor: trocar de endereço não empilha outra página.
   static Page<void> _editorPage(Widget child) => CustomTransitionPage(
     key: const ValueKey('object-editor'),
     child: child,

@@ -12,10 +12,8 @@ import 'features/catalog/catalog_setup.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Inicializar Firebase
   await Firebase.initializeApp(options: AppEnvironment.current.firebaseOptions);
 
-  // Configurar injeção de dependências do admin
   AdminSetup.setup();
 
   CatalogSetup.setup();

@@ -1,11 +1,13 @@
 import 'package:expogeo/core/components/image/app_medallion.dart';
 import 'package:expogeo/core/components/reading/breadcrumbs.dart';
 import 'package:expogeo/core/components/reading/page_header.dart';
+import 'package:expogeo/core/components/structure/page_meta_scope.dart';
 import 'package:expogeo/core/components/structure/site_scaffold.dart';
 import 'package:expogeo/core/models/theme_data_model.dart';
 import 'package:expogeo/core/models/theme_illustration.dart';
 import 'package:expogeo/core/navigation/app_router.dart';
 import 'package:expogeo/core/theme/app_theme.dart';
+import 'package:expogeo/core/utils/browser/page_meta.dart';
 import 'package:expogeo/core/utils/screen/screen_utils.dart';
 import 'package:expogeo/features/catalog/presentation/stores/catalog_store.dart';
 import 'package:expogeo/features/theme/components/other_themes_section.dart';
@@ -45,29 +47,36 @@ class _ThemePageState extends State<ThemePage> {
         ? components.pageHeadMedallion
         : components.pageHeadMedallionCompact;
 
-    return SiteScaffold(
-      slivers: [
-        SliverToBoxAdapter(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              PageHeader(
-                breadcrumbs: [
-                  const BreadcrumbItem('Início', route: AppRouter.home),
-                  const BreadcrumbItem('Temas'),
-                  BreadcrumbItem(theme.title),
-                ],
-                title: theme.title,
-                lead: theme.description.trim(),
-                details: ThemeHeaderStats(theme: theme, store: widget.store),
-                trailing: AppMedallion(size: medallion, image: theme.type.illustration),
-              ),
-              ThemeSubthemesSection(theme: theme, store: widget.store),
-              OtherThemesSection(current: theme),
-            ],
+    return PageMetaScope(
+      meta: PageMeta.titled(
+        title: theme.title,
+        description: summarize(theme.description),
+        path: theme.type.route,
+      ),
+      child: SiteScaffold(
+        slivers: [
+          SliverToBoxAdapter(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                PageHeader(
+                  breadcrumbs: [
+                    const BreadcrumbItem('Início', route: AppRouter.home),
+                    const BreadcrumbItem('Temas'),
+                    BreadcrumbItem(theme.title),
+                  ],
+                  title: theme.title,
+                  lead: theme.description.trim(),
+                  details: ThemeHeaderStats(theme: theme, store: widget.store),
+                  trailing: AppMedallion(size: medallion, image: theme.type.illustration),
+                ),
+                ThemeSubthemesSection(theme: theme, store: widget.store),
+                OtherThemesSection(current: theme),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

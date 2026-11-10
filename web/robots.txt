@@ -1,0 +1,4 @@
+# Produção. O deploy de dev troca este arquivo por "Disallow: /" (deploy-dev.yml).
+User-agent: *
+Disallow: /admin
+Allow: /

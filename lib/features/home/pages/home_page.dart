@@ -1,9 +1,12 @@
 import 'package:expogeo/core/components/partners/partners_section.dart';
 import 'package:expogeo/core/components/structure/observatory_card.dart';
 import 'package:expogeo/core/components/structure/page_content.dart';
+import 'package:expogeo/core/components/structure/page_meta_scope.dart';
 import 'package:expogeo/core/components/structure/site_scaffold.dart';
+import 'package:expogeo/core/navigation/app_router.dart';
 import 'package:expogeo/core/navigation/home_sections.dart';
 import 'package:expogeo/core/theme/app_theme.dart';
+import 'package:expogeo/core/utils/browser/page_meta.dart';
 import 'package:expogeo/core/utils/screen/screen_utils.dart';
 import 'package:expogeo/features/catalog/presentation/stores/catalog_store.dart';
 import 'package:expogeo/features/home/components/home_about_section.dart';
@@ -22,6 +25,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  static const String _description =
+      'Conteúdos digitais de Geografia escolhidos para a sala de aula: sites, vídeos, mapas e '
+      'aplicativos organizados por tema, com a curadoria do Observatório do Ensino de História '
+      'e Geografia da UFU.';
+
   final _themesKey = GlobalKey();
   final _themesTitleFocus = FocusNode(debugLabel: 'Por onde começar');
 
@@ -76,29 +84,36 @@ class _HomePageState extends State<HomePage> {
       Breakpoint.desktop => components.sectionPaddingDesktop,
     };
 
-    return SiteScaffold(
-      background: AppTheme.colors.page,
-      slivers: [
-        SliverToBoxAdapter(child: HomeHero(onExploreThemes: _exploreThemes)),
-        SliverToBoxAdapter(
-          child: KeyedSubtree(
-            key: _themesKey,
-            child: HomeThemesSection(titleFocusNode: _themesTitleFocus),
-          ),
-        ),
-        const SliverToBoxAdapter(child: HomeExploreSection()),
-        const SliverToBoxAdapter(child: HomeRecentSection()),
-        const SliverToBoxAdapter(child: HomeAboutSection()),
-        const SliverToBoxAdapter(child: PartnersSection()),
-        SliverToBoxAdapter(
-          child: PageContent(
-            child: Padding(
-              padding: EdgeInsets.only(bottom: sectionPadding),
-              child: const ObservatoryCard(),
+    return PageMetaScope(
+      meta: const PageMeta(
+        title: 'expoGEO · Curadoria digital do saber geográfico',
+        description: _description,
+        path: AppRouter.home,
+      ),
+      child: SiteScaffold(
+        background: AppTheme.colors.page,
+        slivers: [
+          SliverToBoxAdapter(child: HomeHero(onExploreThemes: _exploreThemes)),
+          SliverToBoxAdapter(
+            child: KeyedSubtree(
+              key: _themesKey,
+              child: HomeThemesSection(titleFocusNode: _themesTitleFocus),
             ),
           ),
-        ),
-      ],
+          const SliverToBoxAdapter(child: HomeExploreSection()),
+          const SliverToBoxAdapter(child: HomeRecentSection()),
+          const SliverToBoxAdapter(child: HomeAboutSection()),
+          const SliverToBoxAdapter(child: PartnersSection()),
+          SliverToBoxAdapter(
+            child: PageContent(
+              child: Padding(
+                padding: EdgeInsets.only(bottom: sectionPadding),
+                child: const ObservatoryCard(),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

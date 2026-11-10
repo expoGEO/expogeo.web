@@ -1,5 +1,5 @@
 // ignore_for_file: deprecated_member_use
-// `containsSemantics` só ganha o substituto `isSemantics` em SDKs mais novos que o 3.35.5 fixado.
+// O SDK fixado ainda usa `containsSemantics`; o substituto `isSemantics` não existe nele.
 
 import 'package:flutter_test/flutter_test.dart';
 
@@ -10,8 +10,8 @@ void expectHeading(WidgetTester tester, Finder finder, int level) {
   expect(data.headingLevel, level);
 }
 
-// Em versões novas do Flutter, `isFocused` e `isSelected` de `flagsCollection` viram `Tristate`
-// e `isFocusable` sai; o matcher tem a mesma forma em todas.
+// Se o SDK trocar `isFocused` e `isSelected` de `flagsCollection` por `Tristate` e tirar
+// `isFocusable`, só estes matchers mudam.
 
 /// Diz se o nó (ou seus dados) de semântica está com o foco.
 bool hasFocus(Object semantics) => containsSemantics(isFocused: true).matches(semantics, {});

@@ -106,7 +106,7 @@ void main() {
     });
   }
 
-  // A navbar tem altura fixa e não entra aqui; a 200% conferem-se os blocos novos da página.
+  // A navbar tem altura fixa e não entra aqui; a 200% conferem-se os blocos de conteúdo da página.
   testWidgets('blocos do código quebram sem overflow em 390 px com texto a 200%', (tester) async {
     tester.view.physicalSize = const Size(390, 1200);
     tester.view.devicePixelRatio = 1;

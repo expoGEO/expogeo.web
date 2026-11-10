@@ -37,7 +37,6 @@ dependencies:
   flutter_animate: ^4.5.0
   carousel_slider: ^5.0.0
   font_awesome_flutter: ^10.7.0
-  google_fonts: ^6.3.2
   cached_network_image: ^3.4.1
   flutter_svg: ^2.2.2
   flutter_staggered_grid_view: ^0.7.0
@@ -81,22 +80,6 @@ flutter:
     - assets/icons/
 
   fonts:
-    - family: Aleo
-      fonts:
-        - asset: assets/fonts/Aleo-ExtraLight.ttf
-          weight: 200
-        - asset: assets/fonts/Aleo-Light.ttf
-          weight: 300
-        - asset: assets/fonts/Aleo-Medium.ttf
-          weight: 400
-        - asset: assets/fonts/Aleo-Regular.ttf
-          weight: 500
-        - asset: assets/fonts/Aleo-SemiBold.ttf
-          weight: 600
-        - asset: assets/fonts/Aleo-Bold.ttf
-          weight: 700
-        - asset: assets/fonts/Aleo-ExtraBold.ttf
-          weight: 800
     - family: BricolageGrotesque
       fonts:
         - asset: assets/fonts/BricolageGrotesque-SemiBold.ttf

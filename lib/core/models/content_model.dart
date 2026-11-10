@@ -1,5 +1,4 @@
 import 'package:expogeo/core/models/theme_data_model.dart';
-import 'package:expogeo/core/theme/app_theme.dart';
 import 'package:expogeo/core/utils/date/date.dart';
 import 'package:flutter/material.dart';
 
@@ -190,15 +189,6 @@ enum ContentType {
     ContentType.documento => Icons.description_outlined,
     ContentType.aplicativo => Icons.apps_outlined,
     ContentType.outro => Icons.info_outline,
-  };
-
-  Color get color => switch (this) {
-    ContentType.site => AppTheme.colors.primaryBlue,
-    ContentType.video => AppTheme.colors.primaryRed,
-    ContentType.imagem => AppTheme.colors.primaryGreen,
-    ContentType.documento => AppTheme.colors.primaryOrange,
-    ContentType.aplicativo => AppTheme.colors.secondaryBlue,
-    ContentType.outro => AppTheme.colors.mediumGray,
   };
 
   /// Aceita o nome (`site`) ou o rótulo (`Site`), porque o formulário antigo gravava o rótulo.

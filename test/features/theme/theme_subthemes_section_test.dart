@@ -27,7 +27,6 @@ void main() {
     title: natureza.title,
     description: natureza.description,
     imagePath: natureza.imagePath,
-    color: natureza.color,
     icon: natureza.icon,
     subthemes: natureza.subthemes.take(count).toList(),
   );
@@ -106,7 +105,6 @@ void main() {
       title: natureza.title,
       description: natureza.description,
       imagePath: natureza.imagePath,
-      color: natureza.color,
       icon: natureza.icon,
       subthemes: [
         natureza.subthemes.firstWhere((s) => s.type == SubthemeEnum.estruturasFormasRelevo),

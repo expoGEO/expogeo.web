@@ -1,9 +1,11 @@
 import 'package:expogeo/core/components/reading/breadcrumbs.dart';
 import 'package:expogeo/core/components/reading/page_header.dart';
 import 'package:expogeo/core/components/structure/page_content.dart';
+import 'package:expogeo/core/components/structure/page_meta_scope.dart';
 import 'package:expogeo/core/components/structure/site_scaffold.dart';
 import 'package:expogeo/core/navigation/app_router.dart';
 import 'package:expogeo/core/theme/app_theme.dart';
+import 'package:expogeo/core/utils/browser/page_meta.dart';
 import 'package:expogeo/core/utils/screen/screen_utils.dart';
 import 'package:expogeo/features/contact/components/contact_form.dart';
 import 'package:expogeo/features/contact/components/contact_info_card.dart';
@@ -33,48 +35,56 @@ class _ContactPageState extends State<ContactPage> {
     final form = FocusTraversalGroup(child: ContactForm(key: _formKey));
     final info = FocusTraversalGroup(child: const ContactInfoCard());
 
-    return SiteScaffold(
-      slivers: [
-        const SliverToBoxAdapter(
-          child: PageHeader(
-            breadcrumbs: [
-              BreadcrumbItem('Início', route: AppRouter.home),
-              BreadcrumbItem('Contato'),
-            ],
-            title: 'Fale com a gente',
-            lead:
-                'Sugira um conteúdo, avise sobre um link quebrado ou conte como você usa a '
-                'expoGEO.',
-          ),
-        ),
-        SliverToBoxAdapter(
-          child: PageContent(
-            child: Padding(
-              padding: EdgeInsets.only(
-                top: components.contactPaddingTop,
-                bottom: components.contactPaddingBottom,
-              ),
-              child: breakpoint == Breakpoint.desktop
-                  ? Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(flex: components.contactFormFlex, child: form),
-                        SizedBox(width: gap),
-                        Expanded(flex: components.contactInfoFlex, child: info),
-                      ],
-                    )
-                  : Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        form,
-                        SizedBox(height: gap),
-                        info,
-                      ],
-                    ),
+    return PageMetaScope(
+      meta: PageMeta.titled(
+        title: 'Contato',
+        description:
+            'Sugira um conteúdo, avise sobre um link quebrado ou conte como você usa a expoGEO.',
+        path: AppRouter.contact,
+      ),
+      child: SiteScaffold(
+        slivers: [
+          const SliverToBoxAdapter(
+            child: PageHeader(
+              breadcrumbs: [
+                BreadcrumbItem('Início', route: AppRouter.home),
+                BreadcrumbItem('Contato'),
+              ],
+              title: 'Fale com a gente',
+              lead:
+                  'Sugira um conteúdo, avise sobre um link quebrado ou conte como você usa a '
+                  'expoGEO.',
             ),
           ),
-        ),
-      ],
+          SliverToBoxAdapter(
+            child: PageContent(
+              child: Padding(
+                padding: EdgeInsets.only(
+                  top: components.contactPaddingTop,
+                  bottom: components.contactPaddingBottom,
+                ),
+                child: breakpoint == Breakpoint.desktop
+                    ? Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(flex: components.contactFormFlex, child: form),
+                          SizedBox(width: gap),
+                          Expanded(flex: components.contactInfoFlex, child: info),
+                        ],
+                      )
+                    : Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          form,
+                          SizedBox(height: gap),
+                          info,
+                        ],
+                      ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

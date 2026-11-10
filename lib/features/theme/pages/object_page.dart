@@ -1,12 +1,14 @@
 import 'package:expogeo/core/components/skeleton/loading_region.dart';
 import 'package:expogeo/core/components/state/state_error_box.dart';
 import 'package:expogeo/core/components/structure/page_content.dart';
+import 'package:expogeo/core/components/structure/page_meta_scope.dart';
 import 'package:expogeo/core/components/structure/site_scaffold.dart';
 import 'package:expogeo/core/models/subtheme_model.dart';
 import 'package:expogeo/core/models/theme_data_model.dart';
 import 'package:expogeo/core/models/theme_model.dart';
 import 'package:expogeo/core/pages/not_found_page.dart';
 import 'package:expogeo/core/theme/app_theme.dart';
+import 'package:expogeo/core/utils/browser/page_meta.dart';
 import 'package:expogeo/features/catalog/infra/models/catalog_model.dart';
 import 'package:expogeo/features/catalog/presentation/stores/catalog_state.dart';
 import 'package:expogeo/features/catalog/presentation/stores/catalog_store.dart';
@@ -109,12 +111,19 @@ class _ObjectViewState extends State<_ObjectView> {
     final content = item.content;
     final note = content.contentInfo.contentNote;
 
-    return _page([
-      ObjectHead(theme: widget.theme, subtheme: widget.subtheme, item: item),
-      ObjectActions(address: content.registrationInfo.location),
-      if (note != null) ObjectNote(text: note),
-      ObjectSheet(item: item),
-    ], below: ObjectRelatedSection(item: item, catalog: catalog));
+    return PageMetaScope(
+      meta: PageMeta.titled(
+        title: '${content.contentInfo.title} · ${widget.subtheme.type.name}',
+        description: summarize(content.contentInfo.description),
+        path: item.route,
+      ),
+      child: _page([
+        ObjectHead(theme: widget.theme, subtheme: widget.subtheme, item: item),
+        ObjectActions(address: content.registrationInfo.location),
+        if (note != null) ObjectNote(text: note),
+        ObjectSheet(item: item),
+      ], below: ObjectRelatedSection(item: item, catalog: catalog)),
+    );
   }
 
   Widget _page(List<Widget> column, {Widget? below}) {

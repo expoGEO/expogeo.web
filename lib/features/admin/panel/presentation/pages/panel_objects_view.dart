@@ -104,7 +104,7 @@ class _PanelObjectsViewState extends State<PanelObjectsView> {
     final location = PanelAddress.objectsWith(next);
     if (fromSearch) {
       _sentQueries.add(next.query);
-      // Uma letra a mais não vira uma entrada nova no histórico do navegador.
+      // Cada letra substitui a entrada do histórico do navegador, em vez de criar outra.
       Router.neglect(context, () => GoRouter.of(context).go(location));
     } else {
       GoRouter.of(context).go(location);

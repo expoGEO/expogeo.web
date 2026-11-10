@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 
 enum PanelFilterLayout { singleRow, twoRows, grid }
 
-/// Busca e três seletores numa caixa com borda. Com espaço, tudo numa linha (a busca ocupa o que
-/// sobra); com menos, a busca numa linha e os seletores na de baixo; estreita, busca e grade de
-/// 2 colunas.
+/// Busca e três seletores numa caixa: numa linha, em duas (busca e seletores) ou, estreita, busca
+/// e grade de 2 colunas.
 class PanelFilterBar extends StatelessWidget {
   const PanelFilterBar({
     required this.search,

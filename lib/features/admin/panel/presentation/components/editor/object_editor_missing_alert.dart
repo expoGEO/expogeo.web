@@ -40,7 +40,7 @@ class _ObjectEditorMissingAlertState extends State<ObjectEditorMissingAlert> {
     _announce();
   }
 
-  // O motor web não lê uma região viva que já tem papel; a lista nova precisa ser anunciada.
+  // O motor web não lê uma região viva que já tem papel; a lista atualizada precisa ser anunciada.
   void _announce() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;

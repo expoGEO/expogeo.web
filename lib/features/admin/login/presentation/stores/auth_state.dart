@@ -3,7 +3,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'auth_state.freezed.dart';
 
-/// Estado geral da autenticação
 @freezed
 class AuthState with _$AuthState {
   const AuthState._();
@@ -12,7 +11,6 @@ class AuthState with _$AuthState {
       _AuthState;
 }
 
-/// Estados possíveis do login
 @freezed
 class LoginState with _$LoginState {
   const factory LoginState.initial() = LoginStateInitial;
@@ -21,7 +19,6 @@ class LoginState with _$LoginState {
   const factory LoginState.error(AuthFailure failure) = LoginStateError;
 }
 
-/// Estados possíveis do logout
 @freezed
 class LogoutState with _$LogoutState {
   const factory LogoutState.initial() = LogoutStateInitial;

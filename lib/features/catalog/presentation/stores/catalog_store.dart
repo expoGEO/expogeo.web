@@ -34,7 +34,7 @@ abstract class CatalogStoreBase with Store {
     _apply(result.fold((failure) => CatalogStateError(failure.message), CatalogStateSuccess.new));
   }
 
-  /// Busca de novo mantendo o catálogo atual à vista; só o troca se a busca der certo.
+  /// Busca outra vez mantendo o catálogo atual à vista; só o troca se a busca der certo.
   /// Sem catálogo, faz o mesmo que [ensureLoaded].
   @action
   Future<void> refresh() async {

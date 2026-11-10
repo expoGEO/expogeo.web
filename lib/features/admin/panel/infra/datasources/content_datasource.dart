@@ -4,7 +4,6 @@ import 'package:expogeo/features/admin/panel/infra/errors/content_failures.dart'
 import 'package:expogeo/features/admin/panel/infra/models/content_response_model.dart';
 import 'package:expogeo/features/admin/panel/infra/models/reference_code.dart';
 
-/// Responsável pelas operações de dados no Firebase Firestore
 class ContentDatasource {
   final FirebaseFirestore _firestore;
 
@@ -35,7 +34,7 @@ class ContentDatasource {
     }
   }
 
-  /// Leva o objeto para outro subtema com um código novo: cria lá e apaga o documento antigo na
+  /// Leva o objeto para outro subtema com outro código: cria lá e apaga o documento de origem na
   /// mesma transação. Devolve o código gravado.
   Future<String> moveContent({
     required SubthemeEnum from,
@@ -89,8 +88,6 @@ class ContentDatasource {
     });
   }
 
-  /// Busca todos os conteúdos de um subtema específico
-  /// Aceita enums diretos: getContentsBySubtheme(subtheme: SubthemeEnum.censoDemografico)
   Future<List<ContentResponseModel>> getContentsBySubtheme({
     required SubthemeEnum subtheme,
     ThemeEnum? theme,
@@ -112,8 +109,6 @@ class ContentDatasource {
     }
   }
 
-  /// Busca um conteúdo específico
-  /// Aceita enums diretos: getContent(subtheme: SubthemeEnum.censoDemografico, contentId: 'CP_CD_01')
   Future<ContentResponseModel> getContent({
     required SubthemeEnum subtheme,
     required String contentId,
@@ -139,8 +134,6 @@ class ContentDatasource {
     }
   }
 
-  /// Atualiza um conteúdo existente
-  /// Aceita enums diretos: updateContent(subtheme: SubthemeEnum.censoDemografico, contentId: 'CP_CD_01', content: ...)
   Future<void> updateContent({
     required SubthemeEnum subtheme,
     required String contentId,
@@ -161,8 +154,6 @@ class ContentDatasource {
     }
   }
 
-  /// Deleta um conteúdo
-  /// Aceita enums diretos: deleteContent(subtheme: SubthemeEnum.censoDemografico, contentId: 'CP_CD_01')
   Future<void> deleteContent({
     required SubthemeEnum subtheme,
     required String contentId,
@@ -182,8 +173,6 @@ class ContentDatasource {
     }
   }
 
-  /// Busca todos os conteúdos de um tema
-  /// Aceita enums diretos: getContentsByTheme(theme: ThemeEnum.culturaPolitica)
   Future<List<ContentResponseModel>> getContentsByTheme({required ThemeEnum theme}) async {
     try {
       final subthemeDocs = await _firestore
@@ -208,7 +197,6 @@ class ContentDatasource {
     }
   }
 
-  /// Busca todos os conteúdos de todos os temas
   Future<List<ContentResponseModel>> getAllContents() async {
     try {
       final themeDocs = await _firestore.collection('themes').get();

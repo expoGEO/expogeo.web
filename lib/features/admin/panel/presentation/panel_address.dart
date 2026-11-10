@@ -89,7 +89,7 @@ class PanelAddress {
     query: selection.query,
   );
 
-  /// Editor de objeto novo, já com o tema e o subtema quando houver.
+  /// Editor para criar um objeto, já com o tema e o subtema quando houver.
   static String newObject({ThemeEnum? theme, SubthemeEnum? subtheme}) {
     final parameters = {
       if (theme != null) themeParam: theme.value,

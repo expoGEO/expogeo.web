@@ -17,6 +17,6 @@ class PanelListMemory {
     return true;
   }
 
-  /// Ao sair, a próxima entrada recarrega de novo.
+  /// Ao sair, a próxima entrada recarrega outra vez.
   void reset() => _catalogRefreshed = false;
 }

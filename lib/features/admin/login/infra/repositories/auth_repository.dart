@@ -3,25 +3,19 @@ import 'package:expogeo/features/admin/login/infra/datasources/firebase_auth_dat
 import 'package:expogeo/features/admin/login/infra/errors/auth_failure.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-/// Interface do repositório de autenticação
 abstract class AuthRepository {
-  /// Faz login com email e senha
   Future<Either<AuthFailure, User>> login(String email, String password);
 
-  /// Faz logout
   Future<Either<AuthFailure, void>> logout();
 
-  /// Obtém o usuário atualmente logado
   Future<Either<AuthFailure, User>> currentUser();
 
   /// Usuário da sessão salva, ou nulo sem sessão ou se o Firebase não responder a tempo
   Future<User?> restoredUser();
 
-  /// Stream de mudanças no estado de autenticação
   Stream<User?> get authStateChanges;
 }
 
-/// Implementação do repositório com tratamento de erros
 class AuthRepositoryImpl implements AuthRepository {
   final FirebaseAuthDatasource _datasource;
 

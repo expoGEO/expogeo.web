@@ -1,24 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-/// Interface para operações de autenticação com Firebase
 abstract class FirebaseAuthDatasource {
-  /// Faz login com email e senha
   Future<User> signIn(String email, String password);
 
-  /// Faz logout
   Future<void> signOut();
 
-  /// Obtém o usuário atual logado
   Future<User?> currentUser();
 
   /// Usuário da sessão salva, depois de o Firebase terminar de recuperá-la
   Future<User?> restoredUser();
 
-  /// Obtém o stream de mudanças de autenticação
   Stream<User?> get authStateChanges;
 }
 
-/// Implementação com Firebase Authentication
 class FirebaseAuthDatasourceImpl implements FirebaseAuthDatasource {
   final FirebaseAuth _firebaseAuth;
 

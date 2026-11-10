@@ -35,10 +35,14 @@ Regras de todas as tarefas: antes de apagar, `grep -rn` do nome da classe e do a
 - [x] **C4.** Gate do grupo C: `analyze`, `test`, `build web`; `grep -rnE "primaryOrange|secondaryOrange|primaryBlue|primaryGreen|primaryRed|mediumGray|primaryGradient|blueGradient|dimensions\.(space|radius)\b" lib test` sem resultado; `grep -rn "color:" lib/core/content` sem resultado. Commit. Atende: CA1, CA6.
 
 ## Grupo D: pacotes (um grupo por vez, com build entre eles)
-- [ ] **D1.** Remover `syncfusion_flutter_pdfviewer` e `youtube_player_iframe` (os mais pesados). Confirmar `grep -rn "syncfusion\|youtube_player" lib test bin tool` vazio; `pub get`; `fvm flutter clean` na cópia ASCII; `analyze`, `test`, `build web`. Revisar o diff do `pubspec.lock` (saída de transitivos órfãos, nenhuma subida de versão de outro pacote). Atende: CA5.
-- [ ] **D2.** Remover `carousel_slider`, `flutter_staggered_grid_view`, `flutter_animate`, `font_awesome_flutter`. Mesma conferência de D1. Atende: CA5.
-- [ ] **D3.** Remover `cached_network_image`, `http` e `cupertino_icons` (conferir `CupertinoIcons` e `package:http` por `grep` em `lib test bin tool`). Mesma conferência de D1. Manter `flutter_svg`, `url_launcher`, `dartz`, `freezed_annotation`, `flutter_web_plugins`. Atende: CA5.
-- [ ] **D4.** Gate do grupo D: `grep` de cada nome de pacote removido em `pubspec.yaml` e em `import` sem resultado; `pubspec.lock` sem eles como `direct`. Commit do grupo (ou um por tarefa, se o lock ficar grande). Atende: CA1, CA5.
+- [x] **D1.** Remover `syncfusion_flutter_pdfviewer` e `youtube_player_iframe` (os mais pesados). Confirmar `grep -rn "syncfusion\|youtube_player" lib test bin tool` vazio; `pub get`; `fvm flutter clean` na cópia ASCII; `analyze`, `test`, `build web`. Revisar o diff do `pubspec.lock` (saída de transitivos órfãos, nenhuma subida de versão de outro pacote). Atende: CA5.
+  - Nota: build/web 48700 KB depois da remoção; o lock só perdeu pacotes (syncfusion_*, webview_*, youtube_*, device_info_plus, intl).
+- [x] **D2.** Remover `carousel_slider`, `flutter_staggered_grid_view`, `flutter_animate`, `font_awesome_flutter`. Mesma conferência de D1. Atende: CA5.
+  - Nota: build/web 48000 KB.
+- [x] **D3.** Remover `cached_network_image`, `http` e `cupertino_icons` (conferir `CupertinoIcons` e `package:http` por `grep` em `lib test bin tool`). Mesma conferência de D1. Manter `flutter_svg`, `url_launcher`, `dartz`, `freezed_annotation`, `flutter_web_plugins`. Atende: CA5.
+  - Nota: `http` também era dependência direta, mas continua no lock como transitivo (Firebase); build/web 47976 KB.
+- [x] **D4.** Gate do grupo D: `grep` de cada nome de pacote removido em `pubspec.yaml` e em `import` sem resultado; `pubspec.lock` sem eles como `direct`. Commit do grupo (ou um por tarefa, se o lock ficar grande). Atende: CA1, CA5.
+  - Nota: nenhum dos pacotes removidos consta como `direct` no lock.
 
 ## Grupo E: assets
 - [ ] **E1.** Em `app_images.dart`, apagar as entradas `logo` e `observatorio`; para cada entrada restante, confirmar por `grep` que há uso (ilustrações de tema e subtema, logos de apoio) e anotar quais não têm. Apagar `logo.png` e `observatorio.png`. Atende: CA8.

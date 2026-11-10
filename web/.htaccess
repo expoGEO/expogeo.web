@@ -1,0 +1,52 @@
+# ---------------------------
+# Flutter Web .htaccess otimizado
+# ---------------------------
+# Versionado aqui e enviado a cada deploy (produção e dev). O deploy de dev ainda
+# acrescenta a senha (ver .github/workflows/deploy-dev.yml). Não ponha neste arquivo
+# blocos gerados pelo cPanel (PHP, Privacidade de Diretório): o deploy os sobrescreve.
+
+# Habilita reescrita de URL
+RewriteEngine On
+RewriteBase /
+
+# Define index.html como página principal
+DirectoryIndex index.html
+
+# Permite o carregamento de arquivos do Flutter Web
+<FilesMatch "\.(html|js|json|css|wasm|woff|woff2|ttf|svg|png|jpg|gif|ico|mp4|webm|ogg|mp3|pdf|map)$">
+    Require all granted
+</FilesMatch>
+
+# Redireciona tudo para index.html para rotas do Flutter Web
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule .* /index.html [L]
+
+# ---------------------------
+# Otimizações de performance
+# ---------------------------
+
+# 1. Compressão Gzip/Brotli (texto, CSS, JS, JSON, fontes)
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript text/javascript application/json
+</IfModule>
+
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/xml text/css application/javascript text/javascript application/json
+</IfModule>
+
+# 2. Cache
+<IfModule mod_headers.c>
+  # O Flutter não põe hash no nome destes arquivos: o navegador sempre pergunta se mudaram
+  <FilesMatch "\.(html|js|json|wasm)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+
+  # Imagens, fontes e mídia podem mudar sem trocar de nome: cache de 7 dias
+  <FilesMatch "\.(css|png|jpe?g|gif|svg|webp|ico|woff2?|ttf|otf|mp4|webm|ogg|mp3)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+
+  # Compatibilidade gzip/brotli
+  Header append Vary Accept-Encoding
+</IfModule>

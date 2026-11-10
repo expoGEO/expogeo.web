@@ -77,3 +77,4 @@ Os arquivos gerados (`*.g.dart`, `*.freezed.dart`) ficam no repositório e não 
 - Interface, documentação, comentários e commits em **português do Brasil**. Nomes de código em inglês.
 - Comentários são exceção: só o **porquê** que o código não mostra (regra de negócio escondida, contorno de limitação do Flutter ou do navegador, número que parece arbitrário). Uma ou duas linhas.
 - Nunca cite spec, fase, protótipo ou seletor CSS em comentário. O histórico fica nos docs e no git.
+- Descreva a regra de hoje, sem "antigo", "novo" ou "agora", e sem citar o código vizinho como origem. `///` só quando traz o que o nome e o tipo não dizem (unidade, formato, significado de nulo).

@@ -42,7 +42,7 @@ A tag é criada localmente no encerramento da fase de limpeza, sem `git push` de
 | 2. Navegação de conteúdo | 2026-11-04 a 11-05 | 007 página de tema, 008 de subtema, 009 de objeto | #11 |
 | 3. Contato e estados | 2026-11-06 a 11-08 | 010 contato, 011 esqueletos, vazio, erro e 404 | #13 (cor da seleção de texto: #12) |
 | 4. Painel | 2026-11-08 a 11-09 | 012 login, 013 moldura e temas, 014 lista de objetos, 015 editor | #14 |
-| 5. Limpeza | 2026-11-09 a 11-10 | 016 código, tokens, fontes, pacotes e assets sem uso; 017 comentários; 018 documentação | a abrir |
+| 5. Limpeza | 2026-11-09 a 11-10 | 016 código, tokens, fontes, pacotes e assets sem uso; 017 comentários; 018 documentação | PR da branch `refactor/redesign-fase-5` para `develop` |
 
 O que cada limpeza fez:
 

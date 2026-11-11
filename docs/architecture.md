@@ -18,7 +18,7 @@ lib/
 │   ├── components/           # Widgets compartilhados
 │   ├── content/              # Objetos do acervo em Dart, origem do seed (bin/)
 │   ├── models/               # Tema, subtema, objeto, parceiro, ilustração
-│   ├── navigation/           # app_router.dart e home_sections.dart
+│   ├── navigation/           # app_router.dart, route_meta.dart (título e descrição por rota) e home_sections.dart
 │   ├── pages/                # not_found_page.dart (404)
 │   ├── theme/                # app_colors, app_dimensions, app_typography, app_gradients, app_theme
 │   └── utils/                # accessibility, browser, constants, date, enums, environment,
@@ -26,8 +26,10 @@ lib/
 └── features/                 # home, theme, about, contact, catalog, admin
 assets/{fonts,icons,images}/  # Fontes embutidas, ícones SVG das redes, ilustrações e logos em WebP
 web/                          # index.html (título, descrição, metadados de compartilhamento, tela de
-                              # carregamento inicial, Analytics), manifest, ícones e og-image.png
+                              # carregamento inicial, Analytics), .htaccess, robots.txt, manifest, ícones e
+                              # og-image.png
 tool/web_icons/               # Gera os ícones e a imagem de compartilhamento (generate.sh)
+tool/seo/                     # Gera as páginas HTML por rota e o sitemap.xml no deploy (ver deployment.md)
 bin/                          # Seed do Firestore (Python) e o JSON de objetos
 test/{core,features,support}/ # Testes, espelhando lib/
 ```
@@ -52,7 +54,7 @@ Fluxo: `Widget → Store → Repository → Datasource → Firebase`. O resultad
 | `components/state`, `skeleton` | `StateMessageBox` (vazio e busca sem resultado), `StateErrorBox` (erro de página com "Tentar de novo"), `StateErrorInline` (erro de seção), `AppSkeleton` e `LoadingRegion` (lido uma vez como "Carregando…") |
 | `components/reading`, `partners`, `brand`, `focus`, `environment` | Base das páginas de texto (migalhas, cabeçalho, coluna, código de referência), Realização e apoio, marca, `AppFocusRing`, faixa de ambiente de testes |
 | `models/` | `ThemeEnum`/`SubthemeEnum` (em `theme_data_model.dart`), `ContentModel`, `Partner`, `ThemeIllustration` |
-| `utils/` | `ScreenUtils`, `AppImages`, `AppLinks`, `AppEnvironment`, `Messenger` (aviso curto em caixa escura, um por vez, anunciado), `announce`, `foldForSearch`/`referenceCodeSlug`, `MailDraft`, `openUrl`, `FormValidators`, `leave_guard` (aviso do navegador ao fechar a aba) |
+| `utils/` | `ScreenUtils`, `AppImages`, `AppLinks`, `SiteCopy` (textos de home, sobre e contato que a tela e o gerador de páginas compartilham), `PageMeta` e `applyPageMeta` (metadados por rota), `AppEnvironment`, `Messenger` (aviso curto em caixa escura, um por vez, anunciado), `announce`, `foldForSearch`/`referenceCodeSlug`, `MailDraft`, `openUrl`, `FormValidators`, `leave_guard` (aviso do navegador ao fechar a aba) |
 
 ## Tema e design system
 

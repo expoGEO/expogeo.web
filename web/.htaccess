@@ -5,6 +5,9 @@
 # acrescenta a senha (ver .github/workflows/deploy-dev.yml). Não ponha neste arquivo
 # blocos gerados pelo cPanel (PHP, Privacidade de Diretório): o deploy os sobrescreve.
 
+# O Apache redirecionaria /pasta para /pasta/ (e a página pré-renderizada de /pasta não abriria).
+DirectorySlash Off
+
 # Habilita reescrita de URL
 RewriteEngine On
 RewriteBase /
@@ -16,6 +19,15 @@ DirectoryIndex index.html
 <FilesMatch "\.(html|js|json|css|wasm|woff|woff2|ttf|svg|png|jpg|gif|ico|mp4|webm|ogg|mp3|pdf|map)$">
     Require all granted
 </FilesMatch>
+
+# Um só endereço por página: /sobre/ vai para /sobre (o canonical não tem barra final).
+RewriteRule ^(.+)/$ /$1 [R=301,L]
+
+# Páginas pré-renderizadas: /sobre é servido por sobre.html, sem redirecionar para /sobre/.
+# O que não tem arquivo gerado (objeto novo, endereço inexistente) cai na regra seguinte.
+RewriteCond %{REQUEST_URI} !/$
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}.html -f
+RewriteRule ^ %{REQUEST_URI}.html [L]
 
 # Redireciona tudo para index.html para rotas do Flutter Web
 RewriteCond %{REQUEST_FILENAME} !-f

@@ -6,6 +6,7 @@ import 'package:expogeo/core/components/structure/site_scaffold.dart';
 import 'package:expogeo/core/navigation/app_router.dart';
 import 'package:expogeo/core/theme/app_theme.dart';
 import 'package:expogeo/core/utils/browser/page_meta.dart';
+import 'package:expogeo/core/utils/constants/site_copy.dart';
 import 'package:expogeo/core/utils/screen/screen_utils.dart';
 import 'package:expogeo/features/contact/components/contact_form.dart';
 import 'package:expogeo/features/contact/components/contact_info_card.dart';
@@ -38,8 +39,7 @@ class _ContactPageState extends State<ContactPage> {
     return PageMetaScope(
       meta: PageMeta.titled(
         title: 'Contato',
-        description:
-            'Sugira um conteúdo, avise sobre um link quebrado ou conte como você usa a expoGEO.',
+        description: SiteCopy.contactLead,
         path: AppRouter.contact,
       ),
       child: SiteScaffold(
@@ -50,10 +50,8 @@ class _ContactPageState extends State<ContactPage> {
                 BreadcrumbItem('Início', route: AppRouter.home),
                 BreadcrumbItem('Contato'),
               ],
-              title: 'Fale com a gente',
-              lead:
-                  'Sugira um conteúdo, avise sobre um link quebrado ou conte como você usa a '
-                  'expoGEO.',
+              title: SiteCopy.contactTitle,
+              lead: SiteCopy.contactLead,
             ),
           ),
           SliverToBoxAdapter(

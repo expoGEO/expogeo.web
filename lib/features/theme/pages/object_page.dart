@@ -6,9 +6,9 @@ import 'package:expogeo/core/components/structure/site_scaffold.dart';
 import 'package:expogeo/core/models/subtheme_model.dart';
 import 'package:expogeo/core/models/theme_data_model.dart';
 import 'package:expogeo/core/models/theme_model.dart';
+import 'package:expogeo/core/navigation/route_meta.dart';
 import 'package:expogeo/core/pages/not_found_page.dart';
 import 'package:expogeo/core/theme/app_theme.dart';
-import 'package:expogeo/core/utils/browser/page_meta.dart';
 import 'package:expogeo/features/catalog/infra/models/catalog_model.dart';
 import 'package:expogeo/features/catalog/presentation/stores/catalog_state.dart';
 import 'package:expogeo/features/catalog/presentation/stores/catalog_store.dart';
@@ -112,9 +112,9 @@ class _ObjectViewState extends State<_ObjectView> {
     final note = content.contentInfo.contentNote;
 
     return PageMetaScope(
-      meta: PageMeta.titled(
-        title: '${content.contentInfo.title} · ${widget.subtheme.type.name}',
-        description: summarize(content.contentInfo.description),
+      meta: RouteMeta.object(
+        subtheme: widget.subtheme.type,
+        info: content.contentInfo,
         path: item.route,
       ),
       child: _page([

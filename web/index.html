@@ -185,6 +185,18 @@
       #carregamento.demorou .oculto {
         display: none;
       }
+      /* Texto da página para quem não vê o app (buscadores): fora da vista, mas no HTML. */
+      .conteudo-seo {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        white-space: nowrap;
+        border: 0;
+      }
       @media (prefers-reduced-motion: reduce) {
         #carregamento {
           transition: none;
@@ -199,6 +211,25 @@
         #carregamento .anel,
         #carregamento .oculto {
           display: none;
+        }
+        /* Sem JavaScript o app não abre: o texto da página passa a ficar à vista. */
+        #carregamento {
+          position: static;
+          padding: 16px;
+        }
+        .conteudo-seo {
+          position: static;
+          width: auto;
+          height: auto;
+          max-width: 720px;
+          margin: 0 auto;
+          padding: 24px 16px;
+          overflow: visible;
+          clip: auto;
+          white-space: normal;
+          font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+          line-height: 1.5;
+          color: #1f1b18;
         }
       </style>
     </noscript>
@@ -226,13 +257,21 @@
         var LIMITE_DEMORA_MS = 15000;
         var semMovimento = window.matchMedia("(prefers-reduced-motion: reduce)");
 
+        // O texto de cada página fica no HTML para os buscadores; com o app na tela, sai.
+        function removerTexto() {
+          var texto = document.getElementById("conteudo-seo");
+          if (texto && texto.parentNode) texto.parentNode.removeChild(texto);
+        }
+
         function remover() {
+          removerTexto();
           if (tela.parentNode) tela.parentNode.removeChild(tela);
         }
 
         function esconder() {
           window.clearTimeout(temporizador);
           window.removeEventListener("flutter-first-frame", esconder);
+          removerTexto();
           if (!tela.parentNode || tela.classList.contains("saindo")) return;
           tela.setAttribute("aria-hidden", "true");
           if (semMovimento.matches) {

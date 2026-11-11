@@ -4,6 +4,7 @@ import 'package:expogeo/core/components/button/app_button.dart';
 import 'package:expogeo/core/components/structure/page_content.dart';
 import 'package:expogeo/core/navigation/app_router.dart';
 import 'package:expogeo/core/theme/app_theme.dart';
+import 'package:expogeo/core/utils/constants/site_copy.dart';
 import 'package:expogeo/core/utils/screen/screen_utils.dart';
 import 'package:expogeo/features/home/components/hero_counts.dart';
 import 'package:expogeo/features/home/components/themes_orbit.dart';
@@ -105,7 +106,7 @@ class _HeroText extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Curadoria digital do saber geográfico'.toUpperCase(),
+          SiteCopy.siteTagline.toUpperCase(),
           style: styles.label.copyWith(color: colors.accentStrong),
         ),
         SizedBox(height: components.heroTitleGap),
@@ -115,9 +116,9 @@ class _HeroText extends StatelessWidget {
           child: Text.rich(
             TextSpan(
               children: [
-                const TextSpan(text: 'Conteúdos digitais de Geografia, '),
+                const TextSpan(text: SiteCopy.homeHeadline),
                 TextSpan(
-                  text: 'escolhidos para a sala de aula.',
+                  text: SiteCopy.homeHeadlineAccent,
                   style: TextStyle(color: colors.accentStrong),
                 ),
               ],
@@ -129,8 +130,7 @@ class _HeroText extends StatelessWidget {
         ConstrainedBox(
           constraints: BoxConstraints(maxWidth: components.heroLeadMaxWidth),
           child: Text(
-            'Sites, vídeos, mapas e aplicativos confiáveis, organizados por tema para '
-            'estudantes, professores e quem quer entender o mundo pela Geografia.',
+            SiteCopy.homeLead,
             style: styles.reading.copyWith(color: colors.inkSecondary),
           ),
         ),

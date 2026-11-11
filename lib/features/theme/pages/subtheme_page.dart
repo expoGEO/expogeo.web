@@ -8,9 +8,9 @@ import 'package:expogeo/core/models/subtheme_model.dart';
 import 'package:expogeo/core/models/theme_data_model.dart';
 import 'package:expogeo/core/models/theme_model.dart';
 import 'package:expogeo/core/navigation/app_router.dart';
+import 'package:expogeo/core/navigation/route_meta.dart';
 import 'package:expogeo/core/pages/not_found_page.dart';
 import 'package:expogeo/core/theme/app_theme.dart';
-import 'package:expogeo/core/utils/browser/page_meta.dart';
 import 'package:expogeo/core/utils/screen/screen_utils.dart';
 import 'package:expogeo/features/catalog/presentation/stores/catalog_store.dart';
 import 'package:expogeo/features/theme/components/subtheme_lead.dart';
@@ -89,13 +89,7 @@ class _SubthemeViewState extends State<_SubthemeView> {
         : components.pageHeadMedallionCompact;
 
     return PageMetaScope(
-      meta: PageMeta.titled(
-        title: '${subtheme.type.name} · ${theme.title}',
-        description:
-            'Conteúdos digitais sobre ${subtheme.type.name.toLowerCase()} em ${theme.title}: '
-            'sites, vídeos, mapas e aplicativos escolhidos para a sala de aula.',
-        path: subtheme.type.route,
-      ),
+      meta: RouteMeta.subtheme(theme: theme, subtheme: subtheme.type),
       child: SiteScaffold(
         slivers: [
           SliverToBoxAdapter(

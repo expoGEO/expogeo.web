@@ -56,6 +56,14 @@ jobs:
     - name: Build Flutter Web app
       run: flutter build web --release --dart-define=APP_ENV=prod
 
+    # Uma página HTML por rota e o sitemap.xml, para o Google. Lê o Firestore de produção pela
+    # API pública, sem credencial. Se a leitura falhar, o deploy para aqui e nada é enviado.
+    - name: Gerar páginas para o Google
+      run: |
+        flutter test tool/seo/gerar_seo.dart --dart-define=APP_ENV=prod
+        test -s build/web/sitemap.xml
+        test -s build/web/sobre.html
+
     - name: Sync build/web to HostGator (produção)
       uses: SamKirkland/FTP-Deploy-Action@4.3.0
       with:

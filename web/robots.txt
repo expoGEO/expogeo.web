@@ -2,3 +2,5 @@
 User-agent: *
 Disallow: /admin
 Allow: /
+
+Sitemap: https://expogeo.com.br/sitemap.xml

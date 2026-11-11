@@ -62,6 +62,15 @@ jobs:
         sed -i '/<!-- analytics:inicio -->/,/<!-- analytics:fim -->/d' build/web/index.html
         ! grep -q googletagmanager build/web/index.html
 
+    # Depois da remoção do Analytics: as páginas saem do index.html já sem a tag. No dev elas levam
+    # noindex e não há sitemap.xml.
+    - name: Gerar páginas para o Google
+      run: |
+        flutter test tool/seo/gerar_seo.dart --dart-define=APP_ENV=dev
+        test -s build/web/sobre.html
+        test ! -e build/web/sitemap.xml
+        ! grep -rq googletagmanager build/web --include='*.html'
+
     - name: Bloquear indexação do ambiente de dev
       run: |
         printf 'User-agent: *\nDisallow: /\n' > build/web/robots.txt

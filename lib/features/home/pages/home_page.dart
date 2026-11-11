@@ -7,6 +7,7 @@ import 'package:expogeo/core/navigation/app_router.dart';
 import 'package:expogeo/core/navigation/home_sections.dart';
 import 'package:expogeo/core/theme/app_theme.dart';
 import 'package:expogeo/core/utils/browser/page_meta.dart';
+import 'package:expogeo/core/utils/constants/site_copy.dart';
 import 'package:expogeo/core/utils/screen/screen_utils.dart';
 import 'package:expogeo/features/catalog/presentation/stores/catalog_store.dart';
 import 'package:expogeo/features/home/components/home_about_section.dart';
@@ -25,11 +26,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  static const String _description =
-      'Conteúdos digitais de Geografia escolhidos para a sala de aula: sites, vídeos, mapas e '
-      'aplicativos organizados por tema, com a curadoria do Observatório do Ensino de História '
-      'e Geografia da UFU.';
-
   final _themesKey = GlobalKey();
   final _themesTitleFocus = FocusNode(debugLabel: 'Por onde começar');
 
@@ -86,8 +82,8 @@ class _HomePageState extends State<HomePage> {
 
     return PageMetaScope(
       meta: const PageMeta(
-        title: 'expoGEO · Curadoria digital do saber geográfico',
-        description: _description,
+        title: SiteCopy.homeTitle,
+        description: SiteCopy.homeDescription,
         path: AppRouter.home,
       ),
       child: SiteScaffold(

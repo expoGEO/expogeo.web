@@ -11,6 +11,7 @@ import 'package:expogeo/core/navigation/app_router.dart';
 import 'package:expogeo/core/theme/app_theme.dart';
 import 'package:expogeo/core/utils/browser/page_meta.dart';
 import 'package:expogeo/core/utils/constants/app_links.dart';
+import 'package:expogeo/core/utils/constants/site_copy.dart';
 import 'package:expogeo/core/utils/screen/screen_utils.dart';
 import 'package:expogeo/features/about/components/reference_code_example.dart';
 import 'package:flutter/material.dart';
@@ -18,19 +19,7 @@ import 'package:flutter/material.dart';
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key});
 
-  static const List<String> paragraphs = [
-    'A expoGEO é um espaço pensado para estudantes, professores e todos que se interessam por '
-        'compreender o mundo a partir da Geografia. Aqui você encontra uma seleção cuidadosa de '
-        'conteúdos digitais que abordam os principais temas geográficos de forma dinâmica, '
-        'interativa e pedagogicamente qualificada.',
-    'Reunimos materiais confiáveis, recursos educacionais digitais e propostas inovadoras que '
-        'potencializam os processos de ensino e aprendizagem da Geografia escolar, aproximando '
-        'conhecimento científico, práticas pedagógicas e tecnologias contemporâneas.',
-    'O projeto integra as ações do Programa de Pós-Graduação em Educação da Universidade Federal '
-        'de Uberlândia (PPGED/UFU) e foi desenvolvido no âmbito do Observatório do Ensino de '
-        'História e Geografia (OEHGEO/UFU), fortalecendo a articulação entre pesquisa, formação '
-        'docente e curadoria de conteúdos educacionais.',
-  ];
+  static const List<String> paragraphs = SiteCopy.aboutParagraphs;
 
   @override
   Widget build(BuildContext context) {
@@ -47,8 +36,8 @@ class AboutPage extends StatelessWidget {
 
     return PageMetaScope(
       meta: PageMeta.titled(
-        title: 'Sobre a expoGEO',
-        description: summarize(paragraphs.first),
+        title: SiteCopy.aboutTitle,
+        description: summarize(SiteCopy.aboutParagraphs.first),
         path: AppRouter.about,
       ),
       child: SiteScaffold(
@@ -59,8 +48,8 @@ class AboutPage extends StatelessWidget {
                 BreadcrumbItem('Início', route: AppRouter.home),
                 BreadcrumbItem('Sobre'),
               ],
-              title: 'Sobre a expoGEO',
-              lead: 'Conhecimento, tecnologia e interatividade a serviço do ensino de Geografia.',
+              title: SiteCopy.aboutTitle,
+              lead: SiteCopy.aboutLead,
             ),
           ),
           SliverToBoxAdapter(

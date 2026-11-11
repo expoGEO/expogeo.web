@@ -6,8 +6,8 @@ import 'package:expogeo/core/components/structure/site_scaffold.dart';
 import 'package:expogeo/core/models/theme_data_model.dart';
 import 'package:expogeo/core/models/theme_illustration.dart';
 import 'package:expogeo/core/navigation/app_router.dart';
+import 'package:expogeo/core/navigation/route_meta.dart';
 import 'package:expogeo/core/theme/app_theme.dart';
-import 'package:expogeo/core/utils/browser/page_meta.dart';
 import 'package:expogeo/core/utils/screen/screen_utils.dart';
 import 'package:expogeo/features/catalog/presentation/stores/catalog_store.dart';
 import 'package:expogeo/features/theme/components/other_themes_section.dart';
@@ -48,11 +48,7 @@ class _ThemePageState extends State<ThemePage> {
         : components.pageHeadMedallionCompact;
 
     return PageMetaScope(
-      meta: PageMeta.titled(
-        title: theme.title,
-        description: summarize(theme.description),
-        path: theme.type.route,
-      ),
+      meta: RouteMeta.theme(theme),
       child: SiteScaffold(
         slivers: [
           SliverToBoxAdapter(

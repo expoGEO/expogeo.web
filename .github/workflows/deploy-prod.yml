@@ -15,6 +15,12 @@ on:
       - '.github/workflows/ci.yml'
       - 'analysis_options.yaml'
   workflow_dispatch:
+  # AGENDAMENTO DESATIVADO. Ativar só depois do primeiro deploy de produção com o pré-render
+  # (a `main` precisa ter tool/seo): descomente as duas linhas abaixo e o bloco `permissions`
+  # do job. Refaz as páginas para o Google e o sitemap todo dia às 03:00 de Brasília (06:00 UTC),
+  # para objetos cadastrados no painel entrarem sem ninguém disparar o deploy.
+  # schedule:
+  #   - cron: '0 6 * * *'
 
 concurrency:
   group: deploy-prod
@@ -24,10 +30,23 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: PROD
+    # Com o agendamento ativo, o passo "Manter o agendamento ativo" precisa de `actions: write`.
+    # permissions:
+    #   contents: read
+    #   actions: write
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+
+    # O GitHub desativa workflows agendados depois de 60 dias sem atividade no repositório. Este
+    # passo reativa o próprio workflow pela API a cada execução agendada, sem commit. Só roda
+    # quando o gatilho `schedule` está ativo.
+    - name: Manter o agendamento ativo
+      if: github.event_name == 'schedule'
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: gh api --method PUT "repos/${{ github.repository }}/actions/workflows/deploy-prod.yml/enable"
 
     # Antes do site, porque o código depende das regras e dos índices. As regras do repositório
     # substituem as do projeto; os índices só são criados e atualizados (sem --force).

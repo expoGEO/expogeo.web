@@ -48,8 +48,6 @@ Push na `develop` publica o ambiente de testes e push na `main` publica a produ�
 
 ## Documentação
 
-- [Arquitetura](docs/architecture.md): estrutura, camadas, design system, rotas, catálogo e convenções
+- [Arquitetura](docs/architecture.md): estrutura, camadas, design system, decisões de design, rotas, catálogo, convenções, limitações, ideias futuras e o fluxo de specs (SDD)
 - [Painel administrativo](docs/admin-panel.md): login, lista, editor e formato dos dados
 - [Deploy](docs/deployment.md): ambientes, workflows, Firebase e servidor
-- [Histórico do redesign](docs/redesign-history.md): decisões, ressalvas em aberto e ideias futuras
-- [Especificações (SDD)](docs/specs/README.md): fluxo de spec, plano, implementação e verificação

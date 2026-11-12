@@ -9,7 +9,7 @@ argument-hint: "<número da spec, ex.: 019>"
 Confere o resultado com evidência, critério por critério. **Não corrige** o que achar sem combinar antes.
 
 ## Antes de começar
-1. Leia `docs/specs/README.md`, `docs/architecture.md`, a `spec.md` e o `tasks.md` de `docs/specs/$ARGUMENTS-*`.
+1. Leia `docs/architecture.md` (inclui o fluxo de specs), a `spec.md` e o `tasks.md` de `docs/specs/$ARGUMENTS-*`.
 2. Veja o que mudou: `git status` e `git diff` (e `git log` se já houver commits da spec).
 3. Se restarem tarefas `- [ ]`, avise: a verificação será parcial.
 
@@ -50,4 +50,4 @@ O que não foi possível verificar e por quê.
 
 Depois:
 - Mostre um resumo curto com as pendências e **pergunte** o que a pessoa quer corrigir.
-- Se o resultado for `aprovada` (ou `aprovada com ressalvas` que a pessoa aceite), mude o status da spec para `verificada` e sugira levar regras novas para `docs/architecture.md` ou `docs/admin-panel.md` e ressalvas abertas para `docs/redesign-history.md` antes de apagar a pasta da spec.
+- Se o resultado for `aprovada` (ou `aprovada com ressalvas` que a pessoa aceite), mude o status da spec para `verificada` e sugira levar regras novas para `docs/architecture.md` ou `docs/admin-panel.md` e ressalvas abertas para "Limitações conhecidas" de `docs/architecture.md` (ou para as "Pendências manuais" de `docs/deployment.md`, se dependerem de servidor ou de produção) antes de apagar a pasta da spec.

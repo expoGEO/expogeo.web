@@ -68,6 +68,32 @@ Fluxo: `Widget → Store → Repository → Datasource → Firebase`. O resultad
 - **Faixas de largura:** celular < 600, tablet 600–1023, desktop ≥ 1024 (`Breakpoint`, `ScreenUtils`), largura máxima de conteúdo 1120. Componentes usam tamanhos fixos por faixa; nada escala pela largura da tela. A navbar e o painel viram menu/gaveta abaixo de 900 px.
 - **Regras visuais:** texto secundário nunca em cinza claro (contraste mínimo 4,5:1 para texto e ícones informativos); telas funcionam em 390, 768 e 1280 px sem rolagem horizontal nem `overflow`; toda tela com dados tem carregando (esqueleto), vazio e erro.
 
+## Decisões de design e de produto
+
+| Tema | Decisão |
+|---|---|
+| Marca | Sub-marca do Observatório: mesmo sistema visual, mantendo o logo "expoGEO", o degradê laranja-amarelo e a navegação por temas e subtemas |
+| Ligação com o Observatório | Faixa escura no topo, link na navbar, bloco na Home e no Sobre, coluna no rodapé |
+| Cor e degradê | `#C94400` em tudo que é clicável (o `#F97316` antigo tinha 2,8:1); degradê só decorativo |
+| Fontes | Bricolage Grotesque e Figtree embutidas, as do Observatório; a Aleo e o `google_fonts` saíram |
+| Navbar | Fixa, de fundo branco translúcido; a variação transparente sobre o topo foi testada e descartada |
+| Ilustrações | Inteiras em medalhão 1:1 (`contain`), não no recorte 16:10 do Observatório |
+| Rotas | As públicas continuam; rotas novas em português, minúsculas, sem acento e com hífen |
+| Código na rota | `nma-bio-03`; o original `NMA_BIO_03` também abre e redireciona |
+| Redes do rodapé | Não há redes próprias da expoGEO: o rodapé leva às do Observatório, com nome acessível "… do Observatório" |
+| Fonte das contagens e listas | Catálogo único por `collectionGroup('contents')`, com regra de leitura própria no `firestore.rules`; no lugar das consultas `count()` e da paginação por cursor |
+| Código no editor | Gerado a partir do prefixo que o subtema já usa; "Regras de registro" segue opcional |
+| Logos de apoio | Levam aos sites institucionais, iguais aos do Observatório quando a instituição é a mesma |
+| Contato | Abre o programa de e-mail com tudo preenchido, valida e confirma com "Copiar mensagem" |
+| Painel | No padrão do Observatório, sem mudar dados, campos nem regras, sem situação de publicação, temas e subtemas só para consulta |
+| Indexação | Metas por rota no app, mais uma página HTML por rota gerada no deploy e `sitemap.xml` em produção ([deployment.md](deployment.md)) |
+
+**Referências visuais**
+
+- Protótipo navegável (todas as telas, inclusive login, painel e editor): https://claude.ai/artifact/6tQuscgpFQk87MU2JZPNNs. Continua sendo a referência visual; leia-o com a ferramenta Artifact (`action: read`), não com WebFetch.
+- Base visual e de código: o redesign do Observatório (`../observatorio_geo_hist`, protótipo em https://claude.ai/artifact/PimRbbQyUDbqrapiv8HseH). Tokens, fontes, botões, navbar, rodapé, estados e componentes do painel foram copiados e adaptados, não redesenhados.
+- Aceite visual: 390, 768 e 1280 px, sem rolagem horizontal nem `overflow`, com contraste mínimo de 4,5:1 e navegação por teclado.
+
 ## Rotas
 
 Em [app_router.dart](../lib/core/navigation/app_router.dart). Rotas em português, minúsculas, sem acento e com hífen; ao renomear uma rota pública, a antiga continua redirecionando.
@@ -130,3 +156,59 @@ Todas as telas leem o mesmo **catálogo**: `lib/features/catalog/` faz uma consu
 3. Rotas: constante e `GoRoute` em `app_router.dart`, em português; redirecione a rota antiga se renomear.
 4. Use os tokens de `AppTheme`, os componentes do `core` e os estados de carregando, vazio e erro; confira 390, 768 e 1280 px e a navegação por teclado.
 5. Rode `build_runner` se criou store ou modelo gerado, e adicione testes em `test/features/{feature}/`.
+
+## Limitações conhecidas
+
+- **Primeiro Tab de cada página** cai numa parada invisível (visão de plataforma do `SelectionArea` do `SiteScaffold`). Tirar a área do Tab tiraria tudo que está dentro dela.
+- **Navbar de altura fixa** transborda com texto a 200%, e os títulos das colunas do rodapé são `h2`, somando-se aos da página. Não reconferido.
+- **Leitor de tela real** (VoiceOver, NVDA), texto a 200% e o aviso nativo do navegador ao fechar a aba do editor: só árvore de semântica e testes. Não conferido.
+- **Links de texto sem `href`** (contato e demais externos): o leitor de tela não os lê como link. `PartnerLogo` usa `linkUrl` externo e pode abrir a própria aba além da nova. Não conferido.
+- **Contato:** "Copiar mensagem" copia assunto e corpo, sem o destinatário.
+- **Ano de emissão:** nenhum objeto do dev tem o dado; só foi visto com o datasource alterado.
+- **Nome longo de subtema** parte a palavra abaixo de cerca de 346 px (fora das larguras exigidas).
+- Painel com Firestore real: [admin-panel.md](admin-panel.md). Produção, servidor e indexação: "Pendências manuais" de [deployment.md](deployment.md).
+
+## Ideias futuras
+
+- Busca geral do site.
+- Modo escuro.
+- Criar e editar temas e subtemas pelo painel (hoje só consulta; vêm do código), o que também permitiria descrições próprias para o Google.
+- Situação de publicação (rascunho e publicado) e papéis de usuário no painel (hoje as regras só pedem sessão).
+- Redes sociais próprias da expoGEO.
+- Testes automatizados no CI (hoje só formatação, `analyze` e build) e previews por PR.
+- Indexação: rodar o pré-render a cada mudança no painel (agendado ou disparado por ele), o que mantém o sitemap atual e permitiria devolver 404 de verdade para endereço inexistente; enriquecer as descrições curtas dos objetos.
+
+## Fluxo de trabalho com specs (SDD)
+
+Cada feature maior (de mais ou menos meio dia para cima, ou que mude várias telas) ganha uma pasta `docs/specs/NNN-nome-curto/` enquanto está em andamento; correções pequenas e ajustes pontuais dispensam spec. As skills do projeto criam os arquivos em sequência e **param** para a sua aprovação em cada etapa:
+
+| Arquivo | Criado por | Conteúdo |
+|---|---|---|
+| `spec.md` | `/sdd-spec` | **O quê e por quê**: comportamento, estados, critérios de aceite, fora do escopo |
+| `plan.md` | `/sdd-plan` | **Como**: abordagem técnica, arquivos afetados, decisões e riscos |
+| `tasks.md` | `/sdd-plan` (atualizado por `/sdd-implement`) | Lista de tarefas ordenadas, com o progresso |
+| `verificacao.md` | `/sdd-verify` | Resultado da conferência contra os critérios de aceite |
+
+```
+pedido ou ideia ──► /sdd-spec ──► (aprovação) ──► /sdd-plan ──► /sdd-implement ──► /sdd-verify ──► merge
+ ("Ideias futuras")  spec.md                      plan.md        código +           verificacao.md
+                                                  tasks.md       tasks.md marcadas
+```
+
+**Modo autônomo:** `/sdd-fase <pedido ou itens>` roda o fluxo inteiro sem paradas: divide o pedido em specs, faz cada etapa numa sessão separada, corrige o que a verificação achar (até 2 tentativas por problema), faz commits por entrega numa branch própria (`refactor/redesign-<fase>`, criada a partir da branch de integração) e termina com um resumo e um PR. O andamento fica em `docs/specs/execucao-<fase>.md`, que também serve para retomar se a execução for interrompida; no encerramento ele é apagado e o resumo vai para a descrição do PR.
+
+**Regras**
+
+- Numeração sequencial de três dígitos. As 001 a 019 já foram usadas e removidas; a próxima é a **020**. O nome é curto, em `kebab-case`, sem acentos.
+- A spec tem um **status** no topo: `rascunho`, `aprovada`, `implementada` ou `verificada`.
+- Uma spec só vai para o plano com **zero perguntas em aberto** e status `aprovada`.
+- Se, durante a implementação, algo precisar divergir da spec, **atualize a spec primeiro** (e registre em "Histórico de mudanças"), depois o código.
+- Cada critério de aceite deve poder ser conferido como "passou" ou "não passou".
+
+**Depois do merge** a pasta da spec sai do repositório, no mesmo PR ou logo depois (a pasta `docs/specs/` só existe enquanto há spec em andamento). Antes disso:
+
+- regras e padrões novos vão para este documento, o [admin-panel.md](admin-panel.md) ou o [deployment.md](deployment.md);
+- ressalvas que seguem em aberto vão para "Limitações conhecidas" daqui, ou para as "Pendências manuais" do [deployment.md](deployment.md) quando dependem de servidor ou de conferência em produção;
+- se a feature vinha de uma ideia futura, o item sai de "Ideias futuras".
+
+Para consultar uma spec removida: `git log --all --oneline -- 'docs/specs/019-*'` e `git show <commit>:docs/specs/019-pre-render-seo/spec.md`.

@@ -9,7 +9,7 @@ argument-hint: "<número da spec, ex.: 019>"
 Converte uma spec **aprovada** em plano técnico e tarefas ordenadas. **Não implementa.**
 
 ## Antes de começar
-1. Leia `docs/specs/README.md`, `docs/architecture.md` (camadas, design system, rotas, convenções) e, se a spec tocar o painel, `docs/admin-panel.md`; depois a spec em `docs/specs/$ARGUMENTS-*/spec.md`.
+1. Leia `docs/architecture.md` (camadas, design system, rotas, convenções e fluxo de specs) e, se a spec tocar o painel, `docs/admin-panel.md`; depois a spec em `docs/specs/$ARGUMENTS-*/spec.md`.
 2. Confirme que o status é `aprovada` e que **não há perguntas em aberto**. Se não for o caso, pare e diga o que falta (sugira `/sdd-spec`).
 3. Explore o código que será tocado: leia os arquivos reais, não presuma. Veja como componentes parecidos já foram feitos e reaproveite, aqui ou no redesign do Observatório (`../observatorio_geo_hist/lib/app/`), que é a base visual.
 

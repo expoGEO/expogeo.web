@@ -9,7 +9,7 @@ argument-hint: "<número da spec, ex.: 019> [tarefa, ex.: A2]"
 Executa o plano **uma tarefa por vez**, com a spec como referência.
 
 ## Antes de começar
-1. Leia `docs/specs/README.md`, `docs/architecture.md`, a `spec.md`, o `plan.md` e o `tasks.md` da pasta `docs/specs/$ARGUMENTS-*`.
+1. Leia `docs/architecture.md` (inclui o fluxo de specs), a `spec.md`, o `plan.md` e o `tasks.md` da pasta `docs/specs/$ARGUMENTS-*`.
 2. Confirme que a spec está `aprovada` e que o plano foi aprovado. Se não, pare e diga o que falta.
 3. Rode `git status`. Se houver alterações que não são desta spec, avise antes de continuar.
 4. Encontre a próxima tarefa `- [ ]` (ou a que a pessoa indicou).

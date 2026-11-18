@@ -27,7 +27,7 @@ feature/*  ──PR──▶  develop  ──PR──▶  main
 |---|---|---|
 | [ci.yml](../.github/workflows/ci.yml) | PR para `develop` ou `main` | `pub get`, conferência de formatação (`dart format`, largura 100, sem os gerados), `analyze` e `build web`. Não publica e não roda os testes |
 | `deploy-dev.yml` | push na `develop` ou manual | Regras e índices do Firestore, build com `APP_ENV=dev`, remoção do Analytics, páginas para o Google (com `noindex`, sem sitemap), `robots.txt` bloqueando indexação, senha no `.htaccess` e FTP para o dev |
-| `deploy-prod.yml` | push na `main` ou manual ou agendado (todo dia às 03:00 de Brasília) | Regras e índices do Firestore, build com `APP_ENV=prod`, páginas para o Google com `sitemap.xml` e FTP para produção |
+| `deploy-prod.yml` | push na `main` ou manual ou agendado (a cada 3 dias, às 03:00 de Brasília) | Regras e índices do Firestore, build com `APP_ENV=prod`, páginas para o Google com `sitemap.xml` e FTP para produção |
 
 O filtro de "só docs" fica em lugares diferentes para os dois casos:
 
@@ -43,7 +43,7 @@ Comum aos três:
 
 ## Deploy agendado de produção
 
-O `deploy-prod.yml` também roda todo dia às 03:00 de Brasília (06:00 UTC), sempre sobre a `main`, para o sitemap e as páginas para o Google acompanharem objetos cadastrados ou editados no painel sem ninguém disparar o deploy.
+O `deploy-prod.yml` também roda a cada 3 dias, às 03:00 de Brasília (06:00 UTC), sempre sobre a `main`, para o sitemap e as páginas para o Google acompanharem objetos cadastrados ou editados no painel sem ninguém disparar o deploy. O cron é `0 6 */3 * *`: roda nos dias 1, 4, 7, ... do mês, então na virada do mês o intervalo pode ser de 1 a 3 dias. Objetos novos podem levar até 3 dias para entrar no sitemap; para antecipar, dispare o deploy à mão.
 
 - **Desativar:** comente de volta `schedule:` e o `cron` no topo do arquivo e o bloco `permissions` do job, por PR para a `develop` e depois para a `main`.
 - **Custo:** nenhum. O repositório é público (minutos do GitHub Actions sem cobrança), cada execução lê cerca de 230 documentos (a cota gratuita do Firestore é de 50 mil leituras por dia) e o FTP só envia o que mudou.
@@ -81,7 +81,7 @@ O Flutter desenha tudo num canvas, então o Google só enxerga texto se ele esti
 Os objetos vêm do Firestore pela API REST pública (tema, subtema e conteúdos, cerca de 36 requisições), sem credencial. O gerador usa os mesmos modelos do app (`ThemeDataModel`, `ContentResponseModel`, `RouteMeta`, `SiteCopy`), então rotas, nomes e textos não são copiados para outro lugar. Um objeto que não converte, um Firestore sem resposta ou um endereço fora do padrão interrompem o deploy.
 
 **O que isso não cobre**
-- Objetos e edições feitos no painel só entram nas páginas e no sitemap no **próximo deploy de produção**. Depois de cadastrar conteúdo, espere o [deploy agendado](#deploy-agendado-de-produção) da madrugada ou dispare o `deploy-prod.yml` à mão (aba Actions, *Run workflow*). Até lá, o link direto do objeto abre normalmente (cai no `index.html` e o app o mostra), só sem a página pré-renderizada.
+- Objetos e edições feitos no painel só entram nas páginas e no sitemap no **próximo deploy de produção**. Depois de cadastrar conteúdo, espere o próximo [deploy agendado](#deploy-agendado-de-produção) (até 3 dias) ou dispare o `deploy-prod.yml` à mão (aba Actions, *Run workflow*). Até lá, o link direto do objeto abre normalmente (cai no `index.html` e o app o mostra), só sem a página pré-renderizada.
 - Um endereço inexistente responde 200 e o app mostra o 404 com `noindex` (um "soft 404"). Devolver 404 de verdade exigiria rodar o pré-render a cada mudança no painel.
 - Nomes e descrições de temas e subtemas vivem no código, não no Firestore.
 
@@ -139,4 +139,4 @@ Depois, a Inspeção de URL do Google Search Console numa página de objeto (*Te
 - **Search Console:** cadastrar `expogeo.com.br`, enviar o `sitemap.xml` (basta digitar `sitemap.xml`) e pedir a indexação das URLs principais.
 - **Proteção das branches** `main` e `develop` e o teste ponta a ponta de um PR por `develop` e `main`: ações no GitHub, não conferidas aqui.
 - **Prévia de compartilhamento** (WhatsApp e similares) com a imagem de `web/og-image.png`: conferir em produção.
-- **Deploy agendado:** confirmar na aba Actions que a primeira execução agendada (06:00 UTC) rodou depois do deploy de 2026-11-18 e, com o tempo, que o passo de manter o agendamento funciona ([Deploy agendado de produção](#deploy-agendado-de-produção)).
+- **Deploy agendado:** confirmar na aba Actions que a primeira execução agendada (esperada em 2026-11-19, 06:00 UTC) rodou e, com o tempo, que o passo de manter o agendamento funciona ([Deploy agendado de produção](#deploy-agendado-de-produção)).

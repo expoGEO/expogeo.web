@@ -15,11 +15,12 @@ on:
       - '.github/workflows/ci.yml'
       - 'analysis_options.yaml'
   workflow_dispatch:
-  # Refaz as páginas para o Google e o sitemap todo dia às 03:00 de Brasília (06:00 UTC), para
-  # objetos cadastrados no painel entrarem sem ninguém disparar o deploy. Roda sempre sobre a
+  # Refaz as páginas para o Google e o sitemap a cada 3 dias, às 03:00 de Brasília (06:00 UTC),
+  # para objetos cadastrados no painel entrarem sem ninguém disparar o deploy. Roda sempre sobre a
   # `main`. Para desativar, comente estas duas linhas e o bloco `permissions` do job.
   schedule:
-    - cron: '0 6 * * *'
+    # Dias 1, 4, 7, ... do mês; na virada do mês o intervalo pode ser de 1 a 3 dias.
+    - cron: '0 6 */3 * *'
 
 concurrency:
   group: deploy-prod

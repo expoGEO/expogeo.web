@@ -43,7 +43,6 @@ enum ThemeEnum {
 }
 
 enum SubthemeEnum {
-  // Representações Espaciais
   coordenadasGeograficas('coordenadas-geograficas', 'Coordenadas Geográficas'),
   compositorMapas('compositor-mapas', 'Compositor de Mapas'),
   fusoHorario('fuso-horario', 'Fuso Horário'),
@@ -53,7 +52,6 @@ enum SubthemeEnum {
   movimentosTerra('movimentos-terra', 'Movimentos da Terra'),
   pontosCardeais('pontos-cardeais', 'Pontos Cardeais'),
 
-  // Natureza e Meio Ambiente
   poluicaoAgua('poluicao-agua', 'Poluição da Água'),
   poluicaoAr('poluicao-ar', 'Poluição do Ar'),
   desmatamento('desmatamento', 'Desmatamento'),
@@ -67,7 +65,6 @@ enum SubthemeEnum {
   baciasHidrograficas('bacias-hidrograficas', 'Bacias Hidrográficas'),
   usoAgua('uso-agua', 'Uso da Água'),
 
-  // Espaços Urbanos e Rurais
   espacoUrbanoBrasileiro('espaco-urbano-brasileiro', 'Espaço Urbano Brasileiro'),
   globalizacaoMobilidade('globalizacao-mobilidade', 'Globalização e Mobilidade'),
   industriaTransformacao('industria-transformacao', 'Indústria e Transformação'),
@@ -75,7 +72,6 @@ enum SubthemeEnum {
   conflitosTerra('conflitos-terra', 'Conflitos pela Terra'),
   mercadoAgropecuario('mercado-agropecuario', 'Mercado Agropecuário'),
 
-  // Cultura e Política
   geopolitica('geopolitica', 'Geopolítica'),
   censoDemografico('censo-demografico', 'Censo Demográfico'),
   regioesAdministrativas('regioes-administrativas', 'Regiões Administrativas'),
@@ -89,7 +85,6 @@ enum SubthemeEnum {
   const SubthemeEnum(this.value, this.name);
 
   ThemeEnum get theme => switch (this) {
-    // Representações Espaciais
     SubthemeEnum.coordenadasGeograficas => ThemeEnum.representacoesEspaciais,
     SubthemeEnum.compositorMapas => ThemeEnum.representacoesEspaciais,
     SubthemeEnum.fusoHorario => ThemeEnum.representacoesEspaciais,
@@ -99,7 +94,6 @@ enum SubthemeEnum {
     SubthemeEnum.movimentosTerra => ThemeEnum.representacoesEspaciais,
     SubthemeEnum.pontosCardeais => ThemeEnum.representacoesEspaciais,
 
-    // Natureza e Meio Ambiente
     SubthemeEnum.poluicaoAgua => ThemeEnum.naturezaMeioAmbiente,
     SubthemeEnum.poluicaoAr => ThemeEnum.naturezaMeioAmbiente,
     SubthemeEnum.desmatamento => ThemeEnum.naturezaMeioAmbiente,
@@ -113,7 +107,6 @@ enum SubthemeEnum {
     SubthemeEnum.biomas => ThemeEnum.naturezaMeioAmbiente,
     SubthemeEnum.estruturasFormasRelevo => ThemeEnum.naturezaMeioAmbiente,
 
-    // Espaços Urbanos e Rurais
     SubthemeEnum.espacoUrbanoBrasileiro => ThemeEnum.espacosUrbanosRurais,
     SubthemeEnum.globalizacaoMobilidade => ThemeEnum.espacosUrbanosRurais,
     SubthemeEnum.industriaTransformacao => ThemeEnum.espacosUrbanosRurais,
@@ -121,7 +114,6 @@ enum SubthemeEnum {
     SubthemeEnum.conflitosTerra => ThemeEnum.espacosUrbanosRurais,
     SubthemeEnum.mercadoAgropecuario => ThemeEnum.espacosUrbanosRurais,
 
-    // Cultura e Política
     SubthemeEnum.geopolitica => ThemeEnum.culturaPolitica,
     SubthemeEnum.censoDemografico => ThemeEnum.culturaPolitica,
     SubthemeEnum.regioesAdministrativas => ThemeEnum.culturaPolitica,
@@ -133,7 +125,6 @@ enum SubthemeEnum {
   String get route => '/${theme.value}/$value';
 
   String get id => switch (this) {
-    // Representações Espaciais
     SubthemeEnum.coordenadasGeograficas => 'RE_CG',
     SubthemeEnum.compositorMapas => 'RE_CM',
     SubthemeEnum.fusoHorario => 'RE_FH',
@@ -143,7 +134,6 @@ enum SubthemeEnum {
     SubthemeEnum.movimentosTerra => 'RE_MOT',
     SubthemeEnum.pontosCardeais => 'RE_PC',
 
-    // Natureza e Meio Ambiente
     SubthemeEnum.poluicaoAgua => 'NMA_PA',
     SubthemeEnum.poluicaoAr => 'NMA_PAR',
     SubthemeEnum.desmatamento => 'NMA_DES',
@@ -157,7 +147,6 @@ enum SubthemeEnum {
     SubthemeEnum.biomas => 'NMA_BIO',
     SubthemeEnum.estruturasFormasRelevo => 'NMA_EFR',
 
-    // Espaços Urbanos e Rurais
     SubthemeEnum.espacoUrbanoBrasileiro => 'EUR_EUB',
     SubthemeEnum.globalizacaoMobilidade => 'EUR_GM',
     SubthemeEnum.industriaTransformacao => 'EUR_IT',
@@ -165,7 +154,6 @@ enum SubthemeEnum {
     SubthemeEnum.conflitosTerra => 'EUR_CT',
     SubthemeEnum.mercadoAgropecuario => 'EUR_MA',
 
-    // Cultura e Política
     SubthemeEnum.geopolitica => 'CP_GP',
     SubthemeEnum.censoDemografico => 'CP_CD',
     SubthemeEnum.regioesAdministrativas => 'CP_RA',

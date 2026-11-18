@@ -11,8 +11,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # O validar é check obrigatório: com paths-ignore no gatilho ele nunca reportava e PR só de
-  # docs ficava travado. Por isso o filtro fica aqui; job pulado por `if` conta como aprovado.
+  # O validar é check obrigatório: com paths-ignore no gatilho ele nunca reporta e uma mudança só
+  # de docs fica travada. Por isso o filtro fica aqui; job pulado por `if` conta como aprovado.
   mudancas:
     runs-on: ubuntu-latest
     outputs:

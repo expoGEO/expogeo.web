@@ -15,6 +15,11 @@ on:
       - '.github/workflows/ci.yml'
       - 'analysis_options.yaml'
   workflow_dispatch:
+  # Refaz as páginas para o Google e o sitemap todo dia às 03:00 de Brasília (06:00 UTC), para
+  # objetos cadastrados no painel entrarem sem ninguém disparar o deploy. Roda sempre sobre a
+  # `main`. Para desativar, comente estas duas linhas e o bloco `permissions` do job.
+  schedule:
+    - cron: '0 6 * * *'
 
 concurrency:
   group: deploy-prod
@@ -24,20 +29,33 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: PROD
+    # O passo "Manter o agendamento ativo" precisa de `actions: write`.
+    permissions:
+      contents: read
+      actions: write
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    # Antes do site, para a consulta nova não chegar sem os índices. Só cria e atualiza:
-    # sem --force, índices que existam só no projeto não são apagados.
-    - name: Publicar índices do Firestore
+    # O GitHub desativa workflows agendados depois de 60 dias sem atividade no repositório. Este
+    # passo reativa o próprio workflow pela API a cada execução agendada, sem commit. Só roda
+    # nas execuções agendadas.
+    - name: Manter o agendamento ativo
+      if: github.event_name == 'schedule'
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: gh api --method PUT "repos/${{ github.repository }}/actions/workflows/deploy-prod.yml/enable"
+
+    # Antes do site, porque o código depende das regras e dos índices. As regras do repositório
+    # substituem as do projeto; os índices só são criados e atualizados (sem --force).
+    - name: Publicar regras e índices do Firestore
       env:
         FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
       run: |
         printf '%s' "$FIREBASE_SERVICE_ACCOUNT" > "$RUNNER_TEMP/firebase-sa.json"
         GOOGLE_APPLICATION_CREDENTIALS="$RUNNER_TEMP/firebase-sa.json" \
-          npx --yes firebase-tools@15 deploy --only firestore:indexes \
+          npx --yes firebase-tools@15 deploy --only firestore \
           --project expogeo-fad33 --non-interactive
 
     - name: Ler versão do Flutter do .fvmrc
@@ -55,6 +73,14 @@ jobs:
 
     - name: Build Flutter Web app
       run: flutter build web --release --dart-define=APP_ENV=prod
+
+    # Uma página HTML por rota e o sitemap.xml, para o Google. Lê o Firestore de produção pela
+    # API pública, sem credencial. Se a leitura falhar, o deploy para aqui e nada é enviado.
+    - name: Gerar páginas para o Google
+      run: |
+        flutter test tool/seo/gerar_seo.dart --dart-define=APP_ENV=prod
+        test -s build/web/sitemap.xml
+        test -s build/web/sobre.html
 
     - name: Sync build/web to HostGator (produção)
       uses: SamKirkland/FTP-Deploy-Action@4.3.0

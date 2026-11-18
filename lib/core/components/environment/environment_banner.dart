@@ -11,7 +11,7 @@ class EnvironmentBanner extends StatelessWidget {
 
     // A faixa fica fora das páginas, sem Material acima; sem ele o texto herda o sublinhado de erro.
     return Material(
-      color: AppTheme.colors.primaryYellow,
+      color: AppTheme.colors.environmentBanner,
       child: SizedBox(
         height: AppTheme.dimensions.environmentBannerHeight,
         child: Center(
@@ -20,7 +20,10 @@ class EnvironmentBanner extends StatelessWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,
-            style: AppTheme.typography.label.medium.copyWith(color: AppTheme.colors.gray900),
+            style: AppTheme.typography
+                .of(context)
+                .small
+                .copyWith(fontWeight: FontWeight.w600, color: AppTheme.colors.ink),
           ),
         ),
       ),

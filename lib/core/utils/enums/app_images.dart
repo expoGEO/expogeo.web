@@ -1,13 +1,12 @@
 import "package:expogeo/core/utils/string/string_utils.dart";
 
 enum AppImages {
-  logoSimple,
-  logo,
+  logoSimple(ImageFormat.png),
   capes,
   cnpq,
   faced,
   fapemig,
-  observatorio,
+  observatorioSimbolo(ImageFormat.svg),
   ppged,
   ufu,
   baciasHidrograficas,
@@ -47,5 +46,11 @@ enum AppImages {
   tiposClimaticos,
   usoAgua;
 
-  String get path => "assets/images/${convertToSnakeCase(name)}.png";
+  const AppImages([this.format = ImageFormat.webp]);
+
+  final ImageFormat format;
+
+  String get path => "assets/images/${convertToSnakeCase(name)}.${format.name}";
 }
+
+enum ImageFormat { png, webp, svg }

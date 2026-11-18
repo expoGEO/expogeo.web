@@ -75,7 +75,6 @@ import 'package:expogeo/core/content/natureza_e_meio_ambiente/uso_da_agua/NMA_UA
 import 'package:expogeo/core/models/subtheme_model.dart';
 import 'package:expogeo/core/models/theme_data_model.dart';
 import 'package:expogeo/core/models/theme_model.dart';
-import 'package:expogeo/core/theme/app_theme.dart';
 import 'package:expogeo/core/utils/enums/app_images.dart';
 import 'package:flutter/material.dart';
 
@@ -85,7 +84,6 @@ ThemeModel naturezaMeioAmbiente = ThemeModel(
   description:
       'Investigue conteúdos sobre os elementos geográficos da natureza e pesquise informações acerca da sustentabilidade em nosso planeta.',
   imagePath: 'assets/images/meio-ambiente.jpg',
-  color: AppTheme.colors.primaryGreen,
   icon: Icons.eco_outlined,
   subthemes: [
     SubthemeModel(
@@ -93,7 +91,6 @@ ThemeModel naturezaMeioAmbiente = ThemeModel(
       title: 'POLUIÇÃO DA ÁGUA',
       description: 'Poluição da água',
       image: AppImages.poluicaoAgua,
-      color: AppTheme.colors.primaryGreen,
       contents: [NMA_PAG_01, NMA_PAG_02, NMA_PAG_03, NMA_PAG_04, NMA_PAG_05, NMA_PAG_06],
     ),
     SubthemeModel(
@@ -101,7 +98,6 @@ ThemeModel naturezaMeioAmbiente = ThemeModel(
       title: 'POLUIÇÃO DO AR',
       description: 'Poluição do ar',
       image: AppImages.poluicaoAr,
-      color: AppTheme.colors.primaryGreen,
       contents: [NMA_PAR_01, NMA_PAR_02, NMA_PAR_03, NMA_PAR_04],
     ),
     SubthemeModel(
@@ -109,7 +105,6 @@ ThemeModel naturezaMeioAmbiente = ThemeModel(
       title: 'DESMATAMENTO',
       description: 'Desmatamento',
       image: AppImages.desmatamento,
-      color: AppTheme.colors.primaryGreen,
       contents: [NMA_DES_01, NMA_DES_02, NMA_DES_03, NMA_DES_04, NMA_DES_05, NMA_DES_06],
     ),
     SubthemeModel(
@@ -117,7 +112,6 @@ ThemeModel naturezaMeioAmbiente = ThemeModel(
       title: 'QUEIMADAS',
       description: 'Queimadas',
       image: AppImages.queimadas,
-      color: AppTheme.colors.primaryGreen,
       contents: [
         NMA_QUE_01,
         NMA_QUE_02,
@@ -133,7 +127,6 @@ ThemeModel naturezaMeioAmbiente = ThemeModel(
       title: 'SUSTENTABILIDADE',
       description: 'Sustentabilidade',
       image: AppImages.sustentabilidade,
-      color: AppTheme.colors.primaryGreen,
       contents: [
         NMA_SUS_01,
         NMA_SUS_02,
@@ -152,7 +145,6 @@ ThemeModel naturezaMeioAmbiente = ThemeModel(
       title: 'BIOMAS',
       description: 'Biomas',
       image: AppImages.biomas,
-      color: AppTheme.colors.primaryGreen,
       contents: [
         NMA_BIO_01,
         NMA_BIO_02,
@@ -168,7 +160,6 @@ ThemeModel naturezaMeioAmbiente = ThemeModel(
       title: 'RECURSOS MINERAIS',
       description: 'Recursos minerais',
       image: AppImages.recursosMinerais,
-      color: AppTheme.colors.primaryGreen,
       contents: [NMA_RM_01, NMA_RM_02, NMA_RM_03, NMA_RM_04, NMA_RM_05, NMA_RM_06, NMA_RM_07],
     ),
     SubthemeModel(
@@ -176,7 +167,6 @@ ThemeModel naturezaMeioAmbiente = ThemeModel(
       title: 'ESTRUTURAS E FORMAS DE RELEVO',
       description: 'Estruturas e formas de relevo',
       image: AppImages.estruturasFormasRelevo,
-      color: AppTheme.colors.primaryGreen,
       contents: [NMA_EFR_01, NMA_EFR_02, NMA_EFR_03, NMA_EFR_04, NMA_EFR_05, NMA_EFR_06],
     ),
     SubthemeModel(
@@ -184,7 +174,6 @@ ThemeModel naturezaMeioAmbiente = ThemeModel(
       title: 'TIPOS CLIMÁTICOS',
       description: 'Tipos climáticos',
       image: AppImages.tiposClimaticos,
-      color: AppTheme.colors.primaryGreen,
       contents: [NMA_TPCL_01, NMA_TPCL_02, NMA_TPCL_03, NMA_TPCL_04],
     ),
     SubthemeModel(
@@ -192,7 +181,6 @@ ThemeModel naturezaMeioAmbiente = ThemeModel(
       title: 'TEMPO E CLIMA',
       description: 'Tempo e Clima',
       image: AppImages.tempoClima,
-      color: AppTheme.colors.primaryGreen,
       contents: [NMA_TC_01, NMA_TC_02, NMA_TC_03, NMA_TC_04, NMA_TC_05],
     ),
     SubthemeModel(
@@ -200,7 +188,6 @@ ThemeModel naturezaMeioAmbiente = ThemeModel(
       title: 'BACIAS HIDROGRÁFICAS',
       description: 'Bacias hidrográficas',
       image: AppImages.baciasHidrograficas,
-      color: AppTheme.colors.primaryGreen,
       contents: [NMA_BH_01, NMA_BH_02, NMA_BH_03, NMA_BH_04, NMA_BH_05],
     ),
     SubthemeModel(
@@ -208,7 +195,6 @@ ThemeModel naturezaMeioAmbiente = ThemeModel(
       title: 'USO DA ÁGUA',
       description: 'Uso da água',
       image: AppImages.usoAgua,
-      color: AppTheme.colors.primaryGreen,
       contents: [NMA_UA_01, NMA_UA_02, NMA_UA_03, NMA_UA_04, NMA_UA_05, NMA_UA_06, NMA_UA_07],
     ),
   ],

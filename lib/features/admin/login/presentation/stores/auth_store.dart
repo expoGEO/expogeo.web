@@ -5,7 +5,6 @@ import 'package:mobx/mobx.dart';
 
 part 'auth_store.g.dart';
 
-/// Store MobX para gerenciar autenticação
 class AuthStore = AuthStoreBase with _$AuthStore;
 
 abstract class AuthStoreBase with Store {
@@ -25,13 +24,11 @@ abstract class AuthStoreBase with Store {
     logoutState: LogoutState.initial(),
   );
 
-  /// Alterna a visibilidade da senha
   @action
   void togglePasswordVisibility() {
     passwordVisible = !passwordVisible;
   }
 
-  /// Obtém o usuário atualmente logado
   @action
   Future<void> currentUser() async {
     final result = await _authRepository.currentUser();
@@ -39,12 +36,14 @@ abstract class AuthStoreBase with Store {
     result.fold((failure) => user = null, (user) => this.user = user);
   }
 
-  /// Faz login com email e senha
+  /// Faz login com email e senha; ignora a chamada enquanto outra tentativa está em andamento
   @action
   Future<void> login(String email, String password) async {
+    if (state.loginState is LoginStateLoading) return;
+
     state = state.copyWith(loginState: const LoginState.loading());
 
-    final result = await _authRepository.login(email, password);
+    final result = await _authRepository.login(email.trim(), password);
 
     result.fold((failure) => state = state.copyWith(loginState: LoginState.error(failure)), (user) {
       this.user = user;
@@ -55,7 +54,6 @@ abstract class AuthStoreBase with Store {
     });
   }
 
-  /// Faz logout
   @action
   Future<void> logout() async {
     state = state.copyWith(logoutState: const LogoutState.loading());

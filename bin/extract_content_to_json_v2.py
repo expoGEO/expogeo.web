@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
-"""
-Extract ContentModel data from Dart files to JSON.
-Parses Dart files directly to avoid Flutter SDK compilation issues.
-"""
+"""Extrai os dados de ContentModel dos arquivos Dart para JSON, lendo o texto sem compilar o Dart."""
 
 import os
 import json
@@ -11,38 +8,30 @@ from pathlib import Path
 from typing import Any, Optional, final
 
 def extract_string_value(content: str, key: str, multiline: bool = False) -> Optional[str]:
-    """Extract string value from Dart code."""
     if multiline:
-        # For multiline strings
         pattern = rf"{key}:\s*['\"]([^'\"]*(?:\n[^'\"]*)*)['\"]"
         match = re.search(pattern, content, re.DOTALL)
     else:
-        # For single-line strings
         pattern = rf"{key}:\s*['\"]([^'\"]+)['\"]"
         match = re.search(pattern, content)
     
     if match:
         value = match.group(1).strip()
-        # Clean up multiline strings
         value = re.sub(r'\s+', ' ', value)
         return value
     return None
 
 def extract_list_values(content: str, key: str) -> list[str]:
-    """Extract list of strings from Dart code."""
-    # Match: key: ['value1', 'value2', ...]
     pattern = rf"{key}:\s*\[(.*?)\]"
     match = re.search(pattern, content, re.DOTALL)
     
     if match:
         values_str = match.group(1)
-        # Extract quoted strings
         quoted = re.findall(r"['\"]([^'\"]+)['\"]", values_str)
         return quoted
     return []
 
 def extract_date_value(content: str, key: str) -> Optional[str]:
-    """Extract DateTime value from Dart code."""
     pattern = rf"{key}:\s*DateTime\((\d+),\s*(\d+),?\s*(\d+)?\)"
     match = re.search(pattern, content)
     
@@ -53,20 +42,16 @@ def extract_date_value(content: str, key: str) -> Optional[str]:
     return None
 
 def parse_content_file(file_path: str, theme_id: str, theme_title: str, subtheme_id: str, subtheme_title: str) -> Optional[dict[str, Any]]:
-    """Parse a single content Dart file."""
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             content_code = f.read()
         
-        # Extract ID from filename
         file_name = Path(file_path).stem
         
-        # Extract title
         title = extract_string_value(content_code, r'title')
         if not title:
             return None
         
-        # Extract other fields
         description = extract_string_value(content_code, 'description', multiline=True)
         subjects = extract_list_values(content_code, 'subjects')
         contentNote = extract_string_value(content_code, 'contentNote', multiline=True)
@@ -77,11 +62,9 @@ def parse_content_file(file_path: str, theme_id: str, theme_title: str, subtheme
         insertionDate = extract_date_value(content_code, 'insertionDate')
         language = extract_string_value(content_code, 'language')
         
-        # Extract type (ContentType.site -> site)
         type_match = re.search(r'type:\s*ContentType\.(\w+)', content_code)
         content_type = type_match.group(1) if type_match else 'unknown'
         
-        # Extract format (ContentFormat.outro -> outro)
         format_match = re.search(r'format:\s*ContentFormat\.(\w+)', content_code)
         content_format = format_match.group(1) if format_match else 'unknown'
         
@@ -135,7 +118,6 @@ def parse_content_file(file_path: str, theme_id: str, theme_title: str, subtheme
         return None
 
 def extract_all_content() -> list[dict[str, Any]]:
-    """Extract all content from the content directory."""
     all_contents = []
     base_path = Path('/Users/tainass/Personal/expogeo.web/lib/core/content')
     
@@ -146,23 +128,19 @@ def extract_all_content() -> list[dict[str, Any]]:
         'representacoes_espaciais': ('RE', 'Representações Espaciais'),
     }
     
-    # Mapeamento de pasta para (subthemeId, subthemeTitle)
     subtheme_map = {
-        # Cultura e Política (CP)
         'censo_demografico': ('CP_CD', 'Censo Demográfico'),
         'geopolitica': ('CP_GP', 'Geopolítica'),
         'identidades_culturais': ('CP_IC', 'Identidades Culturais'),
         'populacao': ('CP_POP', 'População'),
         'povos_originarios': ('CP_PO', 'Povos Originários'),
         'regioes_administrativas': ('CP_RA', 'Regiões Administrativas'),
-        # Espaços Urbanos e Rurais (EUR)
         'conflitos_terra': ('EUR_CT', 'Conflitos Terra'),
         'espaco_urbano_brasileiro': ('EUR_EUB', 'Espaço Urbano Brasileiro'),
         'espaco_rural_brasileiro': ('EUR_ERB', 'Espaço Rural Brasileiro'),
         'globalizacao_mobilidade': ('EUR_GM', 'Globalização Mobilidade'),
         'industria_transformacao': ('EUR_IT', 'Indústria Transformação'),
         'mercado_agropecuario': ('EUR_MA', 'Mercado Agropecuário'),
-        # Natureza e Meio Ambiente (NMA)
         'bacia_hidrografica': ('NMA_BH', 'Bacias Hidrográficas'),
         'bacias_hidrograficas': ('NMA_BH', 'Bacias Hidrográficas'),
         'biomas': ('NMA_BIO', 'Biomas'),
@@ -177,7 +155,6 @@ def extract_all_content() -> list[dict[str, Any]]:
         'tipos_climaticos': ('NMA_TPCL', 'Tipos Climáticos'),
         'uso_agua': ('NMA_UA', 'Uso Água'),
         'uso_da_agua': ('NMA_UA', 'Uso Água'),
-        # Representações Espaciais (RE)
         'compositor_mapas': ('RE_CM', 'Compositor Mapas'),
         'coordenadas_geograficas': ('RE_CG', 'Coordenadas Geográficas'),
         'fuso_horario': ('RE_FH', 'Fuso Horário'),
@@ -194,14 +171,12 @@ def extract_all_content() -> list[dict[str, Any]]:
         theme_id, theme_title = theme_map[theme_dir.name]
         print(f"\n📚 Processando tema: {theme_title}")
         
-        # Process subthemes
         for subtheme_dir in sorted(theme_dir.iterdir()):
             if not subtheme_dir.is_dir():
                 continue
             
             subtheme_key = subtheme_dir.name
             
-            # Get subtheme ID and title from mapping
             if subtheme_key not in subtheme_map:
                 print(f"   ⚠️  Subtema desconhecido: {subtheme_key} (pulando)")
                 continue
@@ -210,7 +185,6 @@ def extract_all_content() -> list[dict[str, Any]]:
             
             print(f"   📁 Processando subtema: {subtheme_title} ({subtheme_id})")
             
-            # Find all .dart files (except imports)
             dart_files = sorted(subtheme_dir.glob('*.dart'))
             
             for dart_file in dart_files:
@@ -235,7 +209,6 @@ def main():
     
     print(f"\n\n✅ Total extraído: {len(contents)} itens de conteúdo\n")
     
-    # Save as JSON
     output_file = Path('/Users/tainass/Personal/expogeo.web/bin/content_seed_data.json')
     data = {'contents': contents}
     

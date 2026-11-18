@@ -7,19 +7,16 @@ import 'core/navigation/app_router.dart';
 import 'core/theme/app_theme.dart';
 import 'core/utils/environment/app_environment.dart';
 import 'features/admin/admin_setup.dart';
-import 'features/theme/theme_setup.dart';
+import 'features/catalog/catalog_setup.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Inicializar Firebase
   await Firebase.initializeApp(options: AppEnvironment.current.firebaseOptions);
 
-  // Configurar injeção de dependências do admin
   AdminSetup.setup();
 
-  // Configurar injeção de dependências da feature theme
-  ThemeSetup.setup();
+  CatalogSetup.setup();
 
   usePathUrlStrategy();
 
@@ -32,7 +29,13 @@ class ExpoGeoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'expoGEO: Exposição Geográfica',
+      title: 'expoGEO · Curadoria digital do saber geográfico',
+      theme: ThemeData.light().copyWith(
+        textSelectionTheme: TextSelectionThemeData(
+          selectionColor: AppTheme.colors.textSelection,
+          selectionHandleColor: AppTheme.colors.accent,
+        ),
+      ),
       themeMode: ThemeMode.light,
       routerConfig: AppRouter.router,
       debugShowCheckedModeBanner: false,

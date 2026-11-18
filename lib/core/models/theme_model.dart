@@ -7,7 +7,6 @@ class ThemeModel {
   final String title;
   final String description;
   final String imagePath;
-  final Color color;
   final IconData icon;
   final List<SubthemeModel> subthemes;
 
@@ -16,7 +15,6 @@ class ThemeModel {
     required this.title,
     required this.description,
     required this.imagePath,
-    required this.color,
     required this.icon,
     required this.subthemes,
   });

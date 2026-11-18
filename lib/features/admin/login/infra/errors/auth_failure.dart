@@ -1,12 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-/// Classe base para falhas de autenticação
 class AuthFailure {
   final String message;
 
   const AuthFailure([this.message = 'Ocorreu um erro inesperado. Tente novamente mais tarde.']);
 
-  /// Factory para converter exceções do Firebase em AuthFailure
   factory AuthFailure.fromException(FirebaseAuthException exception) {
     switch (exception.code.toLowerCase()) {
       case 'invalid-credential':

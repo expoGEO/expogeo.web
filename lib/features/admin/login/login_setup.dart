@@ -9,15 +9,12 @@ class LoginSetup {
   static final GetIt getIt = GetIt.instance;
 
   static void setup() {
-    // Firebase Auth Datasource
     getIt.registerSingleton<FirebaseAuthDatasource>(
       FirebaseAuthDatasourceImpl(FirebaseAuth.instance),
     );
 
-    // Auth Repository
     getIt.registerSingleton<AuthRepository>(AuthRepositoryImpl(getIt<FirebaseAuthDatasource>()));
 
-    // Auth Store
     getIt.registerLazySingleton<AuthStore>(() => AuthStore(getIt<AuthRepository>()));
   }
 }

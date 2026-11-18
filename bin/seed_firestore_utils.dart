@@ -1,11 +1,7 @@
+// Utilitário de terminal: imprime o resultado e deixa variáveis só para inspeção.
 // ignore_for_file: avoid_print, unused_local_variable
 
-/// Arquivo auxiliar com funções de debug e validação para o script de seed.
-///
-/// Use este arquivo para:
-/// - Validar estrutura de dados antes de fazer seed
-/// - Debug de conteúdos específicos
-/// - Testes de conectividade com Firestore
+/// Funções de validação e depuração dos dados antes do seed.
 library;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -13,7 +9,6 @@ import 'package:expogeo/core/models/theme_data_model.dart';
 import 'package:expogeo/core/utils/environment/app_environment.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-/// Valida se os dados estão estruturados corretamente antes do seed
 Future<void> validateStructure() async {
   print('\n🔍 Validando estrutura de dados...\n');
 
@@ -62,7 +57,6 @@ Future<void> validateStructure() async {
       print('   │  └─ Conteúdos: ${subtheme.contents.length}');
 
       for (final content in subtheme.contents) {
-        // Validar campos obrigatórios
         if (content.id.isEmpty) {
           errors.add('❌ ContentModel sem ID');
         }
@@ -101,7 +95,6 @@ Future<void> validateStructure() async {
   }
 }
 
-/// Testa conexão com Firestore
 Future<void> testFirestoreConnection() async {
   print('\n🔌 Testando conexão com Firestore...\n');
 
@@ -145,7 +138,6 @@ Future<void> testFirestoreConnection() async {
   }
 }
 
-/// Lista estatísticas sobre conteúdos por tipo
 Future<void> listContentStatistics() async {
   print('\n📊 Estatísticas de Conteúdo...\n');
 
@@ -156,17 +148,14 @@ Future<void> listContentStatistics() async {
   final formatStats = <String, int>{};
 
   for (final theme in themes) {
-    // Contar por subtema
     for (final subtheme in theme.subthemes) {
       final key = '${theme.type.value}/${subtheme.type.value}';
       stats[key] = (stats[key] ?? 0) + subtheme.contents.length;
 
-      // Contar por tipo de conteúdo
       for (final content in subtheme.contents) {
         final typeKey = content.originInfo.type.value;
         contentTypeStats[typeKey] = (contentTypeStats[typeKey] ?? 0) + 1;
 
-        // Contar por formato
         final formatKey = content.originInfo.format.value;
         formatStats[formatKey] = (formatStats[formatKey] ?? 0) + 1;
       }
@@ -198,7 +187,6 @@ Future<void> listContentStatistics() async {
   print('\n✅ Total de conteúdos: $totalContents\n');
 }
 
-/// Encontra conteúdos específicos por ID
 Future<void> findContentById(String contentId) async {
   print('\n🔍 Procurando conteúdo: $contentId\n');
 
@@ -227,7 +215,6 @@ Future<void> findContentById(String contentId) async {
   print('❌ Conteúdo não encontrado\n');
 }
 
-/// Exibe informações sobre um tema específico
 Future<void> showThemeInfo(String themeId) async {
   print('\n📋 Informações do Tema: $themeId\n');
 

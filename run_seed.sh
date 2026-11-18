@@ -1,12 +1,7 @@
 #!/bin/bash
 
-# Seed do Firestore com os objetos de bin/content_seed_data.json.
-# Ativa o venv e roda o script Python no projeto escolhido.
-#
-# Execução:
-#   ./run_seed.sh dev
-#   ./run_seed.sh prod   # pede confirmação
-#
+# Grava os objetos de bin/content_seed_data.json no Firestore: ./run_seed.sh dev|prod (prod pede
+# confirmação).
 
 set -e
 
@@ -40,7 +35,6 @@ if [ "$1" = "prod" ]; then
     echo ""
 fi
 
-# Verificar se o venv existe
 if [ ! -d "$VENV_DIR" ]; then
     echo "❌ Ambiente virtual não encontrado em: $VENV_DIR"
     echo ""
@@ -52,7 +46,6 @@ if [ ! -d "$VENV_DIR" ]; then
     exit 1
 fi
 
-# Verificar se o script Python existe
 if [ ! -f "$PYTHON_SCRIPT" ]; then
     echo "❌ Script não encontrado: $PYTHON_SCRIPT"
     exit 1

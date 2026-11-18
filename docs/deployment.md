@@ -16,7 +16,7 @@ feature/*  ──PR──▶  develop  ──PR──▶  main
 
 1. Trabalhe em `feature/*`, `fix/*`, `refactor/*` ou `docs/*`, saindo da `develop`.
 2. PR para `develop`: o CI valida. Ao mergear, o dev é publicado.
-3. Depois de testar no dev, PR `develop` → `main`. Ao mergear, a produção é publicada. O merge é a aprovação; não há aprovação manual no GitHub.
+3. Depois de testar no dev, PR `develop` → `main`. Ao mergear, a produção é publicada. O merge é a aprovação; não há aprovação manual no GitHub. Use **merge commit** (não squash nem rebase) em `develop` → `main`: o squash faz as duas branches terem históricos diferentes, e o PR seguinte volta a listar os mesmos commits.
 4. Hotfix: `hotfix/*` saindo da `main`, PR para `main` e depois para a `develop`.
 
 **Push na `main` publica o site.** Nunca faça push direto nela, nem na `develop`. As duas devem ser protegidas (só entram por PR, com o check `validar` do CI obrigatório); o estado dessa proteção no GitHub não está no repositório (ver [Pendências](#pendências-manuais)).
@@ -129,14 +129,14 @@ Depois, a Inspeção de URL do Google Search Console numa página de objeto (*Te
 - O primeiro deploy por FTPS pode reenviar tudo (o arquivo de estado da action não bate com o servidor). É esperado e não derruba o site.
 - Rodar local sem define mostra os dados do `expogeo-dev`.
 - Depois de publicar, confira faixa (só no dev), Firebase do ambiente, `robots.txt` e Analytics.
+- Índice novo do Firestore leva de minutos a dezenas de minutos para ficar pronto, e a consulta falha com "index not ready" até lá (a seção "Adicionados recentemente" da Home depende do índice de `contents`). Ao mudar `firestore.indexes.json` ou as regras, publique antes do merge na `main`: `firebase deploy --only firestore --project expogeo-fad33` (foi o que se fez no primeiro deploy do redesign, em 2026-11-18).
 - O pré-render lê o Firestore durante o deploy: se ele não responder, o deploy falha antes do FTP e nada é publicado. Basta rodar o deploy de novo.
 
 ## Pendências manuais
 
-- **Redesign na produção:** a `main` ainda não recebeu as mudanças da `develop`. No merge `develop` → `main`, conferir que as regras publicadas incluem a leitura por grupo de coleções (leitura do catálogo, Home com recentes) e que os objetos de produção têm o mesmo formato dos do dev (`preservationAction`, tipo e formato). Em 2026-11-18 o formato foi conferido: os 191 objetos de produção convertem nos modelos e o gerador de páginas rodou contra a produção (229 páginas e o sitemap). Falta só a regra de leitura por grupo de coleções, que o primeiro deploy publica.
 - **Cadastro no Firebase Auth:** as regras só pedem sessão para gravar, sem papéis. Confirmar, nos dois projetos, que a criação de conta por conta própria está desligada (Authentication, Configurações, Ações do usuário); as contas do painel são criadas à mão. O teste de cadastro sem criar conta não é possível daqui.
-- **Indexação em produção:** o pré-render foi verificado só no dev (rotas de 1 a 3 segmentos, redirecionamento de barra final, `main.dart.js` com senha, `/assets` sem listagem e segunda visita de `/sobre`, em 2026-11-11). Em produção falta rodar, depois do primeiro deploy, o roteiro de `curl` de "Indexação no Google" (robots, `/sobre`, `/sobre/`, sitemap e uma página de objeto) e o Teste de Resultados Avançados do Google numa página de objeto.
-- **Search Console:** cadastrar `expogeo.com.br`, enviar o `sitemap.xml` e pedir a indexação das URLs principais depois do primeiro deploy de produção com o pré-render.
+- **Indexação em produção:** o roteiro de `curl` de "Indexação no Google" foi rodado em produção depois do primeiro deploy do redesign (2026-11-18): `robots.txt`, `/sobre`, `/sobre/` (301), `sitemap.xml` (229 URLs) e páginas de subtema e de objeto, com título, canonical e JSON-LD, sem `noindex`. Falta o Teste de Resultados Avançados do Google numa página de objeto.
+- **Search Console:** cadastrar `expogeo.com.br`, enviar o `sitemap.xml` (basta digitar `sitemap.xml`) e pedir a indexação das URLs principais.
 - **Proteção das branches** `main` e `develop` e o teste ponta a ponta de um PR por `develop` e `main`: ações no GitHub, não conferidas aqui.
-- **Prévia de compartilhamento** (WhatsApp e similares) com a imagem de `web/og-image.png`: conferir depois do deploy no dev.
-- **Deploy agendado:** depois do merge na `main`, confirmar na aba Actions que a primeira execução agendada rodou e, com o tempo, que o passo de manter o agendamento funciona ([Deploy agendado de produção](#deploy-agendado-de-produção)).
+- **Prévia de compartilhamento** (WhatsApp e similares) com a imagem de `web/og-image.png`: conferir em produção.
+- **Deploy agendado:** confirmar na aba Actions que a primeira execução agendada (06:00 UTC) rodou depois do deploy de 2026-11-18 e, com o tempo, que o passo de manter o agendamento funciona ([Deploy agendado de produção](#deploy-agendado-de-produção)).

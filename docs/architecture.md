@@ -134,7 +134,7 @@ Todas as telas leem o mesmo **catálogo**: `lib/features/catalog/` faz uma consu
 
 ## Páginas principais
 
-- **Home:** contagens do catálogo, anel dos temas (`ThemesOrbit`), cartões dos 4 temas (sem carrossel) com descrição, contagens e subtemas, "Como explorar" em 3 passos com exemplos fixos, 6 recentes e resumo do Sobre.
+- **Home:** contagens do catálogo, anel dos temas (`ThemesOrbit`), cartões dos 4 temas (sem carrossel) com descrição, contagens e subtemas, "Como explorar" em 3 passos (o tema e o subtema do exemplo são fixos no código, Meio Ambiente e Natureza e Biomas; a contagem do subtema e o objeto vêm do catálogo, e o objeto é o de menor código de referência do subtema, então o link muda se entrar um objeto com código menor ou se o título for editado), 6 recentes e resumo do Sobre.
 - **Tema e subtema:** `ThemePage` e `SubthemePage`; busca ignora acentos e maiúsculas (`foldForSearch`) e procura em título, descrição, assunto e autor; "Assuntos frequentes" vêm do campo `subjects`.
 - **Objeto:** tipo, título, descrição, "Acessar o recurso", "Copiar link", nota de conteúdo, ficha da curadoria com o código em destaque (grupos Autoria, Conteúdo, Origem, Registro, Direitos e preservação) e "Outros objetos" do subtema. O ano de emissão só aparece quando o objeto tem o dado.
 - **Contato:** abre o programa de e-mail (`expogeoufu@gmail.com`) com tudo preenchido (`MailDraft`), valida os campos e mostra confirmação com "Copiar mensagem".

@@ -37,6 +37,7 @@ O filtro de "só docs" fica em lugares diferentes para os dois casos:
 Comum aos três:
 
 - Versão do Flutter lida do `.fvmrc` com `jq`; `actions/checkout@v4`, `subosito/flutter-action@v2` com cache; sem `flutter clean`.
+- **Idioma:** títulos dos passos (`name:`), comentários e mensagens de log/erro (`echo`, `::error::`) ficam em português; termos técnicos (`build`, `deploy`, `Firestore`) ficam como estão. A saída das ferramentas (flutter, firebase, FTP) não é traduzível. Passo novo segue o mesmo padrão: verbo no infinitivo, por exemplo "Baixar o código", "Compilar o app Flutter Web".
 - Só `build/web/` é enviado, num passo de FTP (`SamKirkland/FTP-Deploy-Action@4.3.0`, FTPS na porta 21).
 - `concurrency` por ambiente: dois deploys do mesmo ambiente não rodam juntos.
 - Nos deploys, regras e índices do Firestore são publicados **antes** do site, porque o código depende deles. As regras do repositório substituem as do projeto; os índices só são criados e atualizados (sem `--force`).

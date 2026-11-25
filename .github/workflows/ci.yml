@@ -19,7 +19,7 @@ jobs:
       site: ${{ steps.filtro.outputs.site }}
 
     steps:
-    - name: Checkout code
+    - name: Baixar o código
       uses: actions/checkout@v4
       with:
         fetch-depth: 0
@@ -37,20 +37,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Baixar o código
       uses: actions/checkout@v4
 
     - name: Ler versão do Flutter do .fvmrc
       id: fvm
       run: echo "version=$(jq -r .flutter .fvmrc)" >> "$GITHUB_OUTPUT"
 
-    - name: Set up Flutter
+    - name: Configurar o Flutter
       uses: subosito/flutter-action@v2
       with:
         flutter-version: ${{ steps.fvm.outputs.version }}
         cache: true
 
-    - name: Install dependencies
+    - name: Instalar as dependências
       run: flutter pub get
 
     - name: Conferir formatação
@@ -58,8 +58,8 @@ jobs:
         find lib -name '*.dart' ! -name '*.g.dart' ! -name '*.freezed.dart' -print0 \
           | xargs -0 dart format --output=none --set-exit-if-changed
 
-    - name: Analyze
+    - name: Analisar o código
       run: flutter analyze --no-fatal-infos
 
-    - name: Build Flutter Web app
+    - name: Compilar o app Flutter Web
       run: flutter build web --release

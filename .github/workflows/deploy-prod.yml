@@ -36,7 +36,7 @@ jobs:
       actions: write
 
     steps:
-    - name: Checkout code
+    - name: Baixar o código
       uses: actions/checkout@v4
 
     # O GitHub desativa workflows agendados depois de 60 dias sem atividade no repositório. Este
@@ -63,16 +63,16 @@ jobs:
       id: fvm
       run: echo "version=$(jq -r .flutter .fvmrc)" >> "$GITHUB_OUTPUT"
 
-    - name: Set up Flutter
+    - name: Configurar o Flutter
       uses: subosito/flutter-action@v2
       with:
         flutter-version: ${{ steps.fvm.outputs.version }}
         cache: true
 
-    - name: Install dependencies
+    - name: Instalar as dependências
       run: flutter pub get
 
-    - name: Build Flutter Web app
+    - name: Compilar o app Flutter Web
       run: flutter build web --release --dart-define=APP_ENV=prod
 
     # Uma página HTML por rota e o sitemap.xml, para o Google. Lê o Firestore de produção pela
@@ -83,7 +83,7 @@ jobs:
         test -s build/web/sitemap.xml
         test -s build/web/sobre.html
 
-    - name: Sync build/web to HostGator (produção)
+    - name: Enviar build/web para a HostGator (produção)
       uses: SamKirkland/FTP-Deploy-Action@4.3.0
       with:
         server: ${{ secrets.FTP_HOST }}
